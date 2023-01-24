@@ -1,0 +1,28 @@
+<div class="header">
+  <div class="header-left">
+    <img
+      class="header-logo"
+      src="../../../assets/images/gsk_logo.png"
+      alt="GSK Logo"
+    />
+    <div>
+      <div class="htext htext-top text-xxl text-x-bold">Together with</div>
+      <div class="htext htext-bottom text-xxl text-x-bold">GSK Oncology</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div *ngIf="!isLoggedIn" class="htext text-med text-x-bold">
+      <div>For Healthcare</div>
+      <div>Professionals Only</div>
+    </div>
+    <div [ngClass]="isLoggedIn ? 'border-right' : 'border-left'">
+      <div class="primary-contact">1-844-4GSK-ONC</div>
+      <div class="secondary-contact">1-844-447-5662</div>
+      <div class="office-timings">8 AM ET to 8 PM ET</div>
+    </div>
+    <div  *ngIf="isLoggedIn" class="flex">
+      <div class="user">Welcome user.user</div>
+      <div class="logout">Logout</div>
+    </div>
+    </div>
+</div>
