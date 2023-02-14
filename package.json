@@ -58,5 +58,11 @@
       "prettier --write",
       "eslint --fix"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "ng lint && lint-staged",
+      "pre-push": "ng build --prod"
+    }
   }
 }
