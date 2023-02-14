@@ -8,9 +8,8 @@ describe('SubmitReferralComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SubmitReferralComponent ]
-    })
-    .compileComponents();
+      declarations: [SubmitReferralComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SubmitReferralComponent);
     component = fixture.componentInstance;
