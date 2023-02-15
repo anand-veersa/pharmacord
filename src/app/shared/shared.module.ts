@@ -5,24 +5,9 @@ import { FooterComponent } from './footer/footer.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { LocalStorageService } from './local-storage.service';
 
-
-
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    FooterComponent,
-    SidenavComponent
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    HeaderComponent,
-    FooterComponent,
-    SidenavComponent
-  ],
-  providers: [
-    LocalStorageService
-  ]
+  declarations: [HeaderComponent, FooterComponent, SidenavComponent],
+  imports: [CommonModule],
+  exports: [HeaderComponent, FooterComponent, SidenavComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

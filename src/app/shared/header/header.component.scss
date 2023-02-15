@@ -38,6 +38,23 @@
         .logout {
             padding-right:2rem;
         }
+        .primary-contact{
+          font-size: 2.0rem;
+          font-family: $primary-font;
+          font-weight: 700;
+        }
+        .secondary-contact{
+            font-size: 1.2rem;
+            font-family: $primary-font;
+            font-weight: 700;
+        }
+        .office-timings{
+          font-size: 1.4rem;
+          color: $color-grey-dark;
+          font-family: $primary-font;
+          font-weight: 700;
+        }
+        
     }
     &-logo {
         height: 9.5rem;

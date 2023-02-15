@@ -11,20 +11,18 @@ import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './material.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MaterialModule,
     AuthModule,
     CoreModule,
     EnrollmentModule,
     SharedModule,
-    MaterialModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

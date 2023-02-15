@@ -22,12 +22,20 @@ html {
 
   @include respond(tab-land) {
     // width < 1200?
-    font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
+    font-size: 54%; //1 rem = 9px, 9/16 = 50%
   }
 
   @include respond(tab-port) {
     // width < 900?
     font-size: 50%; //1 rem = 8px, 8/16 = 50%
+  }
+  @include respond(mini-tab-landscape) {
+     font-size: 46%;
+  }
+
+  @include respond(mobile) {
+    // width < 900?
+    font-size: 43%; //1 rem = 8px, 8/16 = 50%
   }
 
   @include respond(big-desktop) {

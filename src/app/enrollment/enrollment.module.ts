@@ -10,7 +10,6 @@ import { SubmitReferralComponent } from './pages/submit-referral/submit-referral
 import { ToolsAndFormsComponent } from './pages/tools-and-forms/tools-and-forms.component';
 import { SharedModule } from '../shared/shared.module';
 
-
 @NgModule({
   declarations: [
     EnrollmentComponent,
@@ -18,12 +17,8 @@ import { SharedModule } from '../shared/shared.module';
     AccountSettingsComponent,
     MyPatientsComponent,
     SubmitReferralComponent,
-    ToolsAndFormsComponent
+    ToolsAndFormsComponent,
   ],
-  imports: [
-    CommonModule,
-    EnrollmentRoutingModule,
-    SharedModule
-  ]
+  imports: [CommonModule, EnrollmentRoutingModule, SharedModule],
 })
-export class EnrollmentModule { }
+export class EnrollmentModule {}
