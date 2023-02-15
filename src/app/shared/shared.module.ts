@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { LocalStorageService } from './local-storage.service';
 
 
 
@@ -19,6 +20,9 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     HeaderComponent,
     FooterComponent,
     SidenavComponent
+  ],
+  providers: [
+    LocalStorageService
   ]
 })
 export class SharedModule { }
