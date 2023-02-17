@@ -3,10 +3,21 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { CustomButtonComponent } from './custom-button/custom-button.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, SidenavComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    SidenavComponent,
+    CustomButtonComponent,
+  ],
   imports: [CommonModule],
-  exports: [HeaderComponent, FooterComponent, SidenavComponent],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    SidenavComponent,
+    CustomButtonComponent,
+  ],
 })
 export class SharedModule {}

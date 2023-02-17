@@ -5,10 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   public isLoggedIn: boolean = false;
 
-  ngOnInit() {
-    this.isLoggedIn = Math.random() * 10 > 5;
-  }
+  // ngOnInit() {
+  //   // this.isLoggedIn = Math.random() * 10 > 5;
+  // }
 }

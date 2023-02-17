@@ -1,0 +1,19 @@
+<form [formGroup]="myForm" class="example-form" (ngSubmit)="onSubmit()">
+  <div *ngFor="let controls of formData.controls">
+    <label>{{ controls.label }}</label>
+    <mat-form-field class="example-full-width">
+      <input
+        floatLabel="false"
+        [formControlName]="controls.name"
+        [type]="controls.type"
+        matInput
+        [placeholder]="controls.placeholder" />
+      <mat-error>
+        {{ controls.reqErrorMsg }}
+      </mat-error>
+      <mat-error>{{ controls.validityErrorMsg }} </mat-error>
+    </mat-form-field>
+  </div>
+  <app-custom-button btnText="Login" btnType="secondary" isDisable="false">
+  </app-custom-button>
+</form>
