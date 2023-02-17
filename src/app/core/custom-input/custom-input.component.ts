@@ -8,7 +8,7 @@ import { JsonFormControls } from 'src/app/models/json-form-data.model';
 })
 export class CustomInputComponent implements OnInit {
   @Input() inputControl: JsonFormControls;
-  @Input() fieldClassName: string;
+  @Input() fieldClassName: string = '';
   ngOnInit() {
     console.log(this.inputControl, 'ngoninit');
   }
