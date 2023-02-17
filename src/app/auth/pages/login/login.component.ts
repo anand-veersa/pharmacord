@@ -9,6 +9,7 @@ import { JsonFormData } from 'src/app/models/json-form-data.model';
 })
 export class LoginComponent implements OnInit {
   public formData: JsonFormData;
+  public inputFieldClass: string = 'form-field-tertiary';
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
