@@ -1,11 +1,16 @@
-@import '../../../../styles.scss';
+@import '../../../../assets/styles/abstracts/variables';
 .login-container {
   width: 100%;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+  }
   .specification-and-form {
     width: 55%;
     position: absolute;
-    top: 28%;
-    left: 35%;
+    top: 10%;
+    right: 12%;
     display: flex;
     justify-content: flex-end;
     align-items: baseline;
@@ -13,12 +18,12 @@
 
     .portal-specification {
       background: $color-tertiary;
-      border-radius: 0 6rem;
+      border-radius: 0 60px;
       width: 35.2rem;
 
       &-header {
         font-size: 3rem;
-        font-family: 'Arial';
+        font-family: $tertiary-font;
         font-weight: 700;
       }
 
@@ -31,7 +36,6 @@
           padding-top: 1.2rem;
           line-height: 2.6rem;
           font-size: 1.6rem;
-          font-family: 'Arial';
           font-weight: 400;
 
           .check-mark {
@@ -86,11 +90,5 @@
   }
 }
 .image-banner {
-  position: relative;
-  img {
-    vertical-align: middle;
-    border-style: none;
-    width: 100%;
-    height: 100%;
-  }
+  
 }
