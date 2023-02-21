@@ -1,0 +1,83 @@
+@import '../../../../assets/styles/abstracts/variables';
+.forgot-username-container {
+  display: flex;
+  flex-direction: column;
+  margin: auto 7rem;
+  background-color: $color-white;
+  border-radius: 8px;
+
+  &-header {
+    width: 100%;
+    background-color: $color-tertiary;
+    padding: 1.4rem 2rem;
+    border-radius: 8px 8px 0px 0px;
+    color: $color-white;
+    font-size: 2.5rem;
+    line-height: 2.9rem;
+    font-weight: 700;
+  }
+  &-main {
+    padding: 3rem 5.5rem;
+    display: flex;
+    flex-direction: column;
+
+    .common-text {
+      color: $color-black;
+      &-header {
+        font-size: 2.4rem;
+        line-height: 2.8rem;
+        font-weight: 700;
+      }
+      &-sub-header {
+        font-size: 2rem;
+        line-height: 2.4rem;
+        font-weight: 700;
+      }
+    }
+    .form-container {
+      display: flex;
+      width: 60%;
+      flex-wrap: wrap;
+      gap: 5%;
+      .input-fields {
+        display: flex;
+        flex-direction: column;
+        width: 45%;
+
+        &-label {
+          font-size: 1.7rem;
+          line-height: 2rem;
+          font-weight: 700;
+        }
+      }
+      .input-field-3 {
+        width: 80%;
+      }
+    }
+
+    &-footer {
+      display: flex;
+      justify-content: flex-start;
+      gap: 2rem;
+      align-items: flex-end;
+      padding-top: 3rem;
+      .register-btn {
+        color: $color-white;
+        background-color: $color-tertiary;
+        font-size: 2rem;
+        line-height: 2.9rem;
+        font-weight: 700;
+        padding: 1.3rem 5.7rem;
+        justify-items: center;
+        border-radius: 0.6rem;
+        border: none;
+      }
+    }
+  }
+}
+.required-field {
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  font-weight: 400;
+  color: $color-error;
+}
