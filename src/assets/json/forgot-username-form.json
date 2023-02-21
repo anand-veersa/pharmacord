@@ -1,0 +1,44 @@
+{
+  "controls": [
+    {
+      "name": "firstname",
+      "value": "DR",
+      "label": "First Name",
+      "placeholder": "Enter your First Name",
+      "type": "text",
+      "reqErrorMsg": "First Name Required",
+      "validityErrorMsg": "Invalid First Name",
+      "validators": { "required": true },
+      "options": {},
+      "required": true
+    },
+    {
+      "name": "lastname",
+      "value": "MD",
+      "label": "Last Name",
+      "placeholder": "Enter your Last Name",
+      "type": "text",
+      "reqErrorMsg": "Last Name Required",
+      "validityErrorMsg": "Invalid Last Name",
+      "validators": {
+        "required": true
+      },
+      "options": {},
+      "required": true
+    },
+    {
+      "name": "email",
+      "value": "abc@gmail.com",
+      "label": "Email Address",
+      "placeholder": "Enter your Email Address",
+      "type": "email",
+      "reqErrorMsg": "Email Address Required",
+      "validityErrorMsg": "Invalid Email",
+      "validators": {
+        "required": true
+      },
+      "options": {},
+      "required": true
+    }
+  ]
+}
