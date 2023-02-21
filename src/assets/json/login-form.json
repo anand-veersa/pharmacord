@@ -11,6 +11,20 @@
       "validators": { "required": true },
       "options": {},
       "required": true
+    },
+    {
+      "name": "Password",
+      "value": "*****",
+      "label": "Password",
+      "placeholder": "Enter your Password",
+      "type": "password",
+      "reqErrorMsg": "Password Required",
+      "validityErrorMsg": "Invalid Password",
+      "validators": {
+        "required": true
+      },
+      "options": {},
+      "required": true
     }
   ]
 }
