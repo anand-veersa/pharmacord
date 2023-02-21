@@ -30,16 +30,14 @@
       <div class="login-panel-header">LOGIN</div>
       <div class="login-panel-body">
         <!-- <app-custom-input [formData]="formData"></app-custom-input> -->
-        <form #loginForm="ngForm" class="login-form">
-          <div class="input-fields" *ngFor="let controls of formData.controls">
-            <label class="input-fields-label">{{ controls.label }}</label>
-            <app-custom-input
-              ngModel
-              [inputControl]="controls"
-              [fieldClassName]="inputFieldClass"></app-custom-input>
-          </div>
-          <button class="login-form-submit-btn">Login</button>
-        </form>
+        <div class="input-fields" *ngFor="let controls of formData?.controls">
+          <label class="input-fields-label">{{ controls.label }}</label>
+          <app-custom-input
+            [form]="loginForm"
+            [inputControl]="controls"
+            [fieldClassName]="inputFieldClass"></app-custom-input>
+        </div>
+        <button class="login-form-submit-btn">Login</button>
       </div>
       <div class="login-panel-footer">
         <span class="login-panel-footer-text">Not Registered?</span>

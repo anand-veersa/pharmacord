@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-import { CustomInputComponent } from './custom-input/custom-input.component';
 
 @NgModule({
-  declarations: [CustomInputComponent],
+  declarations: [],
   imports: [
     CommonModule,
     MaterialModule,
@@ -14,6 +13,6 @@ import { CustomInputComponent } from './custom-input/custom-input.component';
     ReactiveFormsModule,
     SharedModule,
   ],
-  exports: [CustomInputComponent],
+  exports: [],
 })
 export class CoreModule {}
