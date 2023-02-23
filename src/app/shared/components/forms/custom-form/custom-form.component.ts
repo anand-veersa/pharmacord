@@ -5,6 +5,8 @@ import {
   ViewChild,
   ViewContainerRef,
   ChangeDetectorRef,
+  Renderer2,
+  ElementRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CustomCheckboxComponent } from '../custom-checkbox/custom-checkbox.component';
@@ -20,10 +22,15 @@ import { CustomSelectComponent } from '../custom-select/custom-select.component'
 export class CustomFormComponent implements AfterViewInit {
   @ViewChild('dynamicForm', { read: ViewContainerRef })
   dynamicForm!: ViewContainerRef;
-  @Input() form: FormGroup;
+  @ViewChild('dynamicForm', { read: true }) formContainer!: ElementRef;
+  @Input() form!: FormGroup;
+  @Input() formType: string = '';
   @Input() field: any;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    private renderer: Renderer2,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   public supportedDynamicComponents = [
     {

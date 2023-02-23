@@ -26,10 +26,12 @@
     <div class="login-panel-header">LOGIN</div>
     <div class="login-panel-body">
       <div class="input-fields" *ngFor="let control of formData?.controls">
-        <label class="input-fields-label">{{ control.label }}</label>
-        <app-custom-form [field]="control" [form]="loginForm"></app-custom-form>
-        <button class="login-form-submit-btn">Login</button>
+        <app-custom-form
+          [field]="control"
+          [form]="loginForm"
+          formType="login"></app-custom-form>
       </div>
+      <button class="login-form-submit-btn">Login</button>
       <div class="login-panel-footer">
         <span class="login-panel-footer-text">Not Registered?</span>
         <!-- <button class="login-panel-footer-button">Register Practice</button> -->

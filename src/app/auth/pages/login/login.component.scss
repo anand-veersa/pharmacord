@@ -15,7 +15,7 @@
 
   .portal-specification {
     background: $color-tertiary;
-    border-radius: 0 60px;
+    border-radius: 0 6rem;
     width: 35.2rem;
     @include respond(tab-land) {
       width: 37;
@@ -74,6 +74,7 @@
       color: $color-primary;
     }
     &-body {
+      padding: 2.5rem;
       background-color: $color-primary;
       border-radius: 1rem;
     }
