@@ -2,7 +2,7 @@
   "controls": [
     {
       "name": "username",
-      "value": "abcd",
+      "value": "",
       "label": "Username",
       "placeholder": "Enter your Username",
       "type": "text",
@@ -14,7 +14,7 @@
     },
     {
       "name": "password",
-      "value": "*****",
+      "value": "",
       "label": "Password",
       "placeholder": "Enter your Password",
       "type": "password",

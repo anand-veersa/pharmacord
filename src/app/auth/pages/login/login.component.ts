@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
-import { SharedFormService } from 'src/app/shared/forms/shared-form.service';
+import { SharedFormService } from 'src/app/shared/services/shared-form.service';
 
 @Component({
   selector: 'app-login',
