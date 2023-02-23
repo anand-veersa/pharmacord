@@ -1,45 +1,33 @@
 <div class="login-container">
-  <img
-    src="../../../../assets/images/login_background_img.svg"
-    alt="portal-background-image" />
-  <div class="specification-and-form">
-    <div class="portal-specification">
-      <div class="portal-specification-points">
-        <div class="portal-specification-header">24/7 Online Support</div>
-        <ul class="banner-content-size">
-          <li>
-            <img src="/assets/images/tick.svg" class="check-mark" />
-            Electronic enrollment and e-Signature functionality
-          </li>
-          <li>
-            <img src="/assets/images/tick.svg" class="check-mark" /> Status
-            updates on enrollment form submissions
-          </li>
-          <li>
-            <img src="/assets/images/tick.svg" class="check-mark" />
-            Real-time notification alerts
-          </li>
-          <li>
-            <img src="/assets/images/tick.svg" class="check-mark" />
-            Upload of supporting documentation
-          </li>
-        </ul>
-      </div>
+  <div class="portal-specification">
+    <div class="portal-specification-points">
+      <div class="portal-specification-header">24/7 Online Support</div>
+      <ul class="banner-content-size">
+        <li>
+          <img src="/assets/images/tick.svg" class="check-mark" />
+          Electronic enrollment and e-Signature functionality
+        </li>
+        <li>
+          <img src="/assets/images/tick.svg" class="check-mark" /> Status
+          updates on enrollment form submissions
+        </li>
+        <li>
+          <img src="/assets/images/tick.svg" class="check-mark" />
+          Real-time notification alerts
+        </li>
+        <li>
+          <img src="/assets/images/tick.svg" class="check-mark" />
+          Upload of supporting documentation
+        </li>
+      </ul>
     </div>
-    <div class="login-panel">
-      <div class="login-panel-header">LOGIN</div>
-      <div class="login-panel-body">
-        <!-- <app-custom-input [formData]="formData"></app-custom-input> -->
-        <div class="input-fields" *ngFor="let control of formData?.controls">
-          <label class="input-fields-label">{{ control.label }}</label>
-          <app-custom-form
-            [field]="control"
-            [form]="loginForm"></app-custom-form>
-          <!-- <app-custom-input
-            [form]="loginForm"
-            [inputControl]="controls"
-            [fieldClassName]="inputFieldClass"></app-custom-input> -->
-        </div>
+  </div>
+  <div class="login-panel">
+    <div class="login-panel-header">LOGIN</div>
+    <div class="login-panel-body">
+      <div class="input-fields" *ngFor="let control of formData?.controls">
+        <label class="input-fields-label">{{ control.label }}</label>
+        <app-custom-form [field]="control" [form]="loginForm"></app-custom-form>
         <button class="login-form-submit-btn">Login</button>
       </div>
       <div class="login-panel-footer">

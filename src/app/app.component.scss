@@ -1,18 +1,21 @@
 @import '../assets/styles/abstracts/variables.scss';
 
+.app-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 .header {
   border-bottom: 0.8rem solid $color-header;
 }
 
 .footer {
+  flex: 1 1 22%;
   border-top: 0.8rem solid $color-header;
-  background: #f2f2f2;
-  width: 100%;
-  height: 100%;
-  width: 100%;
 }
 
 .main {
+  flex: 1 1 67%;
   background: linear-gradient(
     180deg,
     rgba(77, 105, 177, 0.45) 0%,
