@@ -10,10 +10,8 @@ interface JsonFormValidators {
   nullValidator?: boolean;
 }
 interface JsonFormControlOptions {
-  min?: string;
-  max?: string;
-  step?: string;
-  icon?: string;
+  label: string;
+  value: any;
 }
 export interface JsonFormControls {
   name: string;
@@ -23,7 +21,7 @@ export interface JsonFormControls {
   placeholder: string;
   validityErrorMsg: string;
   reqErrorMsg: string;
-  options?: JsonFormControlOptions;
+  options?: JsonFormControlOptions[];
   required: boolean;
   validators: JsonFormValidators;
 }

@@ -30,12 +30,15 @@
       <div class="login-panel-header">LOGIN</div>
       <div class="login-panel-body">
         <!-- <app-custom-input [formData]="formData"></app-custom-input> -->
-        <div class="input-fields" *ngFor="let controls of formData?.controls">
-          <label class="input-fields-label">{{ controls.label }}</label>
-          <app-custom-input
+        <div class="input-fields" *ngFor="let control of formData?.controls">
+          <label class="input-fields-label">{{ control.label }}</label>
+          <app-custom-form
+            [field]="control"
+            [form]="loginForm"></app-custom-form>
+          <!-- <app-custom-input
             [form]="loginForm"
             [inputControl]="controls"
-            [fieldClassName]="inputFieldClass"></app-custom-input>
+            [fieldClassName]="inputFieldClass"></app-custom-input> -->
         </div>
         <button class="login-form-submit-btn">Login</button>
       </div>

@@ -9,8 +9,8 @@
       "reqErrorMsg": "Username Required",
       "validityErrorMsg": "Invalid Username",
       "validators": { "required": true },
-      "options": {},
-      "required": true
+      "required": true,
+      "options": []
     },
     {
       "name": "password",
@@ -23,7 +23,7 @@
       "validators": {
         "required": true
       },
-      "options": {},
+      "options": [],
       "required": true
     }
   ]

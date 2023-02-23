@@ -6,6 +6,7 @@ import {
   ViewContainerRef,
   ChangeDetectorRef,
 } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { CustomCheckboxComponent } from '../custom-checkbox/custom-checkbox.component';
 import { CustomInputComponent } from '../custom-input/custom-input.component';
 import { CustomRadioComponent } from '../custom-radio/custom-radio.component';
@@ -19,6 +20,7 @@ import { CustomSelectComponent } from '../custom-select/custom-select.component'
 export class CustomFormComponent implements AfterViewInit {
   @ViewChild('dynamicForm', { read: ViewContainerRef })
   dynamicForm!: ViewContainerRef;
+  @Input() form: FormGroup;
   @Input() field: any;
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
@@ -54,6 +56,7 @@ export class CustomFormComponent implements AfterViewInit {
     const componentInstance = this.getComponentByType(this.field.type);
     const dynamicComponent =
       this.dynamicForm.createComponent(componentInstance);
+    dynamicComponent.setInput('form', this.form);
     dynamicComponent.setInput('field', this.field);
     this.changeDetectorRef.detectChanges();
   }

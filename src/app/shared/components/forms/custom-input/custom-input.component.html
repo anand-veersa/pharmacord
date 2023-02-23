@@ -5,12 +5,12 @@
       matInput
       class="form-field-input"
       floatLabel="false"
-      [formControlName]="inputControl.name"
-      [type]="inputControl.type"
-      [placeholder]="inputControl.placeholder" />
+      [formControlName]="field.name"
+      [type]="field.type"
+      [placeholder]="field.placeholder" />
     <mat-error>
-      {{ inputControl.reqErrorMsg }}
+      {{ field.reqErrorMsg }}
     </mat-error>
-    <mat-error>{{ inputControl.validityErrorMsg }} </mat-error>
+    <mat-error>{{ field.validityErrorMsg }} </mat-error>
   </mat-form-field>
 </form>
