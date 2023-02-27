@@ -29,7 +29,7 @@ export class AuthGuard
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.validateProviderOrHCP(route, state.url);
+    return this.validateAuthorization(route, state.url);
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
@@ -63,11 +63,21 @@ export class AuthGuard
     | UrlTree {
     return true;
   }
-  validateProviderOrHCP(route: ActivatedRouteSnapshot, url: any) {
-    if (!this.authService.isLoggedIn()) this.router.navigate(['/login']);
+  validateAuthorization(route: ActivatedRouteSnapshot, url: any) {
+    const publicRoutes = this.authService.publicRoutes;
+    if (!this.authService.isLoggedIn() && !publicRoutes.includes(url)) {
+      this.router.navigate(['/login']);
+      return false;
+    }
+    if (this.authService.isLoggedIn() && publicRoutes.includes(url)) {
+      this.router.navigate(['enrollment/dashboard']);
+      return false;
+    }
     const userRole = this.authService.getUserRole();
-    if (route.data.role && route.data.role.indexOf(userRole) === -1)
-      this.router.navigate(['/dashboard']);
+    if (route.data['role'] && route.data['role'].indexOf(userRole) === -1) {
+      this.router.navigate(['enrollment/dashboard']);
+      return false;
+    }
     return true;
   }
 }

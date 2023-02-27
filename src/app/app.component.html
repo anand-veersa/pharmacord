@@ -3,7 +3,13 @@
     <app-header></app-header>
   </div>
   <div class="main">
-    <router-outlet></router-outlet>
+    <mat-spinner
+      class="spinner"
+      *ngIf="isLoading"
+      strokeWidth="2"></mat-spinner>
+    <ng-container *ngIf="!isLoading">
+      <router-outlet></router-outlet>
+    </ng-container>
   </div>
   <div class="footer">
     <app-footer></app-footer>

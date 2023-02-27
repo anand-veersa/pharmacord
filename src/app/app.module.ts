@@ -8,21 +8,12 @@ import { CoreModule } from './core/core.module';
 import { EnrollmentModule } from './enrollment/enrollment.module';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './material.module';
-import { LoginComponent } from './auth/pages/login/login.component';
-import { LogoutComponent } from './auth/pages/logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ForgotUsernameComponent } from './auth/pages/forgot-username/forgot-username.component';
-import { ForgotPasswordComponent } from './auth/pages/forgot-password/forgot-password.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    LogoutComponent,
-    ForgotUsernameComponent,
-    ForgotPasswordComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,6 +22,7 @@ import { ForgotPasswordComponent } from './auth/pages/forgot-password/forgot-pas
     FormsModule,
     ReactiveFormsModule,
     CoreModule,
+    AuthModule,
     EnrollmentModule,
     SharedModule,
     HttpClientModule,

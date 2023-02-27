@@ -15,10 +15,15 @@
 }
 
 .main {
+  display: flex;
   flex: 1 1 67%;
   background: linear-gradient(
     180deg,
     rgba(77, 105, 177, 0.45) 0%,
     rgba(130, 84, 158, 0.45) 100%
   );
+
+  .spinner {
+    margin: auto;
+  }
 }

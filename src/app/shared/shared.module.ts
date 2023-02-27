@@ -37,5 +37,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CustomFormComponent,
     CustomInputComponent,
   ],
+  providers: [LocalStorageService],
 })
 export class SharedModule {}

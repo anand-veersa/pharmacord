@@ -31,7 +31,9 @@
           [form]="loginForm"
           formType="login"></app-custom-form>
       </div>
-      <button class="login-form-submit-btn">Login</button>
+      <button class="login-form-submit-btn" type="submit" (click)="onSubmit()">
+        Login
+      </button>
       <div class="login-panel-footer">
         <span class="login-panel-footer-text">Not Registered?</span>
         <!-- <button class="login-panel-footer-button">Register Practice</button> -->

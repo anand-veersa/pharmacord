@@ -34,6 +34,6 @@ export class ForgotUsernameComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('forgot-username-form submit btn', this.forgotUsernameForm);
+    console.log('submit');
   }
 }

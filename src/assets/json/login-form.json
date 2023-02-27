@@ -1,7 +1,7 @@
 {
   "controls": [
     {
-      "name": "username",
+      "name": "Email",
       "value": "",
       "label": "Username",
       "placeholder": "Enter your Username",
@@ -13,7 +13,7 @@
       "options": []
     },
     {
-      "name": "password",
+      "name": "Password",
       "value": "",
       "label": "Password",
       "placeholder": "Enter your Password",
