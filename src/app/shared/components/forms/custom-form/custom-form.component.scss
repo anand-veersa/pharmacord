@@ -1,0 +1,10 @@
+@import '../../../../../assets/styles/abstracts/variables';
+
+.login-form {
+  label {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 3rem;
+    color: $color-white;
+  }
+}

@@ -1,0 +1,16 @@
+<!-- <label class="custom-input-label">{{ inputControl.label }}</label> -->
+<form [formGroup]="form">
+  <mat-form-field [class]="fieldClassName">
+    <input
+      matInput
+      class="form-field-input"
+      floatLabel="false"
+      [formControlName]="field.name"
+      [type]="field.type"
+      [placeholder]="field.placeholder" />
+    <mat-error>
+      {{ field.reqErrorMsg }}
+    </mat-error>
+    <mat-error>{{ field.validityErrorMsg }} </mat-error>
+  </mat-form-field>
+</form>

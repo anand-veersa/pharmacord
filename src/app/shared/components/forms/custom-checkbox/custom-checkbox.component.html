@@ -1,0 +1,9 @@
+<form #loginForm="ngForm" [formGroup]="form" class="login-form">
+  <ul>
+    <li *ngFor="let option of field.options">
+      <mat-checkbox>
+        {{ option.label }}
+      </mat-checkbox>
+    </li>
+  </ul>
+</form>

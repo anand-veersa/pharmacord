@@ -1,5 +1,5 @@
 {
-  "name": "enhancemt",
+  "name": "enhancement",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -54,15 +54,18 @@
     "typescript": "~4.8.2"
   },
   "lint-staged": {
-   "*.{js,json,css,scss,md,ts,html}": [
+    "*.{js,md,ts,html}": [
       "prettier --write",
       "eslint --fix"
+    ],
+    "*.{json,css,scss}": [
+      "prettier --write"
     ]
   },
   "husky": {
     "hooks": {
       "pre-commit": "ng lint && lint-staged",
-      "pre-push": "ng build --prod"
+      "pre-push": "ng build"
     }
   }
 }

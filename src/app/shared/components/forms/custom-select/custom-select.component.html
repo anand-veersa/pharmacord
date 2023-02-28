@@ -1,0 +1,10 @@
+<form #loginForm="ngForm" [formGroup]="form" class="login-form">
+  <mat-form-field appearance="fill">
+    <mat-select>
+      <mat-option>Select</mat-option>
+      <mat-option *ngFor="let option of field.options" [value]="option.value">
+        {{ option.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

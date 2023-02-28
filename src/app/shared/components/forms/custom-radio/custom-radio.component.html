@@ -1,0 +1,10 @@
+<form #loginForm="ngForm" [formGroup]="form" class="login-form">
+  <mat-radio-group>
+    <mat-radio-button
+      class="example-radio-button"
+      *ngFor="let option of field.options"
+      [value]="option.value">
+      {{ option.label }}
+    </mat-radio-button>
+  </mat-radio-group>
+</form>

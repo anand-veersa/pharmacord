@@ -1,0 +1,23 @@
+@import '../../../../../assets/styles/abstracts/variables';
+.primary-button {
+  color: $color-white;
+  background-color: $color-secondary;
+  font-size: 2rem;
+  line-height: 2.2rem;
+  font-weight: 700;
+  padding: 1.7rem 3rem;
+  justify-items: center;
+  border-radius: 0.6rem;
+  border: none;
+}
+.secondary-button {
+  color: $color-white;
+  background-color: $color-tertiary;
+  font-size: 2rem;
+  line-height: 2.2rem;
+  font-weight: 700;
+  padding: 1.7rem 3rem;
+  justify-items: center;
+  border-radius: 0.6rem;
+  border: none;
+}

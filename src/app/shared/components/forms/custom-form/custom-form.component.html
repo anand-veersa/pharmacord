@@ -1,0 +1,9 @@
+<div
+  [ngClass]="{
+    'login-form': formType === 'login',
+    'enrollment-form': formType === 'enrollment-form'
+  }">
+  <ng-container #dynamicForm>
+    <label>{{ field.label }}</label>
+  </ng-container>
+</div>
