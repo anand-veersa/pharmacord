@@ -9,6 +9,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CustomCheckboxComponent } from '../custom-checkbox/custom-checkbox.component';
 import { CustomInputComponent } from '../custom-input/custom-input.component';
 import { CustomRadioComponent } from '../custom-radio/custom-radio.component';
@@ -29,7 +30,8 @@ export class CustomFormComponent implements AfterViewInit {
 
   constructor(
     private renderer: Renderer2,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   public supportedDynamicComponents = [
@@ -73,5 +75,14 @@ export class CustomFormComponent implements AfterViewInit {
       c => c.type === this.field.type
     );
     return dynamicComponent?.component || CustomInputComponent;
+  }
+
+  navigateRoute() {
+    console.log(this.field.extLink);
+    if (this.field.extLink === 'Forgot Username?') {
+      this.router.navigate(['/reset-username']);
+    } else {
+      this.router.navigate(['/reset-password']);
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "controls": [
     {
-      "name": "Email",
+      "name": "username",
       "value": "",
       "label": "Username",
       "placeholder": "Enter your Username",
@@ -10,10 +10,11 @@
       "validityErrorMsg": "Invalid Username",
       "validators": { "required": true },
       "required": true,
-      "options": []
+      "options": [],
+      "extLink": "Forgot Username?"
     },
     {
-      "name": "Password",
+      "name": "password",
       "value": "",
       "label": "Password",
       "placeholder": "Enter your Password",
@@ -24,7 +25,8 @@
         "required": true
       },
       "options": [],
-      "required": true
+      "required": true,
+      "extLink": "Forgot Password?"
     }
   ]
 }

@@ -6,4 +6,7 @@
   <ng-container #dynamicForm>
     <label>{{ field.label }}</label>
   </ng-container>
+  <p *ngIf="field.extLink !== ''" class="extLink" (click)="navigateRoute()">
+    {{ field.extLink }}
+  </p>
 </div>

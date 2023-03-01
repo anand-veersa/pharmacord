@@ -8,3 +8,16 @@
     color: $color-white;
   }
 }
+
+.extLink {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.7rem;
+  font-family: $tertiary-font;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2.9rem;
+  text-decoration-line: underline;
+  color: $color-white;
+  cursor: pointer;
+}
