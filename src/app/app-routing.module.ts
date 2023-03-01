@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './auth/pages/login/login.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -10,6 +12,10 @@ const routes: Routes = [
     path: 'enrollment',
     loadChildren: () =>
       import('./enrollment/enrollment.module').then(m => m.EnrollmentModule),
+  },
+  {
+    path: '**',
+    redirectTo: '',
   },
 ];
 

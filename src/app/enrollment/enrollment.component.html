@@ -1,4 +1,35 @@
 <div class="enrollment">
-  <app-sidenav></app-sidenav>
-  <router-outlet></router-outlet>
+  <div class="sidenav">
+    <app-sidenav></app-sidenav>
+  </div>
+  <div class="main">
+    <div class="action-panel">
+      <div class="medicine-list">
+        <app-custom-button
+          [btnClass]="
+            selectedMed === 'Jemperli' ? 'tertiary small' : 'inactive small'
+          "
+          btnText="JEMPERLI"
+          (action)="changeMedicine('Jemperli')"></app-custom-button>
+        <app-custom-button
+          [btnClass]="
+            selectedMed === 'Zejula' ? 'tertiary small' : 'inactive small'
+          "
+          btnText="ZEJULA"
+          (action)="changeMedicine('Zejula')"></app-custom-button>
+        <app-custom-button
+          [btnClass]="
+            selectedMed === 'Ojjaara' ? 'tertiary small' : 'inactive small'
+          "
+          btnText="OJJAARA"
+          (action)="changeMedicine('Ojjaara')"></app-custom-button>
+        <span class="text-xs text-x-bold">{{
+          currentDate | date : 'MMM d, y'
+        }}</span>
+      </div>
+    </div>
+    <section class="tab-content">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
 </div>

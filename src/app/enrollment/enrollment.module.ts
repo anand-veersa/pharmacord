@@ -9,6 +9,8 @@ import { MyPatientsComponent } from './pages/my-patients/my-patients.component';
 import { SubmitReferralComponent } from './pages/submit-referral/submit-referral.component';
 import { ToolsAndFormsComponent } from './pages/tools-and-forms/tools-and-forms.component';
 import { SharedModule } from '../shared/shared.module';
+import { MaterialModule } from '../material.module';
+import { EnrollmentService } from './enrollment.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,12 @@ import { SharedModule } from '../shared/shared.module';
     SubmitReferralComponent,
     ToolsAndFormsComponent,
   ],
-  imports: [CommonModule, EnrollmentRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    EnrollmentRoutingModule,
+    SharedModule,
+    MaterialModule,
+  ],
+  providers: [EnrollmentService],
 })
 export class EnrollmentModule {}
