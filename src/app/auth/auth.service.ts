@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { catchError, tap, throwError } from 'rxjs';
 import { LocalStorageService } from '../shared/services/local-storage.service';
+import { AppConstants } from '../constants/app.constants';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   constructor(
     private localStorage: LocalStorageService,
-    private http: HttpClient
+    private http: HttpClient,
+    private appConstants: AppConstants
   ) {}
 
   public publicRoutes: string[] = [
@@ -41,7 +43,7 @@ export class AuthService {
       RefreshToken,
     } = data.Payload;
     const expirationDate = new Date(
-      new Date().getTime() + environment.tokenExpiryDuration * 1000
+      new Date().getTime() + this.appConstants.TOKEN_EXPIRY_DURATION * 1000
     );
     // this.autoLogout(environment.tokenExpiryDuration * 1000);
     console.log(

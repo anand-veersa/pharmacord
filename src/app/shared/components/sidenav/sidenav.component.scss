@@ -1,0 +1,28 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.sidenav {
+  height: 100%;
+  background-color: $color-primary;
+
+  &-item {
+    // height: 11.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 2rem 1rem;
+    border-bottom: 1px solid $color-white;
+    img {
+    }
+    figcaption {
+      font-size: 1.6rem;
+      color: $color-white;
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+  :last-child {
+    border-bottom: none;
+  }
+}

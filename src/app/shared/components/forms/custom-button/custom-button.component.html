@@ -1,5 +1,3 @@
-<button
-  [ngClass]="btnType === 'primary' ? 'primary-button' : 'secondary-button'"
-  disabled="isDisabled">
+<button [ngClass]="btnClass" (click)="buttonClicked()">
   {{ btnText }}
 </button>
