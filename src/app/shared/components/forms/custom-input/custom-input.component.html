@@ -1,8 +1,9 @@
 <!-- <label class="custom-input-label">{{ inputControl.label }}</label> -->
 <form [formGroup]="form">
-  <mat-form-field [class]="fieldClassName">
+  <mat-form-field>
     <input
       matInput
+      [ngClass]="{ 'common-btn': formType !== 'login' }"
       class="form-field-input"
       floatLabel="false"
       [formControlName]="field.name"

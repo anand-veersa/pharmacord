@@ -67,6 +67,7 @@ export class CustomFormComponent implements AfterViewInit {
       this.dynamicForm.createComponent(componentInstance);
     dynamicComponent.setInput('form', this.form);
     dynamicComponent.setInput('field', this.field);
+    dynamicComponent.setInput('formType', this.formType);
     this.changeDetectorRef.detectChanges();
   }
 

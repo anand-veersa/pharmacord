@@ -9,6 +9,15 @@
   }
 }
 
+.forgot-username-form {
+  label {
+    font-weight: 700;
+    font-size: 1.7rem;
+    line-height: 3.5rem;
+    color: $color-grey-dark;
+  }
+}
+
 .extLink {
   display: flex;
   justify-content: flex-end;

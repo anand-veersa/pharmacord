@@ -10,7 +10,8 @@ import { FormGroup } from '@angular/forms';
 export class CustomInputComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() field: JsonFormControls;
-  @Input() fieldClassName: string = '';
+  @Input() formType: string = '';
+  // @Input() fieldClassName: string = '';
 
   ngOnInit() {
     console.log(this.form);
