@@ -25,10 +25,8 @@
     </div>
     <app-custom-button
       btnText="Submit"
-      isDisable="false"
-      btnType="secondary"
-      type="submit"
-      class="submit-btn"></app-custom-button>
+      [isDisabled]="true"
+      btnClass="tertiary button-1"></app-custom-button>
 
     <p class="success-text">
       Your username has been sent to the email provided.
@@ -48,10 +46,9 @@
 
     <div class="forgot-username-container-main-footer">
       <app-custom-button
-        class="back-btn"
+        btnClass="button-1 secondary"
         btnText="< Back to Login"
-        isDisable="false"
-        btnType="primary"></app-custom-button>
+        [isDisabled]="false"></app-custom-button>
       <button class="register-btn">Register</button>
     </div>
   </div>

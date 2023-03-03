@@ -4,6 +4,12 @@ button {
   border-radius: 0.6rem;
   border: none;
 }
+
+button:disabled {
+  background-color: $color-disabled;
+  border: none;
+}
+
 .primary {
   background-color: $color-primary;
 }
@@ -25,4 +31,23 @@ button {
   line-height: 2.8rem;
   font-weight: 400;
   padding: 1.1rem 3rem;
+}
+
+.register-user {
+  padding: 1rem 2.8rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  text-align: center;
+  color: $color-white;
+}
+
+.button-1 {
+  padding: 1.7rem 3.1rem;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2.1rem;
+  text-align: center;
+  color: $color-white;
 }
