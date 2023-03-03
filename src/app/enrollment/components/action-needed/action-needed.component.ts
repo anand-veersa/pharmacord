@@ -7,8 +7,4 @@ import { Component, Input } from '@angular/core';
 })
 export class ActionNeededComponent {
   @Input() alerts: any[] = [];
-
-  ngOnInit() {
-    console.log(this.alerts);
-  }
 }

@@ -17,6 +17,7 @@ import { MaterialModule } from '../material.module';
 
 import { LocalStorageService } from './services/local-storage.service';
 import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinner.component';
+import { CustomErrorComponent } from './components/forms/custom-error/custom-error.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinn
     CustomFormComponent,
     CustomInputComponent,
     CustomSpinnerComponent,
+    CustomErrorComponent,
   ],
   imports: [
     CommonModule,
