@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
-import { SharedFormService } from 'src/app/shared/services/shared-form.service';
+import { SharedService } from 'src/app/shared/services/shared.service';
 import { AuthService } from '../../auth.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private formService: SharedFormService,
+    private sharedService: SharedService,
     private authService: AuthService,
     private router: Router
   ) {}
@@ -26,15 +26,14 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.http.get('/assets/json/login-form.json').subscribe((formData: any) => {
       this.formData = formData;
-      this.loginForm = this.formService.buildForm(this.formData);
+      this.loginForm = this.sharedService.buildForm(this.formData);
     });
   }
   onSubmit() {
-    this.formService.isLoading.next(true);
+    this.sharedService.isLoading.next(true);
     this.authService.login(this.loginForm.value).subscribe(res => {
-      this.formService.isLoading.next(false);
+      this.sharedService.isLoading.next(false);
       this.router.navigate(['/enrollment/dashboard']);
     });
-    console.log(JSON.stringify(this.loginForm.value));
   }
 }

@@ -8,17 +8,27 @@ import { AppConstants } from '../constants/app.constants';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private localStorage: LocalStorageService,
-    private http: HttpClient,
-    private appConstants: AppConstants
-  ) {}
-
+  public user!: {
+    firstName: string;
+    lastName: string;
+    username: string;
+    email: string;
+    phone: number;
+    fax: string;
+    providers: any[];
+    portalAccountPkId: number;
+    role: any;
+  };
   public publicRoutes: string[] = [
     '/login',
     '/reset-password',
     '/reset-username',
   ];
+  constructor(
+    private localStorage: LocalStorageService,
+    private http: HttpClient,
+    private appConstants: AppConstants
+  ) {}
 
   public isLoggedIn(): boolean {
     return !!JSON.parse(this.localStorage.getItem('userData'));
@@ -42,17 +52,9 @@ export class AuthService {
       IsFirstTimeLogin,
       RefreshToken,
     } = data.Payload;
+    const UserName = data.Parameters.Email;
     const expirationDate = new Date(
       new Date().getTime() + this.appConstants.TOKEN_EXPIRY_DURATION * 1000
-    );
-    // this.autoLogout(environment.tokenExpiryDuration * 1000);
-    console.log(
-      JSON.stringify({
-        AccessToken,
-        HasSecurityQuestionAnswere,
-        IsFirstTimeLogin,
-        RefreshToken,
-      })
     );
     this.localStorage.setItem(
       'userData',
@@ -61,6 +63,7 @@ export class AuthService {
         HasSecurityQuestionAnswere,
         IsFirstTimeLogin,
         RefreshToken,
+        UserName,
       })
     );
   }

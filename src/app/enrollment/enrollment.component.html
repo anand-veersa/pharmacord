@@ -28,8 +28,8 @@
         }}</span>
       </div>
     </div>
-    <section class="tab-content">
+    <div class="tab-content" *ngIf="cases.length > 0">
       <router-outlet></router-outlet>
-    </section>
+    </div>
   </div>
 </div>

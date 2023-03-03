@@ -1,0 +1,56 @@
+@import '../../../../assets/styles/abstracts/variables';
+@import '../../../../assets/styles/abstracts/mixins';
+
+.chart-container {
+  display: flex;
+  @include respond(tab-port) {
+    flex-direction: column;
+  }
+  .bar-chart {
+    background-color: $color-white;
+    padding: 3rem;
+    width: 75%;
+    @include respond(tab-port) {
+      width: 100%;
+    }
+  }
+  .chart-legends {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    @include respond(tab-port) {
+      width: 100%;
+    }
+    .legend {
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      color: $color-white;
+      font-weight: 700;
+      line-height: 2rem;
+      @include respond(tab-port) {
+        padding: 2rem;
+      }
+      &-title {
+        font-size: 2rem;
+      }
+      &-count {
+        font-size: 3rem;
+      }
+      &:first-child {
+        border-radius: 0 0.8rem 0 0;
+        @include respond(tab-port) {
+          border-radius: 0;
+        }
+      }
+      &:last-child {
+        border-radius: 0 0 0.8rem 0;
+        @include respond(tab-port) {
+          border-radius: 0 0 0.8rem 0.8rem;
+        }
+      }
+    }
+  }
+}

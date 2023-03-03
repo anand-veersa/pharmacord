@@ -11,15 +11,15 @@ export class AuthInterceptor {
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const modifiedRequest = req.clone({
-      setHeaders: { ClientId: environment.clientId },
-    });
+    const headers: any = { ClientId: environment.clientId };
     if (this.authService.isLoggedIn()) {
       const { AccessToken } = JSON.parse(
         this.localStorageService.getItem('userData')
       );
-      modifiedRequest.headers.append('Authorization', `Bearer ${AccessToken}`);
+      headers.Authorization = `Bearer ${AccessToken}`;
     }
+    const modifiedRequest = req.clone({ setHeaders: headers });
+
     return next.handle(modifiedRequest);
   }
 }

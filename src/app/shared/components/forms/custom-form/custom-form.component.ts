@@ -22,7 +22,6 @@ import { CustomSelectComponent } from '../custom-select/custom-select.component'
 export class CustomFormComponent implements AfterViewInit {
   @ViewChild('dynamicForm', { read: ViewContainerRef })
   dynamicForm!: ViewContainerRef;
-  @ViewChild('dynamicForm', { read: true }) formContainer!: ElementRef;
   @Input() form!: FormGroup;
   @Input() formType: string = '';
   @Input() field: any;

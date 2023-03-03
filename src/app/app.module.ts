@@ -8,10 +8,11 @@ import { CoreModule } from './core/core.module';
 import { EnrollmentModule } from './enrollment/enrollment.module';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './material.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { ChartModule } from 'primeng/chart';
+import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +30,13 @@ import { ChartModule } from 'primeng/chart';
     HttpClientModule,
     ChartModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

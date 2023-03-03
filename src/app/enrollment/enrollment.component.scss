@@ -8,11 +8,15 @@
 
   .main {
     flex: 1 1 91%;
+    overflow: scroll;
     .action-panel {
       display: flex;
       align-items: center;
       background-color: $color-white;
       padding: 1.6rem 1.3rem 1.6rem 3.5rem;
+      position: sticky;
+      z-index: 999;
+      top: 0;
 
       .medicine-list {
         display: flex;

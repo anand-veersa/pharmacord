@@ -1,0 +1,16 @@
+@import '../../../../assets/styles/abstracts/mixins';
+.dashboard {
+  display: flex;
+  gap: 1.2rem;
+
+  @include respond(tab-land) {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .chart {
+    flex: 1 1 77.5%;
+  }
+  .action-needed {
+    flex: 1 1 22.5%;
+  }
+}
