@@ -60,22 +60,26 @@ export class EnrollmentService {
     };
   }
 
-  private handleError(errorRes: HttpErrorResponse) {
+  private handleError(errorRes: number) {
+    console.log(errorRes);
     let errorMessage = 'An unknown error occurred!';
-    if (!errorRes.status) {
-      return throwError(errorMessage);
+    if (!errorRes) {
+      return throwError(() => errorMessage);
     }
-    switch (errorRes.status) {
-      case 400:
-        errorMessage = 'The supplied credentials are incorrect';
+    switch (errorRes) {
+      case 401:
+        errorMessage = 'Session timed out. Please try again';
         break;
       case 403:
-        errorMessage = 'The supplied credentials are incorrect';
+        errorMessage = 'Session timed out. Please try again';
+        break;
+      case 404:
+        errorMessage = 'No data found';
         break;
       case 500:
         errorMessage = 'Something went wrong. Please try again';
         break;
     }
-    return throwError(errorMessage);
+    return throwError(() => errorMessage);
   }
 }

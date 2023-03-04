@@ -1,5 +1,6 @@
 import { HttpHandler, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, throwError } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { environment } from 'src/environments/environment';
@@ -20,6 +21,13 @@ export class AuthInterceptor {
     }
     const modifiedRequest = req.clone({ setHeaders: headers });
 
-    return next.handle(modifiedRequest);
+    return next.handle(modifiedRequest).pipe(
+      catchError(error => {
+        if ([401, 403].includes(error.status)) {
+          this.authService.logoutWithoutToken();
+        }
+        return throwError(() => error.status);
+      })
+    );
   }
 }

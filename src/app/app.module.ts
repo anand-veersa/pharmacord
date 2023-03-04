@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './material.module';
 import { CoreModule } from './core/core.module';
+import { ChartModule } from 'primeng/chart';
+import { RouterModule } from '@angular/router';
 import { EnrollmentModule } from './enrollment/enrollment.module';
 import { SharedModule } from './shared/shared.module';
-import { MaterialModule } from './material.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
-import { ChartModule } from 'primeng/chart';
+import { ToastrModule } from 'ngx-toastr';
+import { AppRoutingModule } from './app-routing.module';
+
 import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
+
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +33,8 @@ import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
     SharedModule,
     HttpClientModule,
     ChartModule,
+    RouterModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     {

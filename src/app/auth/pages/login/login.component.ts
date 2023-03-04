@@ -31,9 +31,15 @@ export class LoginComponent implements OnInit {
   }
   onSubmit() {
     this.sharedService.isLoading.next(true);
-    this.authService.login(this.loginForm.value).subscribe(res => {
-      this.sharedService.isLoading.next(false);
-      this.router.navigate(['/enrollment/dashboard']);
+    this.authService.login(this.loginForm.value).subscribe({
+      next: res => {
+        this.sharedService.isLoading.next(false);
+        this.router.navigate(['/enrollment/dashboard']);
+      },
+      error: err => {
+        this.sharedService.isLoading.next(false);
+        this.sharedService.notify('error', err);
+      },
     });
   }
 }

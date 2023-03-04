@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { catchError, tap, throwError } from 'rxjs';
 import { LocalStorageService } from '../shared/services/local-storage.service';
 import { AppConstants } from '../constants/app.constants';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
@@ -27,7 +28,8 @@ export class AuthService {
   constructor(
     private localStorage: LocalStorageService,
     private http: HttpClient,
-    private appConstants: AppConstants
+    private appConstants: AppConstants,
+    private router: Router
   ) {}
 
   public isLoggedIn(): boolean {
@@ -43,6 +45,17 @@ export class AuthService {
       catchError(this.handleError),
       tap(res => this.handleAuthentication(res))
     );
+  }
+
+  public logout() {
+    const { UserName } = JSON.parse(this.localStorage.getItem('userData'));
+    return this.http
+      .post<any>(`${environment.baseUrl}account/logout`, UserName)
+      .subscribe(res => this.logoutWithoutToken());
+  }
+  public logoutWithoutToken() {
+    this.localStorage.clear();
+    this.router.navigate(['/logout']);
   }
 
   private handleAuthentication(data: any) {
@@ -68,12 +81,12 @@ export class AuthService {
     );
   }
 
-  private handleError(errorRes: HttpErrorResponse) {
+  private handleError(errorRes: number) {
     let errorMessage = 'An unknown error occurred!';
-    if (!errorRes.status) {
-      return throwError(errorMessage);
+    if (!errorRes) {
+      return throwError(() => errorMessage);
     }
-    switch (errorRes.status) {
+    switch (errorRes) {
       case 400:
         errorMessage = 'The supplied credentials are incorrect';
         break;
@@ -84,6 +97,6 @@ export class AuthService {
         errorMessage = 'Something went wrong. Please try again';
         break;
     }
-    return throwError(errorMessage);
+    return throwError(() => errorMessage);
   }
 }

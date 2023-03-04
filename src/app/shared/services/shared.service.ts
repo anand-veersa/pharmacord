@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 
@@ -7,6 +13,8 @@ import { JsonFormData } from 'src/app/models/json-form-data.model';
   providedIn: 'root',
 })
 export class SharedService {
+  constructor(private toastr: ToastrService) {}
+
   public isLoading = new BehaviorSubject<boolean>(false);
 
   public buildForm(formData: JsonFormData): FormGroup {
@@ -18,7 +26,18 @@ export class SharedService {
     return new FormGroup(formControl);
   }
 
-  private addValidator(rules: any) {
+  public notify(
+    type: string,
+    msg: string,
+    title: string = '',
+    config: any = {}
+  ): void {
+    type === 'success'
+      ? this.toastr.success(msg, title)
+      : this.toastr.error(msg, title);
+  }
+
+  private addValidator(rules: any): ValidationErrors {
     let validators: any[] = [];
     if (!rules) {
       return validators;

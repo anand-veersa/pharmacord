@@ -34,17 +34,28 @@ export class EnrollmentComponent implements OnInit {
               this.authService.user.providers[0].ProviderId,
               this.authService.user.portalAccountPkId
             )
-            .subscribe(response => {
-              this.enrolService.cases.next(response.Payload);
-              this.cases = response.Payload;
-              this.enrolService.medicineCases.next(response.Payload);
-              this.sharedService.isLoading.next(false);
+            .subscribe({
+              next: response => {
+                this.enrolService.cases.next(response.Payload);
+                this.cases = response.Payload;
+                this.enrolService.medicineCases.next(response.Payload);
+                this.sharedService.isLoading.next(false);
+              },
+              error: err => {
+                this.sharedService.notify('error', err, '');
+                this.sharedService.isLoading.next(false);
+              },
             });
+        },
+        error: err => {
+          this.sharedService.notify('error', err, '');
+          this.sharedService.isLoading.next(false);
         },
       });
   }
 
   public changeMedicine(medicine: string): void {
+    //TODO REMOVE ONCE TESTED
     this.cases = [
       {
         'prescriberId ': '3393',
