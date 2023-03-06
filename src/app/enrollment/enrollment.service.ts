@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 @Injectable()
 export class EnrollmentService {
-  public selectedMedicine = new Subject<string>();
+  public selectedMedicine = new BehaviorSubject<string>('');
   public medicineCases = new BehaviorSubject<any[]>([]);
   public cases = new Subject<any[]>();
   constructor(private http: HttpClient, private authService: AuthService) {}

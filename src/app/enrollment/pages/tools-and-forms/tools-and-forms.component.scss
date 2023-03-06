@@ -1,0 +1,50 @@
+@import '../../../../assets/styles/abstracts/variables';
+@import '../../../../assets/styles/abstracts/mixins';
+
+.tools-container {
+  padding: 2.5rem;
+  background-color: $color-white;
+  border: 2px solid #bfcbd2;
+  border-radius: 8px;
+
+  .header {
+    display: flex;
+    gap: 1rem;
+    color: $color-grey-dark-3;
+  }
+  .medicine {
+    color: $color-grey-dark-2;
+    padding: 2rem 0;
+
+    h4 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 1rem;
+    }
+    .tools {
+      display: flex;
+      gap: 15rem;
+
+      @include respond(tab-port) {
+        gap: 5rem;
+      }
+      @include respond(mobile) {
+        gap: 1rem;
+      }
+
+      h5 {
+        margin: 0 0 0.8rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+      }
+
+      li {
+        padding: 0.5rem;
+        margin-left: 1rem;
+        list-style: circle;
+        color: $color-primary;
+        font-weight: 400;
+      }
+    }
+  }
+}

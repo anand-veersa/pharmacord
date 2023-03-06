@@ -50,7 +50,7 @@ export class AuthService {
   public logout() {
     const { UserName } = JSON.parse(this.localStorage.getItem('userData'));
     return this.http
-      .post<any>(`${environment.baseUrl}account/logout`, UserName)
+      .post<any>(`${environment.baseUrl}account/logout`, { Email: UserName })
       .subscribe(res => this.logoutWithoutToken());
   }
   public logoutWithoutToken() {

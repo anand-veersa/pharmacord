@@ -3,6 +3,9 @@ button {
   color: $color-white;
   border-radius: 0.6rem;
   border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 .primary {
   background-color: $color-primary;

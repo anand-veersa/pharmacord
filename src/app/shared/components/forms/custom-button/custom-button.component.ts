@@ -9,6 +9,7 @@ export class CustomButtonComponent {
   @Input() btnText: string = 'Submit';
   @Input() isDisabled: boolean = false;
   @Input() btnClass: string = 'primary';
+  @Input() btnIcon: string = '';
   @Output() action = new EventEmitter();
 
   public buttonClicked() {

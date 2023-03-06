@@ -1,5 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, Event, NavigationEnd } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import { AppConstants } from '../constants/app.constants';
 import { LocalStorageService } from '../shared/services/local-storage.service';
 import { SharedService } from '../shared/services/shared.service';
 import { EnrollmentService } from './enrollment.service';
@@ -10,16 +12,37 @@ import { EnrollmentService } from './enrollment.service';
 })
 export class EnrollmentComponent implements OnInit {
   public currentDate = new Date();
-  public selectedMed: string = 'Jemperli';
+  public selectedMed: string;
   public medicineCases: any[] = [];
   public cases: any[] = [];
+  public enableAllMeds: boolean = false;
 
   constructor(
     private enrolService: EnrollmentService,
     private localStorage: LocalStorageService,
     private authService: AuthService,
-    private sharedService: SharedService
-  ) {}
+    private sharedService: SharedService,
+    private router: Router,
+    public appConstants: AppConstants
+  ) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        if (
+          event.url.includes('/patients') ||
+          event.url.includes('/tools-and-forms')
+        ) {
+          this.enableAllMeds = true;
+          this.selectedMed = this.appConstants.MEDICINES.ALL;
+          this.enrolService.selectedMedicine.next(
+            this.appConstants.MEDICINES.ALL
+          );
+        } else {
+          this.enableAllMeds = false;
+          this.changeMedicine(this.appConstants.MEDICINES.MEDICINE_1);
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.sharedService.isLoading.next(true);
@@ -38,7 +61,12 @@ export class EnrollmentComponent implements OnInit {
               next: response => {
                 this.enrolService.cases.next(response.Payload);
                 this.cases = response.Payload;
-                this.enrolService.medicineCases.next(response.Payload);
+                const medicineCases = this.cases.filter(
+                  c =>
+                    c.DrugGroup.Value.toLowerCase() ===
+                    this.selectedMed.toLowerCase()
+                );
+                this.enrolService.medicineCases.next(medicineCases);
                 this.sharedService.isLoading.next(false);
               },
               error: err => {
@@ -508,8 +536,9 @@ export class EnrollmentComponent implements OnInit {
     ];
     this.selectedMed = medicine;
     this.enrolService.selectedMedicine.next(medicine);
+    if (medicine === this.appConstants.MEDICINES.ALL) return;
     const medicineCases = this.cases.filter(
-      c => c.DrugGroup.Value === medicine
+      c => c.DrugGroup.Value.toLowerCase() === medicine.toLowerCase()
     );
     this.enrolService.medicineCases.next(medicineCases);
   }

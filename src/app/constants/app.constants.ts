@@ -3,6 +3,12 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class AppConstants {
   public TOKEN_EXPIRY_DURATION = 15;
+  public MEDICINES = {
+    MEDICINE_1: 'JEMPERLI',
+    MEDICINE_2: 'ZEJULA',
+    MEDICINE_3: 'OJJAARA',
+    ALL: 'All',
+  };
 
   // public BAR_CHART_LABELS =  {
   //     first: "Intake",
@@ -17,7 +23,7 @@ export class AppConstants {
       'Intake',
       'Insurance Auth Required',
       'Financial ServiceIn Progress',
-      'PAP In, Process',
+      'PAP In Process',
       'Other',
       'Total',
     ],

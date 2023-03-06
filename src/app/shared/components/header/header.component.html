@@ -19,9 +19,12 @@
       <div class="secondary-contact">1-844-447-5662</div>
       <div class="office-timings">8 AM ET to 8 PM ET</div>
     </div>
-    <div *ngIf="authService.isLoggedIn()" class="flex">
-      <div class="user">Welcome {{ userName }}</div>
-      <div class="logout">Logout</div>
+    <div *ngIf="authService.isLoggedIn()" class="auth">
+      <div class="user">
+        <img src="../../../../assets/images/user_icon.svg" [alt]="userName" />
+        <span>Welcome {{ userName }}</span>
+      </div>
+      <div class="logout" (click)="logout()">Logout</div>
     </div>
   </div>
 </div>

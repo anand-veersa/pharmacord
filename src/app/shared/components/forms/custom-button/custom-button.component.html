@@ -1,3 +1,5 @@
 <button [ngClass]="btnClass" (click)="buttonClicked()">
-  {{ btnText }}
+  <img
+    *ngIf="btnIcon"
+    src="{{ '../../../../../assets/images/' + btnIcon }}" />{{ btnText }}
 </button>

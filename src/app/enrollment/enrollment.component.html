@@ -6,26 +6,55 @@
     <div class="action-panel">
       <div class="medicine-list">
         <app-custom-button
+          *ngIf="enableAllMeds"
           [btnClass]="
-            selectedMed === 'Jemperli' ? 'tertiary small' : 'inactive small'
+            selectedMed === appConstants.MEDICINES.ALL
+              ? 'tertiary small'
+              : 'inactive small'
           "
-          btnText="JEMPERLI"
-          (action)="changeMedicine('Jemperli')"></app-custom-button>
+          [btnText]="appConstants.MEDICINES.ALL"
+          (action)="
+            changeMedicine(appConstants.MEDICINES.ALL)
+          "></app-custom-button>
         <app-custom-button
           [btnClass]="
-            selectedMed === 'Zejula' ? 'tertiary small' : 'inactive small'
+            selectedMed === appConstants.MEDICINES.MEDICINE_1
+              ? 'tertiary small'
+              : 'inactive small'
           "
-          btnText="ZEJULA"
-          (action)="changeMedicine('Zejula')"></app-custom-button>
+          [btnText]="appConstants.MEDICINES.MEDICINE_1"
+          (action)="
+            changeMedicine(appConstants.MEDICINES.MEDICINE_1)
+          "></app-custom-button>
         <app-custom-button
           [btnClass]="
-            selectedMed === 'Ojjaara' ? 'tertiary small' : 'inactive small'
+            selectedMed === appConstants.MEDICINES.MEDICINE_2
+              ? 'tertiary small'
+              : 'inactive small'
           "
-          btnText="OJJAARA"
-          (action)="changeMedicine('Ojjaara')"></app-custom-button>
+          [btnText]="appConstants.MEDICINES.MEDICINE_2"
+          (action)="
+            changeMedicine(appConstants.MEDICINES.MEDICINE_2)
+          "></app-custom-button>
+        <app-custom-button
+          [btnClass]="
+            selectedMed === appConstants.MEDICINES.MEDICINE_3
+              ? 'tertiary small'
+              : 'inactive small'
+          "
+          [btnText]="appConstants.MEDICINES.MEDICINE_3"
+          (action)="
+            changeMedicine(appConstants.MEDICINES.MEDICINE_3)
+          "></app-custom-button>
         <span class="text-xs text-x-bold">{{
           currentDate | date : 'MMM d, y'
         }}</span>
+      </div>
+      <div class="form-button">
+        <app-custom-button
+          btnIcon="form_icon.svg"
+          btnClass="tertiary small"
+          btnText="Submit Enrollment Form"></app-custom-button>
       </div>
     </div>
     <div class="tab-content" *ngIf="cases.length > 0">
