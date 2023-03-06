@@ -57,12 +57,14 @@
       font-size: 2rem;
       line-height: 2.3rem;
       color: $color-grey-dark;
+      padding-top: 2rem;
     }
     .failed-call {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 2rem;
+      padding-top: 2rem;
 
       .failed-request-text,
       .register-user {
@@ -89,17 +91,6 @@
       gap: 2rem;
       align-items: flex-end;
       padding-top: 3rem;
-      .register-btn {
-        color: $color-white;
-        background-color: $color-tertiary;
-        font-size: 2rem;
-        line-height: 2.9rem;
-        font-weight: 700;
-        padding: 1.3rem 5.7rem;
-        justify-items: center;
-        border-radius: 0.6rem;
-        border: none;
-      }
     }
   }
 }

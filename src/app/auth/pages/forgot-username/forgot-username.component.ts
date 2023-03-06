@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { SharedFormService } from 'src/app/shared/services/shared-form.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-username',
@@ -18,9 +19,11 @@ export class ForgotUsernameComponent implements OnInit {
     'lastname',
     'email',
   ];
+  callFailed: boolean = false;
   constructor(
     private http: HttpClient,
-    private formService: SharedFormService
+    private formService: SharedFormService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -30,6 +33,10 @@ export class ForgotUsernameComponent implements OnInit {
         this.formData = formData;
         this.forgotUsernameForm = this.formService.buildForm(this.formData);
       });
+  }
+
+  navigateToLogin() {
+    this.router.navigate(['/login']);
   }
 
   onSubmit() {

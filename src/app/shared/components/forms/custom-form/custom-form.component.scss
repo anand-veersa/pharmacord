@@ -9,24 +9,28 @@
   }
 }
 
-.forgot-username-form {
-  label {
-    font-weight: 700;
-    font-size: 1.7rem;
-    line-height: 3.5rem;
-    color: $color-grey-dark;
+label {
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 3.5rem;
+  color: $color-grey-dark;
+
+  .asterick {
+    color: $color-error;
   }
 }
 
-.extLink {
+.extLinkDiv {
   display: flex;
   justify-content: flex-end;
-  margin-top: 0.7rem;
-  font-family: $tertiary-font;
-  font-weight: 700;
-  font-size: 1.8rem;
-  line-height: 2.9rem;
-  text-decoration-line: underline;
-  color: $color-white;
-  cursor: pointer;
+  .extLink {
+    margin-top: 0.7rem;
+    font-family: $tertiary-font;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 2.9rem;
+    text-decoration-line: underline;
+    color: $color-white;
+    cursor: pointer;
+  }
 }

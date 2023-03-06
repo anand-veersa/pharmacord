@@ -9,7 +9,7 @@
       "reqErrorMsg": "Username Required",
       "validityErrorMsg": "Invalid Username",
       "validators": { "required": true },
-      "required": true,
+      "required": false,
       "options": [],
       "extLink": "Forgot Username?"
     },
@@ -25,7 +25,7 @@
         "required": true
       },
       "options": [],
-      "required": true,
+      "required": false,
       "extLink": "Forgot Password?"
     }
   ]

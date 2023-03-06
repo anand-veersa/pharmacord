@@ -31,7 +31,7 @@
     <p class="success-text">
       Your username has been sent to the email provided.
     </p>
-    <div class="failed-call">
+    <div class="failed-call" *ngIf="callFailed">
       <p class="failed-request-text">
         One or more pieces of information entered do not match our records.
         <br />
@@ -48,8 +48,10 @@
       <app-custom-button
         btnClass="button-1 secondary"
         btnText="< Back to Login"
-        [isDisabled]="false"></app-custom-button>
-      <button class="register-btn">Register</button>
+        [isDisabled]="false"
+        (click)="navigateToLogin()"></app-custom-button>
+      <app-custom-button btnText="Register" btnClass="register-btn">
+      </app-custom-button>
     </div>
   </div>
 </div>

@@ -44,10 +44,22 @@ button:disabled {
 
 .button-1 {
   padding: 1.7rem 3.1rem;
+  min-width: 15.1rem;
   font-style: normal;
   font-weight: 700;
   font-size: 2rem;
   line-height: 2.1rem;
   text-align: center;
   color: $color-white;
+}
+
+.register-btn {
+  color: $color-white;
+  background-color: $color-tertiary;
+  font-size: 2rem;
+  line-height: 2.9rem;
+  font-weight: 700;
+  padding: 1.3rem 5.7rem;
+  justify-items: center;
+  border-radius: 0.6rem;
 }
