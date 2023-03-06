@@ -1,0 +1,46 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.action-needed-card {
+  height: 100%;
+
+  font-weight: 700;
+  .header {
+    height: 20%;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    color: $color-white;
+    background-color: $color-primary;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-radius: 0.8rem 0.8rem 0 0;
+    .title {
+    }
+    .count {
+      height: 6rem;
+      width: 6rem;
+      border-radius: 50%;
+      background-color: $color-tertiary;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .action-container {
+    height: 80%;
+    background-color: $color-white;
+    padding: 1.5rem;
+    border-radius: 0 0 0.8rem 0.8rem;
+
+    .list-item {
+      color: $color-primary;
+      font-size: 1.4rem;
+      padding: 0.5rem;
+      display: flex;
+      span:first-child {
+        flex-basis: 40%;
+      }
+    }
+  }
+}

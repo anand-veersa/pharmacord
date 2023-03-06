@@ -3,6 +3,9 @@ button {
   color: $color-white;
   border-radius: 0.6rem;
   border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 button:disabled {
@@ -45,6 +48,7 @@ button:disabled {
 .button-1 {
   padding: 1.7rem 3.1rem;
   min-width: 15.1rem;
+  justify-content: center;
   font-style: normal;
   font-weight: 700;
   font-size: 2rem;

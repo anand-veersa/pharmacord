@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { JsonFormControls } from 'src/app/models/json-form-data.model';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-custom-input',
@@ -10,10 +10,12 @@ import { FormGroup } from '@angular/forms';
 export class CustomInputComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() field: JsonFormControls;
+  @Input() fieldName: string;
   @Input() formType: string = '';
   // @Input() fieldClassName: string = '';
+  public errors: ValidationErrors | null | undefined;
 
   ngOnInit() {
-    console.log(this.form);
+    this.errors = this.form.get(this.field.name)?.errors;
   }
 }

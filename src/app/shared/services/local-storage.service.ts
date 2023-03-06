@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class LocalStorageService {
   public getItem(key: string): any {
-    return !!localStorage.getItem(key);
+    return localStorage.getItem(key);
   }
 
   public setItem(key: string, value: any): void {

@@ -31,7 +31,11 @@
           [form]="loginForm"
           formType="login"></app-custom-form>
       </div>
-      <button class="login-form-submit-btn" type="submit" (click)="onSubmit()">
+      <button
+        [disabled]="loginForm?.invalid"
+        class="login-form-submit-btn"
+        type="submit"
+        (click)="onSubmit()">
         Login
       </button>
     </div>

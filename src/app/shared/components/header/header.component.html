@@ -10,18 +10,21 @@
     </div>
   </div>
   <div class="header-right">
-    <div *ngIf="!isLoggedIn" class="htext text-med text-x-bold">
+    <div *ngIf="!authService.isLoggedIn()" class="htext text-med text-x-bold">
       <div>For Healthcare</div>
       <div>Professionals Only</div>
     </div>
-    <div [ngClass]="isLoggedIn ? 'border-right' : 'border-left'">
+    <div [ngClass]="authService.isLoggedIn() ? 'border-right' : 'border-left'">
       <div class="primary-contact">1-844-4GSK-ONC</div>
       <div class="secondary-contact">1-844-447-5662</div>
       <div class="office-timings">8 AM ET to 8 PM ET</div>
     </div>
-    <div *ngIf="isLoggedIn" class="flex">
-      <div class="user">Welcome user.user</div>
-      <div class="logout">Logout</div>
+    <div *ngIf="authService.isLoggedIn()" class="auth">
+      <div class="user">
+        <img src="../../../../assets/images/user_icon.svg" [alt]="userName" />
+        <span>Welcome {{ userName }}</span>
+      </div>
+      <div class="logout" (click)="logout()">Logout</div>
     </div>
   </div>
 </div>

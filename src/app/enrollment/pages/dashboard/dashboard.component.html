@@ -1,1 +1,8 @@
-<app-charts></app-charts>
+<div class="dashboard">
+  <div class="chart">
+    <app-charts [data]="cases"></app-charts>
+  </div>
+  <div class="action-needed">
+    <app-action-needed [alerts]="pendingCases"></app-action-needed>
+  </div>
+</div>

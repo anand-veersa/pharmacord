@@ -9,9 +9,10 @@
       [formControlName]="field.name"
       [type]="field.type"
       [placeholder]="field.placeholder" />
-    <mat-error>
-      {{ field.reqErrorMsg }}
-    </mat-error>
-    <mat-error>{{ field.validityErrorMsg }} </mat-error>
   </mat-form-field>
+  <app-custom-error
+    *ngIf="this.form.controls[this.field.name].touched"
+    [form]="form"
+    [field]="field"
+    [errors]="this.form.get(field.name)?.errors"></app-custom-error>
 </form>

@@ -4,21 +4,33 @@ import { environment } from 'src/environments/environment';
 import { catchError, tap, throwError } from 'rxjs';
 import { LocalStorageService } from '../shared/services/local-storage.service';
 import { AppConstants } from '../constants/app.constants';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private localStorage: LocalStorageService,
-    private http: HttpClient,
-    private appConstants: AppConstants
-  ) {}
-
+  public user!: {
+    firstName: string;
+    lastName: string;
+    username: string;
+    email: string;
+    phone: number;
+    fax: string;
+    providers: any[];
+    portalAccountPkId: number;
+    role: any;
+  };
   public publicRoutes: string[] = [
     '/login',
     '/reset-password',
     '/reset-username',
   ];
+  constructor(
+    private localStorage: LocalStorageService,
+    private http: HttpClient,
+    private appConstants: AppConstants,
+    private router: Router
+  ) {}
 
   public isLoggedIn(): boolean {
     return !!JSON.parse(this.localStorage.getItem('userData'));
@@ -35,6 +47,17 @@ export class AuthService {
     );
   }
 
+  public logout() {
+    const { UserName } = JSON.parse(this.localStorage.getItem('userData'));
+    return this.http
+      .post<any>(`${environment.baseUrl}account/logout`, { Email: UserName })
+      .subscribe(res => this.logoutWithoutToken());
+  }
+  public logoutWithoutToken() {
+    this.localStorage.clear();
+    this.router.navigate(['/logout']);
+  }
+
   private handleAuthentication(data: any) {
     const {
       AccessToken,
@@ -42,17 +65,9 @@ export class AuthService {
       IsFirstTimeLogin,
       RefreshToken,
     } = data.Payload;
+    const UserName = data.Parameters.Email;
     const expirationDate = new Date(
       new Date().getTime() + this.appConstants.TOKEN_EXPIRY_DURATION * 1000
-    );
-    // this.autoLogout(environment.tokenExpiryDuration * 1000);
-    console.log(
-      JSON.stringify({
-        AccessToken,
-        HasSecurityQuestionAnswere,
-        IsFirstTimeLogin,
-        RefreshToken,
-      })
     );
     this.localStorage.setItem(
       'userData',
@@ -61,16 +76,17 @@ export class AuthService {
         HasSecurityQuestionAnswere,
         IsFirstTimeLogin,
         RefreshToken,
+        UserName,
       })
     );
   }
 
-  private handleError(errorRes: HttpErrorResponse) {
+  private handleError(errorRes: number) {
     let errorMessage = 'An unknown error occurred!';
-    if (!errorRes.status) {
-      return throwError(errorMessage);
+    if (!errorRes) {
+      return throwError(() => errorMessage);
     }
-    switch (errorRes.status) {
+    switch (errorRes) {
       case 400:
         errorMessage = 'The supplied credentials are incorrect';
         break;
@@ -81,6 +97,6 @@ export class AuthService {
         errorMessage = 'Something went wrong. Please try again';
         break;
     }
-    return throwError(errorMessage);
+    return throwError(() => errorMessage);
   }
 }

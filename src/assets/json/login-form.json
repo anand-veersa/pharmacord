@@ -22,7 +22,10 @@
       "reqErrorMsg": "Password Required",
       "validityErrorMsg": "Invalid Password",
       "validators": {
-        "required": true
+        "required": true,
+        "max": 14,
+        "min": 8,
+        "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]+).{8,30}$"
       },
       "options": [],
       "required": false,

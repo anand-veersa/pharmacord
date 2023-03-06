@@ -1,1 +1,25 @@
-<p>tools-and-forms works!</p>
+<div class="tools-container">
+  <div class="header">
+    <img src="../../../../assets/images/tools_forms_icon.svg" alt="" />
+    <span class="text-large text-x-bold">Tools and Forms</span>
+  </div>
+  <div class="medicine" *ngFor="let tools of toolsAndFormsData">
+    <h4>{{ tools.medicine }}</h4>
+    <div class="tools">
+      <section class="support-guide">
+        <h5>ENROLLMENT FORM AND SUPPORT</h5>
+        <ul class="forms-list">
+          <li class="forms-item">Provider Portal User Guide</li>
+          <li class="forms-item">Enrollment Form</li>
+        </ul>
+      </section>
+      <section class="product-info">
+        <h5>PRODUCT INFORMATION</h5>
+        <ul class="forms-list">
+          <li class="forms-item">Prescribing Information</li>
+          <li class="forms-item">Medication Guide</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
