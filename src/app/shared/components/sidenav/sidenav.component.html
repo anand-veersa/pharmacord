@@ -1,1 +1,38 @@
-<p>sidenav works!</p>
+<ul class="sidenav">
+  <li
+    class="sidenav-item"
+    [routerLink]="['/enrollment/dashboard']"
+    routerLinkActive="active">
+    <img
+      src="../../../../assets/images/dashboard_icon.svg"
+      alt="Dashboard Icon" />
+    <figcaption>Dashboard</figcaption>
+  </li>
+  <li
+    class="sidenav-item"
+    [routerLink]="['/enrollment/patients']"
+    routerLinkActive="active">
+    <img
+      src="../../../../assets/images/my_patients.svg"
+      alt="My Patients Icon" />
+    <figcaption>My Patients</figcaption>
+  </li>
+  <li
+    class="sidenav-item"
+    [routerLink]="['/enrollment/tools-and-forms']"
+    routerLinkActive="active">
+    <img
+      src="../../../../assets/images/tools_and_forms.svg"
+      alt="Tools and Forms Icon" />
+    <figcaption>Tools and Forms</figcaption>
+  </li>
+  <li
+    class="sidenav-item"
+    [routerLink]="['/enrollment/account-settings']"
+    routerLinkActive="active">
+    <img
+      src="../../../../assets/images/account_settings.svg"
+      alt="Account Settings Icon" />
+    <figcaption>Account Settings</figcaption>
+  </li>
+</ul>

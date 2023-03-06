@@ -1,5 +1,5 @@
-<button
-  [ngClass]="btnType === 'primary' ? 'primary-button' : 'secondary-button'"
-  disabled="isDisabled">
-  {{ btnText }}
+<button [ngClass]="btnClass" (click)="buttonClicked()">
+  <img
+    *ngIf="btnIcon"
+    src="{{ '../../../../../assets/images/' + btnIcon }}" />{{ btnText }}
 </button>

@@ -1,0 +1,13 @@
+<div class="action-needed-card">
+  <div class="header">
+    <span class="title">Actions Needed</span>
+    <span class="count">{{ alerts.length }}</span>
+  </div>
+  <ul class="action-container">
+    <li class="list-item" *ngFor="let alert of alerts">
+      <span> {{ alert.CaseId }} - </span>
+      <span class="names"> {{ alert.PatientName }} </span>
+      <br />
+    </li>
+  </ul>
+</div>

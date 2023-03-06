@@ -1,0 +1,38 @@
+@import '../../assets/styles/abstracts/variables';
+.enrollment {
+  display: flex;
+  height: 100%;
+  .sidenav {
+    flex: 1 1 9%;
+  }
+
+  .main {
+    flex: 1 1 91%;
+    overflow: scroll;
+    .action-panel {
+      display: flex;
+      align-items: center;
+      background-color: $color-white;
+      padding: 1.6rem 1.3rem 1.6rem 3.5rem;
+      position: sticky;
+      z-index: 999;
+      top: 0;
+      justify-content: space-between;
+
+      .medicine-list {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        button {
+          font-weight: 400;
+          font-size: 1.6rem;
+          line-height: 2.8rem;
+        }
+      }
+    }
+
+    .tab-content {
+      padding: 2rem 3rem;
+    }
+  }
+}

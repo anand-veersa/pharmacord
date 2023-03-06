@@ -31,12 +31,20 @@
       line-height: 3rem;
       padding-right: 2.6rem;
     }
-
+    .auth {
+      display: flex;
+      align-items: center;
+      color: $color-tertiary;
+      font-weight: 700;
+    }
     .user {
       padding: 0 2rem;
+      display: flex;
+      align-items: center;
     }
     .logout {
       padding-right: 2rem;
+      cursor: pointer;
     }
     .primary-contact {
       font-size: 2rem;
