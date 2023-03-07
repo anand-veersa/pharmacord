@@ -37,6 +37,14 @@ export class SharedService {
       : this.toastr.error(msg, title);
   }
 
+  downloadFile(filePath: string, fileName: string): void {
+    const link = document.createElement('a');
+    link.href = filePath;
+    link.download = fileName;
+    link.click();
+    link.remove();
+  }
+
   private addValidator(rules: any): ValidationErrors {
     let validators: any[] = [];
     if (!rules) {

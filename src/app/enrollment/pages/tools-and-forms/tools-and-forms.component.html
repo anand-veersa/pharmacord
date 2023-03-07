@@ -9,17 +9,74 @@
       <section class="support-guide">
         <h5>ENROLLMENT FORM AND SUPPORT</h5>
         <ul class="forms-list">
-          <li class="forms-item">Provider Portal User Guide</li>
-          <li class="forms-item">Enrollment Form</li>
+          <li
+            class="forms-item"
+            (click)="
+              showPdf('user_guide', 5, tools.medicine + '_User_Guide.pdf')
+            ">
+            Provider Portal User Guide
+          </li>
+          <li
+            class="forms-item"
+            (click)="
+              showPdf(
+                tools.enrollmentForm,
+                2,
+                'Patient-Referral-' + tools.medicine + '.pdf'
+              )
+            ">
+            Enrollment Form
+          </li>
         </ul>
       </section>
       <section class="product-info">
         <h5>PRODUCT INFORMATION</h5>
         <ul class="forms-list">
-          <li class="forms-item">Prescribing Information</li>
-          <li class="forms-item">Medication Guide</li>
+          <li
+            class="forms-item"
+            (click)="
+              showPdf(
+                tools.presciptionInformation,
+                1,
+                tools.medicine + '_Prescription_Information.pdf'
+              )
+            ">
+            Prescribing Information
+          </li>
+          <li
+            class="forms-item"
+            (click)="
+              showPdf(
+                tools.presciptionInformation,
+                5,
+                tools.medicine + '_Prescription_Information.pdf'
+              )
+            ">
+            Medication Guide
+          </li>
         </ul>
       </section>
     </div>
+  </div>
+</div>
+<div class="overlay" *ngIf="pdfSrc" (click)="closePdf()">
+  <div class="pdf-viewer">
+    <div class="action-panel">
+      <app-custom-button
+        btnClass="x-small secondary"
+        btnText="Download"
+        (action)="downloadFile()"></app-custom-button>
+      <app-custom-button
+        btnClass="x-small tertiary"
+        btnText="Close"
+        (action)="closePdf()"></app-custom-button>
+    </div>
+    <pdf-viewer
+      [src]="pdfSrc"
+      [render-text]="true"
+      [page]="pdfPage"
+      [original-size]="false"
+      style="width: 80rem; height: 60rem">
+    </pdf-viewer>
   </div>
 </div>
