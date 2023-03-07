@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { catchError, tap, throwError } from 'rxjs';
@@ -25,6 +29,11 @@ export class AuthService {
     '/reset-password',
     '/reset-username',
   ];
+  public resHeaders: HttpHeaders = new HttpHeaders()
+    .set('Accept', 'application/json')
+    .set('Content-Type', 'application/json')
+    .set('ClientId', 'V5G18lkyJw7nBL3g5RMBK5fgXSf4FFeH')
+    .set('ProgramId', '500034');
   constructor(
     private localStorage: LocalStorageService,
     private http: HttpClient,
@@ -78,6 +87,29 @@ export class AuthService {
         RefreshToken,
         UserName,
       })
+    );
+  }
+
+  public resetUsername(data: {
+    Email: string;
+    FirstName: string;
+    LastName: string;
+  }) {
+    return this.http.post(
+      `${environment.baseUrl}portal/account/forgotUsername`,
+      data,
+      {
+        headers: this.resHeaders,
+      }
+    );
+  }
+
+  public getSecurityQuestions(data: { Email: string; Username: string }) {
+    return this.http.get(
+      `${environment.baseUrl}securityQuestions?userName=${data.Username}&email=${data.Email}`,
+      {
+        headers: this.resHeaders,
+      }
     );
   }
 

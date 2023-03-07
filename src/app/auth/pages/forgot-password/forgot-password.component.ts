@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/services/shared.service';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -27,7 +28,8 @@ export class ForgotPasswordComponent implements OnInit {
   passwordResetSuccessful: boolean = false;
   constructor(
     private http: HttpClient,
-    private formService: SharedService,
+    private sharedService: SharedService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -36,7 +38,7 @@ export class ForgotPasswordComponent implements OnInit {
       .get('/assets/json/forgot-password-confirm-username-email-form.json')
       .subscribe((formData: any) => {
         this.formDataVerifyForm = formData;
-        this.forgotPasswordVerifyForm = this.formService.buildForm(
+        this.forgotPasswordVerifyForm = this.sharedService.buildForm(
           this.formDataVerifyForm
         );
       });
@@ -45,7 +47,7 @@ export class ForgotPasswordComponent implements OnInit {
       .get('/assets/json/forgot-password-security-questions-form.json')
       .subscribe((formData: any) => {
         this.formDataQuestionForm = formData;
-        this.forgotPasswordQuestionForm = this.formService.buildForm(
+        this.forgotPasswordQuestionForm = this.sharedService.buildForm(
           this.formDataQuestionForm
         );
       });
@@ -54,23 +56,45 @@ export class ForgotPasswordComponent implements OnInit {
       .get('/assets/json/forgot-password-confirm-password-form.json')
       .subscribe((formData: any) => {
         this.formDataConfirmForm = formData;
-        this.forgotPasswordConfirmForm = this.formService.buildForm(
+        this.forgotPasswordConfirmForm = this.sharedService.buildForm(
           this.formDataConfirmForm
         );
       });
   }
 
   verifyIdentity() {
-    console.log(this.forgotPasswordVerifyForm);
-    this.containerHeader = 'Answer Security Question';
-    this.containerSubHeader = 'Answer Security Questions';
-    this.containerSubHeaderInformation =
-      'Please answer the following security questions to identify yourself.';
-    this.showVerifyForm = false;
-    this.showQuestionForm = true;
+    this.sharedService.isLoading.next(true);
+    const payloadForVerifyIdentity = {
+      Username: this.forgotPasswordVerifyForm.get('userName')?.value,
+      Email: this.forgotPasswordVerifyForm.get('email')?.value,
+    };
+
+    this.authService.getSecurityQuestions(payloadForVerifyIdentity).subscribe({
+      next: (res: any) => {
+        if (res.Status === 'SUCCESS') {
+          for (let i = 0; i < res.Payload.length; i++) {
+            this.formDataQuestionForm.controls[i].label =
+              res.Payload[i].SecurityQuestion.QuestionText;
+          }
+          // after successfull call
+          this.containerHeader = 'Answer Security Question';
+          this.containerSubHeader = 'Answer Security Questions';
+          this.containerSubHeaderInformation =
+            'Please answer the following security questions to identify yourself.';
+          this.showVerifyForm = false;
+          this.showQuestionForm = true;
+        } else {
+          console.log(res.Status);
+        }
+        this.sharedService.isLoading.next(false);
+      },
+      error: (err: any) => {
+        this.sharedService.isLoading.next(false);
+        this.sharedService.notify('error', err);
+      },
+    });
   }
   verifyQuestionAnswer() {
-    console.log(this.forgotPasswordQuestionForm);
     this.containerHeader = 'Confirm New Password';
     this.containerSubHeader = 'Confirm Your New Password';
     this.containerSubHeaderInformation = 'Please choose a new password.';
@@ -78,7 +102,6 @@ export class ForgotPasswordComponent implements OnInit {
     this.showConfirmForm = true;
   }
   submitNewPassword() {
-    console.log(this.forgotPasswordConfirmForm);
     this.passwordResetSuccessful = true;
   }
 

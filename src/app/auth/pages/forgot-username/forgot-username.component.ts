@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/services/shared.service';
-
+import { AuthService } from '../../auth.service';
 @Component({
   selector: 'app-forgot-username',
   templateUrl: './forgot-username.component.html',
@@ -19,10 +19,12 @@ export class ForgotUsernameComponent implements OnInit {
     'lastname',
     'email',
   ];
-  callFailed: boolean = false;
+  apiSuccess: boolean = false;
+  submitBtnClicked: boolean = false;
   constructor(
     private http: HttpClient,
-    private formService: SharedService,
+    private sharedService: SharedService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -31,7 +33,7 @@ export class ForgotUsernameComponent implements OnInit {
       .get('/assets/json/forgot-username-form.json')
       .subscribe((formData: any) => {
         this.formData = formData;
-        this.forgotUsernameForm = this.formService.buildForm(this.formData);
+        this.forgotUsernameForm = this.sharedService.buildForm(this.formData);
       });
   }
 
@@ -39,7 +41,28 @@ export class ForgotUsernameComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  onSubmit() {
+  submitResetUsername() {
+    this.submitBtnClicked = true;
     console.log('submit');
+    this.sharedService.isLoading.next(true);
+    const finalPayload = {
+      FirstName: this.forgotUsernameForm.get('firstName')?.value,
+      LastName: this.forgotUsernameForm.get('lastName')?.value,
+      Email: this.forgotUsernameForm.get('email')?.value,
+    };
+    this.authService.resetUsername(finalPayload).subscribe({
+      next: (res: any) => {
+        this.sharedService.isLoading.next(false);
+        if (res.Status === 'SUCCESS') {
+          this.apiSuccess = true;
+        } else {
+          this.apiSuccess = false;
+        }
+      },
+      error: err => {
+        this.sharedService.isLoading.next(false);
+        this.sharedService.notify('error', err);
+      },
+    });
   }
 }

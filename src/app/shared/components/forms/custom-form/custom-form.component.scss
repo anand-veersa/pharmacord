@@ -20,7 +20,7 @@ label {
   }
 }
 
-.extLinkDiv {
+.login-form > .extLinkDiv {
   display: flex;
   justify-content: flex-end;
   .extLink {
@@ -33,4 +33,8 @@ label {
     color: $color-white;
     cursor: pointer;
   }
+}
+
+.extLinkDiv {
+  display: none;
 }
