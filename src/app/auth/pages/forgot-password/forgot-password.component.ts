@@ -26,6 +26,8 @@ export class ForgotPasswordComponent implements OnInit {
   showQuestionForm: boolean = false;
   showConfirmForm: boolean = false;
   passwordResetSuccessful: boolean = false;
+  securityQuestionsID: number[] = [];
+  securityAnswerData: any[] = [];
   constructor(
     private http: HttpClient,
     private sharedService: SharedService,
@@ -75,6 +77,7 @@ export class ForgotPasswordComponent implements OnInit {
           for (let i = 0; i < res.Payload.length; i++) {
             this.formDataQuestionForm.controls[i].label =
               res.Payload[i].SecurityQuestion.QuestionText;
+            this.securityQuestionsID?.push(res.Payload[i].SecurityQuestion.Id);
           }
           // after successfull call
           this.containerHeader = 'Answer Security Question';
@@ -102,10 +105,64 @@ export class ForgotPasswordComponent implements OnInit {
     this.showConfirmForm = true;
   }
   submitNewPassword() {
-    this.passwordResetSuccessful = true;
+    this.sharedService.isLoading.next(true);
+    let index = 1;
+    this.securityAnswerData = [];
+    for (const item of this.securityQuestionsID) {
+      this.securityAnswerData.push({
+        SecurityQuestion: { Id: item },
+        Choice: null,
+        Answer: this.forgotPasswordQuestionForm.get(`securityQuestion${index}`)
+          ?.value,
+      });
+      index++;
+    }
+
+    const payloadResetPassword = {
+      UserName: this.forgotPasswordVerifyForm.get('userName')?.value,
+      Password: this.forgotPasswordConfirmForm.get('newPassword')?.value,
+      PasswordConfirmation:
+        this.forgotPasswordConfirmForm.get('confirmNewPassword')?.value,
+      SecurityAnswers: this.securityAnswerData,
+    };
+
+    this.authService.resetPassword(payloadResetPassword).subscribe({
+      next: (res: any) => {
+        if (res.Status === 'SUCCESS') {
+          console.log(res, 'response for Reset password');
+          this.passwordResetSuccessful = true;
+        } else {
+          this.sharedService.notify('error', res.Errors[0].Message);
+        }
+        this.sharedService.isLoading.next(false);
+      },
+      error: err => {
+        this.sharedService.isLoading.next(false);
+        this.sharedService.notify('error', err);
+      },
+    });
   }
 
   navigateToLogin() {
     this.router.navigate(['/login']);
+  }
+  showPrevious() {
+    if (this.containerHeader === 'Confirm New Password') {
+      this.containerHeader = 'Answer Security Question';
+      this.containerSubHeader = 'Answer Security Questions';
+      this.containerSubHeaderInformation =
+        'Please answer the following security questions to identify yourself.';
+      this.showVerifyForm = false;
+      this.showQuestionForm = true;
+      this.showConfirmForm = false;
+    } else {
+      this.containerHeader = 'Forgot Password';
+      this.containerSubHeader = 'Confirm Username & Email Address';
+      this.containerSubHeaderInformation =
+        'Please verify the username and email address for your account.';
+      this.showVerifyForm = true;
+      this.showQuestionForm = false;
+      this.showConfirmForm = false;
+    }
   }
 }

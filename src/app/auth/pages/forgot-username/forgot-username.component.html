@@ -1,19 +1,17 @@
-<br />
+<!-- <br /> -->
 <div class="forgot-username-container">
   <div class="forgot-username-container-header">Forgot Username</div>
   <div class="forgot-username-container-main">
-    <div class="common-text">
-      <p class="common-text-header">Provide Your User Information</p>
-      <p class="common-text-sub-header">
+    <div class="title-container">
+      <p class="title-container-header">Provide Your User Information</p>
+      <p class="title-container-sub-header">
         Please provide the information you used to create your account below so
         that we can match you to our records.
       </p>
-      <p class="required-field">
-        <span class="asterick">* </span>Required field
-      </p>
+      <p class="required-field"><span>* </span>Required field</p>
     </div>
 
-    <div class="form-fields-div">
+    <div class="form-fields">
       <div class="input-fields" *ngFor="let control of formData?.controls">
         <app-custom-form
           [field]="control"
@@ -24,14 +22,14 @@
     <app-custom-button
       class="submit-btn"
       btnText="Submit"
-      [isDisabled]="forgotUsernameForm.invalid"
-      btnClass="tertiary button-1"
+      [isDisabled]="forgotUsernameForm && forgotUsernameForm.invalid"
+      btnClass="tertiary medium"
       (click)="submitResetUsername()"></app-custom-button>
 
-    <p class="success-text" *ngIf="apiSuccess && submitBtnClicked">
+    <p class="success-text" *ngIf="resetSuccess">
       Your username has been sent to the email provided.
     </p>
-    <div class="failed-call" *ngIf="!apiSuccess && submitBtnClicked">
+    <div class="request-fail" *ngIf="!resetSuccess && submitBtnClicked">
       <p class="failed-request-text">
         One or more pieces of information entered do not match our records.
         <br />
@@ -48,22 +46,22 @@
       class="forgot-username-container-main-footer"
       [ngStyle]="{
         'padding-top': submitBtnClicked
-          ? apiSuccess
+          ? resetSuccess
             ? '7rem'
             : '2rem'
           : '11.3rem'
       }">
       <app-custom-button
-        btnClass="button-1 secondary"
+        btnClass="medium secondary"
         btnText="< Back to Login"
         [isDisabled]="false"
         (click)="navigateToLogin()"></app-custom-button>
       <app-custom-button
         btnText="Register"
         btnClass="register-btn"
-        *ngIf="!apiSuccess && submitBtnClicked">
+        *ngIf="!resetSuccess && submitBtnClicked">
       </app-custom-button>
     </div>
   </div>
 </div>
-<br />
+<!-- <br /> -->

@@ -95,22 +95,29 @@ export class AuthService {
     FirstName: string;
     LastName: string;
   }) {
-    return this.http.post(
-      `${environment.baseUrl}portal/account/forgotUsername`,
-      data,
-      {
+    return this.http
+      .post(`${environment.baseUrl}portal/account/forgotUsername`, data, {
         headers: this.resHeaders,
-      }
-    );
+      })
+      .pipe(catchError(this.handleError));
   }
 
   public getSecurityQuestions(data: { Email: string; Username: string }) {
-    return this.http.get(
-      `${environment.baseUrl}securityQuestions?userName=${data.Username}&email=${data.Email}`,
-      {
+    return this.http
+      .get(
+        `${environment.baseUrl}securityQuestions?userName=${data.Username}&email=${data.Email}`,
+        {
+          headers: this.resHeaders,
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  public resetPassword(data: any) {
+    return this.http
+      .post(`${environment.baseUrl}portal/account/resetPassword`, data, {
         headers: this.resHeaders,
-      }
-    );
+      })
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(errorRes: number) {

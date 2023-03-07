@@ -13,13 +13,7 @@ import { AuthService } from '../../auth.service';
 export class ForgotUsernameComponent implements OnInit {
   public forgotUsernameForm!: FormGroup;
   public formData!: JsonFormData;
-  public inputFieldClass: string = 'secondary';
-  public formControlNameArray: Array<string> = [
-    'firstname',
-    'lastname',
-    'email',
-  ];
-  apiSuccess: boolean = false;
+  resetSuccess: boolean = false;
   submitBtnClicked: boolean = false;
   constructor(
     private http: HttpClient,
@@ -52,12 +46,12 @@ export class ForgotUsernameComponent implements OnInit {
     };
     this.authService.resetUsername(finalPayload).subscribe({
       next: (res: any) => {
-        this.sharedService.isLoading.next(false);
         if (res.Status === 'SUCCESS') {
-          this.apiSuccess = true;
+          this.resetSuccess = true;
         } else {
-          this.apiSuccess = false;
+          this.resetSuccess = false;
         }
+        this.sharedService.isLoading.next(false);
       },
       error: err => {
         this.sharedService.isLoading.next(false);

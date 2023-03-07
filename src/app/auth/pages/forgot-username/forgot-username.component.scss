@@ -2,7 +2,7 @@
 .forgot-username-container {
   display: flex;
   flex-direction: column;
-  margin: auto 7rem;
+  margin: 1.2rem 7rem 2rem 7rem;
   background-color: $color-white;
   border-radius: 8px;
 
@@ -17,11 +17,11 @@
     font-weight: 700;
   }
   &-main {
-    padding: 3rem 5.5rem;
+    padding: 2.4rem 5.5rem;
     display: flex;
     flex-direction: column;
 
-    .common-text {
+    .title-container {
       color: $color-black;
       &-header {
         font-size: 2.4rem;
@@ -34,7 +34,7 @@
         font-weight: 700;
       }
     }
-    .form-fields-div {
+    .form-fields {
       display: flex;
       width: 70vw;
       flex-wrap: wrap;
@@ -64,7 +64,8 @@
       color: $color-grey-dark;
       padding-top: 2rem;
     }
-    .failed-call {
+
+    .request-fail {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -86,6 +87,7 @@
         font-weight: 500;
       }
     }
+
     .submit-btn {
       margin-bottom: 2rem;
     }
