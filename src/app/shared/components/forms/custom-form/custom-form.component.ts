@@ -25,11 +25,9 @@ export class CustomFormComponent implements AfterViewInit {
   @Input() form!: FormGroup;
   @Input() formType: string = '';
   @Input() field: any;
+  @Input() inputPrefix: string;
 
-  constructor(
-    private renderer: Renderer2,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {}
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   public supportedDynamicComponents = [
     {
@@ -64,6 +62,7 @@ export class CustomFormComponent implements AfterViewInit {
       this.dynamicForm.createComponent(componentInstance);
     dynamicComponent.setInput('form', this.form);
     dynamicComponent.setInput('field', this.field);
+    dynamicComponent.setInput('inputPrefix', this.inputPrefix);
     this.changeDetectorRef.detectChanges();
   }
 

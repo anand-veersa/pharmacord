@@ -21,6 +21,7 @@ import { LocalStorageService } from './services/local-storage.service';
 import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinner.component';
 import { CustomErrorComponent } from './components/forms/custom-error/custom-error.component';
 import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component';
+import { CustomTableComponent } from './components/custom-table/custom-table.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component
     CustomSpinnerComponent,
     CustomErrorComponent,
     PdfViewerComponent,
+    CustomTableComponent,
   ],
   imports: [
     CommonModule,
@@ -57,6 +59,7 @@ import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component
     CustomFormComponent,
     CustomInputComponent,
     CustomSpinnerComponent,
+    CustomTableComponent,
   ],
   providers: [LocalStorageService],
 })
