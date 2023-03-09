@@ -15,10 +15,13 @@ import { CustomFormComponent } from './components/forms/custom-form/custom-form.
 import { ChartModule } from 'primeng/chart';
 import { MaterialModule } from '../material.module';
 import { RouterModule } from '@angular/router';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { LocalStorageService } from './services/local-storage.service';
 import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinner.component';
 import { CustomErrorComponent } from './components/forms/custom-error/custom-error.component';
+import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component';
+import { CustomTableComponent } from './components/custom-table/custom-table.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { CustomErrorComponent } from './components/forms/custom-error/custom-err
     CustomInputComponent,
     CustomSpinnerComponent,
     CustomErrorComponent,
+    PdfViewerComponent,
+    CustomTableComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +46,7 @@ import { CustomErrorComponent } from './components/forms/custom-error/custom-err
     ReactiveFormsModule,
     ChartModule,
     RouterModule,
+    PdfViewerModule,
   ],
   exports: [
     HeaderComponent,
@@ -53,6 +59,7 @@ import { CustomErrorComponent } from './components/forms/custom-error/custom-err
     CustomFormComponent,
     CustomInputComponent,
     CustomSpinnerComponent,
+    CustomTableComponent,
   ],
   providers: [LocalStorageService],
 })

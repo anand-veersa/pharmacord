@@ -1,1 +1,24 @@
-<p>my-patients works!</p>
+<div class="patient-container">
+  <div class="patient-header">
+    <div class="title">
+      <img
+        src="../../../../assets/images/patient_icon.svg"
+        alt="Patient Icon" />
+      <span>My Patients</span>
+    </div>
+    <div class="search-block">
+      <app-custom-form
+        [form]="searchForm"
+        [field]="searchField"
+        inputPrefix="search"></app-custom-form>
+      <app-custom-button
+        btnText="Search"
+        btnClass="secondary small"></app-custom-button>
+    </div>
+  </div>
+  <app-custom-table
+    [dataSource]="cases"
+    [columnSchema]="columnSchema"
+    [displayedColumns]="displayedColumns"
+    [pageSizeOptions]="pageSizeOptions"></app-custom-table>
+</div>
