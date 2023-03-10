@@ -64,7 +64,7 @@ export class ForgotPasswordComponent implements OnInit {
       });
   }
 
-  verifyIdentity() {
+  verifyIdentity(): void {
     this.sharedService.isLoading.next(true);
     const payloadForVerifyIdentity = {
       Username: this.forgotPasswordVerifyForm.get('userName')?.value,
@@ -86,8 +86,6 @@ export class ForgotPasswordComponent implements OnInit {
             'Please answer the following security questions to identify yourself.';
           this.showVerifyForm = false;
           this.showQuestionForm = true;
-        } else {
-          console.log(res.Status);
         }
         this.sharedService.isLoading.next(false);
       },
@@ -97,14 +95,14 @@ export class ForgotPasswordComponent implements OnInit {
       },
     });
   }
-  verifyQuestionAnswer() {
+  verifyQuestionAnswer(): void {
     this.containerHeader = 'Confirm New Password';
     this.containerSubHeader = 'Confirm Your New Password';
     this.containerSubHeaderInformation = 'Please choose a new password.';
     this.showQuestionForm = false;
     this.showConfirmForm = true;
   }
-  submitNewPassword() {
+  submitNewPassword(): void {
     this.sharedService.isLoading.next(true);
     let index = 1;
     this.securityAnswerData = [];
@@ -129,7 +127,6 @@ export class ForgotPasswordComponent implements OnInit {
     this.authService.resetPassword(payloadResetPassword).subscribe({
       next: (res: any) => {
         if (res.Status === 'SUCCESS') {
-          console.log(res, 'response for Reset password');
           this.passwordResetSuccessful = true;
         } else {
           this.sharedService.notify('error', res.Errors[0].Message);
@@ -143,10 +140,10 @@ export class ForgotPasswordComponent implements OnInit {
     });
   }
 
-  navigateToLogin() {
+  navigateToLogin(): void {
     this.router.navigate(['/login']);
   }
-  showPrevious() {
+  showPrevious(): void {
     if (this.containerHeader === 'Confirm New Password') {
       this.containerHeader = 'Answer Security Question';
       this.containerSubHeader = 'Answer Security Questions';

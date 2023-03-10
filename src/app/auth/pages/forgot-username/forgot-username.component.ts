@@ -31,13 +31,12 @@ export class ForgotUsernameComponent implements OnInit {
       });
   }
 
-  navigateToLogin() {
+  navigateToLogin(): void {
     this.router.navigate(['/login']);
   }
 
-  submitResetUsername() {
+  submitResetUsername(): void {
     this.submitBtnClicked = true;
-    console.log('submit');
     this.sharedService.isLoading.next(true);
     const finalPayload = {
       FirstName: this.forgotUsernameForm.get('firstName')?.value,
