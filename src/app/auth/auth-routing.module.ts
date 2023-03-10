@@ -5,6 +5,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { ForgotUsernameComponent } from './pages/forgot-username/forgot-username.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LogoutComponent } from './pages/logout/logout.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -19,6 +20,10 @@ const routes: Routes = [
     path: 'reset-username',
     component: ForgotUsernameComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'registration',
+    component: RegistrationComponent,
   },
 ];
 

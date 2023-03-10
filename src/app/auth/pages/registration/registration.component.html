@@ -1,0 +1,71 @@
+<div class="registration-container">
+  <div class="registration-header">
+    <!-- <mat-stepper headerPosition="bottom" #stepper>
+      <mat-step [stepControl]="test1()"> </mat-step>
+      <mat-step [stepControl]="test2()" optional> </mat-step>
+      <mat-step> </mat-step>
+    </mat-stepper> -->
+    <div class="title-and-stepper text-x-bold">
+      <span>Create New Account</span>
+    </div>
+    <span class="info-text text-small text-x-bold">
+      Please complete all fields below to create your account.
+    </span>
+  </div>
+  <div class="main-container">
+    <div class="title">
+      <p class="text-xxl text-x-bold">Tell us more about you.</p>
+      <p class="text-large text-x-bold">
+        Which type of account would you like to create?
+      </p>
+    </div>
+    <div class="selection-cards">
+      <div class="img-label-group">
+        <div
+          (click)="toggleSelection()"
+          [ngClass]="
+            prescriberRegistration ? 'selectedCard' : 'prescriber-img'
+          ">
+          <img
+            src="../../../../assets/images/unselected-prescriber.svg"
+            alt="unselected-prescriber-logo"
+            *ngIf="!prescriberRegistration" />
+          <img
+            src="../../../../assets/images/selected-prescriber.svg"
+            alt="selected-prescriber-logo"
+            *ngIf="prescriberRegistration" />
+        </div>
+        <span class="img-label text-small text-x-bold">Provider</span>
+      </div>
+
+      <div class="img-label-group">
+        <div
+          (click)="toggleSelection()"
+          [ngClass]="HcpRegistration ? 'selectedCard' : 'hcp-img'">
+          <img
+            src="../../../../assets/images/unselected-hcp.svg"
+            alt="unselected-HCP-logo"
+            *ngIf="!HcpRegistration" />
+          <img
+            src="../../../../assets/images/selected-hcp.svg"
+            alt="selected-HCP-logo"
+            *ngIf="HcpRegistration" />
+        </div>
+        <div class="img-label">
+          <p class="text-small text-x-bold">Healthcare</p>
+          <p class="text-small text-x-bold">Professional</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="registration-footer">
+    <app-custom-button
+      btnText="< Back to Login"
+      btnClass="medium secondary"
+      (click)="navigateToLogin()"></app-custom-button>
+    <app-custom-button
+      btnText="Next"
+      btnClass="medium tertiary"></app-custom-button>
+  </div>
+</div>

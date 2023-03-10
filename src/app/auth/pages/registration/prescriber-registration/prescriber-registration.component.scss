@@ -1,0 +1,21 @@
+.page-1 {
+  display: flex;
+
+  .lookup-information {
+    width: 65%;
+    height: 20rem;
+    background-color: aqua;
+  }
+
+  .confirm-information {
+    width: 35%;
+    height: 20rem;
+    background-color: black;
+  }
+
+  .select-username {
+    width: 100%;
+    height: 20rem;
+    background-color: red($color: #000000);
+  }
+}

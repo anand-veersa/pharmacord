@@ -1,0 +1,88 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.registration-container {
+  display: flex;
+  flex-direction: column;
+  margin: 1.2rem 7rem 2rem 7rem;
+  background-color: $color-white;
+  border-radius: 8px;
+
+  .registration-header {
+    background: $color-tertiary;
+    border-radius: 8px 8px 0px 0px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $color-white;
+    padding: 1.4rem 2rem;
+
+    .title-and-stepper {
+      display: flex;
+      justify-content: space-between;
+      font-size: 2.5rem;
+      line-height: 2.9rem;
+    }
+  }
+
+  .main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    padding: 4rem 4.8rem;
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .selection-cards {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+
+      .img-label-group {
+        .hcp-img,
+        .prescriber-img {
+          display: flex;
+          justify-content: center;
+          border: 1px solid $color-header;
+          border-radius: 10px;
+          margin-bottom: 1.4rem;
+          img {
+            padding: 3rem;
+          }
+        }
+        .img-label {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  .selectedCard {
+    background-color: $color-tertiary;
+    border: none;
+    display: flex;
+    justify-content: center;
+    border: 1px solid $color-tertiary;
+    border-radius: 10px;
+    margin-bottom: 1.4rem;
+    img {
+      padding: 3rem;
+    }
+  }
+
+  .registration-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 4rem 4.8rem;
+  }
+}

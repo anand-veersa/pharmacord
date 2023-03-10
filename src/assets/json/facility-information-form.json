@@ -1,0 +1,131 @@
+{
+  "controls": [
+    {
+      "name": "practiceName",
+      "value": "",
+      "label": "Practice Name",
+      "placeholder": "Enter Practice Name",
+      "type": "text",
+      "reqErrorMsg": "Practice Name is Required",
+      "validityErrorMsg": "",
+      "validators": {
+        "required": true
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "facilityPhone",
+      "value": "",
+      "label": "Phone",
+      "placeholder": "Enter Facility Phone",
+      "type": "number",
+      "reqErrorMsg": "Phone number is Required",
+      "validityErrorMsg": "Phone number is not vaild",
+      "validators": {
+        "required": true
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "facilityFax",
+      "value": "",
+      "label": "Fax",
+      "placeholder": "Enter Fax",
+      "type": "number",
+      "reqErrorMsg": "Fax is a required",
+      "validityErrorMsg": "Fax number is not valid",
+      "validators": {
+        "required": true
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "facilityEmail",
+      "value": "",
+      "label": "Email",
+      "placeholder": "Enter facility Email",
+      "type": "email",
+      "reqErrorMsg": "Email is required",
+      "validityErrorMsg": "Invalid Email",
+      "validators": {
+        "required": true,
+        "pattern": "^\\S+@\\S+\\.\\S+$"
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "facilityAddress1",
+      "value": "",
+      "label": "Address 1",
+      "placeholder": "Enter Address line 1",
+      "type": "text",
+      "reqErrorMsg": "Address 1 is a required field",
+      "validityErrorMsg": "",
+      "validators": {
+        "required": true
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "facilityAddress2",
+      "value": "",
+      "label": "Address 2",
+      "placeholder": "Enter facility Address line 2",
+      "type": "text",
+      "reqErrorMsg": "",
+      "validityErrorMsg": "",
+      "validators": {
+        "required": true
+      },
+      "required": false,
+      "options": []
+    },
+    {
+      "name": "facilityCity",
+      "value": "",
+      "label": "City",
+      "placeholder": "Enter facility city",
+      "type": "text",
+      "reqErrorMsg": "City is required",
+      "validityErrorMsg": "",
+      "validators": {
+        "required": true
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "facilityState",
+      "value": "",
+      "label": "State",
+      "placeholder": "Enter Facility State",
+      "type": "text",
+      "reqErrorMsg": "State is a required field",
+      "validityErrorMsg": "",
+      "validators": {
+        "required": true
+      },
+      "required": false,
+      "options": []
+    },
+    {
+      "name": "facilityZip",
+      "value": "",
+      "label": "Zip",
+      "placeholder": "Enter Facility Zip",
+      "type": "number",
+      "reqErrorMsg": "Zip is a required field",
+      "validityErrorMsg": "invalid Zip",
+      "validators": {
+        "required": true
+      },
+      "required": true,
+      "options": []
+    }
+  ]
+}
