@@ -95,6 +95,7 @@ export class ForgotPasswordComponent implements OnInit {
       },
     });
   }
+
   verifyQuestionAnswer(): void {
     this.containerHeader = 'Confirm New Password';
     this.containerSubHeader = 'Confirm Your New Password';
@@ -102,6 +103,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.showQuestionForm = false;
     this.showConfirmForm = true;
   }
+
   submitNewPassword(): void {
     this.sharedService.isLoading.next(true);
     let index = 1;
@@ -143,6 +145,7 @@ export class ForgotPasswordComponent implements OnInit {
   navigateToLogin(): void {
     this.router.navigate(['/login']);
   }
+
   showPrevious(): void {
     if (this.containerHeader === 'Confirm New Password') {
       this.containerHeader = 'Answer Security Question';

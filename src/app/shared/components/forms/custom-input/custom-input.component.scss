@@ -5,7 +5,7 @@
 }
 
 ::placeholder input {
-  color: red;
+  color: $color-error;
 }
 
 :host ::ng-deep .mat-mdc-text-field-wrapper {
@@ -49,10 +49,9 @@
 
 :host ::ng-deep .mdc-line-ripple {
   display: none;
-  // text-decoration: none;
 }
 
-.common-btn {
+.common-form-input {
   font-weight: 400 !important;
   font-size: 1.6rem !important;
   line-height: 1.9rem !important;

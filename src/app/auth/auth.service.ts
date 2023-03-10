@@ -34,6 +34,7 @@ export class AuthService {
     .set('Content-Type', 'application/json')
     .set('ClientId', 'V5G18lkyJw7nBL3g5RMBK5fgXSf4FFeH')
     .set('ProgramId', '500034');
+
   constructor(
     private localStorage: LocalStorageService,
     private http: HttpClient,
@@ -62,6 +63,7 @@ export class AuthService {
       .post<any>(`${environment.baseUrl}account/logout`, { Email: UserName })
       .subscribe(res => this.logoutWithoutToken());
   }
+
   public logoutWithoutToken() {
     this.localStorage.clear();
     this.router.navigate(['/logout']);
@@ -112,6 +114,7 @@ export class AuthService {
       )
       .pipe(catchError(this.handleError));
   }
+
   public resetPassword(data: any) {
     return this.http
       .post(`${environment.baseUrl}portal/account/resetPassword`, data, {
