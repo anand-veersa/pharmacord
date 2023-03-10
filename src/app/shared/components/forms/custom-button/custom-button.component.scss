@@ -6,6 +6,10 @@ button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 button:disabled {
@@ -27,6 +31,12 @@ button:disabled {
 }
 .inactive {
   background-color: $color-header;
+}
+.x-small {
+  font-size: 1rem;
+  line-height: 2rem;
+  font-weight: 400;
+  padding: 0.5rem 2rem;
 }
 
 .small {

@@ -19,11 +19,11 @@ export interface JsonFormControls {
   value: string;
   type: string;
   placeholder: string;
-  validityErrorMsg: string;
-  reqErrorMsg: string;
+  validityErrorMsg?: string;
+  reqErrorMsg?: string;
   options?: JsonFormControlOptions[];
-  required: boolean;
-  validators: JsonFormValidators;
+  required?: boolean;
+  validators?: JsonFormValidators;
   extLink?: string;
 }
 export interface JsonFormData {

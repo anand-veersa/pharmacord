@@ -7,13 +7,17 @@ import {
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedService {
-  constructor(private toastr: ToastrService) {}
+  constructor(
+    private toastr: ToastrService,
+    private authService: AuthService
+  ) {}
 
   public isLoading = new BehaviorSubject<boolean>(false);
 
@@ -35,6 +39,36 @@ export class SharedService {
     type === 'success'
       ? this.toastr.success(msg, title)
       : this.toastr.error(msg, title);
+  }
+
+  public downloadFile(filePath: string, fileName: string): void {
+    const link = document.createElement('a');
+    link.href = filePath;
+    link.download = fileName;
+    link.click();
+    link.remove();
+  }
+
+  public getFormattedDate(d: Date): string {
+    const date = new Date(d);
+    const year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month;
+    let day = date.getDate().toString();
+    day = day.length > 1 ? day : '0' + day;
+    return month + '/' + day + '/' + year;
+  }
+
+  getProviderName(prescriberId: string): string {
+    if (prescriberId) {
+      const provider = this.authService.user.providers.filter(
+        prov => prov.ProviderId == prescriberId
+      );
+      if (provider) {
+        return provider[0].FirstName + ' ' + provider[0].LastName;
+      }
+    }
+    return '--';
   }
 
   private addValidator(rules: any): ValidationErrors {

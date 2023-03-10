@@ -1,6 +1,7 @@
 <!-- <label class="custom-input-label">{{ inputControl.label }}</label> -->
 <form [formGroup]="form">
   <mat-form-field>
+    <span matPrefix *ngIf="inputPrefix"><mat-icon>search</mat-icon></span>
     <input
       matInput
       [ngClass]="{ 'common-form-input': formType !== 'login' }"

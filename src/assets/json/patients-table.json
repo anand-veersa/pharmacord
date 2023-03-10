@@ -1,0 +1,49 @@
+{
+  "columns": [
+    {
+      "key": "PatientId",
+      "value": "",
+      "label": "Patient Id"
+    },
+    {
+      "key": "FirstName",
+      "value": "",
+      "label": "First Name"
+    },
+    {
+      "key": "LastName",
+      "value": "",
+      "label": "Last Name"
+    },
+    {
+      "key": "DateOfBirth",
+      "value": "",
+      "label": "Date Of Birth"
+    },
+    {
+      "key": "Provider",
+      "value": "",
+      "label": "Provider"
+    },
+    {
+      "key": "DateSubmitted",
+      "value": "",
+      "label": "Date Submitted"
+    },
+    {
+      "key": "EnrollmentStatus",
+      "value": "",
+      "label": "Enrollment Status"
+    },
+    {
+      "key": "Product",
+      "value": "",
+      "label": "Product"
+    },
+    {
+      "key": "ActionNeeded",
+      "value": "",
+      "label": "Action Needed"
+    }
+  ]
+}
