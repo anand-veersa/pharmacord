@@ -17,6 +17,7 @@ import { SubmitReferralComponent } from './pages/submit-referral/submit-referral
 import { ToolsAndFormsComponent } from './pages/tools-and-forms/tools-and-forms.component';
 import { ChartsComponent } from '../enrollment/components/charts/charts.component';
 import { ActionNeededComponent } from './components/action-needed/action-needed.component';
+import { PatientProfileComponent } from './pages/patient-profile/patient-profile.component';
 @NgModule({
   declarations: [
     EnrollmentComponent,
@@ -27,6 +28,7 @@ import { ActionNeededComponent } from './components/action-needed/action-needed.
     ToolsAndFormsComponent,
     ActionNeededComponent,
     ChartsComponent,
+    PatientProfileComponent,
   ],
   imports: [
     CommonModule,

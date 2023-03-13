@@ -14,6 +14,12 @@
   align-items: center;
 }
 
+.column-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .error-or-required {
   font-size: 1.2rem;
   line-height: 1.4rem;

@@ -1,0 +1,29 @@
+{
+  "columns": [
+    {
+      "key": "CaseId",
+      "value": "",
+      "label": "Case ID"
+    },
+    {
+      "key": "DateSubmitted",
+      "value": "",
+      "label": "Date Submitted"
+    },
+    {
+      "key": "EnrollmentStatus",
+      "value": "",
+      "label": "Enrollment Status"
+    },
+    {
+      "key": "Product",
+      "value": "",
+      "label": "Product"
+    },
+    {
+      "key": "ActionNeeded",
+      "value": "",
+      "label": "Action Needed"
+    }
+  ]
+}

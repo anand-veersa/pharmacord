@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   BehaviorSubject,
   catchError,
+  map,
   Observable,
   Subject,
   tap,
@@ -14,7 +15,7 @@ import { AuthService } from '../auth/auth.service';
 export class EnrollmentService {
   public selectedMedicine = new BehaviorSubject<string>('');
   public medicineCases = new BehaviorSubject<any[]>([]);
-  public cases = new Subject<any[]>();
+  public cases = new BehaviorSubject<any[]>([]);
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   public getAccountInfo(username: string): Observable<any> {
@@ -35,6 +36,18 @@ export class EnrollmentService {
     return this.http.get<any>(
       `${environment.baseUrl}provider/cases/prescriber?prescriberIds=${providerId}&masterPortalAccountId=${userPortalPkId}`
     );
+  }
+
+  public getCaseDetails(caseId: string): Observable<any> {
+    return this.http
+      .get<any>(`${environment.baseUrl}cases/${caseId}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  public getCaseDoc(url: string): Observable<any> {
+    return this.http
+      .get(url, { responseType: 'blob' })
+      .pipe(map(response => new Blob([response], { type: 'application/pdf' })));
   }
 
   private handleAccountInfo(data: any) {
@@ -61,7 +74,6 @@ export class EnrollmentService {
   }
 
   private handleError(errorRes: number) {
-    console.log(errorRes);
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes) {
       return throwError(() => errorMessage);
