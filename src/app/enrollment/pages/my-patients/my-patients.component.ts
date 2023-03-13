@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   JsonFormControls,
   JsonFormData,
 } from 'src/app/models/json-form-data.model';
-import { Patient } from 'src/app/models/patient.model';
+import { Patient } from 'src/app/models/cases.model';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { EnrollmentService } from '../../enrollment.service';
 
@@ -25,7 +26,9 @@ export class MyPatientsComponent implements OnInit {
   constructor(
     private enrolService: EnrollmentService,
     private http: HttpClient,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.http.get('/assets/json/patients-table.json').subscribe((data: any) => {
       this.columnSchema = data.columns;
@@ -68,6 +71,7 @@ export class MyPatientsComponent implements OnInit {
     dataCasesByPatient.forEach((item, index) => {
       const patientCase = {
         PatientId: item.PatientId,
+        CaseId: item.CaseId,
         FirstName: item.PatientName.split(' ')[0],
         LastName: item.PatientName.split(' ').at(-1),
         DateOfBirth: item.DateOfBirth,
@@ -80,5 +84,12 @@ export class MyPatientsComponent implements OnInit {
       patientCases.push(patientCase);
     });
     this.cases.data = patientCases;
+  }
+
+  patientSelected(patient: Patient) {
+    this.router.navigate([`${patient.PatientId}`], {
+      queryParams: { case: patient.CaseId },
+      relativeTo: this.route,
+    });
   }
 }

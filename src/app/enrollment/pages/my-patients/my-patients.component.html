@@ -13,12 +13,13 @@
         inputPrefix="search"></app-custom-form>
       <app-custom-button
         btnText="Search"
-        btnClass="secondary small"></app-custom-button>
+        btnClass="secondary x-small"></app-custom-button>
     </div>
   </div>
   <app-custom-table
     [dataSource]="cases"
     [columnSchema]="columnSchema"
     [displayedColumns]="displayedColumns"
-    [pageSizeOptions]="pageSizeOptions"></app-custom-table>
+    [pageSizeOptions]="pageSizeOptions"
+    (action)="patientSelected($event)"></app-custom-table>
 </div>

@@ -8,7 +8,6 @@ import { LocalStorageService } from '../../services/local-storage.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  public isLoggedIn: boolean = false;
   public userName: string = '';
 
   constructor(
@@ -17,6 +16,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (!this.authService.isLoggedIn()) return;
     this.userName = JSON.parse(this.localStorage.getItem('userData')).UserName;
   }
 

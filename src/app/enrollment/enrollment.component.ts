@@ -59,6 +59,12 @@ export class EnrollmentComponent implements OnInit {
             )
             .subscribe({
               next: response => {
+                if (Object.keys(response.Payload).length === 0) {
+                  this.sharedService.notify('error', 'No data found');
+                  this.sharedService.isLoading.next(false);
+                  return;
+                }
+                console.log(!response.Payload);
                 this.enrolService.cases.next(response.Payload);
                 this.cases = response.Payload;
                 let medicineCases: any[] = [];
@@ -88,6 +94,7 @@ export class EnrollmentComponent implements OnInit {
   }
 
   public changeMedicine(medicine: string): void {
+    if (!this.cases) return;
     //TODO REMOVE ONCE TESTED
     this.cases = [
       {

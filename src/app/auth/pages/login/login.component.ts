@@ -12,9 +12,9 @@ import { AuthService } from '../../auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  public formData!: JsonFormData;
+  public formData: JsonFormData;
   public inputFieldClass: string = 'form-field-tertiary';
-  public loginForm!: FormGroup;
+  public loginForm: FormGroup;
 
   constructor(
     private http: HttpClient,

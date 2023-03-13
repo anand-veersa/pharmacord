@@ -37,6 +37,12 @@ export class EnrollmentService {
     );
   }
 
+  public getCaseDetails(caseId: string): Observable<any> {
+    return this.http
+      .get<any>(`${environment.baseUrl}cases/${caseId}`)
+      .pipe(catchError(this.handleError));
+  }
+
   private handleAccountInfo(data: any) {
     const {
       FirstName,

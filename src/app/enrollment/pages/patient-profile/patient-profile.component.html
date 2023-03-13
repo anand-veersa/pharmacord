@@ -1,0 +1,35 @@
+<div class="patient-profile-container">
+  <div class="patient-header bm-2">
+    <div class="title">
+      <img
+        src="../../../../assets/images/patient_icon.svg"
+        alt="Patient Icon" />
+      <span>My Patients</span>
+    </div>
+    <div class="action-buttons">
+      <app-custom-button
+        btnText="&#60; Back"
+        btnClass="secondary x-small"></app-custom-button>
+      <app-custom-button
+        btnText="Print"
+        btnIcon="print_icon.svg"
+        btnClass="secondary x-small"></app-custom-button>
+    </div>
+  </div>
+  <div class="patient-profile-content">
+    <mat-accordion class="column-flex" multi>
+      <mat-expansion-panel class="column-flex">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Patient Cases </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="expansion-body">
+          <app-custom-table
+            [dataSource]="patientCases"
+            [columnSchema]="columnSchema"
+            [displayedColumns]="displayedColumns"
+            [pageSizeOptions]="pageSizeOptions"></app-custom-table>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
