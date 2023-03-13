@@ -1,5 +1,4 @@
-<button [ngClass]="btnClass" (click)="buttonClicked()">
-  <img
-    *ngIf="btnIcon"
-    src="{{ '../../../../../assets/images/' + btnIcon }}" />{{ btnText }}
+<button [ngClass]="btnClass" (click)="buttonClicked()" [disabled]="isDisabled">
+  {{ btnText }}
+  <img *ngIf="btnIcon" src="{{ '../../../../../assets/images/' + btnIcon }}" />
 </button>

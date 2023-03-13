@@ -1,20 +1,58 @@
-.form-field-tertiary {
-  width: 100%;
-  // height: 4rem;
-  .form-field-input {
-    height: 4rem;
-  }
-}
-.form-field-secondary {
-  width: 100%;
-  height: 3.5rem;
-}
-
-.form-field-primary {
-  width: 100%;
-  height: 2.6rem;
-}
+@import '../../../../../assets/styles/abstracts/variables';
 
 .mat-mdc-form-field {
   width: 100%;
+}
+
+::placeholder input {
+  color: $color-error;
+}
+
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: 6px;
+  border: 1px solid $color-grey-border;
+  padding: 0;
+  background: #ffffff;
+}
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+  height: 0px !important;
+}
+
+:host ::ng-deep .mat-mdc-form-field-infix {
+  min-height: 3.5rem;
+  max-height: 4rem;
+  font-family: $tertiary-font;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2.9rem;
+  color: $color-grey-dark;
+
+  ::placeholder {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+  }
+}
+
+:host ::ng-deep .mat-mdc-form-field-input-control {
+  padding: 0.4rem 1.3rem;
+}
+
+:host
+  ::ng-deep
+  .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined)
+  .mat-mdc-form-field-infix {
+  padding: 0;
+}
+
+:host ::ng-deep .mdc-line-ripple {
+  display: none;
+}
+
+.common-form-input {
+  font-weight: 400 !important;
+  font-size: 1.6rem !important;
+  line-height: 1.9rem !important;
 }

@@ -12,7 +12,10 @@ export class AuthInterceptor {
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const headers: any = { ClientId: environment.clientId };
+    const headers: any = {
+      ClientId: environment.clientId,
+      ProgramId: '500034',
+    };
     if (this.authService.isLoggedIn()) {
       const { AccessToken } = JSON.parse(
         this.localStorageService.getItem('userData')

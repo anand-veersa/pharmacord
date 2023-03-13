@@ -11,7 +11,7 @@ export class CustomInputComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() field: JsonFormControls;
   @Input() fieldName: string;
-  @Input() fieldClassName: string = '';
+  @Input() formType: string = '';
   @Input() inputPrefix: string;
   public errors: ValidationErrors | null | undefined;
 

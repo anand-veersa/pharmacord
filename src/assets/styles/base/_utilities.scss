@@ -19,3 +19,10 @@
   flex-direction: column;
   gap: 2rem;
 }
+
+.error-or-required {
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  font-weight: 400;
+  color: $color-error;
+}

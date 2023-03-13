@@ -24,6 +24,7 @@ export interface JsonFormControls {
   options?: JsonFormControlOptions[];
   required?: boolean;
   validators?: JsonFormValidators;
+  extLink?: string;
 }
 export interface JsonFormData {
   controls: JsonFormControls[];

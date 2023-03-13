@@ -11,6 +11,12 @@ button {
     transform: scale(1.05);
   }
 }
+
+button:disabled {
+  background-color: $color-disabled;
+  border: none;
+}
+
 .primary {
   background-color: $color-primary;
 }
@@ -38,4 +44,36 @@ button {
   line-height: 2.8rem;
   font-weight: 400;
   padding: 1.1rem 3rem;
+}
+
+.register-user {
+  padding: 1rem 2.8rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  text-align: center;
+  color: $color-white;
+}
+
+.medium {
+  padding: 1.7rem 3.1rem;
+  min-width: 15.1rem;
+  justify-content: center;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2.1rem;
+  text-align: center;
+  color: $color-white;
+}
+
+.large {
+  color: $color-white;
+  background-color: $color-tertiary;
+  font-size: 2rem;
+  line-height: 2.9rem;
+  font-weight: 700;
+  padding: 1.3rem 5.7rem;
+  justify-items: center;
+  border-radius: 0.6rem;
 }
