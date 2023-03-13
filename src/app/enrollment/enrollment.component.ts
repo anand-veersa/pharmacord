@@ -61,11 +61,16 @@ export class EnrollmentComponent implements OnInit {
               next: response => {
                 this.enrolService.cases.next(response.Payload);
                 this.cases = response.Payload;
-                const medicineCases = this.cases.filter(
-                  c =>
-                    c.DrugGroup.Value.toLowerCase() ===
-                    this.selectedMed.toLowerCase()
-                );
+                let medicineCases: any[] = [];
+                if (this.selectedMed === this.appConstants.MEDICINES.ALL) {
+                  medicineCases = this.cases;
+                } else {
+                  medicineCases = this.cases.filter(
+                    c =>
+                      c.DrugGroup.Value.toLowerCase() ===
+                      this.selectedMed.toLowerCase()
+                  );
+                }
                 this.enrolService.medicineCases.next(medicineCases);
                 this.sharedService.isLoading.next(false);
               },
@@ -535,11 +540,15 @@ export class EnrollmentComponent implements OnInit {
       },
     ];
     this.selectedMed = medicine;
+    let medicineCases = [];
     this.enrolService.selectedMedicine.next(medicine);
-    if (medicine === this.appConstants.MEDICINES.ALL) return;
-    const medicineCases = this.cases.filter(
-      c => c.DrugGroup.Value.toLowerCase() === medicine.toLowerCase()
-    );
+    if (medicine === this.appConstants.MEDICINES.ALL)
+      medicineCases = this.cases;
+    else {
+      medicineCases = this.cases.filter(
+        c => c.DrugGroup.Value.toLowerCase() === medicine.toLowerCase()
+      );
+    }
     this.enrolService.medicineCases.next(medicineCases);
   }
 }

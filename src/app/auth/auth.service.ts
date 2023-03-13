@@ -1,11 +1,7 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { LocalStorageService } from '../shared/services/local-storage.service';
 import { AppConstants } from '../constants/app.constants';
 import { Router } from '@angular/router';
@@ -29,11 +25,7 @@ export class AuthService {
     '/reset-password',
     '/reset-username',
   ];
-  public resHeaders: HttpHeaders = new HttpHeaders()
-    .set('Accept', 'application/json')
-    .set('Content-Type', 'application/json')
-    .set('ClientId', 'V5G18lkyJw7nBL3g5RMBK5fgXSf4FFeH')
-    .set('ProgramId', '500034');
+
   constructor(
     private localStorage: LocalStorageService,
     private http: HttpClient,
@@ -62,6 +54,7 @@ export class AuthService {
       .post<any>(`${environment.baseUrl}account/logout`, { Email: UserName })
       .subscribe(res => this.logoutWithoutToken());
   }
+
   public logoutWithoutToken() {
     this.localStorage.clear();
     this.router.navigate(['/logout']);
@@ -94,29 +87,26 @@ export class AuthService {
     Email: string;
     FirstName: string;
     LastName: string;
-  }) {
+  }): Observable<any> {
     return this.http
-      .post(`${environment.baseUrl}portal/account/forgotUsername`, data, {
-        headers: this.resHeaders,
-      })
+      .post(`${environment.baseUrl}portal/account/forgotUsername`, data)
       .pipe(catchError(this.handleError));
   }
 
-  public getSecurityQuestions(data: { Email: string; Username: string }) {
+  public getSecurityQuestions(data: {
+    Email: string;
+    Username: string;
+  }): Observable<any> {
     return this.http
       .get(
-        `${environment.baseUrl}securityQuestions?userName=${data.Username}&email=${data.Email}`,
-        {
-          headers: this.resHeaders,
-        }
+        `${environment.baseUrl}securityQuestions?userName=${data.Username}&email=${data.Email}`
       )
       .pipe(catchError(this.handleError));
   }
-  public resetPassword(data: any) {
+
+  public resetPassword(data: any): Observable<any> {
     return this.http
-      .post(`${environment.baseUrl}portal/account/resetPassword`, data, {
-        headers: this.resHeaders,
-      })
+      .post(`${environment.baseUrl}portal/account/resetPassword`, data)
       .pipe(catchError(this.handleError));
   }
 

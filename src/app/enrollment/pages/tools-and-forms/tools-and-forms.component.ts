@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AppConstants } from 'src/app/constants/app.constants';
+import { SharedService } from 'src/app/shared/services/shared.service';
 import { EnrollmentService } from '../../enrollment.service';
 
 @Component({
@@ -11,16 +12,19 @@ export class ToolsAndFormsComponent implements OnInit {
   public selectedMedicine: string;
   public medicines: string[];
   public toolsAndFormsData: any[];
+  public pdfSrc: string;
+  public pdfPage: number = 1;
+  public downloadFileName: string;
   constructor(
     public appConstants: AppConstants,
-    private enrollService: EnrollmentService
+    private enrollService: EnrollmentService,
+    private sharedService: SharedService
   ) {
     this.medicines = Object.values(this.appConstants.MEDICINES);
   }
 
   ngOnInit() {
     this.enrollService.selectedMedicine.subscribe(selectedMed => {
-      console.log('herec');
       this.toolsAndFormsData = [];
       this.selectedMedicine = selectedMed;
       if (this.selectedMedicine === this.appConstants.MEDICINES.ALL) {
@@ -28,15 +32,31 @@ export class ToolsAndFormsComponent implements OnInit {
           if (med === this.appConstants.MEDICINES.ALL) return;
           this.toolsAndFormsData.push({
             medicine: med,
-            enrollmentForm: `/assets/docs/${med}_enrollment_form`,
+            enrollmentForm: `${med}_Enrollment_Form`,
+            presciptionInformation: `${med}_PI`,
           });
         });
       } else {
         this.toolsAndFormsData.push({
           medicine: this.selectedMedicine,
-          enrollmentForm: `/assets/docs/${this.selectedMedicine}_enrollment_form`,
+          enrollmentForm: `${this.selectedMedicine}_Enrollment_Form`,
+          presciptionInformation: `${this.selectedMedicine}_PI`,
         });
       }
     });
+  }
+  showPdf(fileName: string, page: number = 1, downloadName: string) {
+    this.pdfSrc = `assets/docs/${fileName}.pdf`;
+    this.pdfPage = page;
+    this.downloadFileName = downloadName;
+  }
+
+  closePdf() {
+    this.pdfSrc = '';
+    this.pdfPage = 1;
+  }
+
+  downloadFile(): void {
+    this.sharedService.downloadFile(this.pdfSrc, this.downloadFileName);
   }
 }

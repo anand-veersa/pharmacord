@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { EnrollmentRoutingModule } from './enrollment-routing.module';
 import { MaterialModule } from '../material.module';
 import { ChartModule } from 'primeng/chart';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { EnrollmentService } from './enrollment.service';
 
@@ -33,6 +34,7 @@ import { ActionNeededComponent } from './components/action-needed/action-needed.
     SharedModule,
     MaterialModule,
     ChartModule,
+    PdfViewerModule,
   ],
   providers: [EnrollmentService],
 })

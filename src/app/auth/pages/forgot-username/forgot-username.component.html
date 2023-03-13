@@ -8,7 +8,7 @@
         Please provide the information you used to create your account below so
         that we can match you to our records.
       </p>
-      <p class="required-field"><span>* </span>Required field</p>
+      <p class="error-or-required"><span>* </span>Required field</p>
     </div>
 
     <div class="form-fields">
@@ -26,20 +26,20 @@
       btnClass="tertiary medium"
       (click)="submitResetUsername()"></app-custom-button>
 
-    <p class="success-text" *ngIf="resetSuccess">
+    <p class="success-text text-med text-x-bold" *ngIf="resetSuccess">
       Your username has been sent to the email provided.
     </p>
     <div class="request-fail" *ngIf="!resetSuccess && submitBtnClicked">
-      <p class="failed-request-text">
+      <p class="text-med text-medium">
         One or more pieces of information entered do not match our records.
         <br />
         Please try again or contact us at 1-844-447-5662 for additional
         assistance.
       </p>
-      <p class="register-user">
+      <span class="register-user text-med">
         Alternatively, click on the Register button below if you do not have a
         current account.
-      </p>
+      </span>
     </div>
 
     <div
@@ -54,11 +54,10 @@
       <app-custom-button
         btnClass="medium secondary"
         btnText="< Back to Login"
-        [isDisabled]="false"
         (click)="navigateToLogin()"></app-custom-button>
       <app-custom-button
         btnText="Register"
-        btnClass="register-btn"
+        btnClass="large"
         *ngIf="!resetSuccess && submitBtnClicked">
       </app-custom-button>
     </div>

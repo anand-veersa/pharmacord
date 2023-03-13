@@ -12,7 +12,7 @@ export class CustomInputComponent implements OnInit {
   @Input() field: JsonFormControls;
   @Input() fieldName: string;
   @Input() formType: string = '';
-  // @Input() fieldClassName: string = '';
+  @Input() inputPrefix: string;
   public errors: ValidationErrors | null | undefined;
 
   ngOnInit() {

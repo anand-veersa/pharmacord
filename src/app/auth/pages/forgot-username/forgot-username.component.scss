@@ -38,7 +38,7 @@
       display: flex;
       width: 70vw;
       flex-wrap: wrap;
-      gap: 5%;
+      gap: 2.7rem;
       margin-bottom: 2rem;
 
       .input-fields {
@@ -58,9 +58,6 @@
     }
 
     .success-text {
-      font-weight: 700;
-      font-size: 2rem;
-      line-height: 2.3rem;
       color: $color-grey-dark;
       padding-top: 2rem;
     }
@@ -74,17 +71,7 @@
 
       .failed-request-text,
       .register-user {
-        font-size: 2rem;
-        line-height: 2.3rem;
         color: $color-grey-dark;
-      }
-
-      .register-user {
-        font-weight: 400;
-      }
-
-      .failed-request-text {
-        font-weight: 500;
       }
     }
 
@@ -100,10 +87,4 @@
       padding-top: 3rem;
     }
   }
-}
-.required-field {
-  font-size: 1.2rem;
-  line-height: 1.4rem;
-  font-weight: 400;
-  color: $color-error;
 }
