@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
     this.userName = JSON.parse(this.localStorage.getItem('userData')).UserName;
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
   }
 }

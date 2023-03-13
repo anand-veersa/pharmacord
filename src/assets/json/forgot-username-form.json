@@ -1,7 +1,7 @@
 {
   "controls": [
     {
-      "name": "firstname",
+      "name": "firstName",
       "value": "DR",
       "label": "First Name",
       "placeholder": "Enter your First Name",
@@ -13,7 +13,7 @@
       "required": true
     },
     {
-      "name": "lastname",
+      "name": "lastName",
       "value": "MD",
       "label": "Last Name",
       "placeholder": "Enter your Last Name",
@@ -35,7 +35,8 @@
       "reqErrorMsg": "Email Address Required",
       "validityErrorMsg": "Invalid Email",
       "validators": {
-        "required": true
+        "required": true,
+        "pattern": "^\\S+@\\S+\\.\\S+$"
       },
       "options": {},
       "required": true

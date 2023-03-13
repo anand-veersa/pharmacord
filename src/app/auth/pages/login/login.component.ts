@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       this.loginForm = this.sharedService.buildForm(this.formData);
     });
   }
-  onSubmit() {
+  onSubmit(): void {
     this.sharedService.isLoading.next(true);
     this.authService.login(this.loginForm.value).subscribe({
       next: res => {
