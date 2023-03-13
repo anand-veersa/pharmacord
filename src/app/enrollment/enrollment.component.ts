@@ -64,7 +64,6 @@ export class EnrollmentComponent implements OnInit {
                   this.sharedService.isLoading.next(false);
                   return;
                 }
-                console.log(!response.Payload);
                 this.enrolService.cases.next(response.Payload);
                 this.cases = response.Payload;
                 let medicineCases: any[] = [];

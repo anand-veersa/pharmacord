@@ -1,0 +1,37 @@
+<mat-expansion-panel class="column-flex" [expanded]="expanded">
+  <mat-expansion-panel-header>
+    <mat-panel-title> {{ title }} </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="expansion-body">
+    <ng-container *ngIf="contentType === 'table'">
+      <app-custom-table
+        [dataSource]="dataSource"
+        [columnSchema]="columnSchema"
+        [displayedColumns]="displayedColumns"
+        [pageSizeOptions]="pageSizeOptions"
+        [pdfSrc]="pdfSrc"
+        (action)="action.emit($event)">
+      </app-custom-table>
+    </ng-container>
+    <ng-container *ngIf="contentType === 'card'">
+      <div class="card-container flex">
+        <div class="card-content column-flex">
+          <div
+            *ngFor="let detail of cardLeftPanel | keyvalue : originalOrder"
+            class="detail">
+            <span class="demograph-key">{{ detail.key }}</span> <span>:</span>
+            <span>{{ detail.value }}</span>
+          </div>
+        </div>
+        <div class="card-content column-flex">
+          <div
+            *ngFor="let detail of cardRightPanel | keyvalue : originalOrder"
+            class="detail">
+            <span class="demograph-key">{{ detail.key }}</span> <span>:</span>
+            <span>{{ detail.value }}</span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</mat-expansion-panel>

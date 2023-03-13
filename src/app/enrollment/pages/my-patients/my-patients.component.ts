@@ -3,10 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  JsonFormControls,
-  JsonFormData,
-} from 'src/app/models/json-form-data.model';
+import { JsonFormControls } from 'src/app/models/json-form-data.model';
 import { Patient } from 'src/app/models/cases.model';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { EnrollmentService } from '../../enrollment.service';

@@ -3,6 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -19,6 +20,7 @@ export class CustomTableComponent implements AfterViewInit {
   @Input() columnSchema: any[];
   @Input() displayedColumns: string[];
   @Input() pageSizeOptions: number[];
+  @Input() pdfSrc: string;
   @Output() action = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

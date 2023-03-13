@@ -20,23 +20,4 @@
       gap: 1.5rem;
     }
   }
-  mat-expansion-panel {
-    box-shadow: none;
-    mat-expansion-panel-header {
-      margin-bottom: 1rem;
-      padding: 0;
-      mat-panel-title {
-        border-radius: 0.8rem;
-        background-color: $color-tertiary;
-        padding: 1.5rem 2rem;
-        margin: 0;
-        font-weight: 700;
-        font-size: 1.8rem;
-        color: $color-white;
-      }
-    }
-  }
-}
-::ng-deep .patient-profile-content .mat-expansion-indicator {
-  display: none;
 }

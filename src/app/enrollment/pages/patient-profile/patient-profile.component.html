@@ -4,7 +4,8 @@
       <img
         src="../../../../assets/images/patient_icon.svg"
         alt="Patient Icon" />
-      <span>My Patients</span>
+      <span>{{ patientCases[0]?.PatientName }}</span>
+      <span> (Patient Id: {{ patientCases[0]?.PatientId }})</span>
     </div>
     <div class="action-buttons">
       <app-custom-button
@@ -16,20 +17,48 @@
         btnClass="secondary x-small"></app-custom-button>
     </div>
   </div>
-  <div class="patient-profile-content">
+  <div class="custom-expansion-content">
     <mat-accordion class="column-flex" multi>
-      <mat-expansion-panel class="column-flex">
-        <mat-expansion-panel-header>
-          <mat-panel-title> Patient Cases </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="expansion-body">
-          <app-custom-table
-            [dataSource]="patientCases"
-            [columnSchema]="columnSchema"
-            [displayedColumns]="displayedColumns"
-            [pageSizeOptions]="pageSizeOptions"></app-custom-table>
-        </div>
-      </mat-expansion-panel>
+      <!-- Patient Cases -->
+      <app-custom-expansion-panel
+        title="Patient Cases"
+        [expanded]="true"
+        [dataSource]="patientCasesDataSource"
+        [columnSchema]="caseColumnSchema"
+        [displayedColumns]="casesDisplayedColumns"
+        [pageSizeOptions]="pageSizeOptions"
+        (action)="getCaseDetails($event)">
+        ></app-custom-expansion-panel
+      >
+
+      <!-- Patient Demographics -->
+      <app-custom-expansion-panel
+        title="Patient Demographics"
+        [expanded]="true"
+        [cardLeftPanel]="patientDemographics.caseDetails"
+        [cardRightPanel]="patientDemographics.patientAddress"
+        contentType="card"></app-custom-expansion-panel>
+
+      <!-- Case Alerts -->
+      <app-custom-expansion-panel
+        title="Case Alerts"
+        [expanded]="true"
+        [dataSource]="alertDataSource"
+        [columnSchema]="alertColumnSchema"
+        [displayedColumns]="alertDisplayedColumns"
+        [pageSizeOptions]="pageSizeOptions"></app-custom-expansion-panel>
+
+      <!-- Case Documents -->
+      <app-custom-expansion-panel
+        title="Case Documents"
+        [expanded]="true"
+        [dataSource]="docDataSource"
+        [columnSchema]="docColumnSchema"
+        [displayedColumns]="docDisplayedColumns"
+        [pageSizeOptions]="pageSizeOptions"
+        [pdfSrc]="pdfSrc"
+        (action)="openDoc($event)">
+      </app-custom-expansion-panel>
     </mat-accordion>
   </div>
 </div>

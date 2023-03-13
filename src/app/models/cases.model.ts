@@ -12,9 +12,22 @@ export interface Patient {
 }
 
 export interface Case {
+  PatientName: string;
+  PatientId: string;
   CaseId: string;
   DateSubmitted: string;
   EnrollmentStatus: string;
   Product: string;
   ActionNeeded: string;
+}
+
+export interface Alert {
+  GeneratedDate: string;
+  RequiredAction: string;
+  Acknowledge: string;
+}
+export interface CaseDoc {
+  DocumentType: string;
+  DocumentDate: string;
+  DocumentURL: string;
 }

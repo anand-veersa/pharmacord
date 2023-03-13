@@ -1,0 +1,19 @@
+{
+  "columns": [
+    {
+      "key": "GeneratedDate",
+      "value": "",
+      "label": "Date & Time"
+    },
+    {
+      "key": "RequiredAction",
+      "value": "",
+      "label": "Action Needed"
+    },
+    {
+      "key": "Acknowledge",
+      "value": "",
+      "label": "Acknowledge"
+    }
+  ]
+}

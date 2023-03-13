@@ -1,0 +1,19 @@
+{
+  "columns": [
+    {
+      "key": "DocumentType",
+      "value": "",
+      "label": "Document Name and Type Needed"
+    },
+    {
+      "key": "DocumentDate",
+      "value": "",
+      "label": "Date"
+    },
+    {
+      "key": "DocumentURL",
+      "value": "",
+      "label": "Document URL"
+    }
+  ]
+}
