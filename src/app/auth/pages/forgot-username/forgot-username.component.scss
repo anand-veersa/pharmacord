@@ -38,14 +38,13 @@
       display: flex;
       width: 70vw;
       flex-wrap: wrap;
-      gap: 5%;
+      gap: 2.7rem;
       margin-bottom: 2rem;
 
       .input-fields {
         display: flex;
         flex-direction: column;
         width: 40%;
-        margin-bottom: 2.6rem;
 
         &-label {
           font-size: 1.7rem;
@@ -73,14 +72,6 @@
       .failed-request-text,
       .register-user {
         color: $color-grey-dark;
-      }
-
-      .register-user {
-        font-weight: 400;
-      }
-
-      .failed-request-text {
-        font-weight: 500;
       }
     }
 

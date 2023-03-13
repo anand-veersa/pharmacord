@@ -13,8 +13,8 @@ import { AuthService } from '../../auth.service';
 export class ForgotUsernameComponent implements OnInit {
   public forgotUsernameForm!: FormGroup;
   public formData!: JsonFormData;
-  resetSuccess: boolean = false;
-  submitBtnClicked: boolean = false;
+  public resetSuccess: boolean = false;
+  public submitBtnClicked: boolean = false;
   constructor(
     private http: HttpClient,
     private sharedService: SharedService,

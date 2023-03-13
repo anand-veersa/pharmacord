@@ -18,16 +18,16 @@ export class ForgotPasswordComponent implements OnInit {
   public formDataVerifyForm!: JsonFormData;
   public formDataQuestionForm!: JsonFormData;
   public formDataConfirmForm!: JsonFormData;
-  containerHeader: string = 'Forgot Password';
-  containerSubHeader: string = 'Confirm Username & Email Address';
-  containerSubHeaderInformation: string =
+  public containerHeader: string = 'Forgot Password';
+  public containerSubHeader: string = 'Confirm Username & Email Address';
+  public containerSubHeaderInformation: string =
     'Please verify the username and email address for your account.';
-  showVerifyForm: boolean = true;
-  showQuestionForm: boolean = false;
-  showConfirmForm: boolean = false;
-  passwordResetSuccessful: boolean = false;
-  securityQuestionsID: number[] = [];
-  securityAnswerData: any[] = [];
+  public showVerifyForm: boolean = true;
+  public showQuestionForm: boolean = false;
+  public showConfirmForm: boolean = false;
+  public passwordResetSuccessful: boolean = false;
+  public securityQuestionsID: number[] = [];
+  public securityAnswerData: any[] = [];
   constructor(
     private http: HttpClient,
     private sharedService: SharedService,
