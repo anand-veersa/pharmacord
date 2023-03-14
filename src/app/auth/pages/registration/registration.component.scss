@@ -85,4 +85,77 @@
     justify-content: space-between;
     padding: 4rem 4.8rem;
   }
+
+  .prescriber-registration {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    &-main {
+      display: flex;
+      padding: 2.4rem 4rem;
+      flex-direction: column;
+      gap: 2rem;
+
+      .upper-forms {
+        display: flex;
+        flex-direction: row;
+
+        .lookup-information {
+          min-width: 65%;
+
+          .lookup-form-fields {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: end;
+            gap: 3.5rem;
+
+            .input-fields-providerNpi {
+              width: 100%;
+            }
+            .input-fields-providerFirstName,
+            .input-fields-providerLastName {
+              width: 42%;
+            }
+          }
+        }
+
+        .confirm-account-information {
+          display: flex;
+          flex-direction: column;
+          padding-left: 2rem;
+
+          .form-container {
+            padding-left: 2.2rem;
+            border-left: 1px solid $color-light-grey-border;
+          }
+
+          .confirm-form-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+
+            .confirm-input-fields {
+              width: 15.9rem;
+            }
+          }
+        }
+      }
+
+      .create-username {
+        display: flex;
+        flex-direction: column;
+        padding-top: 2.1rem;
+        border-top: 2px solid $color-light-grey-border;
+
+        .create-username-fields,
+        .create-username-form-fields {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 3rem;
+        }
+      }
+    }
+  }
 }

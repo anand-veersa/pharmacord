@@ -11,7 +11,6 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../core/interceptors/auth-interceptor.service';
 import { RegistrationComponent } from './pages/registration/registration.component';
-import { PrescriberRegistrationComponent } from './pages/registration/prescriber-registration/prescriber-registration.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import { PrescriberRegistrationComponent } from './pages/registration/prescriber
     ForgotUsernameComponent,
     ForgotPasswordComponent,
     RegistrationComponent,
-    PrescriberRegistrationComponent,
   ],
   imports: [
     CommonModule,
