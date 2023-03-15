@@ -1,4 +1,9 @@
 <button [ngClass]="btnClass" (click)="buttonClicked()" [disabled]="isDisabled">
+  <img
+    *ngIf="btnIcon && iconPlace === 'prefix'"
+    src="{{ '../../../../../assets/images/' + btnIcon }}" />
   {{ btnText }}
-  <img *ngIf="btnIcon" src="{{ '../../../../../assets/images/' + btnIcon }}" />
+  <img
+    *ngIf="btnIcon && iconPlace === 'suffix'"
+    src="{{ '../../../../../assets/images/' + btnIcon }}" />
 </button>

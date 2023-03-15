@@ -46,12 +46,13 @@ export class ToolsAndFormsComponent implements OnInit {
     });
   }
   showPdf(fileName: string, page: number = 1, downloadName: string) {
-    this.pdfSrc = `assets/docs/${fileName}.pdf`;
+    this.pdfSrc = `/assets/docs/${fileName}.pdf`;
     this.pdfPage = page;
     this.downloadFileName = downloadName;
   }
 
   closePdf() {
+    console.log('clicked');
     this.pdfSrc = '';
     this.pdfPage = 1;
   }

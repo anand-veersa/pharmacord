@@ -59,24 +59,25 @@
     </div>
   </div>
 </div>
-<div class="overlay" *ngIf="pdfSrc" (click)="closePdf()">
-  <div class="pdf-viewer">
-    <div class="action-panel">
-      <app-custom-button
-        btnClass="x-small secondary"
-        btnText="Download"
-        (action)="downloadFile()"></app-custom-button>
-      <app-custom-button
-        btnClass="x-small tertiary"
-        btnText="Close"
-        (action)="closePdf()"></app-custom-button>
-    </div>
-    <pdf-viewer
-      [src]="pdfSrc"
-      [render-text]="true"
-      [page]="pdfPage"
-      [original-size]="false"
-      style="width: 80rem; height: 60rem">
-    </pdf-viewer>
+<div class="overlay" *ngIf="pdfSrc" (click)="closePdf()"></div>
+<div class="pdf-viewer" *ngIf="pdfSrc">
+  <div class="action-panel">
+    <app-custom-button
+      btnClass="x-small secondary"
+      btnText="Download"
+      (action)="downloadFile()"></app-custom-button>
+    <app-custom-button
+      btnClass="x-small tertiary"
+      btnText="Close"
+      (action)="closePdf()"></app-custom-button>
   </div>
+  <ng2-pdfjs-viewer
+    pagemode="none"
+    [pdfSrc]="pdfSrc"
+    [download]="false"
+    [openFile]="false"
+    [page]="1"
+    style="">
+    ></ng2-pdfjs-viewer
+  >
 </div>
