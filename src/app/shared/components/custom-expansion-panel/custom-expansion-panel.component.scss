@@ -1,0 +1,45 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.card-container {
+  gap: 10rem;
+  border: 2px solid $color-border-1;
+  border-radius: 8px;
+  padding: 2rem 3rem;
+  align-items: flex-start;
+  .card-content {
+    flex-basis: 45%;
+  }
+  font-size: 1.6rem;
+  line-height: 3.5rem;
+  .demograph-key {
+    font-weight: 700;
+    color: $color-header;
+    flex-basis: 45%;
+  }
+  .detail {
+    display: flex;
+    gap: 3rem;
+  }
+}
+mat-expansion-panel {
+  box-shadow: none !important;
+  mat-expansion-panel-header {
+    margin-bottom: 1rem;
+    padding: 0;
+    mat-panel-title {
+      border-radius: 0.8rem;
+      background-color: $color-tertiary;
+      padding: 1.5rem 2rem;
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: $color-white;
+    }
+  }
+}
+::ng-deep .custom-expansion-content .mat-expansion-panel-body {
+  padding: 0;
+}
+::ng-deep .custom-expansion-content .mat-expansion-indicator {
+  display: none;
+}

@@ -19,13 +19,13 @@
     width: 35.2rem;
     color: $color-white;
     @include respond(tab-land) {
-      width: 37;
+      width: 37rem;
     }
     @include respond(tab-port) {
       width: 39rem;
     }
     @include respond(min-tab-port) {
-      width: 41;
+      width: 41rem;
     }
 
     &-header {
