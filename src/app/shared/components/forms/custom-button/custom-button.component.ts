@@ -10,6 +10,7 @@ export class CustomButtonComponent {
   @Input() isDisabled: boolean = false;
   @Input() btnClass: string = 'primary';
   @Input() btnIcon: string = '';
+  @Input() iconPlace: string = 'suffix';
   @Output() action = new EventEmitter();
 
   public buttonClicked() {
