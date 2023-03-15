@@ -1,0 +1,55 @@
+<div class="add-facility-container">
+  <div class="title">
+    <p class="text-x-bold text-large">{{ title }}</p>
+    <p class="text-medium text-xmed">
+      {{ subTitle }}
+      <span class="error-or-required">* Required field</span>
+    </p>
+  </div>
+  <div class="form-container">
+    <div class="form-fields">
+      <div
+        [class]="'input-field-' + control.name"
+        *ngFor="let control of addFacilityFormData?.controls">
+        <app-custom-form
+          [field]="control"
+          [form]="addFacilityForm"
+          formType="add-facility"></app-custom-form>
+      </div>
+
+      <div class="form-buttons">
+        <app-custom-button
+          btnText="Add"
+          btnClass="secondary text-small text-x-bold x-large"
+          *ngIf="!editClicked">
+        </app-custom-button>
+        <app-custom-button
+          btnText="Cancel"
+          btnClass="secondary text-small text-x-bold xm-small"
+          *ngIf="editClicked">
+        </app-custom-button>
+        <app-custom-button
+          btnText="Update"
+          btnClass="tertiary text-small text-x-bold xm-small"
+          *ngIf="editClicked">
+        </app-custom-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container"></div>
+  <div class="table-container"></div>
+  <div class="footer-container">
+    <app-custom-button
+      btnText="< Back"
+      btnClass="secondary s-medium text-x-bold text-xmed"
+      *ngIf="requirementFor === 'prescriberRegistration'">
+    </app-custom-button>
+
+    <app-custom-button
+      btnText="Save and Register"
+      btnClass="tertiary x-medium text-x-bold text-xmed"
+      *ngIf="requirementFor === 'prescriberRegistration'">
+    </app-custom-button>
+  </div>
+</div>

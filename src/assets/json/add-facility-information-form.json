@@ -4,7 +4,7 @@
       "name": "practiceName",
       "value": "",
       "label": "Practice Name",
-      "placeholder": "Enter Practice Name",
+      "placeholder": "",
       "type": "text",
       "reqErrorMsg": "Practice Name is Required",
       "validityErrorMsg": "",
@@ -18,7 +18,7 @@
       "name": "facilityPhone",
       "value": "",
       "label": "Phone",
-      "placeholder": "Enter Facility Phone",
+      "placeholder": "",
       "type": "number",
       "reqErrorMsg": "Phone number is Required",
       "validityErrorMsg": "Phone number is not vaild",
@@ -32,7 +32,7 @@
       "name": "facilityFax",
       "value": "",
       "label": "Fax",
-      "placeholder": "Enter Fax",
+      "placeholder": "",
       "type": "number",
       "reqErrorMsg": "Fax is a required",
       "validityErrorMsg": "Fax number is not valid",
@@ -46,9 +46,9 @@
       "name": "facilityEmail",
       "value": "",
       "label": "Email",
-      "placeholder": "Enter facility Email",
+      "placeholder": "",
       "type": "email",
-      "reqErrorMsg": "Email is required",
+      "reqErrorMsg": "",
       "validityErrorMsg": "Invalid Email",
       "validators": {
         "required": true,
@@ -61,7 +61,7 @@
       "name": "facilityAddress1",
       "value": "",
       "label": "Address 1",
-      "placeholder": "Enter Address line 1",
+      "placeholder": "",
       "type": "text",
       "reqErrorMsg": "Address 1 is a required field",
       "validityErrorMsg": "",
@@ -75,7 +75,7 @@
       "name": "facilityAddress2",
       "value": "",
       "label": "Address 2",
-      "placeholder": "Enter facility Address line 2",
+      "placeholder": "",
       "type": "text",
       "reqErrorMsg": "",
       "validityErrorMsg": "",
@@ -89,7 +89,7 @@
       "name": "facilityCity",
       "value": "",
       "label": "City",
-      "placeholder": "Enter facility city",
+      "placeholder": "",
       "type": "text",
       "reqErrorMsg": "City is required",
       "validityErrorMsg": "",
@@ -103,21 +103,95 @@
       "name": "facilityState",
       "value": "",
       "label": "State",
-      "placeholder": "Enter Facility State",
-      "type": "text",
+      "placeholder": "",
+      "type": "select",
       "reqErrorMsg": "State is a required field",
       "validityErrorMsg": "",
       "validators": {
         "required": true
       },
       "required": false,
-      "options": []
+      "options": [
+        { "label": "UP", "value": "UP" },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        },
+        {
+          "label": "UP",
+          "value": "UP"
+        }
+      ]
     },
     {
       "name": "facilityZip",
       "value": "",
       "label": "Zip",
-      "placeholder": "Enter Facility Zip",
+      "placeholder": "",
       "type": "number",
       "reqErrorMsg": "Zip is a required field",
       "validityErrorMsg": "invalid Zip",

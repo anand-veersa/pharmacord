@@ -1,0 +1,48 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.add-facility-container {
+  padding: 2.4rem 7rem;
+
+  .form-container {
+    .form-fields {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      gap: 2.4rem;
+
+      .input-field {
+        &-practiceName,
+        &-facilityPhone,
+        &-facilityFax,
+        &-facilityEmail,
+        &-facilityAddress1,
+        &-facilityAddress2 {
+          width: 28.5rem;
+        }
+
+        &-facilityCity {
+          width: 12.8rem;
+        }
+
+        &-facilityState {
+          width: 9.5rem;
+        }
+
+        &-facilityZip {
+          width: 11.1rem;
+        }
+      }
+
+      .form-buttons {
+        display: flex;
+        gap: 1.4rem;
+      }
+    }
+  }
+
+  .footer-container {
+    padding-top: 3.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+}

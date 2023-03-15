@@ -39,6 +39,11 @@ button:disabled {
   line-height: 2.3rem;
   font-weight: 700;
 }
+
+.xm-small {
+  padding: 0.8rem 1.7rem;
+}
+
 .x-small {
   font-size: 1rem;
   line-height: 2rem;
@@ -62,6 +67,10 @@ button:disabled {
   color: $color-white;
 }
 
+.s-medium {
+  padding: 1.7rem 2.2rem;
+}
+
 .medium {
   padding: 1.7rem 3.1rem;
   min-width: 15.1rem;
@@ -74,6 +83,10 @@ button:disabled {
   color: $color-white;
 }
 
+.x-medium {
+  padding: 1.6rem 4.6rem;
+}
+
 .large {
   color: $color-white;
   background-color: $color-tertiary;
@@ -83,4 +96,8 @@ button:disabled {
   padding: 1.3rem 5.7rem;
   justify-items: center;
   border-radius: 0.6rem;
+}
+
+.x-large {
+  padding: 0.8rem 8rem;
 }

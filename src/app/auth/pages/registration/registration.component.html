@@ -160,7 +160,8 @@
         (click)="navigateToLogin()"></app-custom-button>
       <app-custom-button
         btnText="Next >"
-        btnClass="medium tertiary"></app-custom-button>
+        btnClass="medium tertiary"
+        (click)="registrationStep2()"></app-custom-button>
     </div>
   </div>
 
@@ -177,4 +178,10 @@
         btnClass="medium tertiary"></app-custom-button>
     </div>
   </div>
+
+  <app-custom-add-facility
+    [title]="addFacilityScreenTitle"
+    [subTitle]="addFacilityScreenSubTitle"
+    requirementFor="prescriberRegistration"
+    *ngIf="addFacilityScreen"></app-custom-add-facility>
 </div>

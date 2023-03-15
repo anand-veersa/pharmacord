@@ -19,9 +19,13 @@ export class RegistrationComponent implements OnInit {
   public createUsernameForm: FormGroup;
   public accountTypeSelection: boolean = false;
   public prescriberRegistrationCard: boolean = true;
-  public prescriberRegistration: boolean = true;
+  public prescriberRegistration: boolean = false;
   public othersRegistrationCard: boolean = false;
   public othersRegistration: boolean = false;
+  public addFacilityScreen: boolean = true;
+  public addFacilityScreenTitle: string = 'Associated Practice Office(s)';
+  public addFacilityScreenSubTitle: string =
+    'Please add or update the Practice/Facility information associated with this new account.';
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -60,12 +64,12 @@ export class RegistrationComponent implements OnInit {
       });
   }
 
-  toggleSelection() {
+  toggleSelection(): void {
     this.othersRegistrationCard = !this.othersRegistrationCard;
     this.prescriberRegistrationCard = !this.othersRegistrationCard;
   }
 
-  registrationStep1() {
+  registrationStep1(): void {
     this.accountTypeSelection = false;
     if (this.prescriberRegistrationCard) {
       this.prescriberRegistration = true;
@@ -74,11 +78,21 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  navigateToLogin() {
+  registrationStep2(): void {
+    if (this.prescriberRegistration) {
+      this.prescriberRegistration = false;
+      this.addFacilityScreen = true;
+    } else {
+      this.othersRegistration = false;
+      this.addFacilityScreen = true;
+    }
+  }
+
+  navigateToLogin(): void {
     this.router.navigate(['/login']);
   }
 
-  checkProviderNpi() {
+  checkProviderNpi(): void {
     console.log('checkProviderNpi function clicked');
   }
 }
