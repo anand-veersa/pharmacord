@@ -8,6 +8,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Patient } from 'src/app/models/cases.model';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 
 @Injectable({
@@ -94,5 +95,32 @@ export class SharedService {
       }
     });
     return validators;
+  }
+
+  public filterSearch(
+    search: string,
+    data: Patient[],
+    fieldsToSearch: string[] = []
+  ): any[] {
+    return data.filter((record: any) => {
+      const tempRecord: any[] = [];
+      Object.keys(record).map((keyName: string, index: number) => {
+        if (fieldsToSearch?.length > 0 && !fieldsToSearch.includes(keyName))
+          return;
+        else {
+          if (typeof record[keyName] == 'object') {
+            tempRecord.push(record[keyName]?.text);
+          } else {
+            tempRecord.push(record[keyName]);
+          }
+        }
+      });
+      if (
+        JSON.stringify(tempRecord)
+          ?.toLowerCase()
+          .indexOf(search.toLowerCase()) > -1
+      )
+        return record;
+    });
   }
 }

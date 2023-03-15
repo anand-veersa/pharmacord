@@ -8,7 +8,12 @@
       style="width: 100%; height: 30rem">
     </pdf-viewer>
   </div>
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="announceSortChange($event)"
+    class="mat-elevation-z8">
     <ng-container
       *ngFor="let column of columnSchema"
       [matColumnDef]="column.key">

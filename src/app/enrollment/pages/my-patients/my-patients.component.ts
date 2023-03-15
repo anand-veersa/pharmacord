@@ -15,6 +15,7 @@ import { EnrollmentService } from '../../enrollment.service';
 })
 export class MyPatientsComponent implements OnInit {
   public cases = new MatTableDataSource<Patient>([]);
+  public filteredCases = new MatTableDataSource<Patient>([]);
   public displayedColumns: string[] = [];
   public columnSchema: any[] = [];
   public pageSizeOptions: number[] = [10, 20, 50];
@@ -81,12 +82,20 @@ export class MyPatientsComponent implements OnInit {
       patientCases.push(patientCase);
     });
     this.cases.data = patientCases;
+    this.filteredCases.data = patientCases;
   }
 
-  patientSelected(patient: Patient) {
+  patientSelected(patient: Patient): void {
     this.router.navigate([`${patient.PatientId}`], {
       queryParams: { case: patient.CaseId },
       relativeTo: this.route,
     });
+  }
+
+  filterPatients(): void {
+    this.filteredCases.data = this.sharedService.filterSearch(
+      this.searchForm.value?.search,
+      this.cases?.data
+    );
   }
 }

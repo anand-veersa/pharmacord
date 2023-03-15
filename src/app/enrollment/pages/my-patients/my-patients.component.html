@@ -10,14 +10,17 @@
       <app-custom-form
         [form]="searchForm"
         [field]="searchField"
+        (keyup)="!searchForm.value.search.length ? filterPatients() : {}"
         inputPrefix="search"></app-custom-form>
       <app-custom-button
         btnText="Search"
-        btnClass="secondary x-small"></app-custom-button>
+        btnClass="secondary x-small"
+        [isDisabled]="!(searchForm.value.search.length > 0)"
+        (action)="filterPatients()"></app-custom-button>
     </div>
   </div>
   <app-custom-table
-    [dataSource]="cases"
+    [dataSource]="filteredCases"
     [columnSchema]="columnSchema"
     [displayedColumns]="displayedColumns"
     [pageSizeOptions]="pageSizeOptions"
