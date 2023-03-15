@@ -52,7 +52,7 @@ export class ChartsComponent implements OnInit {
         title: {
           display: true,
           text: 'My Patients',
-          color: this.appConstants.DARK_COLOR,
+          color: '#2F2F2F',
           font: {
             weight: '400',
             size: '18',
@@ -91,7 +91,7 @@ export class ChartsComponent implements OnInit {
           title: {
             display: true,
             text: 'Number of Patients',
-            color: this.appConstants.DARK_COLOR,
+            color: '#2F2F2F',
             font: {
               size: '14',
               weight: '400',
@@ -102,7 +102,7 @@ export class ChartsComponent implements OnInit {
             beginAtZero: true,
             max: maxStep,
             min: 0,
-            color: this.appConstants.DARK_COLOR,
+            color: '#2F2F2F',
           },
         },
         x: {
@@ -112,7 +112,7 @@ export class ChartsComponent implements OnInit {
           ticks: {
             display: true,
             beginAtZero: 0,
-            color: this.appConstants.BLACK_COLOR,
+            color: '#000000',
             callback: (index: number) => {
               const labelName =
                 this.appConstants.BAR_CHART.BAR_CHART_LABELS[index];
@@ -139,7 +139,10 @@ export class ChartsComponent implements OnInit {
     };
   }
 
-  getLegendStyle(index: number) {
+  getLegendStyle(index: number): {
+    flexBasis: string;
+    backgroundColor: string;
+  } {
     return {
       flexBasis: `${100 / this.labelLength}%`,
       backgroundColor: this.appConstants.BAR_CHART.BAR_CHART_COLORS[index],

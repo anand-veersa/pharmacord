@@ -36,6 +36,4 @@ export class AppConstants {
       '#40488D',
     ],
   };
-  public BLACK_COLOR: '#000000';
-  public DARK_COLOR: '#2F2F2F';
 }
