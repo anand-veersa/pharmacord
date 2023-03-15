@@ -48,16 +48,16 @@ export class AuthService {
     );
   }
 
-  public logout() {
+  public logout(): Observable<any> {
     const { UserName } = JSON.parse(this.localStorage.getItem('userData'));
-    return this.http
-      .post<any>(`${environment.baseUrl}account/logout`, { Email: UserName })
-      .subscribe(res => this.logoutWithoutToken());
+    return this.http.post<any>(`${environment.baseUrl}account/logout`, {
+      Email: UserName,
+    });
   }
 
   public logoutWithoutToken() {
     this.localStorage.clear();
-    this.router.navigate(['/logout']);
+    this.router.navigate(['/login']);
   }
 
   private handleAuthentication(data: any) {
