@@ -40,6 +40,10 @@ export class CustomFormComponent implements AfterViewInit {
       component: CustomInputComponent,
     },
     {
+      type: 'search',
+      component: CustomInputComponent,
+    },
+    {
       type: 'number',
       component: CustomInputComponent,
     },
