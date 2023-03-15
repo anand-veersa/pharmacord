@@ -51,6 +51,17 @@
   display: none;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 .common-form-input {
   font-weight: 400 !important;
   font-size: 1.6rem !important;

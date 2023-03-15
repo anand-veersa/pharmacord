@@ -22,10 +22,14 @@ export class RegistrationComponent implements OnInit {
   public prescriberRegistration: boolean = false;
   public othersRegistrationCard: boolean = false;
   public othersRegistration: boolean = false;
-  public addFacilityScreen: boolean = true;
+  public addFacilityScreen: boolean = false;
+  public addHealthcareProviderScreen: boolean = true;
   public addFacilityScreenTitle: string = 'Associated Practice Office(s)';
   public addFacilityScreenSubTitle: string =
     'Please add or update the Practice/Facility information associated with this new account.';
+  public addProviderScreenTitle = 'Associated Healthcare Provider(s)';
+  public addProviderScreenSubTitle =
+    'Please enter the information for each healthcare provider (HCP) associated with this new account.';
   constructor(
     private router: Router,
     private http: HttpClient,

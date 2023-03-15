@@ -11,6 +11,8 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../core/interceptors/auth-interceptor.service';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { AddFacilityComponent } from './pages/registration/add-facility/add-facility.component';
+import { AddHealthcareProviderComponent } from './pages/registration/add-healthcare-provider/add-healthcare-provider.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { RegistrationComponent } from './pages/registration/registration.compone
     ForgotUsernameComponent,
     ForgotPasswordComponent,
     RegistrationComponent,
+    AddFacilityComponent,
+    AddHealthcareProviderComponent,
   ],
   imports: [
     CommonModule,
@@ -28,5 +32,6 @@ import { RegistrationComponent } from './pages/registration/registration.compone
     ReactiveFormsModule,
     AuthRoutingModule,
   ],
+  exports: [AddFacilityComponent, AddHealthcareProviderComponent],
 })
 export class AuthModule {}

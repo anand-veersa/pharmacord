@@ -110,6 +110,18 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
+  public getProviderDetails(data: {
+    NPI: number;
+    FirstName: string;
+    LastName: string;
+  }): Observable<any> {
+    return this.http
+      .get(
+        `${environment.baseUrl}provider/${data.NPI}/${data.FirstName}/${data.LastName}`
+      )
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(errorRes: number) {
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes) {

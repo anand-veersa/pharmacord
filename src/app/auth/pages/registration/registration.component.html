@@ -179,9 +179,15 @@
     </div>
   </div>
 
-  <app-custom-add-facility
+  <app-add-facility
     [title]="addFacilityScreenTitle"
     [subTitle]="addFacilityScreenSubTitle"
     requirementFor="prescriberRegistration"
-    *ngIf="addFacilityScreen"></app-custom-add-facility>
+    *ngIf="addFacilityScreen"></app-add-facility>
+
+  <app-add-healthcare-provider
+    [componentTitle]="addProviderScreenTitle"
+    [componentSubTitle]="addProviderScreenSubTitle"
+    *ngIf="addHealthcareProviderScreen"
+    requirementFor="othersRegistration"></app-add-healthcare-provider>
 </div>

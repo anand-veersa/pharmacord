@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
-import { SharedService } from '../../services/shared.service';
+import { SharedService } from '../../../../shared/services/shared.service';
 
 @Component({
-  selector: 'app-custom-add-facility',
-  templateUrl: './custom-add-facility.component.html',
-  styleUrls: ['./custom-add-facility.component.scss'],
+  selector: 'app-add-facility',
+  templateUrl: './add-facility.component.html',
+  styleUrls: ['./add-facility.component.scss'],
 })
-export class CustomAddFacilityComponent implements OnInit {
+export class AddFacilityComponent implements OnInit {
   @Input() title: string = '';
   @Input() subTitle: string = '';
   @Input() requirementFor: string = '';

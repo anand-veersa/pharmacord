@@ -22,7 +22,6 @@ import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinn
 import { CustomErrorComponent } from './components/forms/custom-error/custom-error.component';
 import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component';
 import { CustomTableComponent } from './components/custom-table/custom-table.component';
-import { CustomAddFacilityComponent } from './components/custom-add-facility/custom-add-facility.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +38,6 @@ import { CustomAddFacilityComponent } from './components/custom-add-facility/cus
     CustomErrorComponent,
     PdfViewerComponent,
     CustomTableComponent,
-    CustomAddFacilityComponent,
   ],
   imports: [
     CommonModule,
@@ -62,7 +60,6 @@ import { CustomAddFacilityComponent } from './components/custom-add-facility/cus
     CustomInputComponent,
     CustomSpinnerComponent,
     CustomTableComponent,
-    CustomAddFacilityComponent,
   ],
   providers: [LocalStorageService],
 })

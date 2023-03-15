@@ -1,0 +1,42 @@
+<div class="add-provider-container">
+  <div class="title">
+    <p class="text-x-bold text-large">{{ componentTitle }}</p>
+    <p class="text-medium text-xmed">
+      {{ componentSubTitle }}
+      <span class="error-or-required">* Required field</span>
+    </p>
+  </div>
+  <div class="form-container">
+    <div
+      [class]="'input-field-' + control.name"
+      *ngFor="let control of addProviderFormData?.controls">
+      <app-custom-form
+        [field]="control"
+        [form]="addProviderForm"
+        formType="add-facility"></app-custom-form>
+    </div>
+
+    <div class="form-buttons">
+      <app-custom-button
+        [isDisabled]="addProviderForm && addProviderForm.invalid"
+        btnText="Add"
+        btnClass="secondary text-small text-x-bold xx-small"
+        (click)="checkProviderDetails()">
+      </app-custom-button>
+    </div>
+  </div>
+
+  <div class="footer-buttons">
+    <app-custom-button
+      btnText="< Back"
+      btnClass="secondary s-medium text-x-bold text-xmed"
+      *ngIf="requirementFor === 'othersRegistration'">
+    </app-custom-button>
+
+    <app-custom-button
+      btnText="Save and Register"
+      btnClass="tertiary x-medium text-x-bold text-xmed"
+      *ngIf="requirementFor === 'othersRegistration'">
+    </app-custom-button>
+  </div>
+</div>
