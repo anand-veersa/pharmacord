@@ -9,5 +9,6 @@ import { JsonFormControls } from 'src/app/models/json-form-data.model';
 })
 export class CustomRadioComponent {
   @Input() form: FormGroup;
+  @Input() formType: string = '';
   @Input() field: JsonFormControls;
 }
