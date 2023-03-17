@@ -5,8 +5,6 @@ import {
   ViewChild,
   ViewContainerRef,
   ChangeDetectorRef,
-  Renderer2,
-  ElementRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -29,7 +27,6 @@ export class CustomFormComponent implements AfterViewInit {
   @Input() inputPrefix: string;
 
   constructor(
-    private renderer: Renderer2,
     private changeDetectorRef: ChangeDetectorRef,
     private router: Router
   ) {}

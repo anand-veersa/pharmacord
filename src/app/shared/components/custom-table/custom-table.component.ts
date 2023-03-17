@@ -23,11 +23,18 @@ export class CustomTableComponent implements AfterViewInit {
   @Input() displayedColumns: string[];
   @Input() pageSizeOptions: number[];
   @Input() pdfSrc: string;
+  @Input() showBlueHeader: boolean = true;
   @Output() action = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _liveAnnouncer: LiveAnnouncer) {}
+
+  public selectedRow: number;
+
+  onRowClicked(selectedRowIndex: number) {
+    this.selectedRow = selectedRowIndex;
+  }
   onAction(event: any) {
     this.action.emit(event);
   }
