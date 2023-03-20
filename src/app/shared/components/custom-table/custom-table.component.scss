@@ -22,10 +22,7 @@
       background: $color-white;
     }
     tr:hover {
-      background-color: $color-secondary !important;
-      > td {
-        color: $color-white !important;
-      }
+      background-color: $color-table-hover !important;
     }
   }
 }
