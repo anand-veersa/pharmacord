@@ -5,7 +5,6 @@ import {
   ViewChild,
   ViewContainerRef,
   ChangeDetectorRef,
-  Renderer2,
   Output,
   EventEmitter,
 } from '@angular/core';
