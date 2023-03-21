@@ -1,0 +1,10 @@
+@import '../../assets/styles/abstracts/variables';
+
+.profile-container {
+  padding: 2.5rem;
+  background-color: $color-white;
+  border: 2px solid #bfcbd2;
+  border-radius: 8px;
+  max-width: 90% !important;
+  margin: 2rem auto;
+}

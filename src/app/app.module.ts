@@ -18,6 +18,7 @@ import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 
 import { AppComponent } from './app.component';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +37,7 @@ import { AppComponent } from './app.component';
     ChartModule,
     RouterModule,
     PdfJsViewerModule,
+    ProfileModule,
     ToastrModule.forRoot(),
   ],
   providers: [
