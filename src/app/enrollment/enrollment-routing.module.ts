@@ -6,6 +6,7 @@ import { AccountSettingsComponent } from './pages/account-settings/account-setti
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MyPatientsComponent } from './pages/my-patients/my-patients.component';
 import { PatientProfileComponent } from './pages/patient-profile/patient-profile.component';
+import { SubmitEnrollmentComponent } from './pages/submit-enrollment/submit-enrollment.component';
 import { ToolsAndFormsComponent } from './pages/tools-and-forms/tools-and-forms.component';
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',
+      },
+      {
+        path: 'create',
+        component: SubmitEnrollmentComponent,
       },
       {
         path: 'dashboard',

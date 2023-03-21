@@ -15,6 +15,7 @@ import { AuthService } from '../auth/auth.service';
 export class EnrollmentService {
   public selectedMedicine = new BehaviorSubject<string>('');
   public medicineCases = new BehaviorSubject<any[]>([]);
+  public submitFormInitiated = new BehaviorSubject<boolean>(false);
   public cases = new BehaviorSubject<any[]>([]);
   constructor(private http: HttpClient, private authService: AuthService) {}
 

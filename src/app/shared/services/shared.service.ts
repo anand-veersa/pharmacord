@@ -60,9 +60,9 @@ export class SharedService {
     return month + '/' + day + '/' + year;
   }
 
-  getProviderName(prescriberId: string): string {
+  public getProviderName(prescriberId: string): string {
     if (prescriberId) {
-      const provider = this.authService.user.providers.filter(
+      const provider = this.authService.user?.providers.filter(
         prov => prov.ProviderId == prescriberId
       );
       if (provider) {
@@ -70,6 +70,11 @@ export class SharedService {
       }
     }
     return '--';
+  }
+
+  public capitalize(str: string): string {
+    const lower = str.toLowerCase();
+    return str.charAt(0).toUpperCase() + lower.slice(1);
   }
 
   private addValidator(rules: any): ValidationErrors {

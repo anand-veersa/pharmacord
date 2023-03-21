@@ -44,7 +44,7 @@ export class MyPatientsComponent implements OnInit {
       name: 'search',
       label: '',
       value: '',
-      type: 'text',
+      type: 'search',
       placeholder: 'Search',
     };
     this.searchForm = this.sharedService.buildForm({
