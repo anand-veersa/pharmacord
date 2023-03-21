@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppConstants } from 'src/app/constants/app.constants';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { EnrollmentService } from '../../enrollment.service';
@@ -52,7 +52,6 @@ export class ToolsAndFormsComponent implements OnInit {
   }
 
   closePdf() {
-    console.log('clicked');
     this.pdfSrc = '';
     this.pdfPage = 1;
   }

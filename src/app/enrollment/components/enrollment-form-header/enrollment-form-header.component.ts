@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-
+import { FormGroup } from '@angular/forms';
+import { JsonFormData } from 'src/app/models/json-form-data.model';
 @Component({
   selector: 'app-enrollment-form-header',
   templateUrl: './enrollment-form-header.component.html',
@@ -7,4 +8,7 @@ import { Component, Input } from '@angular/core';
 })
 export class EnrollmentFormHeaderComponent {
   @Input() title: string = '';
+  @Input() displayedScreen: string = '';
+  @Input() selectPrescriberForm: FormGroup;
+  @Input() selectPrescriberField: JsonFormData;
 }
