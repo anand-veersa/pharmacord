@@ -57,14 +57,14 @@
   top: 0;
   left: 0;
   background-color: rgba(74, 74, 74, 0.8);
-  z-index: 99999;
+  z-index: 999;
 }
 .action-panel {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: $border-style;
   margin-bottom: 1rem;
 }
 .pdf-viewer {
@@ -72,9 +72,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: $border-style;
   border-radius: 0.3rem;
   padding: 3rem;
   border-radius: 5px;
   background: white;
+  z-index: 1000;
 }

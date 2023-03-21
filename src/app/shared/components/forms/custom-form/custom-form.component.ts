@@ -40,6 +40,10 @@ export class CustomFormComponent implements AfterViewInit {
       component: CustomInputComponent,
     },
     {
+      type: 'search',
+      component: CustomInputComponent,
+    },
+    {
       type: 'number',
       component: CustomInputComponent,
     },
@@ -68,7 +72,9 @@ export class CustomFormComponent implements AfterViewInit {
     dynamicComponent.setInput('form', this.form);
     dynamicComponent.setInput('field', this.field);
     dynamicComponent.setInput('formType', this.formType);
-    dynamicComponent.setInput('inputPrefix', this.inputPrefix);
+    if (componentInstance === CustomInputComponent) {
+      dynamicComponent.setInput('inputPrefix', this.inputPrefix);
+    }
     this.changeDetectorRef.detectChanges();
   }
 

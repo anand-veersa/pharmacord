@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, map, Subscription } from 'rxjs';
 import { Alert, Case, CaseDoc } from 'src/app/models/cases.model';
 import { SharedService } from 'src/app/shared/services/shared.service';
@@ -22,6 +22,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
     caseDetails: {},
     patientAddress: {},
   };
+  public patientId: string;
   public caseDetail: any;
   public shippingData: any[];
   public caseDocuments: any[];
@@ -36,7 +37,8 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
   public pdfSrc: any = null;
 
   constructor(
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
+    public router: Router,
     private enrolService: EnrollmentService,
     private sharedService: SharedService,
     private http: HttpClient
@@ -69,6 +71,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
       .pipe(map(results => ({ params: results[0]['id'], query: results[1] })))
       .subscribe({
         next: results => {
+          this.patientId = results.params;
           this.sharedService.isLoading.next(true);
           this.enrolService.cases.subscribe((cases: any[]) => {
             this.patientCases = [];
@@ -90,13 +93,13 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
             });
             this.patientCasesDataSource.data = this.patientCases;
           });
-          this.caseDetail(results.query['case']);
+          this.getCaseDetails(results.query['case']);
         },
       });
   }
 
-  public getCaseDetails(caseDetail: Case): void {
-    this.enrolService.getCaseDetails(caseDetail.CaseId).subscribe({
+  public getCaseDetails(caseId: string): void {
+    this.enrolService.getCaseDetails(caseId).subscribe({
       next: resp => {
         if (resp && resp.Status === 'SUCCESS' && !resp.Payload.ErrorMessage) {
           this.caseDetail = resp.Payload;
@@ -130,7 +133,9 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
           this.caseDetail.Documents.forEach((doc: any) => {
             docs.push({
               DocumentType: doc.DocumentType,
-              DocumentDate: doc.DocumentDate,
+              DocumentDate: this.sharedService.getFormattedDate(
+                doc.DocumentDate
+              ),
               DocumentURL: doc.DocumentURL,
             });
           });
@@ -149,10 +154,11 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
             }
           });
           this.alertDataSource.data = alerts;
+          this.sharedService.isLoading.next(false);
         } else {
           this.sharedService.notify('error', 'Error in fetching case details');
+          this.sharedService.isLoading.next(false);
         }
-        this.sharedService.isLoading.next(false);
       },
       error: err => {
         this.sharedService.isLoading.next(false);
@@ -164,6 +170,12 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
   public openDoc(docDetail: CaseDoc): void {
     this.enrolService.getCaseDoc(docDetail.DocumentURL).subscribe(pdf => {
       this.pdfSrc = window.URL.createObjectURL(pdf);
+    });
+  }
+
+  public changeCases(patientCase: Case): void {
+    this.router.navigate([`/enrollment/patients/${this.patientId}`], {
+      queryParams: { case: patientCase.CaseId },
     });
   }
 
