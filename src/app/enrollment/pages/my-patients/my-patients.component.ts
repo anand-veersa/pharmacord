@@ -52,7 +52,7 @@ export class MyPatientsComponent implements OnInit {
     });
   }
 
-  createTableData(cases: any[]): void {
+  public createTableData(cases: any[]): void {
     cases.sort(
       (a, b) => parseInt(b.CaseId.slice(3)) - parseInt(a.CaseId.slice(3))
     );
@@ -85,14 +85,14 @@ export class MyPatientsComponent implements OnInit {
     this.filteredCases.data = patientCases;
   }
 
-  patientSelected(patient: Patient): void {
+  public patientSelected(patient: Patient): void {
     this.router.navigate([`${patient.PatientId}`], {
       queryParams: { case: patient.CaseId },
       relativeTo: this.route,
     });
   }
 
-  filterPatients(): void {
+  public filterPatients(): void {
     this.filteredCases.data = this.sharedService.filterSearch(
       this.searchForm.value?.search,
       this.cases?.data
