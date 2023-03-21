@@ -18,7 +18,6 @@
       background: $color-table-odd-rows;
     }
     tr:nth-child(even) {
-      //This is default white - DO we need this code ?
       background: $color-white;
     }
     tr:hover {

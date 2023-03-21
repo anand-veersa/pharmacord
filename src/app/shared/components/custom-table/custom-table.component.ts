@@ -32,10 +32,10 @@ export class CustomTableComponent implements AfterViewInit {
 
   public selectedRow: number;
 
-  onRowClicked(selectedRowIndex: number) {
+  public onRowClicked(selectedRowIndex: number): void {
     this.selectedRow = selectedRowIndex;
   }
-  onAction(event: any) {
+  public onAction(event: any): void {
     this.action.emit(event);
   }
   ngAfterViewInit() {
