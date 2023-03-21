@@ -1,11 +1,10 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   BehaviorSubject,
   catchError,
   map,
   Observable,
-  Subject,
   tap,
   throwError,
 } from 'rxjs';
@@ -61,6 +60,7 @@ export class EnrollmentService {
       PortalAccountPkId,
       Role,
     } = data.Payload;
+
     this.authService.user = {
       firstName: FirstName,
       lastName: LastName,
