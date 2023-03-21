@@ -3,9 +3,31 @@
 .form-header {
   width: 100%;
   height: 10rem;
-  padding: 3.6rem 3.4rem;
+  padding: 0.6rem 3.4rem;
   background-color: $color-white;
-  .title {
-    color: $color-primary;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .prescriber {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    img {
+      height: 6rem;
+      width: 6rem;
+    }
+    &-name {
+      font-weight: 700;
+      font-size: 2rem;
+      color: $color-primary;
+    }
+    &-list {
+      border: $border-style-2;
+      display: flex;
+      padding: 1.2rem 2rem;
+      align-items: center;
+      gap: 1rem;
+    }
   }
 }

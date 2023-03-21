@@ -1,6 +1,11 @@
 <div class="enrollment-form">
-  <app-enrollment-form-header [title]="title"></app-enrollment-form-header>
+  <app-enrollment-form-header
+    [title]="title"
+    [selectPrescriberForm]="selectPrescriberForm"
+    [selectPrescriberField]="prescriberListJson"
+    [displayedScreen]="displayScreen"></app-enrollment-form-header>
   <div class="enrollment-form-container">
-    <app-select-medication (title)="setTitle($event)"></app-select-medication>
+    <ng-container #enrollmentForm></ng-container>
+    <!-- <app-select-medication (title)="setTitle($event)" (nextAction)="next($event)"></app-select-medication> -->
   </div>
 </div>

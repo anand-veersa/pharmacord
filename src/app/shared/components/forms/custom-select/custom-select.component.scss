@@ -1,0 +1,16 @@
+@import '../../../../../assets/styles/abstracts/variables';
+
+::ng-deep .prescriber-select {
+  height: 4rem;
+  mat-form-field .mat-mdc-text-field-wrapper {
+    height: 4rem;
+    width: 20rem;
+  }
+  .mat-mdc-form-field-infix {
+    padding: 0.6rem 0 0 !important;
+  }
+  .mdc-list-item__primary-text {
+    font-size: 1.6rem;
+    color: $color-grey-dark-4;
+  }
+}

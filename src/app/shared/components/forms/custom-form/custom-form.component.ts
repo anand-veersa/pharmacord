@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { JsonFormControls } from 'src/app/models/json-form-data.model';
 import { CustomCheckboxComponent } from '../custom-checkbox/custom-checkbox.component';
 import { CustomInputComponent } from '../custom-input/custom-input.component';
 import { CustomRadioComponent } from '../custom-radio/custom-radio.component';
@@ -23,13 +24,8 @@ export class CustomFormComponent implements AfterViewInit {
   dynamicForm!: ViewContainerRef;
   @Input() form!: FormGroup;
   @Input() formType: string = '';
-  @Input() field: any;
+  @Input() field: JsonFormControls;
   @Input() inputPrefix: string;
-
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private router: Router
-  ) {}
 
   public supportedDynamicComponents = [
     {
@@ -61,9 +57,13 @@ export class CustomFormComponent implements AfterViewInit {
       component: CustomCheckboxComponent,
     },
   ];
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private router: Router
+  ) {}
 
   ngAfterViewInit() {
-    const componentInstance = this.getComponentByType(this.field.type);
+    const componentInstance = this.getComponentByType();
     const dynamicComponent =
       this.dynamicForm.createComponent(componentInstance);
     dynamicComponent.setInput('form', this.form);
@@ -75,7 +75,7 @@ export class CustomFormComponent implements AfterViewInit {
     this.changeDetectorRef.detectChanges();
   }
 
-  getComponentByType(type: string) {
+  getComponentByType() {
     const dynamicComponent = this.supportedDynamicComponents.find(
       c => c.type === this.field.type
     );
@@ -83,7 +83,6 @@ export class CustomFormComponent implements AfterViewInit {
   }
 
   navigateRoute() {
-    console.log(this.field.extLink);
     if (this.field.extLink === 'Forgot Username?') {
       this.router.navigate(['/reset-username']);
     } else {
