@@ -1,10 +1,21 @@
 <div class="medication-container">
-  <h4>Please select the medication.</h4>
+  <span class="primary-title">Please select the medication.</span>
 
-  <div class="medication-list">
+  <div class="medication-list tm-2">
     <app-custom-form
       [field]="formJson.controls[0]"
       [form]="selectMedicationForm"
       formType="selectMedicationForm"></app-custom-form>
   </div>
+</div>
+<div class="action-panel">
+  <app-custom-button
+    btnClass="small secondary"
+    btnText="&#60; Back"
+    (action)="action('back')"></app-custom-button>
+  <app-custom-button
+    btnClass="small tertiary"
+    btnText="Next &#62;"
+    (action)="action('next')"
+    [isDisabled]="selectMedicationForm.invalid"></app-custom-button>
 </div>

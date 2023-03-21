@@ -1,8 +1,18 @@
 <div class="form-header">
-  <div class="text-large text-x-bold title">
+  <div class="primary-title">
     <span>{{ title }}</span>
   </div>
-  <div class="prescriber-details"></div>
   <div class="stepper"></div>
-  <div class="prescriber-list"></div>
+  <div class="prescriber" *ngIf="selectPrescriberForm">
+    <img
+      src="../../../../assets/images/prescriber_icon.svg"
+      alt="Prescriber Icon" />
+    <div class="prescriber-list">
+      <span class="prescriber-name">Select a Prescriber</span>
+      <app-custom-form
+        [field]="selectPrescriberField.controls[0]"
+        [form]="selectPrescriberForm"
+        formType="select-prescriber"></app-custom-form>
+    </div>
+  </div>
 </div>

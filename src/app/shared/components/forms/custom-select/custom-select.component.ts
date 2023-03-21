@@ -10,4 +10,5 @@ import { JsonFormControls } from 'src/app/models/json-form-data.model';
 export class CustomSelectComponent {
   @Input() form: FormGroup;
   @Input() field: JsonFormControls;
+  @Input() formType: string = '';
 }

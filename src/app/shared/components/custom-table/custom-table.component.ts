@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-custom-table',
@@ -21,13 +23,31 @@ export class CustomTableComponent implements AfterViewInit {
   @Input() displayedColumns: string[];
   @Input() pageSizeOptions: number[];
   @Input() pdfSrc: string;
+  @Input() showBlueHeader: boolean = true;
   @Output() action = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  onAction(event: any) {
+  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+
+  public selectedRow: number;
+
+  public onRowClicked(selectedRowIndex: number): void {
+    this.selectedRow = selectedRowIndex;
+  }
+  public onAction(event: any): void {
     this.action.emit(event);
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
 }

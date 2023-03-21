@@ -9,7 +9,7 @@ interface JsonFormValidators {
   pattern?: string;
   nullValidator?: boolean;
 }
-interface JsonFormControlOptions {
+export interface JsonFormControlOptions {
   label: string;
   value: any;
 }

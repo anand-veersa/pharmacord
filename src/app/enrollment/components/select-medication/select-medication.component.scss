@@ -6,3 +6,9 @@
   background-color: $color-white;
   border-radius: 0.8rem;
 }
+.action-panel {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 20rem;
+}

@@ -1,10 +1,45 @@
+@import '../../../../assets/styles/abstracts/_variables.scss';
+
 ::ng-deep .custom-table .mat-sort-header-content {
   text-align: left !important;
 }
+::ng-deep .mat-mdc-table {
+  thead {
+    .mat-header-blue {
+      background: $color-blue-light-1;
+    }
+    tr > th {
+      font-family: $primary-font;
+      color: $color-primary;
+    }
+  }
+  tbody {
+    tr:nth-child(odd) {
+      background: $color-table-odd-rows;
+    }
+    tr:nth-child(even) {
+      background: $color-white;
+    }
+    tr:hover {
+      background-color: $color-table-hover !important;
+    }
+  }
+}
 
 .custom-table {
-  overflow: scroll;
+  overflow: auto;
   width: 100%;
+  &-paginator {
+    background: $color-blue-light-1;
+    display: flex;
+    justify-content: center;
+  }
+  .mat-table-row-selected {
+    background-color: $color-secondary !important;
+    > td {
+      color: $color-white !important;
+    }
+  }
 }
 
 .pdf-viewer {
