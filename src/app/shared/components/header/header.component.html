@@ -14,17 +14,31 @@
       <div>For Healthcare</div>
       <div>Professionals Only</div>
     </div>
-    <div [ngClass]="authService.isLoggedIn() ? 'border-right' : 'border-left'">
-      <div class="primary-contact">1-844-4GSK-ONC</div>
-      <div class="secondary-contact">1-844-447-5662</div>
-      <div class="office-timings">8 AM ET to 8 PM ET</div>
-    </div>
-    <div *ngIf="authService.isLoggedIn()" class="auth">
-      <div class="user">
-        <img src="../../../../assets/images/user_icon.svg" [alt]="userName" />
-        <span>Welcome {{ userName }}</span>
+    <mat-divider
+      vertical
+      [ngClass]="{ 'header-divider': !authService.isLoggedIn() }"></mat-divider>
+    <div class="text-right">
+      <div class="primary-contact text-med text-x-bold">
+        <span><mat-icon>phone</mat-icon></span> 1-844-4GSK-ONC
       </div>
-      <div class="logout" (click)="logout()">Logout</div>
+      <div class="secondary-contact text-xxs text-x-bold">(1-844-447-5662)</div>
+      <div class="office-timings text-xs text-x-bold">8 AM ET to 8 PM ET</div>
+    </div>
+    <mat-divider
+      vertical
+      [ngClass]="{ 'header-divider': authService.isLoggedIn() }"></mat-divider>
+    <div *ngIf="authService.isLoggedIn()" class="auth">
+      <div class="user text-small text-x-bold">
+        <img src="../../../../assets/images/user_icon.svg" [alt]="userName" />
+        <span class="user-welcome">Welcome {{ userName }}</span>
+      </div>
+      <mat-divider vertical class="header-divider"></mat-divider>
+      <div class="logout" (click)="logout()">
+        <img
+          src="../../../../assets/images/logout_icon.svg"
+          class="exit-icon" />
+        LogOut
+      </div>
     </div>
   </div>
 </div>

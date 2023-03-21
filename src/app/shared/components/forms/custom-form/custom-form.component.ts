@@ -5,7 +5,6 @@ import {
   ViewChild,
   ViewContainerRef,
   ChangeDetectorRef,
-  Renderer2,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';

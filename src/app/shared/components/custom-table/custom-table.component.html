@@ -8,13 +8,21 @@
       [page]="1"
       style="width: 100%; height: 50rem"></ng2-pdfjs-viewer>
   </div>
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <table
+    class="mat-elevation-z8"
+    mat-table
+    matSort
+    matSortDirection="desc"
+    [dataSource]="dataSource"
+    [matSortActive]="columnSchema[0].key"
+    (matSortChange)="announceSortChange($event)">
     <ng-container
       *ngFor="let column of columnSchema"
       [matColumnDef]="column.key">
       <th
-        mat-header-cell
         *matHeaderCellDef
+        class="text-small text-x-bold"
+        mat-header-cell
         mat-sort-header
         sortActionDescription="{{ 'Sort by ' + column.label }}">
         {{ column.label }}
@@ -24,13 +32,25 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+      [ngClass]="{ 'mat-header-blue': showBlueHeader }"></tr>
+    <tr
+      *matRowDef="
+        let row;
+        columns: displayedColumns;
+        let selectedRowIndex = index
+      "
+      [ngClass]="{ 'mat-table-row-selected': selectedRow === selectedRowIndex }"
+      mat-row
+      (click)="onRowClicked(selectedRowIndex)"></tr>
   </table>
 
   <mat-paginator
-    [pageSizeOptions]="pageSizeOptions"
+    class="custom-table-paginator"
     showFirstLastButtons
-    aria-label="Select page of periodic elements">
+    aria-label="Select page of periodic elements"
+    [pageSizeOptions]="pageSizeOptions">
   </mat-paginator>
 </div>

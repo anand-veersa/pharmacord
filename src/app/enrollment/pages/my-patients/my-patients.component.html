@@ -4,20 +4,25 @@
       <img
         src="../../../../assets/images/patient_icon.svg"
         alt="Patient Icon" />
-      <figcaption>My Patients</figcaption>
+      <figcaption class="text-large text-x-bold">My Patients</figcaption>
     </div>
     <div class="search-block">
       <app-custom-form
+        inputPrefix="search"
         [form]="searchForm"
         [field]="searchField"
-        inputPrefix="search"></app-custom-form>
+        (keyup)="
+          !searchForm.value.search.length ? filterPatients() : {}
+        "></app-custom-form>
       <app-custom-button
         btnText="Search"
-        btnClass="secondary x-small"></app-custom-button>
+        btnClass="secondary x-small"
+        [isDisabled]="!(searchForm.value.search.length > 0)"
+        (action)="filterPatients()"></app-custom-button>
     </div>
   </div>
   <app-custom-table
-    [dataSource]="cases"
+    [dataSource]="filteredCases"
     [columnSchema]="columnSchema"
     [displayedColumns]="displayedColumns"
     [pageSizeOptions]="pageSizeOptions"
