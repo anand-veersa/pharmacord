@@ -20,6 +20,7 @@ import { PatientProfileComponent } from './pages/patient-profile/patient-profile
 import { SubmitEnrollmentComponent } from './pages/submit-enrollment/submit-enrollment.component';
 import { EnrollmentFormHeaderComponent } from './components/enrollment-form-header/enrollment-form-header.component';
 import { SelectMedicationComponent } from './components/select-medication/select-medication.component';
+import { SelectPrescriberComponent } from './components/select-prescriber/select-prescriber.component';
 @NgModule({
   declarations: [
     EnrollmentComponent,
@@ -33,6 +34,7 @@ import { SelectMedicationComponent } from './components/select-medication/select
     SubmitEnrollmentComponent,
     EnrollmentFormHeaderComponent,
     SelectMedicationComponent,
+    SelectPrescriberComponent,
   ],
   imports: [
     CommonModule,
