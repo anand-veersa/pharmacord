@@ -72,7 +72,7 @@ export class MyPatientsComponent implements OnInit {
         FirstName: item.PatientName.split(' ')[0],
         LastName: item.PatientName.split(' ').at(-1),
         DateOfBirth: item.DateOfBirth,
-        Provider: this.sharedService.getProviderName(item['prescriberId ']),
+        Prescriber: this.sharedService.getPrescriberName(item['prescriberId ']),
         DateSubmitted: this.sharedService.getFormattedDate(item.CaseStartDate),
         EnrollmentStatus: item.EnrollmentStatus,
         Product: item.DrugGroup.Value,

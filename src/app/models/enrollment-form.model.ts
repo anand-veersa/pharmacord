@@ -55,7 +55,7 @@ interface OtherFacilityData {
   FacilityType: string;
 }
 
-interface ProviderData {
+interface PrescriberData {
   FirstName: string;
   LastName: string;
   NPI: string;
@@ -123,7 +123,7 @@ export interface EnrollmentFormPayload {
   Financial?: FinancialData;
   Insurance?: InsuranceData;
   PrescriptionInformation?: PrescriptionInformationData;
-  Provider?: ProviderData;
+  Provider?: PrescriberData;
   Attestation?: AttestaionData;
 }
 

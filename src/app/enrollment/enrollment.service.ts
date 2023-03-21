@@ -29,12 +29,12 @@ export class EnrollmentService {
       );
   }
 
-  public getProviderCases(
-    providerId: number,
+  public getPrescriberCases(
+    prescriberId: number,
     userPortalPkId: number
   ): Observable<any> {
     return this.http.get<any>(
-      `${environment.baseUrl}provider/cases/prescriber?prescriberIds=${providerId}&masterPortalAccountId=${userPortalPkId}`
+      `${environment.baseUrl}provider/cases/prescriber?prescriberIds=${prescriberId}&masterPortalAccountId=${userPortalPkId}`
     );
   }
 
@@ -65,7 +65,7 @@ export class EnrollmentService {
       firstName: FirstName,
       lastName: LastName,
       username: Username,
-      providers: Providers,
+      prescribers: Providers,
       email: UserDetails.Email,
       phone: UserDetails.Phone,
       fax: UserDetails.Fax,

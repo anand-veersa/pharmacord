@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 import { JsonFormControls } from 'src/app/models/json-form-data.model';
 
 @Component({
@@ -11,4 +12,9 @@ export class CustomSelectComponent {
   @Input() form: FormGroup;
   @Input() field: JsonFormControls;
   @Input() formType: string = '';
+  @Output() action = new EventEmitter();
+
+  public selectionChanged(event: MatSelectChange): void {
+    this.action.emit(event.value);
+  }
 }

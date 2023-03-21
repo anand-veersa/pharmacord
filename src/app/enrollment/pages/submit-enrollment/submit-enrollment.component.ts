@@ -2,12 +2,12 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  Input,
   OnDestroy,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
 import {
   EnrollmentFormPayload,
   EnrollmentScreenNextData,
@@ -43,6 +43,7 @@ export class SubmitEnrollmentComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private enrolService: EnrollmentService,
+    private authService: AuthService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -56,6 +57,12 @@ export class SubmitEnrollmentComponent implements AfterViewInit, OnDestroy {
       this.enrollmentFormPayload.DrugGroup = form.DrugGroup;
     }
     this.getComponentByScreen();
+  }
+
+  public getPrescriberFacilities(prescriberId: number) {
+    this.authService.user.prescribers.filter(prescriber => {
+      prescriber.ProviderId === prescriberId;
+    });
   }
 
   private getComponentByScreen() {

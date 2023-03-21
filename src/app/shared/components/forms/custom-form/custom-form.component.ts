@@ -6,6 +6,8 @@ import {
   ViewContainerRef,
   ChangeDetectorRef,
   Renderer2,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -27,6 +29,7 @@ export class CustomFormComponent implements AfterViewInit {
   @Input() formType: string = '';
   @Input() field: JsonFormControls;
   @Input() inputPrefix: string;
+  @Output() action = new EventEmitter();
 
   public supportedDynamicComponents = [
     {
@@ -73,10 +76,15 @@ export class CustomFormComponent implements AfterViewInit {
     if (componentInstance === CustomInputComponent) {
       dynamicComponent.setInput('inputPrefix', this.inputPrefix);
     }
+    if (componentInstance === CustomSelectComponent) {
+      dynamicComponent.instance.action.subscribe((data: string | number) =>
+        this.action.emit(data)
+      );
+    }
     this.changeDetectorRef.detectChanges();
   }
 
-  getComponentByType() {
+  getComponentByType(): ComponentType {
     const dynamicComponent = this.supportedDynamicComponents.find(
       c => c.type === this.field.type
     );
@@ -90,4 +98,7 @@ export class CustomFormComponent implements AfterViewInit {
       this.router.navigate(['/reset-password']);
     }
   }
+}
+interface ComponentType<T = any> {
+  new (...args: any[]): T;
 }

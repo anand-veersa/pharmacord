@@ -3,7 +3,10 @@
     [title]="title"
     [selectPrescriberForm]="selectPrescriberForm"
     [selectPrescriberField]="prescriberListJson"
-    [displayedScreen]="displayScreen"></app-enrollment-form-header>
+    [displayedScreen]="displayScreen"
+    (prescriberChanged)="
+      getPrescriberFacilities($event)
+    "></app-enrollment-form-header>
   <div class="enrollment-form-container">
     <ng-container #enrollmentForm></ng-container>
     <!-- <app-select-medication (title)="setTitle($event)" (nextAction)="next($event)"></app-select-medication> -->

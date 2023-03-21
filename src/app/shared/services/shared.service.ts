@@ -59,13 +59,13 @@ export class SharedService {
     return month + '/' + day + '/' + year;
   }
 
-  public getProviderName(prescriberId: string): string {
+  public getPrescriberName(prescriberId: string): string {
     if (prescriberId) {
-      const provider = this.authService.user?.providers.filter(
-        prov => prov.ProviderId == prescriberId
+      const prescriber = this.authService.user?.prescribers.filter(
+        pre => pre.ProviderId == prescriberId
       );
-      if (provider) {
-        return provider[0].FirstName + ' ' + provider[0].LastName;
+      if (prescriber) {
+        return prescriber[0].FirstName + ' ' + prescriber[0].LastName;
       }
     }
     return '--';

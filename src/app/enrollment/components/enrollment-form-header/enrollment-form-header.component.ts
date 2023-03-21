@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 @Component({
@@ -11,4 +11,5 @@ export class EnrollmentFormHeaderComponent {
   @Input() displayedScreen: string = '';
   @Input() selectPrescriberForm: FormGroup;
   @Input() selectPrescriberField: JsonFormData;
+  @Output() prescriberChanged = new EventEmitter();
 }

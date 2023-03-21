@@ -28,10 +28,10 @@ export class SelectPrescriberComponent implements OnInit {
     this.title.emit(`Submit ${this.selectedMedication} Enrollment Form`);
     const options: JsonFormControlOptions[] = [];
     const prescriberListJson: JsonFormData = { controls: [] };
-    this.authService.user?.providers.forEach(provider => {
+    this.authService.user?.prescribers.forEach(prescriber => {
       options.push({
-        label: `${provider.FirstName} ${provider.LastName}`,
-        value: provider.ProviderId,
+        label: `${prescriber.FirstName} ${prescriber.LastName}`,
+        value: prescriber.ProviderId,
       });
       prescriberListJson.controls.push({
         name: 'Prescriber',

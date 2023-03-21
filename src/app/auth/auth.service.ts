@@ -16,7 +16,7 @@ export class AuthService {
     email: string;
     phone: number;
     fax: string;
-    providers: any[];
+    prescribers: any[];
     portalAccountPkId: number;
     role: any;
   };

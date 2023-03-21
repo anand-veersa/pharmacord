@@ -21,9 +21,9 @@
       "label": "Date Of Birth"
     },
     {
-      "key": "Provider",
+      "key": "Prescriber",
       "value": "",
-      "label": "Provider"
+      "label": "Prescriber"
     },
     {
       "key": "DateSubmitted",
