@@ -9,7 +9,9 @@
       "reqErrorMsg": "Provider's NPI is a required field",
       "validityErrorMsg": "Invalid NPI",
       "validators": {
-        "required": true
+        "required": true,
+        "max": 10,
+        "min": 10
       },
       "required": true,
       "options": []

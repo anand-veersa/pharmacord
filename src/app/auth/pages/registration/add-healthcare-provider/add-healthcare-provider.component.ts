@@ -37,6 +37,7 @@ export class AddHealthcareProviderComponent implements OnInit {
   }
 
   checkProviderDetails(): void {
+    console.log(this.addProviderForm);
     const payloadGetProviderDetails = {
       NPI: this.addProviderForm?.get('HCPNPI')?.value,
       FirstName: this.addProviderForm?.get('HCPFirstName')?.value,

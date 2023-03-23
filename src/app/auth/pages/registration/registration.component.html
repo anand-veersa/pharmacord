@@ -117,7 +117,7 @@
             </p>
             <div class="confirm-form-fields">
               <div
-                class="confirm-input-fields"
+                [class]="control.name"
                 *ngFor="
                   let control of confirmAccountInformationFormData?.controls
                 ">
@@ -157,7 +157,7 @@
       <app-custom-button
         btnText="< Back"
         btnClass="medium secondary"
-        (click)="navigateToLogin()"></app-custom-button>
+        (click)="navigateToSelectAccountType()"></app-custom-button>
       <app-custom-button
         btnText="Next >"
         btnClass="medium tertiary"
@@ -183,6 +183,7 @@
     [title]="addFacilityScreenTitle"
     [subTitle]="addFacilityScreenSubTitle"
     requirementFor="prescriberRegistration"
+    (backToParentComponent)="backTriggeredFromStep2($event)"
     *ngIf="addFacilityScreen"></app-add-facility>
 
   <app-add-healthcare-provider

@@ -17,13 +17,13 @@ export class RegistrationComponent implements OnInit {
   public confirmAccountInformationForm: FormGroup;
   public createUsernameFormData: JsonFormData;
   public createUsernameForm: FormGroup;
-  public accountTypeSelection: boolean = false;
+  public accountTypeSelection: boolean = true;
   public prescriberRegistrationCard: boolean = true;
   public prescriberRegistration: boolean = false;
   public othersRegistrationCard: boolean = false;
   public othersRegistration: boolean = false;
   public addFacilityScreen: boolean = false;
-  public addHealthcareProviderScreen: boolean = true;
+  public addHealthcareProviderScreen: boolean = false;
   public addFacilityScreenTitle: string = 'Associated Practice Office(s)';
   public addFacilityScreenSubTitle: string =
     'Please add or update the Practice/Facility information associated with this new account.';
@@ -98,5 +98,21 @@ export class RegistrationComponent implements OnInit {
 
   checkProviderNpi(): void {
     console.log('checkProviderNpi function clicked');
+  }
+
+  backTriggeredFromStep2(eventData: { backBtnClicked: boolean }): void {
+    console.log('backBtnClicked value in ', eventData.backBtnClicked);
+    this.addFacilityScreen = false;
+    if (this.prescriberRegistrationCard) {
+      this.prescriberRegistration = true;
+    } else {
+      this.othersRegistration = true;
+    }
+  }
+
+  navigateToSelectAccountType(): void {
+    this.othersRegistration = false;
+    this.prescriberRegistration = false;
+    this.accountTypeSelection = true;
   }
 }

@@ -135,8 +135,14 @@
             flex-wrap: wrap;
             gap: 1.8rem;
 
-            .confirm-input-fields {
-              width: 15.9rem;
+            .ConfirmAccountFirstName,
+            .confirmAccountLastName,
+            .confirmAccountPhone,
+            .confirmAccountFax {
+              width: 16rem;
+            }
+            .confirmAccountEmail {
+              width: 34rem;
             }
           }
         }
@@ -154,6 +160,10 @@
           flex-direction: row;
           align-items: center;
           gap: 3rem;
+        }
+
+        .create-form-input-fields {
+          width: 25rem;
         }
       }
     }
