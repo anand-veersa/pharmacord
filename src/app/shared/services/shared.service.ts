@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Patient } from 'src/app/models/cases.model';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
-
+import { MatchPasswordsValidator } from '../validators/match-passwords.validator';
 @Injectable({
   providedIn: 'root',
 })
@@ -25,8 +25,9 @@ export class SharedService {
   public buildForm(formData: JsonFormData): FormGroup {
     const formControl: { [key: string]: any } = {};
     formData.controls.forEach(field => {
-      const validators = this.addValidator(field.validators);
-      formControl[field.name] = new FormControl(field.value, validators);
+      formControl[field.name] = new FormControl(field.value);
+      const validators = this.addValidator(field.validators, formControl);
+      formControl[field.name].addValidators(validators);
     });
     return new FormGroup(formControl);
   }
@@ -77,7 +78,10 @@ export class SharedService {
     return str.charAt(0).toUpperCase() + lower.slice(1);
   }
 
-  private addValidator(rules: any): ValidationErrors {
+  private addValidator(
+    rules: any,
+    formControl: { [key: string]: any }
+  ): ValidationErrors | null {
     let validators: any[] = [];
     if (!rules) {
       return validators;
@@ -95,6 +99,8 @@ export class SharedService {
           return Validators.minLength(rule[1]);
         case 'pattern':
           return Validators.pattern(rule[1]);
+        case 'match':
+          return MatchPasswordsValidator(formControl);
         default:
           return;
       }

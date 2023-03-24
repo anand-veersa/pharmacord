@@ -1,8 +1,13 @@
 <div class="profile-container">
-  <mat-tab-group>
-    <mat-tab label="First"> Content 1 </mat-tab>
-    <mat-tab label="Second"> Content 2 </mat-tab>
-    <mat-tab label="Third"> Content 3 </mat-tab>
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Change Password">
+      <app-change-password></app-change-password>
+    </mat-tab>
+    <mat-tab label="Change Security Questions">
+      <app-change-security-questions></app-change-security-questions>
+    </mat-tab>
+    <mat-tab label="Profile Information">
+      <app-profile-information></app-profile-information>
+    </mat-tab>
   </mat-tab-group>
-  <p>profile works!</p>
 </div>

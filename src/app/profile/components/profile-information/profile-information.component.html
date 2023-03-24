@@ -1,0 +1,24 @@
+<div class="profile-information">
+  <p class="profile-information-heading text-med text-x-bold">
+    Manage your profile and contact information
+  </p>
+  <p class="error-or-required"><span>* </span>Required field</p>
+  <div class="form-fields">
+    <div class="input-fields" *ngFor="let control of formData?.controls">
+      <app-custom-form
+        [field]="control"
+        [form]="profileInformationForm"></app-custom-form>
+    </div>
+  </div>
+  <div class="profile-information-buttons">
+    <app-custom-button
+      btnClass="secondary register-user"
+      btnText="&#60; Back to Home"
+      (click)="navigateToHome()"></app-custom-button>
+    <app-custom-button
+      btnClass="tertiary register-user"
+      btnText="Save"
+      [isDisabled]="profileInformationForm && profileInformationForm.invalid"
+      (click)="saveProfileInformation()"></app-custom-button>
+  </div>
+</div>

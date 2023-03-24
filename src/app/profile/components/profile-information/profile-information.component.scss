@@ -1,0 +1,34 @@
+@import '../../../../assets/styles/abstracts/variables';
+@import '../../../../assets/styles/abstracts/mixins';
+
+.profile-information {
+  &-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 12.6rem 0 2rem 0;
+  }
+  .form-fields {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 2.2rem;
+
+    .input-fields {
+      width: 23%;
+
+      @include respond(tab-land) {
+        width: 45%;
+      }
+
+      @include respond(tab-port) {
+        width: 55%;
+      }
+
+      @include respond(min-tab-port) {
+        width: 60%;
+      }
+    }
+  }
+}
