@@ -1,4 +1,4 @@
-<div class="registration-container">
+<div class="registration-container" *ngIf="!thankYouScreen">
   <div class="registration-header">
     <!-- <mat-stepper headerPosition="bottom" #stepper>
       <mat-step [stepControl]="test1()"> </mat-step>
@@ -12,6 +12,8 @@
       Please complete all fields below to create your account.
     </span>
   </div>
+
+  <!-- account Type Selection -->
   <div class="account-type-selection" *ngIf="accountTypeSelection">
     <div class="main-container">
       <div class="title">
@@ -167,28 +169,101 @@
 
   <!-- Others Screens Start here -->
   <div class="others-registration" *ngIf="othersRegistration">
-    <div class="others-registration-main"></div>
+    <div class="others-registration-main">
+      <div class="others-account-information">
+        <p class="text-x-bold text-large">Account Information</p>
+        <p class="step-sub-title text-medium text-xmed">
+          Please confirm and update your information for this new account.
+          <span class="error-or-required">* Required field</span>
+        </p>
+        <div class="account-information-fields">
+          <div
+            [class]="control.name"
+            *ngFor="let control of othersAccountInformationFormData?.controls">
+            <app-custom-form
+              [field]="control"
+              [form]="othersAccountInformationForm"
+              formType="prescriber-confirm-information"></app-custom-form>
+          </div>
+        </div>
+      </div>
+      <div class="others-create-username">
+        <p class="step-sub-title text-medium text-xmed">
+          Create a username and password to access your new online account.
+          <span class="error-or-required">* Required field</span>
+        </p>
+        <div class="others-create-username-fields">
+          <span class="text-med text-x-bold tp-1">Create Login</span>
+          <div class="others-create-username-form-fields">
+            <div
+              class="others-create-form-input-fields"
+              *ngFor="let control of othersCreateUsernameFormData?.controls">
+              <app-custom-form
+                [field]="control"
+                [form]="othersCreateUsernameForm"
+                formType="others-create-username-form"></app-custom-form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="registration-footer">
       <app-custom-button
         btnText="< Back"
         btnClass="medium secondary"
-        (click)="navigateToLogin()"></app-custom-button>
+        (click)="navigateToSelectAccountType()"></app-custom-button>
       <app-custom-button
         btnText="Next >"
-        btnClass="medium tertiary"></app-custom-button>
+        btnClass="medium tertiary"
+        (click)="registrationStep2()"></app-custom-button>
     </div>
   </div>
 
+  <!-- For the Case of Prescriber -->
   <app-add-facility
     [title]="addFacilityScreenTitle"
     [subTitle]="addFacilityScreenSubTitle"
     requirementFor="prescriberRegistration"
     (backToParentComponent)="backTriggeredFromStep2($event)"
-    *ngIf="addFacilityScreen"></app-add-facility>
+    *ngIf="prescriberAddFacilityScreen"></app-add-facility>
+
+  <!-- For the case of Others -->
+
+  <app-add-facility
+    [title]="addFacilityScreenTitle"
+    [subTitle]="addFacilityScreenSubTitle"
+    requirementFor="othersRegistration"
+    (backToParentComponent)="moveToOthersFirstScreen($event)"
+    (navigateToNextComponent)="moveToAddProviderScreen($event)"
+    *ngIf="othersAddFacilityScreen"></app-add-facility>
 
   <app-add-healthcare-provider
     [componentTitle]="addProviderScreenTitle"
     [componentSubTitle]="addProviderScreenSubTitle"
     *ngIf="addHealthcareProviderScreen"
-    requirementFor="othersRegistration"></app-add-healthcare-provider>
+    requirementFor="othersRegistration"
+    (saveAndRegister)="
+      saveAndRegisterCall($event)
+    "></app-add-healthcare-provider>
+</div>
+
+<!--  thankyou screen -->
+<div class="thankyou-screen-container" *ngIf="thankYouScreen">
+  <p class="text-x-bold text-xxxl">Thank You for Registering!</p>
+  <div class="information">
+    <p class="text-med">
+      Your registration request has been submitted. A confirmation email has
+      been sent to the email address entered during the registration process.
+      You will receive another email notification within 2 business days
+      regarding your account approval.
+    </p>
+    <p class="text-med">
+      If you have any questions, please contact us at 1-844-447-5662.
+    </p>
+  </div>
+  <app-custom-button
+    btnText="Back to Login"
+    btnClass="medium tertiary"
+    (click)="navigateToLogin()"></app-custom-button>
 </div>

@@ -36,6 +36,7 @@
     <app-custom-button
       btnText="Save and Register"
       btnClass="tertiary x-medium text-x-bold text-xmed"
+      (click)="registrationCall()"
       *ngIf="requirementFor === 'othersRegistration'">
     </app-custom-button>
   </div>

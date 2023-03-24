@@ -101,12 +101,15 @@
         [ngClass]="editClickedIndex === i ? 'activeEdit' : ''"></tr>
     </table>
   </div>
-  <div class="table-container"></div>
+  <!-- <div class="table-container"></div> -->
   <div class="footer-container">
     <app-custom-button
       btnText="< Back"
       btnClass="secondary s-medium text-x-bold text-xmed"
-      *ngIf="requirementFor === 'prescriberRegistration'"
+      *ngIf="
+        requirementFor === 'prescriberRegistration' ||
+        requirementFor === 'othersRegistration'
+      "
       (click)="navigateToPrevious()">
     </app-custom-button>
 
@@ -119,7 +122,8 @@
     <app-custom-button
       btnText="Next"
       btnClass="tertiary x-medium text-x-bold text-xmed"
-      *ngIf="requirementFor === 'othersRegistration'">
+      *ngIf="requirementFor === 'othersRegistration'"
+      (click)="navigateToNext()">
     </app-custom-button>
 
     <app-custom-button

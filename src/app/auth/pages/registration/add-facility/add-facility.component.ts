@@ -24,6 +24,9 @@ export class AddFacilityComponent implements OnInit {
   @Output() backToParentComponent = new EventEmitter<{
     backBtnClicked: boolean;
   }>();
+  @Output() navigateToNextComponent = new EventEmitter<{
+    nextBtnClicked: boolean;
+  }>();
   @Output() masterFacilities = new EventEmitter<{ facilities: Array<any> }>();
   public facilities: Array<any> = [];
   public addFacilityFormData: JsonFormData;
@@ -64,6 +67,10 @@ export class AddFacilityComponent implements OnInit {
 
   navigateToPrevious(): void {
     this.backToParentComponent.emit({ backBtnClicked: true });
+  }
+
+  navigateToNext(): void {
+    this.navigateToNextComponent.emit({ nextBtnClicked: true });
   }
 
   addFacility(): void {

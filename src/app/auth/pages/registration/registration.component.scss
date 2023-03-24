@@ -168,4 +168,81 @@
       }
     }
   }
+
+  .others-registration {
+    display: flex;
+    flex-direction: column;
+
+    .others-registration-main {
+      padding: 2.4rem 4rem;
+      display: flex;
+      flex-direction: column;
+
+      .others-account-information {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        padding-bottom: 3.4rem;
+        border-bottom: 2px solid $color-light-grey-border;
+
+        .account-information-fields {
+          display: flex;
+          gap: 2.8rem;
+          flex-wrap: wrap;
+
+          .ConfirmAccountFirstName,
+          .confirmAccountLastName,
+          .confirmAccountPhone,
+          .confirmAccountFax {
+            width: 23%;
+          }
+
+          .confirmAccountEmail {
+            width: 48%;
+          }
+        }
+      }
+
+      .others-create-username {
+        padding-top: 2.4rem;
+        display: flex;
+        flex-direction: column;
+
+        .others-create-username-fields {
+          display: flex;
+          gap: 3rem;
+          align-items: center;
+
+          .others-create-username-form-fields {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+
+            .others-create-form-input-fields {
+              width: 25rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.thankyou-screen-container {
+  background-color: $color-white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4rem;
+  padding: 5.4rem 30.4rem;
+  margin: 7.5rem 7.5rem 18.1rem 7.5rem;
+
+  .information {
+    width: 68.4rem;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    gap: 2.4rem;
+  }
 }

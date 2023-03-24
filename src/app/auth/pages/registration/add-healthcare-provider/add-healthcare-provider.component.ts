@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
@@ -14,7 +14,9 @@ export class AddHealthcareProviderComponent implements OnInit {
   @Input() componentTitle: string = '';
   @Input() componentSubTitle: string = '';
   @Input() requirementFor: string = '';
-
+  @Output() saveAndRegister = new EventEmitter<{
+    healthcareProviders: any;
+  }>();
   public addProviderFormData: JsonFormData;
   public addProviderForm: FormGroup;
   constructor(
@@ -57,6 +59,12 @@ export class AddHealthcareProviderComponent implements OnInit {
         this.sharedService.isLoading.next(false);
         this.sharedService.notify('error', err);
       },
+    });
+  }
+
+  registrationCall(): void {
+    this.saveAndRegister.emit({
+      healthcareProviders: this.addProviderForm.value,
     });
   }
 }

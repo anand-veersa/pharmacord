@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Form, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { SharedService } from 'src/app/shared/services/shared.service';
@@ -17,13 +17,19 @@ export class RegistrationComponent implements OnInit {
   public confirmAccountInformationForm: FormGroup;
   public createUsernameFormData: JsonFormData;
   public createUsernameForm: FormGroup;
+  public othersCreateUsernameFormData: JsonFormData;
+  public othersCreateUsernameForm: FormGroup;
+  public othersAccountInformationFormData: JsonFormData;
+  public othersAccountInformationForm: FormGroup;
   public accountTypeSelection: boolean = true;
   public prescriberRegistrationCard: boolean = true;
   public prescriberRegistration: boolean = false;
   public othersRegistrationCard: boolean = false;
   public othersRegistration: boolean = false;
-  public addFacilityScreen: boolean = false;
+  public prescriberAddFacilityScreen: boolean = false;
+  public othersAddFacilityScreen: boolean = false;
   public addHealthcareProviderScreen: boolean = false;
+  public thankYouScreen: boolean = false;
   public addFacilityScreenTitle: string = 'Associated Practice Office(s)';
   public addFacilityScreenSubTitle: string =
     'Please add or update the Practice/Facility information associated with this new account.';
@@ -66,6 +72,24 @@ export class RegistrationComponent implements OnInit {
           this.createUsernameFormData
         );
       });
+
+    this.http
+      .get('/assets/json/confirm-account-information-form.json')
+      .subscribe((formData: any) => {
+        this.othersAccountInformationFormData = formData;
+        this.othersAccountInformationForm = this.sharedService.buildForm(
+          this.othersAccountInformationFormData
+        );
+      });
+
+    this.http
+      .get('/assets/json/create-username-password-form.json')
+      .subscribe((formData: any) => {
+        this.othersCreateUsernameFormData = formData;
+        this.othersCreateUsernameForm = this.sharedService.buildForm(
+          this.othersCreateUsernameFormData
+        );
+      });
   }
 
   toggleSelection(): void {
@@ -85,10 +109,10 @@ export class RegistrationComponent implements OnInit {
   registrationStep2(): void {
     if (this.prescriberRegistration) {
       this.prescriberRegistration = false;
-      this.addFacilityScreen = true;
+      this.prescriberAddFacilityScreen = true;
     } else {
       this.othersRegistration = false;
-      this.addFacilityScreen = true;
+      this.othersAddFacilityScreen = true;
     }
   }
 
@@ -102,7 +126,7 @@ export class RegistrationComponent implements OnInit {
 
   backTriggeredFromStep2(eventData: { backBtnClicked: boolean }): void {
     console.log('backBtnClicked value in ', eventData.backBtnClicked);
-    this.addFacilityScreen = false;
+    this.prescriberAddFacilityScreen = false;
     if (this.prescriberRegistrationCard) {
       this.prescriberRegistration = true;
     } else {
@@ -110,9 +134,34 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  moveToOthersFirstScreen(eventData: { backBtnClicked: boolean }): void {
+    console.log('moveToOthersFirstScreen triggered');
+    this.othersAddFacilityScreen = false;
+    this.othersRegistration = true;
+  }
+
+  moveToAddProviderScreen(eventData: { nextBtnClicked: boolean }): void {
+    console.log('i am in moveToAddProviderScreen ', eventData.nextBtnClicked);
+    this.othersAddFacilityScreen = false;
+    this.addHealthcareProviderScreen = true;
+  }
+
   navigateToSelectAccountType(): void {
     this.othersRegistration = false;
     this.prescriberRegistration = false;
     this.accountTypeSelection = true;
+  }
+
+  saveAndRegisterCall(eventData: { healthcareProviders: any }): void {
+    console.log(eventData.healthcareProviders, 'data from add provider screen');
+    if (this.addHealthcareProviderScreen == true) {
+      // API call for registration will be handle here
+      this.addHealthcareProviderScreen = false;
+      this.thankYouScreen = true;
+    } else {
+      // API call for registration will be handle here
+      this.prescriberAddFacilityScreen = false;
+      this.thankYouScreen = true;
+    }
   }
 }
