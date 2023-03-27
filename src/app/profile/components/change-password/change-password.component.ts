@@ -31,7 +31,6 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
       .subscribe((formData: any) => {
         this.formData = formData;
         this.changePasswordForm = this.sharedService.buildForm(this.formData);
-        console.log('change ', this.changePasswordForm);
       });
   }
 
@@ -44,7 +43,6 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
       PasswordConfirmation:
         this.changePasswordForm.get('confirmNewPassword')?.value,
     };
-    console.log('changePasswordPayload', changePasswordPayload);
     this.profileService.changePassword(changePasswordPayload).subscribe({
       next: (res: any) => {
         console.log(res);

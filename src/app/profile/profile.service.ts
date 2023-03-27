@@ -19,6 +19,12 @@ export class ProfileService {
       );
   }
 
+  public profileInformation(data: any): Observable<any> {
+    return this.http
+      .post(`${environment.baseUrl}portal/account/person/update`, data)
+      .pipe(catchError(this.handleError));
+  }
+
   private handleToaster(response: any) {
     const msg = response.Errors[0].Message;
     if (msg.indexOf('New password matches a previous password') > -1) {
