@@ -125,8 +125,8 @@ export class ProfileService {
   }
 
   public resetForms(): void {
-    this.changePasswordForm.reset();
-    this.changeSecurityQuesForm.reset();
-    this.profileInformationForm.reset();
+    this.changePasswordForm?.reset();
+    this.changeSecurityQuesForm?.reset();
+    this.profileInformationForm?.reset();
   }
 }
