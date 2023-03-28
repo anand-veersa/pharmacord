@@ -4,11 +4,13 @@
   </p>
   <p class="error-or-required"><span>* </span>Required field</p>
   <div class="form-fields">
-    <!-- <div class="input-fields" *ngFor="let control of formData?.controls">
+    <div
+      class="input-fields"
+      *ngFor="let control of profileService.changeSecurityQuesJSON?.controls">
       <app-custom-form
         [field]="control"
-        [form]="changePasswordForm"></app-custom-form>
-    </div> -->
+        [form]="profileService.changeSecurityQuesForm"></app-custom-form>
+    </div>
     <div class="change-security-ques-buttons">
       <app-custom-button
         btnClass="secondary register-user"

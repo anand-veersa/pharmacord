@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { ProfileService } from '../../profile.service';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -13,27 +11,16 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./profile-information.component.scss'],
 })
 export class ProfileInformationComponent implements OnInit {
-  public formData: JsonFormData;
-  public profileInformationForm: FormGroup;
-
   constructor(
     private http: HttpClient,
     private sharedService: SharedService,
-    private profileService: ProfileService,
+    public profileService: ProfileService,
     private authService: AuthService,
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.http
-      .get('/assets/json/profile-information.json')
-      .subscribe((formData: any) => {
-        this.formData = formData;
-        this.profileInformationForm = this.sharedService.buildForm(
-          this.formData
-        );
-        this.getProfileInfo();
-      });
+    this.profileService.createProfileInfo();
   }
 
   public navigateToHome(): void {
@@ -45,11 +32,13 @@ export class ProfileInformationComponent implements OnInit {
     const profileInformationPayload = {
       MasterAccountId: this.authService?.user?.portalAccountPkId,
       UserContactDetails: {
-        FirstName: this.profileInformationForm.get('firstName')?.value,
-        LastName: this.profileInformationForm.get('lastName')?.value,
-        Email: this.profileInformationForm.get('email')?.value,
-        Phone: this.profileInformationForm.get('phone')?.value,
-        Fax: this.profileInformationForm.get('fax')?.value,
+        FirstName:
+          this.profileService.profileInformationForm.get('firstName')?.value,
+        LastName:
+          this.profileService.profileInformationForm.get('lastName')?.value,
+        Email: this.profileService.profileInformationForm.get('email')?.value,
+        Phone: this.profileService.profileInformationForm.get('phone')?.value,
+        Fax: this.profileService.profileInformationForm.get('fax')?.value,
       },
     };
     this.profileService
@@ -69,15 +58,5 @@ export class ProfileInformationComponent implements OnInit {
           this.sharedService.notify('error', err);
         },
       });
-  }
-
-  private getProfileInfo(): void {
-    const { firstName, lastName, email, phone, fax } = this.authService.user;
-
-    this.profileInformationForm.controls['firstName'].setValue(firstName);
-    this.profileInformationForm.controls['lastName'].setValue(lastName);
-    this.profileInformationForm.controls['phone'].setValue(phone);
-    this.profileInformationForm.controls['fax'].setValue(fax);
-    this.profileInformationForm.controls['email'].setValue(email);
   }
 }

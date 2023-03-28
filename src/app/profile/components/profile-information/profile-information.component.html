@@ -4,10 +4,12 @@
   </p>
   <p class="error-or-required"><span>* </span>Required field</p>
   <div class="form-fields">
-    <div class="input-fields" *ngFor="let control of formData?.controls">
+    <div
+      class="input-fields"
+      *ngFor="let control of profileService.profileInfoJSON?.controls">
       <app-custom-form
         [field]="control"
-        [form]="profileInformationForm"></app-custom-form>
+        [form]="profileService.profileInformationForm"></app-custom-form>
     </div>
   </div>
   <div class="profile-information-buttons">
@@ -18,7 +20,10 @@
     <app-custom-button
       btnClass="tertiary register-user"
       btnText="Save"
-      [isDisabled]="profileInformationForm && profileInformationForm.invalid"
+      [isDisabled]="
+        profileService.profileInformationForm &&
+        profileService.profileInformationForm.invalid
+      "
       (click)="saveProfileInformation()"></app-custom-button>
   </div>
 </div>

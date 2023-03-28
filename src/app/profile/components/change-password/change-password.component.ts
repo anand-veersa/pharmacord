@@ -1,8 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { SharedService } from 'src/app/shared/services/shared.service';
@@ -13,25 +11,18 @@ import { ProfileService } from '../../profile.service';
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss'],
 })
-export class ChangePasswordComponent implements OnInit, OnDestroy {
+export class ChangePasswordComponent implements OnInit {
   public formData: JsonFormData;
   public changePasswordForm: FormGroup;
-  private changePasswordCall: Subscription;
   constructor(
-    private http: HttpClient,
     private sharedService: SharedService,
     private localStorage: LocalStorageService,
-    private profileService: ProfileService,
+    public profileService: ProfileService,
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.changePasswordCall = this.http
-      .get('/assets/json/change-password.json')
-      .subscribe((formData: any) => {
-        this.formData = formData;
-        this.changePasswordForm = this.sharedService.buildForm(this.formData);
-      });
+    this.profileService.createChangePassword();
   }
 
   public saveChangePassword(): void {
@@ -60,8 +51,5 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
   public navigateToHome(): void {
     this.router.navigate(['/enrollment/dashboard']);
-  }
-  ngOnDestroy(): void {
-    this.changePasswordCall.unsubscribe();
   }
 }
