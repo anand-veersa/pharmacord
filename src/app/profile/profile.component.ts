@@ -18,6 +18,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ) {}
 
   tabClicked: string = 'password';
+  securityQuestions: any[];
+  securityQuesOptions: Array<{ label: string; value: number }>;
+  defaultSecurityQuestions: Array<any>;
   ngOnInit() {
     this.sharedService.isLoading.next(true);
 
@@ -27,13 +30,37 @@ export class ProfileComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: (res: any) => {
+          this.profileService
+            .getSecurityQuestionsbyId(res.Payload?.PortalAccountPkId)
+            .subscribe({
+              next: (seqQues: any) => {
+                this.defaultSecurityQuestions = seqQues.Payload;
+              },
+              error: err => {
+                this.sharedService.notify('error', err);
+              },
+            });
           this.sharedService.isLoading.next(false);
         },
         error: err => {
-          this.sharedService.notify('error', err, '');
+          this.sharedService.notify('error', err);
           this.sharedService.isLoading.next(false);
         },
       });
+
+    this.profileService.getSecurityQuestions().subscribe({
+      next: (res: any) => {
+        this.securityQuestions = res.Payload;
+        const arr: Array<{ label: string; value: number }> = [];
+        this.securityQuestions.map(el =>
+          arr.push({ value: el.Id, label: el.QuestionText })
+        );
+        this.securityQuesOptions = arr;
+      },
+      error: err => {
+        this.sharedService.notify('error', err);
+      },
+    });
   }
 
   public tabChange(tab: number) {

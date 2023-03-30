@@ -15,31 +15,68 @@
       "options": []
     },
     {
-      "name": "newPassword",
+      "name": "question1",
       "value": "",
-      "label": "New Password",
-      "placeholder": "Enter new password",
-      "type": "password",
+      "label": "Select a Question 1",
+      "placeholder": "",
+      "type": "select",
       "validators": {
-        "required": true,
-        "max": 14,
-        "min": 8,
-        "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]+).{8,30}$"
+        "required": true
       },
       "options": []
     },
     {
-      "name": "confirmNewPassword",
+      "name": "answer1",
       "value": "",
-      "label": "Confirm New Password",
-      "placeholder": "Confirm new password",
-      "type": "password",
+      "label": "Your Answer",
+      "placeholder": "Enter your answer",
+      "type": "text",
       "validators": {
-        "required": true,
-        "max": 14,
-        "min": 8,
-        "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]+).{8,30}$",
-        "match": true
+        "required": true
+      },
+      "options": []
+    },
+    {
+      "name": "question2",
+      "value": "",
+      "label": "Select a Question 2",
+      "placeholder": "",
+      "type": "select",
+      "validators": {
+        "required": true
+      },
+      "options": []
+    },
+    {
+      "name": "answer2",
+      "value": "",
+      "label": "Your Answer",
+      "placeholder": "Enter your answer",
+      "type": "text",
+      "validators": {
+        "required": true
+      },
+      "options": []
+    },
+    {
+      "name": "question3",
+      "value": "",
+      "label": "Select a Question 3",
+      "placeholder": "",
+      "type": "select",
+      "validators": {
+        "required": true
+      },
+      "options": []
+    },
+    {
+      "name": "answer3",
+      "value": "",
+      "label": "Your Answer",
+      "placeholder": "Enter your answer",
+      "type": "text",
+      "validators": {
+        "required": true
       },
       "options": []
     }

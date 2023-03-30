@@ -50,12 +50,25 @@ export class ProfileService {
         });
     }
   }
-  public createChangeSecurityQues() {
+  public createChangeSecurityQues(
+    options: Array<{ label: string; value: number }>,
+    defaultSecurityQuestions: Array<any>
+  ) {
     if (!this.changeSecurityQuesForm) {
       this.http
         .get('/assets/json/change-security-ques.json')
         .subscribe((formData: any) => {
           this.changeSecurityQuesJSON = formData;
+          let index = 0;
+          const arr = defaultSecurityQuestions.map(
+            el => el.SecurityQuestion.Id
+          );
+          this.changeSecurityQuesJSON.controls.forEach(data => {
+            if (data.type === 'select') {
+              data.options = options;
+              data.value = arr[index++];
+            }
+          });
           this.changeSecurityQuesForm = this.sharedService.buildForm(
             this.changeSecurityQuesJSON
           );
@@ -75,6 +88,26 @@ export class ProfileService {
           this.getProfileInfo();
         });
     }
+  }
+
+  public getSecurityQuestions(): Observable<any> {
+    return this.http
+      .get(`${environment.baseUrl}portal/securityQuestion`)
+      .pipe(catchError(this.handleError));
+  }
+
+  public getSecurityQuestionsbyId(PortalAccountPkId: number): Observable<any> {
+    return this.http
+      .get(
+        `${environment.baseUrl}portal/account/securityQuestion/${PortalAccountPkId}`
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  public resetForms(): void {
+    this.changePasswordForm?.reset();
+    this.changeSecurityQuesForm?.reset();
+    this.profileInformationForm?.reset();
   }
 
   private handleToaster(response: any) {
@@ -122,11 +155,5 @@ export class ProfileService {
     this.profileInformationForm.controls['phone'].setValue(phone);
     this.profileInformationForm.controls['fax'].setValue(fax);
     this.profileInformationForm.controls['email'].setValue(email);
-  }
-
-  public resetForms(): void {
-    this.changePasswordForm?.reset();
-    this.changeSecurityQuesForm?.reset();
-    this.profileInformationForm?.reset();
   }
 }

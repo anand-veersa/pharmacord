@@ -2,7 +2,7 @@
   [formGroup]="form"
   [ngClass]="{ 'prescriber-select': formType === 'select-prescriber' }">
   <mat-form-field appearance="outline">
-    <mat-select>
+    <mat-select [(value)]="field.value">
       <mat-option value="">Select</mat-option>
       <mat-option *ngFor="let option of field.options" [value]="option.value">
         {{ option.label }}

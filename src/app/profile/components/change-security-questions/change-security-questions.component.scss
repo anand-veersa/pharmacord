@@ -1,6 +1,33 @@
 @import '../../../../assets/styles/abstracts/variables';
 @import '../../../../assets/styles/abstracts/mixins';
 
+::ng-deep {
+  .change-security-ques {
+    .mat-mdc-form-field {
+      width: 100%;
+      &-subscript-wrapper {
+        display: none;
+      }
+    }
+    .input-fields {
+      &-currentPassword > div {
+        border-bottom: 1px solid $color-grey-border;
+        padding-bottom: 5rem;
+      }
+      &-question1 > div {
+        padding-top: 5rem;
+      }
+      &-question1,
+      &-question2,
+      &-question3 {
+        > div {
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
 .change-security-ques {
   &-buttons {
     display: flex;
@@ -11,23 +38,17 @@
   .form-fields {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 39rem;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 2.2rem;
 
     .input-fields {
-      width: 33%;
+      width: 48%;
 
       @include respond(tab-land) {
         width: 45%;
-      }
-
-      @include respond(tab-port) {
-        width: 55%;
-      }
-
-      @include respond(min-tab-port) {
-        width: 60%;
+        padding-left: 1px;
       }
     }
   }

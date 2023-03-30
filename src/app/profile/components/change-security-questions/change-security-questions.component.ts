@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProfileService } from '../../profile.service';
 
@@ -9,8 +9,15 @@ import { ProfileService } from '../../profile.service';
 })
 export class ChangeSecurityQuestionsComponent implements OnInit {
   constructor(private router: Router, public profileService: ProfileService) {}
+
+  @Input() securityQuesOptions: Array<{ label: string; value: number }>;
+  @Input() defaultSecurityQuestions: Array<any>;
+
   ngOnInit() {
-    this.profileService.createChangeSecurityQues();
+    this.profileService.createChangeSecurityQues(
+      this.securityQuesOptions,
+      this.defaultSecurityQuestions
+    );
   }
 
   public navigateToHome(): void {

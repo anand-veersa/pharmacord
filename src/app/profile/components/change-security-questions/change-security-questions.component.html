@@ -8,18 +8,19 @@
       class="input-fields"
       *ngFor="let control of profileService.changeSecurityQuesJSON?.controls">
       <app-custom-form
+        [class]="'input-fields-' + control.name"
         [field]="control"
         [form]="profileService.changeSecurityQuesForm"></app-custom-form>
     </div>
-    <div class="change-security-ques-buttons">
-      <app-custom-button
-        btnClass="secondary register-user"
-        btnText="&#60; Back to Home"
-        (click)="navigateToHome()"></app-custom-button>
-      <app-custom-button
-        btnClass="tertiary register-user"
-        btnText="Save"
-        [isDisabled]="false"></app-custom-button>
-    </div>
+  </div>
+  <div class="change-security-ques-buttons">
+    <app-custom-button
+      btnClass="secondary register-user"
+      btnText="&#60; Back to Home"
+      (click)="navigateToHome()"></app-custom-button>
+    <app-custom-button
+      btnClass="tertiary register-user"
+      btnText="Save"
+      [isDisabled]="false"></app-custom-button>
   </div>
 </div>

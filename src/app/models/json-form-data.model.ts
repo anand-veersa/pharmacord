@@ -15,7 +15,7 @@ export interface JsonFormControlOptions {
 export interface JsonFormControls {
   name: string;
   label: string;
-  value: string;
+  value: any;
   type: string;
   placeholder: string;
   validityErrorMsg?: string;
