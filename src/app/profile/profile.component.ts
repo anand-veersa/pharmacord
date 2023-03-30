@@ -35,12 +35,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
             .subscribe({
               next: (seqQues: any) => {
                 this.defaultSecurityQuestions = seqQues.Payload;
+                this.sharedService.isLoading.next(false);
               },
               error: err => {
                 this.sharedService.notify('error', err);
+                this.sharedService.isLoading.next(false);
               },
             });
-          this.sharedService.isLoading.next(false);
         },
         error: err => {
           this.sharedService.notify('error', err);

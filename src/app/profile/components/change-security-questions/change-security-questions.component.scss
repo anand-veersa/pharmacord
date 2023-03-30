@@ -12,10 +12,10 @@
     .input-fields {
       &-currentPassword > div {
         border-bottom: 1px solid $color-grey-border;
-        padding-bottom: 5rem;
+        padding-bottom: 6rem;
       }
       &-question1 > div {
-        padding-top: 5rem;
+        padding-top: 6rem;
       }
       &-question1,
       &-question2,
@@ -23,6 +23,9 @@
         > div {
           margin-bottom: 1.5rem;
         }
+      }
+      &-answer2 > div {
+        margin-bottom: 3.3rem;
       }
     }
   }
@@ -37,19 +40,14 @@
   }
   .form-fields {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    flex-flow: column wrap;
     max-height: 39rem;
     justify-content: flex-start;
     align-items: flex-start;
+    column-gap: 3rem;
 
     .input-fields {
       width: 48%;
-
-      @include respond(tab-land) {
-        width: 45%;
-        padding-left: 1px;
-      }
     }
   }
 }
