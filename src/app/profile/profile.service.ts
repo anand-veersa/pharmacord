@@ -31,6 +31,17 @@ export class ProfileService {
         tap(res => this.handleToaster(res))
       );
   }
+  public changeSecurityQuestion(data: any): Observable<any> {
+    return this.http
+      .post(
+        `${environment.baseUrl}portal/account/answerSecurityQuestionUpdate`,
+        data
+      )
+      .pipe(
+        catchError(this.handleError),
+        tap(res => this.handleToaster(res))
+      );
+  }
 
   public profileInformation(data: any): Observable<any> {
     return this.http
@@ -111,8 +122,9 @@ export class ProfileService {
   }
 
   private handleToaster(response: any) {
-    const msg = response.Errors[0].Message;
-    if (msg.indexOf('New password matches a previous password') > -1) {
+    const msg = response.Errors[0]?.Message;
+    if (!msg) return;
+    else if (msg.indexOf('New password matches a previous password') > -1) {
       this.sharedService.notify(
         'error',
         'You used this password recently. Please choose a different one'
@@ -128,6 +140,15 @@ export class ProfileService {
       msg.indexOf('The username/password does not match error message') > -1
     ) {
       this.sharedService.notify('error', 'Entered wrong current password');
+    } else if (
+      msg.indexOf(
+        'The supplied details not matching, Security Questions are not updated'
+      ) > -1
+    ) {
+      this.sharedService.notify(
+        'error',
+        'The supplied Password is incorrect,Security Questions are not updated'
+      );
     }
   }
 

@@ -13,6 +13,16 @@
         [form]="profileService.changeSecurityQuesForm"></app-custom-form>
     </div>
   </div>
+  <div *ngIf="showSuccessMessage" class="change-security-ques-success-message">
+    <mat-icon class="success-icon">info</mat-icon>
+    <span class="text-normal text-x-bold">
+      {{
+        samePreviousAnswers && samePreviousAnswers.length
+          ? samePreviousAnswers
+          : 'Your Security Questions have been changed successfully.'
+      }}
+    </span>
+  </div>
   <div class="change-security-ques-buttons">
     <app-custom-button
       btnClass="secondary register-user"
@@ -21,6 +31,10 @@
     <app-custom-button
       btnClass="tertiary register-user"
       btnText="Save"
-      [isDisabled]="false"></app-custom-button>
+      [isDisabled]="
+        profileService.changeSecurityQuesForm &&
+        profileService.changeSecurityQuesForm.invalid
+      "
+      (click)="saveSecurityQuestions()"></app-custom-button>
   </div>
 </div>
