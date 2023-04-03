@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  AfterContentChecked,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { SharedService } from 'src/app/shared/services/shared.service';
@@ -9,16 +13,18 @@ import { ProfileService } from '../../profile.service';
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss'],
 })
-export class ChangePasswordComponent implements OnInit {
+export class ChangePasswordComponent implements AfterContentChecked {
   constructor(
     private sharedService: SharedService,
     private localStorage: LocalStorageService,
     public profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private cdref: ChangeDetectorRef
   ) {}
 
-  ngOnInit() {
+  ngAfterContentChecked() {
     this.profileService.createChangePasswordForm();
+    this.cdref.detectChanges();
   }
 
   public saveChangePassword(): void {

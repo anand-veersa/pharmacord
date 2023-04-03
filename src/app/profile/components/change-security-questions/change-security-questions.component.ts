@@ -1,4 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  AfterContentChecked,
+  Input,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { ProfileService } from '../../profile.service';
@@ -8,11 +13,12 @@ import { ProfileService } from '../../profile.service';
   templateUrl: './change-security-questions.component.html',
   styleUrls: ['./change-security-questions.component.scss'],
 })
-export class ChangeSecurityQuestionsComponent implements OnInit {
+export class ChangeSecurityQuestionsComponent implements AfterContentChecked {
   constructor(
     private router: Router,
     public profileService: ProfileService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private cdref: ChangeDetectorRef
   ) {}
 
   showSuccessMessage: boolean = false;
@@ -20,11 +26,12 @@ export class ChangeSecurityQuestionsComponent implements OnInit {
   @Input() allSecurityQuestions: Array<{ label: string; value: number }>;
   @Input() selectedSecurityQuestions: Array<any>;
 
-  ngOnInit() {
+  ngAfterContentChecked() {
     this.profileService.createChangeSecurityQuesForm(
       this.allSecurityQuestions,
       this.selectedSecurityQuestions
     );
+    this.cdref.detectChanges();
   }
 
   public navigateToHome(): void {
