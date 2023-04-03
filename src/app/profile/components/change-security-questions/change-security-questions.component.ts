@@ -17,13 +17,13 @@ export class ChangeSecurityQuestionsComponent implements OnInit {
 
   showSuccessMessage: boolean = false;
   samePreviousAnswers: string = '';
-  @Input() securityQuesOptions: Array<{ label: string; value: number }>;
-  @Input() defaultSecurityQuestions: Array<any>;
+  @Input() allSecurityQuestions: Array<{ label: string; value: number }>;
+  @Input() selectedSecurityQuestions: Array<any>;
 
   ngOnInit() {
-    this.profileService.createChangeSecurityQues(
-      this.securityQuesOptions,
-      this.defaultSecurityQuestions
+    this.profileService.createChangeSecurityQuesForm(
+      this.allSecurityQuestions,
+      this.selectedSecurityQuestions
     );
   }
 
@@ -53,7 +53,7 @@ export class ChangeSecurityQuestionsComponent implements OnInit {
       ],
     };
     this.profileService
-      .changeSecurityQuestion(changeSecurityQuesPayload)
+      .updateChangeSecurityQuestion(changeSecurityQuesPayload)
       .subscribe({
         next: (res: any) => {
           if (res.Status === 'SUCCESS') {
@@ -73,10 +73,10 @@ export class ChangeSecurityQuestionsComponent implements OnInit {
       });
   }
 
-  public changeDropdown() {
+  public changeSecurityQuestions() {
     this.profileService.filterQuestions(
-      this.securityQuesOptions,
-      this.defaultSecurityQuestions
+      this.allSecurityQuestions,
+      this.selectedSecurityQuestions
     );
   }
 }

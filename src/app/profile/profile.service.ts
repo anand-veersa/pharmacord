@@ -31,7 +31,7 @@ export class ProfileService {
         tap(res => this.handleToaster(res))
       );
   }
-  public changeSecurityQuestion(data: any): Observable<any> {
+  public updateChangeSecurityQuestion(data: any): Observable<any> {
     return this.http
       .post(
         `${environment.baseUrl}portal/account/answerSecurityQuestionUpdate`,
@@ -49,7 +49,7 @@ export class ProfileService {
       .pipe(catchError(this.handleError));
   }
 
-  public createChangePassword() {
+  public createChangePasswordForm() {
     if (!this.changePasswordForm) {
       this.http
         .get('/assets/json/change-password.json')
@@ -61,16 +61,16 @@ export class ProfileService {
         });
     }
   }
-  public createChangeSecurityQues(
+  public createChangeSecurityQuesForm(
     options: Array<{ label: string; value: number }>,
-    defaultSecurityQuestions: Array<any>
+    selectedSecurityQuestions: Array<any>
   ) {
     if (!this.changeSecurityQuesForm) {
       this.http
         .get('/assets/json/change-security-ques.json')
         .subscribe((formData: any) => {
           this.changeSecurityQuesJSON = formData;
-          this.filterQuestions(options, defaultSecurityQuestions);
+          this.filterQuestions(options, selectedSecurityQuestions);
           this.changeSecurityQuesForm = this.sharedService.buildForm(
             this.changeSecurityQuesJSON
           );
@@ -80,7 +80,7 @@ export class ProfileService {
 
   public filterQuestions(
     options: Array<{ label: string; value: number }>,
-    defaultSecurityQuestions: Array<any>
+    selectedSecurityQuestions: Array<any>
   ): void {
     let index = 0;
     let arr: number[] = [];
@@ -89,7 +89,7 @@ export class ProfileService {
         this.changeSecurityQuesForm.value;
       arr = [question1, question2, question3];
     } else {
-      arr = defaultSecurityQuestions.map(el => el.SecurityQuestion.Id);
+      arr = selectedSecurityQuestions.map(el => el.SecurityQuestion.Id);
     }
     const q1 = options.filter(e => e.value !== arr[1] && e.value !== arr[2]);
     const q2 = options.filter(e => e.value !== arr[0] && e.value !== arr[2]);

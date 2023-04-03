@@ -10,9 +10,9 @@
     <mat-tab label="Change Security Questions">
       <div *ngIf="tabClicked === 'security'">
         <app-change-security-questions
-          [securityQuesOptions]="securityQuesOptions"
-          [defaultSecurityQuestions]="
-            defaultSecurityQuestions
+          [allSecurityQuestions]="allSecurityQuestions"
+          [selectedSecurityQuestions]="
+            selectedSecurityQuestions
           "></app-change-security-questions>
       </div>
     </mat-tab>

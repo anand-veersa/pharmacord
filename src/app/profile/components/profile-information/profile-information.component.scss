@@ -30,5 +30,11 @@
         width: 60%;
       }
     }
+    :last-child {
+      flex-grow: 0.32;
+      @include respond(tab-land) {
+        flex-grow: 0;
+      }
+    }
   }
 }

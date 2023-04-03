@@ -11,7 +11,7 @@
         [class]="'input-fields-' + control.name"
         [field]="control"
         [form]="profileService.changeSecurityQuesForm"
-        (action)="changeDropdown()"></app-custom-form>
+        (action)="changeSecurityQuestions()"></app-custom-form>
     </div>
   </div>
   <div *ngIf="showSuccessMessage" class="change-security-ques-success-message">

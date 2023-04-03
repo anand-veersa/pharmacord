@@ -18,13 +18,13 @@ export class ChangePasswordComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.profileService.createChangePassword();
+    this.profileService.createChangePasswordForm();
   }
 
   public saveChangePassword(): void {
     this.sharedService.isLoading.next(true);
     const changePasswordPayload = {
-      UserName: JSON.parse(this.localStorage.getItem('userData')).UserName,
+      UserName: JSON.parse(this.localStorage.getItem('userData'))?.UserName,
       CurrentPassword:
         this.profileService.changePasswordForm.get('currentPassword')?.value,
       Password:
@@ -34,7 +34,6 @@ export class ChangePasswordComponent implements OnInit {
     };
     this.profileService.changePassword(changePasswordPayload).subscribe({
       next: (res: any) => {
-        console.log(res);
         if (res.Status === 'SUCCESS') {
           this.sharedService.notify('success', res.Payload.Message);
         }
