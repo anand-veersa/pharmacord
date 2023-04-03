@@ -70,21 +70,39 @@ export class ProfileService {
         .get('/assets/json/change-security-ques.json')
         .subscribe((formData: any) => {
           this.changeSecurityQuesJSON = formData;
-          let index = 0;
-          const arr = defaultSecurityQuestions.map(
-            el => el.SecurityQuestion.Id
-          );
-          this.changeSecurityQuesJSON.controls.forEach(data => {
-            if (data.type === 'select') {
-              data.options = options;
-              data.value = arr[index++];
-            }
-          });
+          this.filterQuestions(options, defaultSecurityQuestions);
           this.changeSecurityQuesForm = this.sharedService.buildForm(
             this.changeSecurityQuesJSON
           );
         });
     }
+  }
+
+  public filterQuestions(
+    options: Array<{ label: string; value: number }>,
+    defaultSecurityQuestions: Array<any>
+  ): void {
+    let index = 0;
+    let arr: number[] = [];
+    if (this.changeSecurityQuesForm) {
+      const { question1, question2, question3 } =
+        this.changeSecurityQuesForm.value;
+      arr = [question1, question2, question3];
+    } else {
+      arr = defaultSecurityQuestions.map(el => el.SecurityQuestion.Id);
+    }
+    const q1 = options.filter(e => e.value !== arr[1] && e.value !== arr[2]);
+    const q2 = options.filter(e => e.value !== arr[0] && e.value !== arr[2]);
+    const q3 = options.filter(e => e.value !== arr[0] && e.value !== arr[1]);
+
+    this.changeSecurityQuesJSON.controls.forEach(data => {
+      if (data.type === 'select') {
+        if (data.name === 'question1') data.options = q1;
+        else if (data.name === 'question2') data.options = q2;
+        else if (data.name === 'question3') data.options = q3;
+        data.value = arr[index++];
+      }
+    });
   }
 
   public createProfileInfo() {

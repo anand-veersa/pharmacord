@@ -72,4 +72,11 @@ export class ChangeSecurityQuestionsComponent implements OnInit {
         },
       });
   }
+
+  public changeDropdown() {
+    this.profileService.filterQuestions(
+      this.securityQuesOptions,
+      this.defaultSecurityQuestions
+    );
+  }
 }
