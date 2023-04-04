@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { LocalStorageService } from '../../services/local-storage.service';
 import { SharedService } from '../../services/shared.service';
 
 @Component({
@@ -15,13 +14,14 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     public authService: AuthService,
-    public sharedService: SharedService,
-    private localStorage: LocalStorageService
+    public sharedService: SharedService
   ) {}
 
   ngOnInit() {
     if (!this.authService.isLoggedIn()) return;
-    this.userName = JSON.parse(this.localStorage.getItem('userData')).UserName;
+    this.authService.userFullName.subscribe(
+      fullName => (this.userName = fullName)
+    );
   }
 
   logout(): void {

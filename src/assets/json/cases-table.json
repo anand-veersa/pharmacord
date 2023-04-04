@@ -3,26 +3,31 @@
     {
       "key": "CaseId",
       "value": "",
+      "display": true,
       "label": "Case ID"
     },
     {
       "key": "DateSubmitted",
       "value": "",
+      "display": true,
       "label": "Date Submitted"
     },
     {
       "key": "EnrollmentStatus",
       "value": "",
+      "display": true,
       "label": "Enrollment Status"
     },
     {
       "key": "Product",
       "value": "",
+      "display": true,
       "label": "Product"
     },
     {
       "key": "ActionNeeded",
       "value": "",
+      "display": true,
       "label": "Action Needed"
     }
   ]

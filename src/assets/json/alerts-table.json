@@ -3,16 +3,19 @@
     {
       "key": "GeneratedDate",
       "value": "",
+      "display": true,
       "label": "Date & Time"
     },
     {
       "key": "RequiredAction",
       "value": "",
+      "display": true,
       "label": "Action Needed"
     },
     {
       "key": "Acknowledge",
       "value": "",
+      "display": true,
       "label": "Acknowledge"
     }
   ]

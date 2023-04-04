@@ -9,7 +9,8 @@
       floatLabel="false"
       [formControlName]="field.name"
       [type]="field.type"
-      [placeholder]="field.placeholder" />
+      [placeholder]="field.placeholder"
+      [disabled]="field.disabled ?? false" />
   </mat-form-field>
   <app-custom-error
     *ngIf="this.form.controls[this.field.name].touched"

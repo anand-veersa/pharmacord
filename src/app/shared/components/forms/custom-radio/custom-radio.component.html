@@ -1,9 +1,13 @@
-<form #loginForm="ngForm" [formGroup]="form" class="login-form">
+<form [formGroup]="form">
   <mat-radio-group
     [ngClass]="{
-      'medication-form': formType === 'selectMedicationForm'
+      'medication-form': formType === 'selectMedicationForm',
+      'enrollment-form': formType !== 'enrollmentForm',
+      'generic-form':
+        formType !== 'enrollmentForm' && formType !== 'selectMedicationForm'
     }"
-    [formControlName]="field.name">
+    [formControlName]="field.name"
+    [disabled]="field.disabled ?? false">
     <mat-radio-button
       class="example-radio-button"
       *ngFor="let option of field.options"

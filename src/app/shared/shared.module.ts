@@ -22,6 +22,7 @@ import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinn
 import { CustomErrorComponent } from './components/forms/custom-error/custom-error.component';
 import { CustomTableComponent } from './components/custom-table/custom-table.component';
 import { CustomExpansionPanelComponent } from './components/custom-expansion-panel/custom-expansion-panel.component';
+import { CustomDatepickerComponent } from './components/forms/custom-datepicker/custom-datepicker.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CustomExpansionPanelComponent } from './components/custom-expansion-pan
     CustomErrorComponent,
     CustomTableComponent,
     CustomExpansionPanelComponent,
+    CustomDatepickerComponent,
   ],
   imports: [
     CommonModule,

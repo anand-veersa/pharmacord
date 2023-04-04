@@ -19,3 +19,31 @@
     color: $color-black;
   }
 }
+
+::ng-deep .generic-form {
+  display: flex;
+  justify-content: space-between;
+  label {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    color: $color-grey-dark-4;
+  }
+  mat-radio-button {
+    flex-basis: 25%;
+  }
+}
+::ng-deep .enrollment-form {
+  display: flex;
+  justify-content: space-between;
+  label {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    color: $color-grey-dark-4;
+  }
+  mat-radio-button {
+    flex-basis: 50%;
+    label {
+      flex-basis: 100%;
+    }
+  }
+}

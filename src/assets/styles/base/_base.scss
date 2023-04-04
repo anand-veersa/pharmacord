@@ -81,3 +81,25 @@ td {
   font-size: 2.5rem;
   line-height: 2.9rem;
 }
+.sec-title {
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  color: $color-sub-header;
+}
+
+.enroll-form {
+  padding: 2.4rem;
+  border: $border-style;
+  background-color: $color-white;
+  border-radius: 0.8rem;
+  .panel-fields {
+    display: flex;
+    align-content: flex-start;
+    gap: 3rem;
+    .panel {
+      flex-basis: 48%;
+      padding-right: 4rem;
+    }
+  }
+}

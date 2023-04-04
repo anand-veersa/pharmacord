@@ -1,0 +1,45 @@
+<div class="enroll-form">
+  <div class="primary-title flex toggle-panel">
+    Prescriber/Facility Information
+  </div>
+  <div class="sec-title">
+    Please provide the collaborating prescriber information (if applicable).
+  </div>
+  <div class="error-or-required tm-1">* Required field</div>
+  <div *ngIf="submitEnrolService.shippingDetailForm" class="panel-fields">
+    <div class="panel">
+      <div
+        *ngFor="let control of submitEnrolService.prescriberDetails.controls"
+        [ngClass]="control.class ? control.class : 'tm-1'">
+        <app-custom-form
+          *ngIf="control.display"
+          [field]="control"
+          [form]="submitEnrolService.prescriberDetailForm"
+          formType="enrollment-form"></app-custom-form>
+      </div>
+    </div>
+    <mat-divider vertical></mat-divider>
+    <div class="panel">
+      <div
+        *ngFor="let control of submitEnrolService.shippingDetails.controls"
+        [ngClass]="control.class ?? 'tm-1'">
+        <app-custom-form
+          [field]="control"
+          [form]="submitEnrolService.shippingDetailForm"
+          formType="enrollment-form"></app-custom-form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="submitEnrolService.shippingDetailForm" class="action-panel">
+  <app-custom-button
+    btnClass="small secondary"
+    btnText="&#60; Back"
+    (action)="onAction('back')"></app-custom-button>
+  <app-custom-button
+    btnClass="small tertiary"
+    btnText="Next &#62;"
+    (action)="onAction('next')"
+    [isDisabled]="checkFormValidity()"></app-custom-button>
+</div>

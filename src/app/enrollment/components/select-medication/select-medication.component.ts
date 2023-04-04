@@ -1,12 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AppConstants } from 'src/app/constants/app.constants';
-import {
-  JsonFormControlOptions,
-  JsonFormData,
-} from 'src/app/models/json-form-data.model';
-import { SharedService } from 'src/app/shared/services/shared.service';
+import { JsonFormData } from 'src/app/models/json-form-data.model';
+import { SubmitEnrollmentService } from '../../pages/submit-enrollment/submit-enrollment.service';
 
 @Component({
   selector: 'app-select-medication',
@@ -14,44 +10,48 @@ import { SharedService } from 'src/app/shared/services/shared.service';
   styleUrls: ['./select-medication.component.scss'],
 })
 export class SelectMedicationComponent implements OnInit {
+  @Output() action = new EventEmitter();
   public medications: string[] = [];
   public formJson: JsonFormData = { controls: [] };
   public selectMedicationForm: FormGroup;
-  @Output() title = new EventEmitter();
-  @Output() nextAction = new EventEmitter();
 
   constructor(
-    private appConstants: AppConstants,
-    private router: Router,
-    private sharedService: SharedService
+    public submitEnrolService: SubmitEnrollmentService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.title.emit('Medication For Patient Enrollment');
-    const options: JsonFormControlOptions[] = [];
-    Object.values(this.appConstants.MEDICINES).forEach(medicine => {
-      if (medicine === this.appConstants.MEDICINES.ALL) return;
-      const formattedMed = this.sharedService.capitalize(medicine);
-      options.push({ label: formattedMed, value: formattedMed });
-      this.formJson.controls.push({
-        name: 'DrugGroup',
-        value: '',
-        label: '',
-        placeholder: '',
-        type: 'radio',
-        validators: { required: true },
-        options: options,
-      });
-    });
-    this.selectMedicationForm = this.sharedService.buildForm(this.formJson);
+    this.submitEnrolService.headerTitle.next(
+      'Medication For Patient Enrollment'
+    );
+    // const options: JsonFormControlOptions[] = [];
+    // Object.values(this.appConstants.MEDICINES).forEach(medicine => {
+    //   if (medicine === this.appConstants.MEDICINES.ALL) return;
+    //   const formattedMed = this.sharedService.capitalize(medicine);
+    //   options.push({ label: formattedMed, value: formattedMed });
+    //   this.formJson.controls.push({
+    //     name: 'DrugGroup',
+    //     value: '',
+    //     label: '',
+    //     placeholder: '',
+    //     type: 'radio',
+    //     validators: { required: true },
+    //     options: options,
+    //   });
+    // });
+    this.submitEnrolService.createSelectMedicationForm();
+    // this.selectMedicationForm = getSelectMedicationForm;
+    // this.formJson = medicationJson;
+    // this.selectMedicationForm.controls['DrugGroup'].setValue(this.selectedMedication);
   }
 
-  public action(actionType: string): void {
+  public onAction(actionType: string): void {
     if (actionType === 'back') this.router.navigate(['/enrollment/dashboard']);
     else {
-      this.nextAction.emit({
+      this.action.emit({
+        actionType,
         formName: 'select-medication',
-        form: this.selectMedicationForm.value,
+        form: this.submitEnrolService.medicationForm.value,
         nextScreen: 'select-prescriber',
       });
     }

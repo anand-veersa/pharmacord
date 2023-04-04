@@ -10,9 +10,10 @@
     <div class="prescriber-list">
       <span class="prescriber-name">Select a Prescriber</span>
       <app-custom-form
+        formType="select-prescriber"
         [field]="selectPrescriberField.controls[0]"
         [form]="selectPrescriberForm"
-        formType="select-prescriber"></app-custom-form>
+        (action)="prescriberChanged.emit($event)"></app-custom-form>
     </div>
   </div>
 </div>
