@@ -60,8 +60,8 @@ export class EnrollmentComponent implements OnInit {
       .subscribe({
         next: (res: any) => {
           this.enrolService
-            .getProviderCases(
-              this.authService.user.providers[0].ProviderId,
+            .getPrescriberCases(
+              this.authService.user.prescribers[0].ProviderId,
               this.authService.user.portalAccountPkId
             )
             .subscribe({

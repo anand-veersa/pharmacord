@@ -1,21 +1,25 @@
-<div class="medication-container">
+<div class="medication-container enroll-form">
   <span class="primary-title">Please select the medication.</span>
 
-  <div class="medication-list tm-2">
+  <div class="medication-list tm-2" *ngIf="submitEnrolService.medicationForm">
     <app-custom-form
-      [field]="formJson.controls[0]"
-      [form]="selectMedicationForm"
+      [field]="submitEnrolService.medicationJson.controls[0]"
+      [form]="submitEnrolService.medicationForm"
       formType="selectMedicationForm"></app-custom-form>
   </div>
 </div>
+
+<!-- TODO: optimize this -->
 <div class="action-panel">
   <app-custom-button
     btnClass="small secondary"
     btnText="&#60; Back"
-    (action)="action('back')"></app-custom-button>
+    (action)="onAction('back')"></app-custom-button>
   <app-custom-button
     btnClass="small tertiary"
     btnText="Next &#62;"
-    (action)="action('next')"
-    [isDisabled]="selectMedicationForm.invalid"></app-custom-button>
+    (action)="onAction('next')"
+    [isDisabled]="
+      submitEnrolService.medicationForm.invalid
+    "></app-custom-button>
 </div>

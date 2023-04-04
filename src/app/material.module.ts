@@ -13,7 +13,11 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import {
+  MatCheckboxDefaultOptions,
+  MatCheckboxModule,
+  MAT_CHECKBOX_DEFAULT_OPTIONS,
+} from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -87,5 +91,6 @@ import { MatTreeModule } from '@angular/material/tree';
     PortalModule,
     ScrollingModule,
   ],
+  // providers:[{provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'check' } as MatCheckboxDefaultOptions}]
 })
 export class MaterialModule {}

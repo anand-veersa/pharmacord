@@ -1,7 +1,12 @@
-<form #loginForm="ngForm" [formGroup]="form" class="login-form">
-  <ul>
-    <li *ngFor="let option of field.options">
-      <mat-checkbox>
+<form [formGroup]="form">
+  <ul class="checkbox-group">
+    <li
+      class="checkbox"
+      *ngFor="let option of field.options; let index = index">
+      <mat-checkbox
+        color="primary"
+        [checked]="isSame(checked, option.value)"
+        (change)="onChecked($event.checked, option.value, index)">
         {{ option.label }}
       </mat-checkbox>
     </li>

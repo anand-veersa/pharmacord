@@ -1,9 +1,9 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -28,19 +28,29 @@ export class CustomTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) {}
-
+  constructor(
+    private _liveAnnouncer: LiveAnnouncer,
+    private changeDetector: ChangeDetectorRef
+  ) {}
+  @Input() selected: { key: string; value: any };
   public selectedRow: number;
 
+  public checkSelected(a: number, b: any): boolean {
+    if (!this.selected) return false;
+    return b[this.selected.key] === this.selected.value;
+  }
   public onRowClicked(selectedRowIndex: number): void {
     this.selectedRow = selectedRowIndex;
   }
+
   public onAction(event: any): void {
     this.action.emit(event);
   }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.changeDetector.detectChanges();
   }
 
   announceSortChange(sortState: Sort) {

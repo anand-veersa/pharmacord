@@ -18,6 +18,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
   public alertDataSource = new MatTableDataSource<Alert>([]);
   public docDataSource = new MatTableDataSource<CaseDoc>([]);
   public patientCases: any;
+  public selectedCase: { key: string; value: any };
   public patientDemographics: { caseDetails: any; patientAddress: any } = {
     caseDetails: {},
     patientAddress: {},
@@ -93,6 +94,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
             });
             this.patientCasesDataSource.data = this.patientCases;
           });
+          this.selectedCase = { key: 'CaseId', value: results.query['case'] };
           this.getCaseDetails(results.query['case']);
         },
       });

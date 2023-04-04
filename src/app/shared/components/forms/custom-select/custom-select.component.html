@@ -3,8 +3,9 @@
   [ngClass]="{ 'prescriber-select': formType === 'select-prescriber' }">
   <mat-form-field appearance="outline">
     <mat-select
+      (selectionChange)="selectionChanged($event)"
       [formControlName]="field.name"
-      (selectionChange)="selectionChanged($event)">
+      [disabled]="field.disabled ?? false">
       <mat-option value="">Select</mat-option>
       <mat-option *ngFor="let option of field.options" [value]="option.value">
         {{ option.label }}

@@ -9,8 +9,9 @@
   .mat-mdc-form-field-infix {
     padding: 0.6rem 0 0 !important;
   }
-  .mdc-list-item__primary-text {
-    font-size: 1.6rem;
-    color: $color-grey-dark-4;
-  }
+}
+
+::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
+  font-size: 1.6rem;
+  color: $color-grey-dark-4;
 }

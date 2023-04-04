@@ -4,7 +4,7 @@ export interface Patient {
   FirstName: string;
   LastName: string;
   DateOfBirth: string;
-  Provider: string;
+  Prescriber: string;
   DateSubmitted: string;
   EnrollmentStatus: string;
   Product: string;
