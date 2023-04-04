@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.sharedService.isLoading.next(true);
     this.enrolService
       .getAccountInfo(
-        JSON.parse(this.localStorage.getItem('userData')).UserName
+        JSON.parse(this.localStorage.getItem('userData'))?.UserName
       )
       .subscribe({
         next: (res: any) => {
