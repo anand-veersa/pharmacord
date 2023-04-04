@@ -1,12 +1,12 @@
 <div class="profile-information">
-  <p class="profile-information-heading text-med text-x-bold">
+  <p class="text-med text-x-bold">
     Manage your profile and contact information
   </p>
   <p class="error-or-required"><span>* </span>Required field</p>
   <div class="form-fields">
     <div
       class="input-fields"
-      *ngFor="let control of profileService.profileInfoJSON?.controls">
+      *ngFor="let control of profileService.profileInfoJson?.controls">
       <app-custom-form
         [field]="control"
         [form]="profileService.profileInformationForm"></app-custom-form>
@@ -16,7 +16,7 @@
     <app-custom-button
       btnClass="secondary register-user"
       btnText="&#60; Back to Home"
-      (click)="navigateToHome()"></app-custom-button>
+      [routerLink]="['/enrollment/dashboard']"></app-custom-button>
     <app-custom-button
       btnClass="tertiary register-user"
       btnText="Save"

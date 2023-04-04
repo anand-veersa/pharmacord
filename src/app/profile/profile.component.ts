@@ -10,6 +10,11 @@ import { ProfileService } from './profile.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit, OnDestroy {
+  public tabClicked: number = 0;
+  public allSecurityQuestions: Array<{ label: string; value: number }>;
+  public selectedSecurityQuestions: Array<any>;
+  private securityQuestions: any[];
+
   constructor(
     private enrolService: EnrollmentService,
     private localStorage: LocalStorageService,
@@ -17,13 +22,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private profileService: ProfileService
   ) {}
 
-  tabClicked: string = 'password';
-  securityQuestions: any[];
-  allSecurityQuestions: Array<{ label: string; value: number }>;
-  selectedSecurityQuestions: Array<any>;
   ngOnInit() {
     this.sharedService.isLoading.next(true);
-
     this.enrolService
       .getAccountInfo(
         JSON.parse(this.localStorage.getItem('userData')).UserName
@@ -64,10 +64,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  public tabChange(tab: number) {
-    if (tab === 0) this.tabClicked = 'password';
-    else if (tab === 1) this.tabClicked = 'security';
-    else if (tab === 2) this.tabClicked = 'profile';
+  public tabChange(tabClicked: number) {
+    this.tabClicked = tabClicked;
   }
 
   ngOnDestroy(): void {

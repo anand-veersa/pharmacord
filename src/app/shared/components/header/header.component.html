@@ -30,10 +30,7 @@
     <div *ngIf="authService.isLoggedIn()" class="auth">
       <div class="user text-small text-x-bold">
         <img src="../../../../assets/images/user_icon.svg" [alt]="userName" />
-        <span
-          class="user-welcome"
-          routerLinkActive="active"
-          [routerLink]="['/profile']"
+        <span class="user-welcome" [routerLink]="['/profile']"
           >Welcome {{ userName }}</span
         >
       </div>

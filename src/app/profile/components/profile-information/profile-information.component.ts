@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { ProfileService } from '../../profile.service';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -12,19 +10,13 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class ProfileInformationComponent implements OnInit {
   constructor(
-    private http: HttpClient,
-    private sharedService: SharedService,
     public profileService: ProfileService,
-    private authService: AuthService,
-    private router: Router
+    private sharedService: SharedService,
+    private authService: AuthService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.profileService.createProfileInfo();
-  }
-
-  public navigateToHome(): void {
-    this.router.navigate(['/enrollment/dashboard']);
   }
 
   public saveProfileInformation(): void {

@@ -14,9 +14,10 @@ export class ProfileService {
   public changePasswordForm: FormGroup;
   public profileInformationForm: FormGroup;
   public changeSecurityQuesForm: FormGroup;
-  public changePasswordJSON: JsonFormData;
-  public profileInfoJSON: JsonFormData;
+  public changePasswordJson: JsonFormData;
+  public profileInfoJson: JsonFormData;
   public changeSecurityQuesJSON: JsonFormData;
+
   constructor(
     private http: HttpClient,
     private sharedService: SharedService,
@@ -31,6 +32,7 @@ export class ProfileService {
         tap(res => this.handleToaster(res))
       );
   }
+
   public updateChangeSecurityQuestion(data: any): Observable<any> {
     return this.http
       .post(
@@ -49,22 +51,23 @@ export class ProfileService {
       .pipe(catchError(this.handleError));
   }
 
-  public createChangePasswordForm() {
+  public createChangePasswordForm(): void {
     if (!this.changePasswordForm) {
       this.http
         .get('/assets/json/change-password.json')
         .subscribe((formData: any) => {
-          this.changePasswordJSON = formData;
+          this.changePasswordJson = formData;
           this.changePasswordForm = this.sharedService.buildForm(
-            this.changePasswordJSON
+            this.changePasswordJson
           );
         });
     }
   }
+
   public createChangeSecurityQuesForm(
     options: Array<{ label: string; value: number }>,
     selectedSecurityQuestions: Array<any>
-  ) {
+  ): void {
     if (!this.changeSecurityQuesForm) {
       this.http
         .get('/assets/json/change-security-ques.json')
@@ -105,14 +108,14 @@ export class ProfileService {
     });
   }
 
-  public createProfileInfo() {
+  public createProfileInfo(): void {
     if (!this.profileInformationForm) {
       this.http
         .get('/assets/json/profile-information.json')
         .subscribe((formData: any) => {
-          this.profileInfoJSON = formData;
+          this.profileInfoJson = formData;
           this.profileInformationForm = this.sharedService.buildForm(
-            this.profileInfoJSON
+            this.profileInfoJson
           );
           this.getProfileInfo();
         });
@@ -139,7 +142,7 @@ export class ProfileService {
     this.profileInformationForm?.reset();
   }
 
-  private handleToaster(response: any) {
+  private handleToaster(response: any): void {
     const msg = response.Errors[0]?.Message;
     if (!msg) return;
     else if (msg.indexOf('New password matches a previous password') > -1) {

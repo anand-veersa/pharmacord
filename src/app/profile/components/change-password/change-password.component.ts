@@ -1,9 +1,4 @@
-import {
-  Component,
-  AfterContentChecked,
-  ChangeDetectorRef,
-} from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { ProfileService } from '../../profile.service';
@@ -13,16 +8,15 @@ import { ProfileService } from '../../profile.service';
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss'],
 })
-export class ChangePasswordComponent implements AfterContentChecked {
+export class ChangePasswordComponent implements AfterViewChecked {
   constructor(
+    public profileService: ProfileService,
     private sharedService: SharedService,
     private localStorage: LocalStorageService,
-    public profileService: ProfileService,
-    private router: Router,
     private cdref: ChangeDetectorRef
   ) {}
 
-  ngAfterContentChecked() {
+  ngAfterViewChecked(): void {
     this.profileService.createChangePasswordForm();
     this.cdref.detectChanges();
   }
@@ -50,9 +44,5 @@ export class ChangePasswordComponent implements AfterContentChecked {
         this.sharedService.notify('error', err);
       },
     });
-  }
-
-  public navigateToHome(): void {
-    this.router.navigate(['/enrollment/dashboard']);
   }
 }
