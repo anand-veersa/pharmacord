@@ -12,8 +12,8 @@
       ></label
     >
   </ng-container>
-  <div class="extLinkDiv">
-    <p *ngIf="field.extLink !== ''" class="extLink" (click)="navigateRoute()">
+  <div *ngIf="field.extLink !== ''" class="extLinkDiv">
+    <p class="extLink" (click)="navigateRoute()">
       {{ field.extLink }}
     </p>
   </div>

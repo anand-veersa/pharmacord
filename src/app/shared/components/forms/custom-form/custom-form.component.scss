@@ -22,10 +22,6 @@
       cursor: pointer;
     }
   }
-
-  .extLinkDiv {
-    display: none;
-  }
 }
 
 ::ng-deep .enrollment-form {
@@ -42,4 +38,7 @@
   app-custom-radio {
     flex-basis: 60%;
   }
+}
+.extLinkDiv {
+  display: none;
 }
