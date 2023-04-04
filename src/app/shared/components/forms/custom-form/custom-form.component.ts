@@ -12,6 +12,7 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JsonFormControls } from 'src/app/models/json-form-data.model';
 import { CustomCheckboxComponent } from '../custom-checkbox/custom-checkbox.component';
+import { CustomDatepickerComponent } from '../custom-datepicker/custom-datepicker.component';
 import { CustomInputComponent } from '../custom-input/custom-input.component';
 import { CustomRadioComponent } from '../custom-radio/custom-radio.component';
 import { CustomSelectComponent } from '../custom-select/custom-select.component';
@@ -28,6 +29,7 @@ export class CustomFormComponent implements AfterViewInit {
   @Input() formType: string = '';
   @Input() field: JsonFormControls;
   @Input() inputPrefix: string;
+  @Input() checked: any[];
   @Output() action = new EventEmitter();
 
   public supportedDynamicComponents = [
@@ -53,7 +55,7 @@ export class CustomFormComponent implements AfterViewInit {
     },
     {
       type: 'date',
-      component: CustomInputComponent,
+      component: CustomDatepickerComponent,
     },
     {
       type: 'checkbox',
@@ -66,6 +68,7 @@ export class CustomFormComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
+    if (!this.dynamicForm) return;
     const componentInstance = this.getComponentByType();
     const dynamicComponent =
       this.dynamicForm.createComponent(componentInstance);
@@ -74,6 +77,9 @@ export class CustomFormComponent implements AfterViewInit {
     dynamicComponent.setInput('formType', this.formType);
     if (componentInstance === CustomInputComponent) {
       dynamicComponent.setInput('inputPrefix', this.inputPrefix);
+    }
+    if (componentInstance === CustomCheckboxComponent) {
+      dynamicComponent.setInput('checked', this.checked);
     }
     if (componentInstance === CustomSelectComponent) {
       dynamicComponent.instance.action.subscribe((data: string | number) =>

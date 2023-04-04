@@ -38,7 +38,8 @@ export class MyPatientsComponent implements OnInit {
 
   ngOnInit() {
     this.enrolService.medicineCases.subscribe((data: any[]) => {
-      this.createTableData(data);
+      const dataCasesByPatient = this.sharedService.getPatients(data);
+      this.createTableData(dataCasesByPatient);
     });
     this.searchField = {
       name: 'search',
@@ -66,21 +67,9 @@ export class MyPatientsComponent implements OnInit {
     );
   }
 
-  private createTableData(cases: any[]): void {
-    cases.sort(
-      (a, b) => parseInt(b.CaseId.slice(3)) - parseInt(a.CaseId.slice(3))
-    );
-    const uniqueIds: any[] = [];
-    const dataCasesByPatient = cases.filter((c: any) => {
-      const isDuplicate = uniqueIds.includes(c.PatientId + c.DrugGroup.Value);
-      if (!isDuplicate) {
-        uniqueIds.push(c.PatientId + c.DrugGroup.Value);
-        return true;
-      }
-      return;
-    });
-    const patientCases: any[] = [];
-    dataCasesByPatient.forEach((item, index) => {
+  private createTableData(patientCases: any): void {
+    const cases: any[] = [];
+    patientCases.forEach((item: any) => {
       const patientCase = {
         PatientId: item.PatientId,
         CaseId: item.CaseId,
@@ -93,9 +82,9 @@ export class MyPatientsComponent implements OnInit {
         Product: item.DrugGroup.Value,
         ActionNeeded: item.ActionNeeded ? 'Yes' : 'No',
       };
-      patientCases.push(patientCase);
+      cases.push(patientCase);
     });
-    this.cases.data = patientCases;
-    this.filteredCases.data = patientCases;
+    this.cases.data = cases;
+    this.filteredCases.data = cases;
   }
 }

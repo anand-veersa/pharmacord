@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { LocalStorageService } from '../shared/services/local-storage.service';
 import { AppConstants } from '../constants/app.constants';
 import { Router } from '@angular/router';
@@ -20,6 +20,8 @@ export class AuthService {
     portalAccountPkId: number;
     role: any;
   };
+  public userFullName = new BehaviorSubject<string>('');
+
   public publicRoutes: string[] = [
     '/login',
     '/reset-password',
@@ -68,9 +70,6 @@ export class AuthService {
       RefreshToken,
     } = data.Payload;
     const UserName = data.Parameters.Email;
-    const expirationDate = new Date(
-      new Date().getTime() + this.appConstants.TOKEN_EXPIRY_DURATION * 1000
-    );
     this.localStorage.setItem(
       'userData',
       JSON.stringify({

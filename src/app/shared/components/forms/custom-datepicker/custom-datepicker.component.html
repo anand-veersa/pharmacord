@@ -1,0 +1,21 @@
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>{{ field.label }}</mat-label>
+    <input
+      matInput
+      [min]="field.minDate"
+      [max]="field.maxDate"
+      [matDatepicker]="fieldId"
+      [formControlName]="field.name"
+      [disabled]="field.disabled ?? false" />
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="fieldId"></mat-datepicker-toggle>
+    <mat-datepicker #fieldId></mat-datepicker>
+  </mat-form-field>
+  <app-custom-error
+    *ngIf="form.controls[field.name].touched"
+    [form]="form"
+    [field]="field"
+    [errors]="form.get(field.name)?.errors"></app-custom-error>
+</form>

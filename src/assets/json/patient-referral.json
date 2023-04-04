@@ -1,0 +1,90 @@
+{
+  "ExtRefId": "",
+  "PopulatePdfFlag": true,
+  "DrugGroup": "",
+  "EnrollmentServiceRequests": [],
+  "Patient": {
+    "FirstName": "",
+    "LastName": "",
+    "DOB": "",
+    "Gender": "",
+    "MMRStatus": [],
+    "DiagnosisCodes": [],
+    "OtherDiagnosisCodes": "",
+    "PriorTherapies": [],
+    "OtherPriorTherapies": [],
+    "Address1": "",
+    "Address2": "",
+    "City": "",
+    "State": "",
+    "Zip": "",
+    "PatientEmailAddress": "",
+    "PatientId": null,
+    "Phones": [],
+    "AlternateContact": {
+      "FirstName": "",
+      "LastName": "",
+      "RelationshipToPatient": "",
+      "Phone": ""
+    },
+    "BestContactTime": ""
+  },
+  "Financial": {
+    "HouseholdGrossAnnualIncome": "",
+    "NumberOfMembersInHousehold": ""
+  },
+  "Insurance": {
+    "MBI": "",
+    "MedicalInsurance": "",
+    "PharmacyInsurance": "",
+    "MedicalPlans": []
+  },
+  "PrescriptionInformation": {
+    "Quantity": null,
+    "Strength": "",
+    "DirectionForAdministration": []
+  },
+  "Provider": {
+    "FirstName": "",
+    "LastName": "",
+    "NPI": "",
+    "TaxID": "",
+    "Facility": {
+      "Id": null,
+      "NPI": "",
+      "TaxId": "",
+      "Name": "",
+      "Address1": "",
+      "Address2": "",
+      "City": "",
+      "State": "",
+      "Zip": "",
+      "OfficeContactName": ""
+    },
+    "Phones": [],
+    "Fax": "",
+    "Email": "",
+    "OtherFacilities": [
+      {
+        "Name": "",
+        "OfficeContactName": "",
+        "Phone": "",
+        "Address1": "",
+        "Address2": "",
+        "City": "",
+        "State": "",
+        "Zip": "",
+        "FacilityType": ""
+      }
+    ]
+  },
+  "Attestation": {
+    "IsPatientAttestationConsent": false,
+    "PrescriberDeclaration": false,
+    "TextingOptIn": false,
+    "PAPEnrollment": false,
+    "HIPPAAuthorization": false,
+    "PSPEnrollment": false,
+    "PatientEmail": ""
+  }
+}

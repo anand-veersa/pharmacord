@@ -1,0 +1,282 @@
+{
+  "leftPanel": {
+    "controls": [
+      {
+        "name": "firstName",
+        "value": "",
+        "display": true,
+        "label": "First Name",
+        "placeholder": "Enter your first name",
+        "type": "text",
+        "validators": { "required": true },
+        "disabled": true
+      },
+      {
+        "name": "lastName",
+        "value": "",
+        "display": true,
+        "label": "Last Name",
+        "placeholder": "Enter your last name",
+        "type": "text",
+        "validators": { "required": true },
+        "disabled": true
+      },
+      {
+        "name": "npi",
+        "value": "",
+        "display": true,
+        "label": "NPI #",
+        "placeholder": "Enter your NPI #",
+        "type": "text",
+        "validators": { "required": true, "min": 10, "max": 10 },
+        "disabled": true
+      },
+      {
+        "name": "taxId",
+        "value": "",
+        "display": true,
+        "label": "Tax Id #",
+        "placeholder": "Enter your Tax Id #",
+        "type": "text",
+        "validators": {},
+        "disabled": false
+      },
+      {
+        "name": "facilityName",
+        "value": "",
+        "display": true,
+        "label": "Site/Facility Name",
+        "placeholder": "Enter your Site/Facility Name",
+        "type": "text",
+        "validators": { "required": true },
+        "disabled": true
+      },
+      {
+        "name": "mailingAddress1",
+        "value": "",
+        "display": true,
+        "label": "Mailing Address 1",
+        "placeholder": "Enter your mailing address 1",
+        "type": "text",
+        "validators": { "required": true },
+        "disabled": true
+      },
+      {
+        "name": "mailingAddress2",
+        "value": "",
+        "display": true,
+        "label": "Mailing Address 2",
+        "placeholder": "Enter your mailing address 2",
+        "type": "text",
+        "validators": { "required": true },
+        "disabled": true
+      },
+      {
+        "name": "city",
+        "value": "",
+        "display": true,
+        "label": "City",
+        "placeholder": "Enter your city",
+        "type": "text",
+        "validators": { "required": true },
+        "disabled": true
+      },
+      {
+        "name": "state",
+        "value": "",
+        "display": true,
+        "label": "State",
+        "placeholder": "Enter your state",
+        "type": "text",
+        "validators": { "required": true },
+        "disabled": true
+      },
+      {
+        "name": "zipcode",
+        "value": "",
+        "display": true,
+        "label": "Zip Code",
+        "placeholder": "Enter your zip code",
+        "type": "text",
+        "validators": { "required": true, "min": 5, "max": 5 },
+        "disabled": true
+      },
+      {
+        "name": "facilityNpi",
+        "value": "",
+        "display": true,
+        "label": "Facility NPI #",
+        "placeholder": "Enter your Facility NPI #",
+        "type": "text",
+        "validators": { "required": true, "min": 10, "max": 10 },
+        "disabled": true
+      },
+      {
+        "name": "facilitytaxId",
+        "value": "",
+        "display": true,
+        "label": "Facility Tax Id #",
+        "placeholder": "Enter your Facility Tax Id #",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "officeContactName",
+        "value": "",
+        "display": true,
+        "label": "Office Contact Name",
+        "placeholder": "Enter your Office Contact Name",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "officeContactPhone",
+        "value": "",
+        "display": true,
+        "label": "Office Contact Phone #",
+        "placeholder": "Enter your office contact phone #",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "officeContactExt",
+        "value": "",
+        "display": true,
+        "label": "Office Contact Ext",
+        "placeholder": "Ext(if applicable)",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "fax",
+        "value": "",
+        "display": true,
+        "label": "Fax #",
+        "placeholder": "Enter your fax #",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "officeContactEmail",
+        "value": "",
+        "display": true,
+        "label": "Office Contact Email",
+        "placeholder": "Enter your office contact email",
+        "type": "text",
+        "validators": {}
+      }
+    ]
+  },
+  "rightPanel": {
+    "controls": [
+      {
+        "name": "shippingAddressType",
+        "value": "",
+        "display": true,
+        "label": "Shipping Address",
+        "placeholder": "Enter your shipping address",
+        "type": "radio",
+        "validators": { "required": true },
+        "options": [
+          {
+            "label": "Patient’s Address",
+            "value": "patientAddress"
+          },
+          {
+            "label": "Other Address ",
+            "value": "otherAddress "
+          }
+        ]
+      },
+      {
+        "name": "shippingFacilityName",
+        "value": "",
+        "display": true,
+        "label": "Shipping Facility Name",
+        "placeholder": "Enter your shipping facility name",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "recipientName",
+        "value": "",
+        "display": true,
+        "label": "Recipient Name #",
+        "placeholder": "Enter your recipient name",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "phone",
+        "value": "",
+        "display": true,
+        "label": "Phone #",
+        "placeholder": "Enter your phone #",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "street",
+        "value": "",
+        "display": true,
+        "label": "Street",
+        "placeholder": "Enter your street",
+        "type": "text",
+        "validators": { "required": true },
+        "disabled": true
+      },
+      {
+        "name": "city",
+        "value": "",
+        "display": true,
+        "label": "City",
+        "placeholder": "Enter your city",
+        "type": "text",
+        "validators": { "required": true },
+        "disabled": true
+      },
+      {
+        "name": "state",
+        "value": "",
+        "display": true,
+        "label": "State",
+        "placeholder": "Enter your state",
+        "type": "text",
+        "validators": { "required": true },
+        "disabled": true
+      },
+      {
+        "name": "zipcode",
+        "value": "",
+        "display": true,
+        "label": "Zip Code",
+        "placeholder": "Enter your zip code",
+        "type": "text",
+        "validators": { "required": true, "min": 5, "max": 5 },
+        "disabled": true
+      },
+      {
+        "name": "siteOfAdministration",
+        "value": "physicianOffice",
+        "label": "Site of Administration *",
+        "placeholder": "Enter your city",
+        "type": "radio",
+        "validators": { "required": true },
+        "options": [
+          {
+            "label": "Physician’s office",
+            "value": "physicianOffice"
+          },
+          {
+            "label": "Hospital outpatient",
+            "value": "hospitalOutpatient"
+          },
+          {
+            "label": "Another site of care",
+            "value": "anotherSiteOfCare"
+          }
+        ]
+      }
+    ]
+  }
+}

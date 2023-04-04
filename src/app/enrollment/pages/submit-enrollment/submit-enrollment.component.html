@@ -1,14 +1,36 @@
-<div class="enrollment-form">
+<div class="submit-enrollment">
   <app-enrollment-form-header
-    [title]="title"
     [selectPrescriberForm]="selectPrescriberForm"
     [selectPrescriberField]="prescriberListJson"
     [displayedScreen]="displayScreen"
     (prescriberChanged)="
-      getPrescriberFacilities($event)
+      submitEnrolService.selectedPrescriberId.next($event)
     "></app-enrollment-form-header>
-  <div class="enrollment-form-container">
-    <ng-container #enrollmentForm></ng-container>
-    <!-- <app-select-medication (title)="setTitle($event)" (nextAction)="next($event)"></app-select-medication> -->
+  <div class="submit-enrollment-container">
+    <!-- <ng-container #enrollmentForm></ng-container> -->
+    <!-- TODO: optimize this -->
+    <ng-container [ngSwitch]="displayScreen">
+      <app-select-medication
+        *ngSwitchCase="'select-medication'"
+        (action)="onAction($event)"></app-select-medication>
+      <app-select-prescriber
+        *ngSwitchCase="'select-prescriber'"
+        (action)="onAction($event)"
+        (prescribersFormData)="
+          getPrescribersFormData($event)
+        "></app-select-prescriber>
+      <app-select-services
+        *ngSwitchCase="'select-services'"
+        [selectedMedication]="
+          submitEnrolService.enrollmentFormPayload.DrugGroup
+        "
+        (action)="onAction($event)"></app-select-services>
+      <app-select-patient
+        *ngSwitchCase="'select-patient'"
+        (action)="onAction($event)"></app-select-patient>
+      <app-prescriber-details
+        *ngSwitchCase="'prescriber-details'"
+        (action)="onAction($event)"></app-prescriber-details>
+    </ng-container>
   </div>
 </div>

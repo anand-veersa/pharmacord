@@ -25,13 +25,13 @@ interface InsuranceData {
 }
 
 interface PrescriptionInformationData {
-  Quantity: string;
+  Quantity: string | null;
   Strength: string;
   DirectionForAdministration: string[];
 }
 
-interface FacilityData {
-  Id: number;
+export interface FacilityData {
+  Id: number | null;
   NPI: string;
   TaxId: string;
   Name: string;
@@ -68,12 +68,12 @@ interface PrescriberData {
 }
 
 interface AttestaionData {
-  IsPatientAttestationConsent: string;
-  PrescriberDeclaration: string;
-  TextingOptIn: string;
-  PAPEnrollment: string;
-  HIPPAAuthorization: string;
-  PSPEnrollment: string;
+  IsPatientAttestationConsent: boolean;
+  PrescriberDeclaration: boolean;
+  TextingOptIn: boolean;
+  PAPEnrollment: boolean;
+  HIPPAAuthorization: boolean;
+  PSPEnrollment: boolean;
   PatientEmail: string;
 }
 
@@ -90,7 +90,7 @@ interface PhoneData {
 }
 
 interface PatientData {
-  FirstName: string;
+  FirstName?: string;
   LastName: string;
   DOB: string;
   Gender: string;
@@ -112,23 +112,37 @@ interface PatientData {
 }
 
 export interface EnrollmentFormPayload {
-  ExtRefId?: string;
-  PopulatePdfFlag?: boolean;
-  DrugGroup?: string;
-  EnrollmentServiceRequests?: {
+  ExtRefId: string;
+  PopulatePdfFlag: boolean;
+  DrugGroup: string;
+  EnrollmentServiceRequests: {
     Id: string;
     Name: string;
-  };
-  Patient?: PatientData;
-  Financial?: FinancialData;
-  Insurance?: InsuranceData;
-  PrescriptionInformation?: PrescriptionInformationData;
-  Provider?: PrescriberData;
-  Attestation?: AttestaionData;
+  }[];
+  PreferredSpecialityPharmacy: {
+    Id: string;
+    Name: string;
+  }[];
+  Patient: PatientData;
+  Financial: FinancialData;
+  Insurance: InsuranceData;
+  PrescriptionInformation: PrescriptionInformationData;
+  Provider: PrescriberData;
+  Attestation: AttestaionData;
 }
 
 export interface EnrollmentScreenNextData {
+  actionType: string;
   formName: string;
   form: any;
   nextScreen: string;
+}
+
+export interface PrescriberFacility {
+  FacilityId: number;
+  FacilityName: string;
+  Address: string;
+  Phone: string;
+  Fax: string;
+  Email: string;
 }

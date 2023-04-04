@@ -3,46 +3,55 @@
     {
       "key": "PatientId",
       "value": "",
+      "display": true,
       "label": "Patient Id"
     },
     {
       "key": "FirstName",
       "value": "",
+      "display": true,
       "label": "First Name"
     },
     {
       "key": "LastName",
       "value": "",
+      "display": true,
       "label": "Last Name"
     },
     {
       "key": "DateOfBirth",
       "value": "",
+      "display": true,
       "label": "Date Of Birth"
     },
     {
       "key": "Prescriber",
       "value": "",
+      "display": true,
       "label": "Prescriber"
     },
     {
       "key": "DateSubmitted",
       "value": "",
+      "display": true,
       "label": "Date Submitted"
     },
     {
       "key": "EnrollmentStatus",
       "value": "",
+      "display": true,
       "label": "Enrollment Status"
     },
     {
       "key": "Product",
       "value": "",
+      "display": true,
       "label": "Product"
     },
     {
       "key": "ActionNeeded",
       "value": "",
+      "display": true,
       "label": "Action Needed"
     }
   ]

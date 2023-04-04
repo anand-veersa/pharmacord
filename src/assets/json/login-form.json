@@ -3,6 +3,7 @@
     {
       "name": "Email",
       "value": "",
+      "display": true,
       "label": "Username",
       "placeholder": "Enter your Username",
       "type": "text",
@@ -16,6 +17,7 @@
     {
       "name": "Password",
       "value": "",
+      "display": true,
       "label": "Password",
       "placeholder": "Enter your Password",
       "type": "password",
