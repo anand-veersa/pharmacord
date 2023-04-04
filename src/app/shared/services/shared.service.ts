@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Patient } from 'src/app/models/cases.model';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
-import { MatchPasswordsValidator } from '../validators/match-passwords.validator';
+import { matchPasswordsValidator } from '../validators/custom-validators';
 @Injectable({
   providedIn: 'root',
 })
@@ -100,7 +100,7 @@ export class SharedService {
         case 'pattern':
           return Validators.pattern(rule[1]);
         case 'match':
-          return MatchPasswordsValidator(formControl);
+          return matchPasswordsValidator(formControl);
         default:
           return;
       }

@@ -1,6 +1,6 @@
 import { ValidationErrors } from '@angular/forms';
 
-export function MatchPasswordsValidator(control: {
+export function matchPasswordsValidator(control: {
   [key: string]: any;
 }): ValidationErrors | null {
   return (): ValidationErrors | null => {
