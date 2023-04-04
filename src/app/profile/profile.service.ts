@@ -173,7 +173,7 @@ export class ProfileService {
     }
   }
 
-  private handleError(errorRes: number) {
+  private handleError(errorRes: number): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes) {
       return throwError(() => errorMessage);
