@@ -2,7 +2,8 @@
   [ngClass]="{
     'login-form': formType === 'login',
     'enrollment-form': formType === 'enrollment-form',
-    'forgot-username-form': formType === 'forgot-username'
+    'forgot-username-form': formType === 'forgot-username',
+    'profile-form': formType === 'profile-form'
   }">
   <ng-container #dynamicForm>
     <label *ngIf="field.label" class="label"

@@ -8,6 +8,7 @@
       class="input-fields"
       *ngFor="let control of profileService.profileInfoJson?.controls">
       <app-custom-form
+        formType="profile-form"
         [field]="control"
         [form]="profileService.profileInformationForm"></app-custom-form>
     </div>

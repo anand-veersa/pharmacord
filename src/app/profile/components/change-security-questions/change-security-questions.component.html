@@ -8,6 +8,7 @@
       class="input-fields"
       *ngFor="let control of profileService.changeSecurityQuesJSON?.controls">
       <app-custom-form
+        formType="profile-form"
         [class]="'input-fields-' + control.name"
         [field]="control"
         [form]="profileService.changeSecurityQuesForm"
