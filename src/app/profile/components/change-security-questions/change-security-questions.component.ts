@@ -16,9 +16,6 @@ export class ChangeSecurityQuestionsComponent implements AfterViewChecked {
   @Input() allSecurityQuestions: Array<{ label: string; value: number }>;
   @Input() selectedSecurityQuestions: Array<any>;
 
-  public showSuccessMessage: boolean = false;
-  public sameAnswersMsg: string = '';
-
   constructor(
     public profileService: ProfileService,
     private sharedService: SharedService,
@@ -59,12 +56,12 @@ export class ChangeSecurityQuestionsComponent implements AfterViewChecked {
       .subscribe({
         next: (res: any) => {
           if (res.Status === 'SUCCESS') {
-            this.showSuccessMessage = true;
-            this.sameAnswersMsg = res.Payload?.ErrorMessage;
-            setTimeout(() => {
-              this.showSuccessMessage = false;
-              this.sameAnswersMsg = '';
-            }, 5000);
+            const sameAnswersMsg = res.Payload?.ErrorMessage;
+            this.sharedService.notify(
+              'success',
+              sameAnswersMsg ||
+                'Your Security Questions have been changed successfully.'
+            );
           }
           this.sharedService.isLoading.next(false);
         },

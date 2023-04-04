@@ -14,16 +14,6 @@
         (action)="changeSecurityQuestions()"></app-custom-form>
     </div>
   </div>
-  <div *ngIf="showSuccessMessage" class="change-security-ques-success-message">
-    <mat-icon class="success-icon">info</mat-icon>
-    <span class="text-normal text-x-bold">
-      {{
-        sameAnswersMsg && sameAnswersMsg.length
-          ? sameAnswersMsg
-          : 'Your Security Questions have been changed successfully.'
-      }}
-    </span>
-  </div>
   <div class="change-security-ques-buttons">
     <app-custom-button
       btnClass="secondary register-user"
