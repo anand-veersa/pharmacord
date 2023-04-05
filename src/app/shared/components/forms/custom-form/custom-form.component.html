@@ -2,7 +2,8 @@
   [ngClass]="{
     'login-form': formType === 'login',
     'enrollment-form': formType === 'enrollment-form',
-    'forgot-username-form': formType === 'forgot-username'
+    'forgot-username-form': formType === 'forgot-username',
+    'profile-form': formType === 'profile-form'
   }">
   <ng-container #dynamicForm>
     <label *ngIf="field.label" class="label"
@@ -12,8 +13,8 @@
       ></label
     >
   </ng-container>
-  <div class="extLinkDiv">
-    <p *ngIf="field.extLink !== ''" class="extLink" (click)="navigateRoute()">
+  <div *ngIf="field.extLink !== ''" class="extLinkDiv">
+    <p class="extLink" (click)="navigateRoute()">
       {{ field.extLink }}
     </p>
   </div>

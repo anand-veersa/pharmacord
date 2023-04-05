@@ -27,6 +27,8 @@ export class CustomErrorComponent implements OnChanges {
       this.errorMessage = `${this.field.label} must have ${this.field.validators.min} characters`;
     } else if (errorKeys.includes('maxlength')) {
       this.errorMessage = `${this.field.label} should not exceed  ${this.field.validators.max} characters`;
+    } else if (errorKeys.includes('passwordNotMatch')) {
+      this.errorMessage = `Passwords do not match`;
     } else {
       this.errorMessage = `${this.field.label} is invalid`;
     }

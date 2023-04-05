@@ -1,0 +1,49 @@
+@import '../../../../assets/styles/abstracts/variables';
+@import '../../../../assets/styles/abstracts/mixins';
+
+::ng-deep {
+  .change-security-ques {
+    padding: 2.4rem 5.5rem;
+    @include respond(tab-land) {
+      padding: 1rem;
+    }
+    .mat-mdc-form-field {
+      &-subscript-wrapper {
+        max-height: 1.8rem;
+      }
+    }
+    .input-fields {
+      &-currentPassword > div {
+        border-bottom: 1px solid $color-grey-border;
+        padding-bottom: 6rem;
+      }
+      &-question1 > div {
+        padding-top: 5.2rem;
+      }
+      &-answer2 > div {
+        margin-bottom: 4rem;
+      }
+    }
+  }
+}
+
+.change-security-ques {
+  &-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 3.3rem 0 2rem 0;
+  }
+  .form-fields {
+    display: flex;
+    flex-flow: column wrap;
+    max-height: 36rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    column-gap: 3rem;
+
+    .input-fields {
+      width: 48%;
+    }
+  }
+}

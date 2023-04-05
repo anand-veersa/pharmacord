@@ -1,0 +1,84 @@
+{
+  "controls": [
+    {
+      "name": "currentPassword",
+      "value": "",
+      "label": "Current Password",
+      "placeholder": "Enter your password",
+      "type": "password",
+      "validators": {
+        "required": true,
+        "max": 14,
+        "min": 8,
+        "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]+).{8,30}$"
+      },
+      "options": []
+    },
+    {
+      "name": "question1",
+      "value": "",
+      "label": "Select a Question 1",
+      "placeholder": "",
+      "type": "select",
+      "validators": {
+        "required": true
+      },
+      "options": []
+    },
+    {
+      "name": "answer1",
+      "value": "",
+      "label": "Your Answer",
+      "placeholder": "Enter your answer",
+      "type": "text",
+      "validators": {
+        "required": true
+      },
+      "options": []
+    },
+    {
+      "name": "question2",
+      "value": "",
+      "label": "Select a Question 2",
+      "placeholder": "",
+      "type": "select",
+      "validators": {
+        "required": true
+      },
+      "options": []
+    },
+    {
+      "name": "answer2",
+      "value": "",
+      "label": "Your Answer",
+      "placeholder": "Enter your answer",
+      "type": "text",
+      "validators": {
+        "required": true
+      },
+      "options": []
+    },
+    {
+      "name": "question3",
+      "value": "",
+      "label": "Select a Question 3",
+      "placeholder": "",
+      "type": "select",
+      "validators": {
+        "required": true
+      },
+      "options": []
+    },
+    {
+      "name": "answer3",
+      "value": "",
+      "label": "Your Answer",
+      "placeholder": "Enter your answer",
+      "type": "text",
+      "validators": {
+        "required": true
+      },
+      "options": []
+    }
+  ]
+}
