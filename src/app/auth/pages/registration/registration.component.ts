@@ -4,6 +4,7 @@ import { Form, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { SharedService } from 'src/app/shared/services/shared.service';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -21,25 +22,33 @@ export class RegistrationComponent implements OnInit {
   public othersCreateUsernameForm: FormGroup;
   public othersAccountInformationFormData: JsonFormData;
   public othersAccountInformationForm: FormGroup;
-  public accountTypeSelection: boolean = true;
+  public accountTypeSelection: boolean = true; // account selection screen
   public prescriberRegistrationCard: boolean = true;
   public prescriberRegistration: boolean = false;
   public othersRegistrationCard: boolean = false;
   public othersRegistration: boolean = false;
-  public prescriberAddFacilityScreen: boolean = false;
-  public othersAddFacilityScreen: boolean = false;
-  public addHealthcareProviderScreen: boolean = false;
+  public validPrescriberNPI: boolean = false;
+  public findPrescriberBtnClicked: boolean = false;
+  public prescriberAddFacilityScreen: boolean = false; // add facility by prescriber
+  public othersAddFacilityScreen: boolean = false; // add facility by others
+  public addHealthcareProviderScreen: boolean = false; //add Provider scrren
   public thankYouScreen: boolean = false;
+  public invalidUsernameError: string = 'Invalid username';
+  public invalidUsername: boolean = true;
   public addFacilityScreenTitle: string = 'Associated Practice Office(s)';
   public addFacilityScreenSubTitle: string =
     'Please add or update the Practice/Facility information associated with this new account.';
   public addProviderScreenTitle = 'Associated Healthcare Provider(s)';
   public addProviderScreenSubTitle =
     'Please enter the information for each healthcare provider (HCP) associated with this new account.';
+  public prescriberID: number;
+  public facilities: Array<object> = [];
+  public UserContactDetails: Array<object> = [];
   constructor(
     private router: Router,
     private http: HttpClient,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private authService: AuthService
   ) {
     console.log('constructor of registration component');
   }
@@ -110,9 +119,41 @@ export class RegistrationComponent implements OnInit {
     if (this.prescriberRegistration) {
       this.prescriberRegistration = false;
       this.prescriberAddFacilityScreen = true;
+      this.UserContactDetails.push({
+        FirstName:
+          this.confirmAccountInformationForm.controls['confirmAccountFirstName']
+            .value,
+        LastName:
+          this.confirmAccountInformationForm.controls['confirmAccountLastName']
+            .value,
+        Phone:
+          this.confirmAccountInformationForm.controls['confirmAccountPhone']
+            .value,
+        Fax: this.confirmAccountInformationForm.controls['confirmAccountFax']
+          .value,
+        Email:
+          this.confirmAccountInformationForm.controls['confirmAccountEmail']
+            .value,
+      });
     } else {
       this.othersRegistration = false;
       this.othersAddFacilityScreen = true;
+      this.UserContactDetails.push({
+        FirstName:
+          this.othersAccountInformationForm.controls['confirmAccountFirstName']
+            .value,
+        LastName:
+          this.othersAccountInformationForm.controls['confirmAccountLastName']
+            .value,
+        Phone:
+          this.othersAccountInformationForm.controls['confirmAccountPhone']
+            .value,
+        Fax: this.othersAccountInformationForm.controls['confirmAccountFax']
+          .value,
+        Email:
+          this.othersAccountInformationForm.controls['confirmAccountEmail']
+            .value,
+      });
     }
   }
 
@@ -122,6 +163,43 @@ export class RegistrationComponent implements OnInit {
 
   checkProviderNpi(): void {
     console.log('checkProviderNpi function clicked');
+    const payloadGetProviderDetails = {
+      NPI: this.lookupInformationForm.get('providerNpi')?.value,
+      FirstName: this.lookupInformationForm.get('providerFirstName')?.value,
+      LastName: this.lookupInformationForm.get('providerLastName')?.value,
+    };
+    this.sharedService.isLoading.next(true); // loader start
+    this.authService.getProviderDetails(payloadGetProviderDetails).subscribe({
+      next: (res: any) => {
+        if (res.Status === 'SUCCESS') {
+          console.log(this.lookupInformationForm);
+          this.validPrescriberNPI = true;
+          this.prescriberID = res.Payload[0].Id;
+          // set values in a prescriber Account information form
+          this.confirmAccountInformationForm.setValue({
+            confirmAccountFirstName: payloadGetProviderDetails.FirstName,
+            confirmAccountLastName: payloadGetProviderDetails.LastName,
+            confirmAccountPhone: null,
+            confirmAccountFax: null,
+            confirmAccountEmail: '',
+          });
+          //disable the keys
+          this.lookupInformationForm.controls['providerNpi'].disable();
+          this.lookupInformationForm.controls['providerFirstName'].disable();
+          this.lookupInformationForm.controls['providerLastName'].disable();
+        } else {
+          this.validPrescriberNPI = false;
+          this.sharedService.notify('error', res.Errors[0].Message);
+        }
+        this.findPrescriberBtnClicked = true;
+        this.sharedService.isLoading.next(false);
+      },
+      error: err => {
+        this.findPrescriberBtnClicked = true;
+        this.sharedService.isLoading.next(false);
+        this.sharedService.notify('error', err);
+      },
+    });
   }
 
   backTriggeredFromStep2(eventData: { backBtnClicked: boolean }): void {
@@ -132,6 +210,13 @@ export class RegistrationComponent implements OnInit {
     } else {
       this.othersRegistration = true;
     }
+  }
+
+  backTriggeredFromStepAddProvider(eventData: {
+    backBtnClicked: boolean;
+  }): void {
+    this.addHealthcareProviderScreen = false;
+    this.othersAddFacilityScreen = true;
   }
 
   moveToOthersFirstScreen(eventData: { backBtnClicked: boolean }): void {
@@ -152,16 +237,123 @@ export class RegistrationComponent implements OnInit {
     this.accountTypeSelection = true;
   }
 
-  saveAndRegisterCall(eventData: { healthcareProviders: any }): void {
-    console.log(eventData.healthcareProviders, 'data from add provider screen');
-    if (this.addHealthcareProviderScreen == true) {
-      // API call for registration will be handle here
-      this.addHealthcareProviderScreen = false;
-      this.thankYouScreen = true;
-    } else {
-      // API call for registration will be handle here
-      this.prescriberAddFacilityScreen = false;
-      this.thankYouScreen = true;
+  collectMasterFacilities(eventData: { facilities: any }): void {
+    this.facilities = eventData.facilities;
+    if (this.prescriberAddFacilityScreen) {
+      this.prescriberSaveAndRegisterCall();
+    }
+  }
+
+  collectPrescriberWithFacility(eventData: {
+    prescribersWithSelectedFacility: any[];
+  }): void {
+    console.log(eventData.prescribersWithSelectedFacility);
+  }
+
+  accountFacilitiesRegistration(prevResponse: any, prevPayload: any): void {
+    prevPayload['IsNewUser'] = false;
+    prevPayload['UserContactDetails'][0]['Id'] = prevResponse.contactId;
+    delete prevPayload.PrescriberId;
+    this.facilities.forEach((facility: any) => {
+      const facilityRegistrationPayload = {
+        ...prevPayload,
+        MasterAccountId: prevResponse.masterPortalAccountId,
+        MasterFacility: facility,
+      };
+
+      console.log(facilityRegistrationPayload, 'facilityRegistrationPayload');
+      this.sharedService.isLoading.next(true);
+      this.authService
+        .accountRegistration(facilityRegistrationPayload)
+        .subscribe({
+          next: (res: any) => {
+            if (res.Status === 'SUCCESS') {
+              console.log(res.Payload.facilityId);
+            }
+          },
+          error: err => {
+            this.sharedService.notify('error', err);
+          },
+        });
+      this.sharedService.isLoading.next(false);
+    });
+  }
+
+  prescriberSaveAndRegisterCall(): void {
+    console.log(this.UserContactDetails, 'in usercontactdetails function');
+    const accountRegistrationPayload = {
+      Username: this.createUsernameForm.controls['username'].value,
+      EmailAddress:
+        this.confirmAccountInformationForm.controls['confirmAccountEmail']
+          .value,
+      Password: this.createUsernameForm.controls['newPassword'].value,
+      PasswordConfirmation:
+        this.createUsernameForm.controls['confirmNewPassword'].value,
+      PrescriberId: this.prescriberID,
+      IsNewUser: true,
+      Role: {
+        RolePkId: 3, // 3 for prescriber 5 for Others
+      },
+      UserContactDetails: this.UserContactDetails,
+    };
+
+    this.authService.accountRegistration(accountRegistrationPayload).subscribe({
+      next: (res: any) => {
+        if (res.Status === 'SUCCESS') {
+          console.log(res);
+          if (res.Errors.length !== 0) {
+            this.sharedService.notify('error', res.Errors[0]);
+          }
+          this.accountFacilitiesRegistration(
+            res.Payload,
+            accountRegistrationPayload
+          );
+        }
+      },
+      error: err => {
+        this.sharedService.isLoading.next(false);
+        this.sharedService.notify('error', err);
+      },
+    });
+
+    // after effects of call
+    // this.prescriberAddFacilityScreen = false;
+    // this.thankYouScreen = true;
+  }
+
+  othersSaveAndRegisterCall(): void {
+    // API call for Others registration will be handle here
+
+    // after effects of Call
+    this.addHealthcareProviderScreen = false;
+    this.thankYouScreen = true;
+  }
+
+  resetLookupForm(): void {
+    this.validPrescriberNPI = false;
+    this.lookupInformationForm.reset();
+    this.lookupInformationForm.controls['providerNpi'].enable();
+    this.lookupInformationForm.controls['providerFirstName'].enable();
+    this.lookupInformationForm.controls['providerLastName'].enable();
+    this.confirmAccountInformationForm.reset();
+  }
+
+  checkUsername(controlName: string): void {
+    if (controlName === 'username') {
+      console.log(this.createUsernameForm.controls['username'].value);
+      const validateUsernamePayload =
+        this.createUsernameForm.controls['username'].value;
+      this.authService.validateUsername(validateUsernamePayload).subscribe({
+        next: (res: any) => {
+          if (res.Status === 'SUCCESS') {
+            console.log(res);
+            this.invalidUsername = res.Payload;
+          }
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+      });
     }
   }
 }

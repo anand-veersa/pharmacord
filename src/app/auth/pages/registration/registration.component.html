@@ -1,10 +1,11 @@
 <div class="registration-container" *ngIf="!thankYouScreen">
   <div class="registration-header">
-    <!-- <mat-stepper headerPosition="bottom" #stepper>
-      <mat-step [stepControl]="test1()"> </mat-step>
-      <mat-step [stepControl]="test2()" optional> </mat-step>
-      <mat-step> </mat-step>
+    <!-- <mat-stepper>
+      <mat-step [editable]="false" [completed]="true"> </mat-step>
+      <mat-step [editable]="false" [completed]="true"> </mat-step>
+      <mat-step [editable]="false" [completed]="false"> </mat-step>
     </mat-stepper> -->
+
     <div class="title-and-stepper text-x-bold">
       <span>Create New Account</span>
     </div>
@@ -100,12 +101,26 @@
                 formType="prescriber-lookup"></app-custom-form>
             </div>
             <app-custom-button
+              *ngIf="!validPrescriberNPI"
               btnText="Find"
               [isDisabled]="
                 lookupInformationForm && lookupInformationForm.invalid
               "
               btnClass="secondary xx-small"
               (click)="checkProviderNpi()"></app-custom-button>
+            <app-custom-button
+              *ngIf="validPrescriberNPI && findPrescriberBtnClicked"
+              btnText="Reset"
+              btnClass="secondary xx-small"
+              (click)="resetLookupForm()"></app-custom-button>
+          </div>
+          <div
+            class="wrong-Npi-error-msg"
+            *ngIf="!validPrescriberNPI && findPrescriberBtnClicked">
+            <p class="text-xs">
+              One or more pieces of information entered do not match our
+              records. Please try again or contact us for additional assistance.
+            </p>
           </div>
         </div>
         <div class="confirm-account-information">
@@ -147,8 +162,11 @@
               class="create-form-input-fields"
               *ngFor="let control of createUsernameFormData?.controls">
               <app-custom-form
+                (focusout)="checkUsername(control.name)"
                 [field]="control"
                 [form]="createUsernameForm"
+                [customErrorMsg]="invalidUsernameError"
+                [isCustomError]="invalidUsername"
                 formType="create-username-form"></app-custom-form>
             </div>
           </div>
@@ -161,6 +179,12 @@
         btnClass="medium secondary"
         (click)="navigateToSelectAccountType()"></app-custom-button>
       <app-custom-button
+        [isDisabled]="
+          lookupInformationForm.invalid ||
+          createUsernameForm.invalid ||
+          confirmAccountInformationForm.invalid ||
+          !invalidUsername
+        "
         btnText="Next >"
         btnClass="medium tertiary"
         (click)="registrationStep2()"></app-custom-button>
@@ -226,6 +250,7 @@
     [subTitle]="addFacilityScreenSubTitle"
     requirementFor="prescriberRegistration"
     (backToParentComponent)="backTriggeredFromStep2($event)"
+    (masterFacilities)="collectMasterFacilities($event)"
     *ngIf="prescriberAddFacilityScreen"></app-add-facility>
 
   <!-- For the case of Others -->
@@ -236,15 +261,16 @@
     requirementFor="othersRegistration"
     (backToParentComponent)="moveToOthersFirstScreen($event)"
     (navigateToNextComponent)="moveToAddProviderScreen($event)"
-    *ngIf="othersAddFacilityScreen"></app-add-facility>
+    [hidden]="!othersAddFacilityScreen"></app-add-facility>
 
   <app-add-healthcare-provider
     [componentTitle]="addProviderScreenTitle"
     [componentSubTitle]="addProviderScreenSubTitle"
-    *ngIf="addHealthcareProviderScreen"
+    [hidden]="!addHealthcareProviderScreen"
+    (backToParentComponent)="backTriggeredFromStepAddProvider($event)"
     requirementFor="othersRegistration"
-    (saveAndRegister)="
-      saveAndRegisterCall($event)
+    (collectPrescriberWithFacility)="
+      collectPrescriberWithFacility($event)
     "></app-add-healthcare-provider>
 </div>
 

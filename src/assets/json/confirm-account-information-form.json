@@ -1,7 +1,7 @@
 {
   "controls": [
     {
-      "name": "ConfirmAccountFirstName",
+      "name": "confirmAccountFirstName",
       "value": "",
       "label": "First Name",
       "placeholder": "Enter First Name",

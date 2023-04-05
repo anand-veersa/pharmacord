@@ -87,13 +87,13 @@ export class AddFacilityComponent implements OnInit {
       PracticeGroup: this.addFacilityForm.value.practiceName,
       Email: this.addFacilityForm.value.facilityEmail,
       Fax: this.addFacilityForm.value.facilityFax,
-      // OfficeName: this.addFacilityForm.value.practiceName,
-      // Rank: 1,
-      // Id: null,
+      OfficeName: this.addFacilityForm.value.practiceName,
+      Rank: 1,
+      Id: null,
       Phone: this.addFacilityForm.value.facilityPhone,
-      // PhoneType: 'office',
-      // Extension: null,
-      // Contacts: [],
+      PhoneType: 'office',
+      Extension: null,
+      Contacts: [],
     };
     this.facilities.push(facility);
     this.addFacilityForm.reset();
@@ -180,5 +180,9 @@ export class AddFacilityComponent implements OnInit {
     this.dataSource = [...this.facilities];
     this.table?.renderRows();
     this.cancleEdit();
+  }
+
+  sendFacilityData(): void {
+    this.masterFacilities.emit({ facilities: this.facilities });
   }
 }

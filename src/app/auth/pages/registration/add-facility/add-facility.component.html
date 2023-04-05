@@ -116,7 +116,9 @@
     <app-custom-button
       btnText="Save and Register"
       btnClass="tertiary x-medium text-x-bold text-xmed"
-      *ngIf="requirementFor === 'prescriberRegistration'">
+      *ngIf="requirementFor === 'prescriberRegistration'"
+      [isDisabled]="facilities.length === 0"
+      (click)="sendFacilityData()">
     </app-custom-button>
 
     <app-custom-button

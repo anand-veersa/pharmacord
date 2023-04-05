@@ -15,5 +15,7 @@
     *ngIf="this.form.controls[this.field.name].touched"
     [form]="form"
     [field]="field"
-    [errors]="this.form.get(field.name)?.errors"></app-custom-error>
+    [errors]="this.form.get(field.name)?.errors">
+    <p class="invalid-username">{{ customErrorMsg }}</p>
+  </app-custom-error>
 </form>

@@ -27,6 +27,8 @@ export class CustomFormComponent implements AfterViewInit {
   @Input() formType: string = '';
   @Input() field: any;
   @Input() inputPrefix: string;
+  @Input() customErrorMsg: string;
+  @Input() isCustomError: boolean;
 
   constructor(
     private renderer: Renderer2,
@@ -68,6 +70,10 @@ export class CustomFormComponent implements AfterViewInit {
     dynamicComponent.setInput('form', this.form);
     dynamicComponent.setInput('field', this.field);
     dynamicComponent.setInput('formType', this.formType);
+    if (this.customErrorMsg) {
+      dynamicComponent.setInput('customErrorMsg', this.customErrorMsg);
+      dynamicComponent.setInput('isCustomError', this.isCustomError);
+    }
     if (componentInstance === CustomInputComponent) {
       dynamicComponent.setInput('inputPrefix', this.inputPrefix);
     }

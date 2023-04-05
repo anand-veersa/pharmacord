@@ -122,6 +122,20 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
+  public validateUsername(validateUsernamePayload: string): Observable<any> {
+    console.log(validateUsernamePayload);
+    return this.http
+      .get(`${environment.baseUrl}account/${validateUsernamePayload}/inuse`)
+      .pipe(catchError(this.handleError));
+  }
+
+  public accountRegistration(data: any): Observable<any> {
+    console.log(data, 'data in auth service');
+    return this.http
+      .post(`${environment.baseUrl}account`, data)
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(errorRes: number) {
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes) {

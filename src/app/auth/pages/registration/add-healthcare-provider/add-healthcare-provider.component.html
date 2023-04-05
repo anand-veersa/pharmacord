@@ -26,11 +26,176 @@
     </div>
   </div>
 
+  <!-- accordians start here -->
+  <div
+    *ngIf="prescribersWithSelectedFacility.length > 0"
+    class="accordian-container">
+    <p class="text-large text-x-bold">Associated practice office(s)</p>
+    <p class="text-xmed text-medium">
+      Please verify the practice offices that you and the healthcare provider(s)
+      are both associated with.
+    </p>
+
+    <div
+      *ngFor="
+        let pescriberObject of prescribersWithSelectedFacility;
+        let prescriberIndex = index
+      "
+      class="all-accordians">
+      <mat-accordion>
+        <mat-expansion-panel (toggle)="toggleAccordian()">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Provider Name - {{ getPrescriberName(pescriberObject.NPI) }}
+            </mat-panel-title>
+            <mat-panel-description>
+              <app-custom-button
+                btnText="Edit"
+                btnClass="xm-small secondary"
+                (click)="
+                  editPrescriberFacilities(pescriberObject, prescriberIndex)
+                "></app-custom-button>
+              <app-custom-button
+                btnText="Delete"
+                btnClass="xm-small secondary"
+                (click)="
+                  deletePrescriberValues(pescriberObject, prescriberIndex)
+                "></app-custom-button>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <!-- <app-custom-table [dataSource]="facilities" [columnSchema]="columnSchema"
+          [displayedColumns]="displayedColumns"></app-custom-table> -->
+          <div class="accordian-content">
+            <table
+              mat-table
+              [dataSource]="pescriberObject.value"
+              class="mat-elevation-z8">
+              <ng-container matColumnDef="PracticeGroup">
+                <th class="" mat-header-cell *matHeaderCellDef>
+                  Practice Name
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.GroupName }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Address">
+                <th mat-header-cell *matHeaderCellDef>Address</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ getCompleteAddress(element) }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Phone">
+                <th mat-header-cell *matHeaderCellDef>Phone</th>
+                <td mat-cell *matCellDef="let element">{{ element.Phone }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Fax">
+                <th mat-header-cell *matHeaderCellDef>Fax</th>
+                <td mat-cell *matCellDef="let element">{{ element.Fax }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Email">
+                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let element">{{ element.Email }}</td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="accordianColumns"></tr>
+              <tr
+                mat-row
+                *matRowDef="
+                  let row;
+                  columns: accordianColumns;
+                  let i = index
+                "></tr>
+            </table>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+
+  <!-- end of accordian -->
+
+  <!-- some dialog work -->
+  <!-- <button mat-button (click)="openTempDialog()">Open Temp Modal</button> -->
+  <ng-template #dialogRef>
+    <div class="dialog-header">
+      <span class="text-x-bold text-xmed">Associated Practice Office(s)</span>
+    </div>
+    <div class="dialog-body">
+      <span class="text-xmed text-medium">
+        Please verify the practice offices that you and the healthcare provider
+        are both associated with.
+      </span>
+      <span class="text-x-bold text-med"
+        >Provider Name: {{ getPrescriberName('recently added') }}</span
+      >
+      <table mat-table [dataSource]="facilities" class="mat-elevation-z8">
+        <ng-container matColumnDef="Checkbox">
+          <th class="" mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox
+              (change)="getCheckbox(element)"
+              [checked]="element.isSelected"></mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="PracticeGroup">
+          <th class="" mat-header-cell *matHeaderCellDef>Practice Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.GroupName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Address">
+          <th mat-header-cell *matHeaderCellDef>Address</th>
+          <td mat-cell *matCellDef="let element">
+            {{ getCompleteAddress(element) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Phone">
+          <th mat-header-cell *matHeaderCellDef>Phone</th>
+          <td mat-cell *matCellDef="let element">{{ element.Phone }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Fax">
+          <th mat-header-cell *matHeaderCellDef>Fax</th>
+          <td mat-cell *matCellDef="let element">{{ element.Fax }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let element">{{ element.Email }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="dialogDisplayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="
+            let row;
+            columns: dialogDisplayedColumns;
+            let i = index
+          "></tr>
+      </table>
+    </div>
+    <div class="dialog-footer">
+      <app-custom-button
+        mat-button
+        mat-dialog-close
+        btnText="Close"
+        btnClass="secondary small text-x-bold text-xmed"
+        (click)="closeDialog()">
+      </app-custom-button>
+    </div>
+  </ng-template>
+
+  <!-- dialog work ends -->
+
   <div class="footer-buttons">
     <app-custom-button
+      *ngIf="requirementFor === 'othersRegistration'"
       btnText="< Back"
       btnClass="secondary s-medium text-x-bold text-xmed"
-      *ngIf="requirementFor === 'othersRegistration'">
+      (click)="navigateToPrevious()">
     </app-custom-button>
 
     <app-custom-button

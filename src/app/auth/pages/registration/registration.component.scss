@@ -118,6 +118,14 @@
               width: 42%;
             }
           }
+
+          .wrong-Npi-error-msg {
+            border-radius: 3px;
+            background: rgba(228, 155, 19, 0.2);
+            color: $color-error;
+            text-align: center;
+            margin-top: 2.1rem;
+          }
         }
 
         .confirm-account-information {
