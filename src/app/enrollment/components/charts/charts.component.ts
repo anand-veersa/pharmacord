@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { AppConstants } from 'src/app/constants/app.constants';
 @Component({
   selector: 'app-charts',
   templateUrl: './charts.component.html',
   styleUrls: ['./charts.component.scss'],
 })
-export class ChartsComponent implements OnInit {
+export class ChartsComponent implements OnChanges {
   @Input() data: any[] = [];
   private barWidth: number = 80;
   public labelLength: number = 0;
@@ -13,10 +13,6 @@ export class ChartsComponent implements OnInit {
   public chartData: any;
   public chartValues: number[] = [];
   constructor(public appConstants: AppConstants) {}
-
-  ngOnInit() {
-    console.log(this.data);
-  }
 
   ngOnChanges() {
     this.buildChart();

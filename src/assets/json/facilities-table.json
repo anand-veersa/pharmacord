@@ -1,0 +1,40 @@
+{
+  "columns": [
+    {
+      "key": "FacilityId",
+      "value": "",
+      "display": true,
+      "label": "Facility Id"
+    },
+    {
+      "key": "FacilityName",
+      "value": "",
+      "display": true,
+      "label": "Facility Name"
+    },
+    {
+      "key": "Address",
+      "value": "",
+      "display": true,
+      "label": "Address"
+    },
+    {
+      "key": "Phone",
+      "value": "",
+      "display": true,
+      "label": "Phone"
+    },
+    {
+      "key": "Fax",
+      "value": "",
+      "display": true,
+      "label": "Fax"
+    },
+    {
+      "key": "Email",
+      "value": "",
+      "display": true,
+      "label": "Email"
+    }
+  ]
+}

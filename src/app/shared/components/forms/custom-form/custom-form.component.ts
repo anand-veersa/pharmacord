@@ -5,12 +5,14 @@ import {
   ViewChild,
   ViewContainerRef,
   ChangeDetectorRef,
-  Renderer2,
-  ElementRef,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { JsonFormControls } from 'src/app/models/json-form-data.model';
 import { CustomCheckboxComponent } from '../custom-checkbox/custom-checkbox.component';
+import { CustomDatepickerComponent } from '../custom-datepicker/custom-datepicker.component';
 import { CustomInputComponent } from '../custom-input/custom-input.component';
 import { CustomRadioComponent } from '../custom-radio/custom-radio.component';
 import { CustomSelectComponent } from '../custom-select/custom-select.component';
@@ -25,20 +27,20 @@ export class CustomFormComponent implements AfterViewInit {
   dynamicForm!: ViewContainerRef;
   @Input() form!: FormGroup;
   @Input() formType: string = '';
-  @Input() field: any;
+  @Input() field: JsonFormControls;
   @Input() inputPrefix: string;
   @Input() customErrorMsg: string;
   @Input() isCustomError: boolean;
-
-  constructor(
-    private renderer: Renderer2,
-    private changeDetectorRef: ChangeDetectorRef,
-    private router: Router
-  ) {}
+  @Input() checked: any[];
+  @Output() action = new EventEmitter();
 
   public supportedDynamicComponents = [
     {
       type: 'text',
+      component: CustomInputComponent,
+    },
+    {
+      type: 'search',
       component: CustomInputComponent,
     },
     {
@@ -55,16 +57,21 @@ export class CustomFormComponent implements AfterViewInit {
     },
     {
       type: 'date',
-      component: CustomInputComponent,
+      component: CustomDatepickerComponent,
     },
     {
       type: 'checkbox',
       component: CustomCheckboxComponent,
     },
   ];
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private router: Router
+  ) {}
 
   ngAfterViewInit() {
-    const componentInstance = this.getComponentByType(this.field.type);
+    if (!this.dynamicForm) return;
+    const componentInstance = this.getComponentByType();
     const dynamicComponent =
       this.dynamicForm.createComponent(componentInstance);
     dynamicComponent.setInput('form', this.form);
@@ -75,12 +82,22 @@ export class CustomFormComponent implements AfterViewInit {
       dynamicComponent.setInput('isCustomError', this.isCustomError);
     }
     if (componentInstance === CustomInputComponent) {
-      dynamicComponent.setInput('inputPrefix', this.inputPrefix);
+      if (componentInstance === CustomInputComponent) {
+        dynamicComponent.setInput('inputPrefix', this.inputPrefix);
+      }
+    }
+    if (componentInstance === CustomCheckboxComponent) {
+      dynamicComponent.setInput('checked', this.checked);
+    }
+    if (componentInstance === CustomSelectComponent) {
+      dynamicComponent.instance.action.subscribe((data: string | number) =>
+        this.action.emit(data)
+      );
     }
     this.changeDetectorRef.detectChanges();
   }
 
-  getComponentByType(type: string) {
+  getComponentByType(): ComponentType {
     const dynamicComponent = this.supportedDynamicComponents.find(
       c => c.type === this.field.type
     );
@@ -88,11 +105,13 @@ export class CustomFormComponent implements AfterViewInit {
   }
 
   navigateRoute() {
-    console.log(this.field.extLink);
     if (this.field.extLink === 'Forgot Username?') {
       this.router.navigate(['/reset-username']);
     } else {
       this.router.navigate(['/reset-password']);
     }
   }
+}
+interface ComponentType<T = any> {
+  new (...args: any[]): T;
 }

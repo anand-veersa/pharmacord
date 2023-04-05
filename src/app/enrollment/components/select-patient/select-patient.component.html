@@ -1,0 +1,76 @@
+<div class="enroll-form">
+  <div class="primary-title flex toggle-panel">
+    <div>Patient Information</div>
+    <div class="flex">
+      <app-custom-button
+        btnText="New Patient"
+        [btnClass]="
+          patientType === 'new'
+            ? 'toggle-btn-1 x-small secondary'
+            : 'toggle-btn-1 x-small light'
+        "
+        (action)="changePatientType('new')"></app-custom-button>
+      <app-custom-button
+        btnText="Existing Patient"
+        [btnClass]="
+          patientType === 'existing'
+            ? 'toggle-btn-2 x-small secondary'
+            : 'toggle-btn-2 x-small light'
+        "
+        (action)="changePatientType('existing')"></app-custom-button>
+    </div>
+  </div>
+  <div class="sec-title">Please enter the patient's information.</div>
+  <div class="error-or-required tm-1">* Required field</div>
+  <div *ngIf="submitEnrolService.patientRepDetailForm" class="panel-fields">
+    <div class="panel">
+      <div
+        *ngFor="let control of submitEnrolService.patientDetails.controls"
+        [ngClass]="control.class ? control.class : 'tm-1'">
+        <app-custom-form
+          *ngIf="control.display"
+          [field]="control"
+          [form]="submitEnrolService.patientDetailForm"
+          formType="enrollment-form"
+          (action)="changePatient($event)"></app-custom-form>
+      </div>
+    </div>
+    <mat-divider vertical></mat-divider>
+    <div class="panel">
+      <div
+        *ngFor="let control of submitEnrolService.patientRepDetails.controls"
+        [ngClass]="control.class ?? 'tm-1'">
+        <app-custom-form
+          [field]="control"
+          [form]="submitEnrolService.patientRepDetailForm"
+          formType="enrollment-form"></app-custom-form>
+      </div>
+      <ng-container
+        *ngIf="
+          submitEnrolService.patientRepDetailForm.controls['applyPap'].value ===
+          'Y'
+        ">
+        <div
+          *ngFor="let control of submitEnrolService.patientPapDetails.controls"
+          [ngClass]="control.class ?? 'tm-2'">
+          <app-custom-form
+            [field]="control"
+            [form]="submitEnrolService.patientPapDetailForm"
+            formType="enrollment-form"></app-custom-form>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="submitEnrolService.patientRepDetailForm" class="action-panel">
+  <app-custom-button
+    btnClass="small secondary"
+    btnText="&#60; Back"
+    (action)="onAction('back')"></app-custom-button>
+  <app-custom-button
+    btnClass="small tertiary"
+    btnText="Next &#62;"
+    (action)="onAction('next')"
+    [isDisabled]="checkFormValidity()"></app-custom-button>
+</div>

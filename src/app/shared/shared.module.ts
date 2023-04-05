@@ -15,14 +15,14 @@ import { CustomFormComponent } from './components/forms/custom-form/custom-form.
 import { ChartModule } from 'primeng/chart';
 import { MaterialModule } from '../material.module';
 import { RouterModule } from '@angular/router';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 
 import { LocalStorageService } from './services/local-storage.service';
 import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinner.component';
 import { CustomErrorComponent } from './components/forms/custom-error/custom-error.component';
-import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component';
 import { CustomTableComponent } from './components/custom-table/custom-table.component';
 import { CustomExpansionPanelComponent } from './components/custom-expansion-panel/custom-expansion-panel.component';
+import { CustomDatepickerComponent } from './components/forms/custom-datepicker/custom-datepicker.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +37,9 @@ import { CustomExpansionPanelComponent } from './components/custom-expansion-pan
     CustomInputComponent,
     CustomSpinnerComponent,
     CustomErrorComponent,
-    PdfViewerComponent,
     CustomTableComponent,
     CustomExpansionPanelComponent,
+    CustomDatepickerComponent,
   ],
   imports: [
     CommonModule,
@@ -48,7 +48,7 @@ import { CustomExpansionPanelComponent } from './components/custom-expansion-pan
     ReactiveFormsModule,
     ChartModule,
     RouterModule,
-    PdfViewerModule,
+    PdfJsViewerModule,
   ],
   exports: [
     HeaderComponent,

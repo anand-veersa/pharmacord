@@ -3,16 +3,19 @@
     {
       "key": "DocumentType",
       "value": "",
+      "display": true,
       "label": "Document Name and Type Needed"
     },
     {
       "key": "DocumentDate",
       "value": "",
+      "display": true,
       "label": "Date"
     },
     {
       "key": "DocumentURL",
       "value": "",
+      "display": true,
       "label": "Document URL"
     }
   ]

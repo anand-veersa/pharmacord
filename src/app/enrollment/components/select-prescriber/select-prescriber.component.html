@@ -1,0 +1,35 @@
+<div class="facilities" *ngIf="prescriberFacilities">
+  <div class="facilities-header">
+    <div class="primary-title">
+      Facilities for {{ selectedPrescriber.FirstName }}
+      {{ selectedPrescriber.LastName }}
+    </div>
+    <div class="text-small tm-1 text-medium">
+      Please select the facility that will be associated with this enrollment
+      form.
+    </div>
+  </div>
+  <div class="facility-table">
+    <app-custom-table
+      [dataSource]="facilities"
+      [columnSchema]="columnSchema"
+      [displayedColumns]="displayedColumns"
+      [pageSizeOptions]="pageSizeOptions"
+      [selected]="{
+        key: 'FacilityId',
+        value: submitEnrolService.selectedFacilityId
+      }"
+      (action)="facilitySelected($event)"></app-custom-table>
+  </div>
+  <div class="action-panel">
+    <app-custom-button
+      btnClass="small secondary"
+      btnText="&#60; Back"
+      (action)="onAction('back')"></app-custom-button>
+    <app-custom-button
+      btnClass="small tertiary"
+      btnText="Next &#62;"
+      (action)="onAction('next')"
+      [isDisabled]="!submitEnrolService.selectedFacility"></app-custom-button>
+  </div>
+</div>

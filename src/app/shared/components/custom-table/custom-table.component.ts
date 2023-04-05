@@ -1,14 +1,16 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-custom-table',
@@ -21,13 +23,41 @@ export class CustomTableComponent implements AfterViewInit {
   @Input() displayedColumns: string[];
   @Input() pageSizeOptions: number[];
   @Input() pdfSrc: string;
+  @Input() showBlueHeader: boolean = true;
   @Output() action = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  onAction(event: any) {
+  constructor(
+    private _liveAnnouncer: LiveAnnouncer,
+    private changeDetector: ChangeDetectorRef
+  ) {}
+  @Input() selected: { key: string; value: any };
+  public selectedRow: number;
+
+  public checkSelected(a: number, b: any): boolean {
+    if (!this.selected) return false;
+    return b[this.selected.key] === this.selected.value;
+  }
+  public onRowClicked(selectedRowIndex: number): void {
+    this.selectedRow = selectedRowIndex;
+  }
+
+  public onAction(event: any): void {
     this.action.emit(event);
   }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.changeDetector.detectChanges();
+  }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
 }

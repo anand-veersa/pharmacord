@@ -4,8 +4,10 @@
       <img
         src="../../../../assets/images/patient_icon.svg"
         alt="Patient Icon" />
-      <span>{{ patientCases[0]?.PatientName }}</span>
-      <span> (Patient Id: {{ patientCases[0]?.PatientId }})</span>
+      <figcaption>
+        <span>{{ patientCases[0]?.PatientName }}</span>
+        <span> (Patient Id: {{ patientCases[0]?.PatientId }})</span>
+      </figcaption>
     </div>
     <div class="action-buttons">
       <app-custom-button
@@ -27,7 +29,8 @@
         [columnSchema]="caseColumnSchema"
         [displayedColumns]="casesDisplayedColumns"
         [pageSizeOptions]="pageSizeOptions"
-        (action)="getCaseDetails($event)">
+        [selected]="selectedCase"
+        (action)="changeCases($event)">
         ></app-custom-expansion-panel
       >
 

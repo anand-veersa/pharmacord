@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppConstants } from 'src/app/constants/app.constants';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { EnrollmentService } from '../../enrollment.service';
@@ -46,7 +46,7 @@ export class ToolsAndFormsComponent implements OnInit {
     });
   }
   showPdf(fileName: string, page: number = 1, downloadName: string) {
-    this.pdfSrc = `assets/docs/${fileName}.pdf`;
+    this.pdfSrc = `/assets/docs/${fileName}.pdf`;
     this.pdfPage = page;
     this.downloadFileName = downloadName;
   }

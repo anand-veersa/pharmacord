@@ -3,7 +3,7 @@
     <app-sidenav></app-sidenav>
   </div>
   <div class="main">
-    <div class="action-panel">
+    <div class="action-panel" *ngIf="!enrollCreationActive">
       <div class="medicine-list">
         <app-custom-button
           *ngIf="enableAllMeds"
@@ -54,10 +54,12 @@
         <app-custom-button
           btnIcon="form_icon.svg"
           btnClass="tertiary small"
-          btnText="Submit Enrollment Form"></app-custom-button>
+          btnText="Submit Enrollment Form"
+          iconPlace="prefix"
+          (action)="startEnrollment()"></app-custom-button>
       </div>
     </div>
-    <div class="tab-content">
+    <div [ngClass]="{ 'tab-content': !enrollCreationActive }">
       <router-outlet></router-outlet>
     </div>
   </div>

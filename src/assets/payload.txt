@@ -1,0 +1,166 @@
+{
+    "ExtRefId": "1679307579053",
+    "PopulatePdfFlag": true,
+    "DrugGroup": "Jemperli",
+    "EnrollmentServiceRequests": [
+        {
+            "Id": 1,
+            "Name": "CoverageSupport"
+        },
+        {
+            "Id": 3,
+            "Name": "PatientAssistanceProgram"
+        },
+        {
+            "Id": 12,
+            "Name": "AlternateCoverageSupport"
+        },
+        {
+            "Id": 2,
+            "Name": "CommercialCopayAssistance"
+        }
+    ],
+    "Patient": {
+        "FirstName": "Check",
+        "LastName": "Doc",
+        "DOB": "03082012",
+        "Gender": "M",
+        "MMRStatus": [
+            "dMMR",
+            "MMRp"
+        ],
+        "DiagnosisCodes": [
+            "MNE"
+        ],
+        "OtherDiagnosisCodes": "uiythgjk",
+        "PriorTherapies": [
+            "TreatementWithPlatinum",
+            "Other"
+        ],
+        "OtherPriorTherapies": [
+            "jjhjkjlkkj"
+        ],
+        "Address1": "J1201",
+        "Address2": "french Apartments",
+        "City": "Noida",
+        "State": "AK",
+        "Zip": "20130",
+        "PatientEmailAddress": "doc@check.com",
+        "PatientId": null,
+        "Phones": [
+            {
+                "Type": "Home",
+                "Number": "8976543467"
+            },
+            {
+                "Type": "Mobile",
+                "Number": "7878654565"
+            }
+        ],
+        "AlternateContact": {
+            "FirstName": "Andrew",
+            "LastName": "Tate",
+            "RelationshipToPatient": "Father",
+            "Phone": "8765434567"
+        },
+        "BestContactTime": "Day"
+    },
+    "Financial": {
+        "HouseholdGrossAnnualIncome": "7890",
+        "NumberOfMembersInHousehold": "6"
+    },
+    "Insurance": {
+        "MBI": "9A99AA9AA99",
+        "MedicalInsurance": "Y",
+        "PharmacyInsurance": "Y",
+        "MedicalPlans": [
+            {
+                "Type": "Medicaid",
+                "PolicyHolderEmployer": "oiuytrkjhj",
+                "PlanName": "iuytrfghjkljh",
+                "Phone": "8765457890",
+                "PlanRank": "Primary",
+                "PolicyID": "65678976568",
+                "SubscriberName": "jvghffhhklhj",
+                "SubscriberDOB": "03102023",
+                "RelationshipToSubscriber": "UNKNOWN",
+                "GroupNo": "7655678978",
+                "AttachDoc": [
+                    {
+                        "file": ""
+                    }
+                ]
+            },
+            {
+                "Type": "Medicaid",
+                "PolicyHolderEmployer": "hjhjjkjkjk",
+                "PlanName": ",jkhjgkjjkjk",
+                "Phone": "7868778888",
+                "PlanRank": "Secondary",
+                "PolicyID": "876547",
+                "SubscriberName": "uuuuuuu",
+                "SubscriberDOB": "03232000",
+                "RelationshipToSubscriber": "Spouse",
+                "GroupNo": "87654578",
+                "AttachDoc": []
+            }
+        ]
+    },
+    "PrescriptionInformation": {
+        "Quantity": null,
+        "Strength": "Injection: clear to slightly opalescent, colorless to yellow solution supplied in a carton containing one 500 mg/10 mL (50 mg/mL), single-dose vial (NDC 0173-0898-03). ",
+        "DirectionForAdministration": [
+            "Dose 1 through 4: 500 mg every 3 weeks.",
+            "Subsequent dosing beginning 3 weeks after Dose 4 (Dose5 onwards): 1000 mg every 6 weeks.",
+            "Administer as an intravenous infusion over 30 minutes."
+        ]
+    },
+    "Provider": {
+        "FirstName": "JENNINE",
+        "LastName": "CABANELLAS",
+        "NPI": "1003004540",
+        "TaxID": "87-6545678",
+        "Facility": {
+            "Id": 1000029849,
+            "NPI": "6757898789",
+            "TaxId": "87-6578989",
+            "Name": "Florida Oncology Treatment Center",
+            "Address1": "sector 142",
+            "Address2": null,
+            "City": "noida",
+            "State": "AL",
+            "Zip": "20110",
+            "OfficeContactName": "ASDEF"
+        },
+        "Phones": [
+            {
+                "Number": "9382832322",
+                "Ext": "6778"
+            }
+        ],
+        "Fax": "7677676767",
+        "Email": "qaveersa+nurseone@gmail.com",
+        "OtherFacilities": [
+            {
+                "Name": "Shipping",
+                "OfficeContactName": "Recipient",
+                "Phone": "8765467890",
+                "Address1": "J1201 french Apartments",
+                "Address2": null,
+                "City": "Noida",
+                "State": "AL",
+                "Zip": "20130",
+                "FacilityType": "Hospital Outpatient"
+            }
+        ]
+    },
+    "Attestation": {
+        "IsPatientAttestationConsent": true,
+        "PrescriberDeclaration": "true",
+        "TextingOptIn": true,
+        "PAPEnrollment": true,
+        "HIPPAAuthorization": true,
+        "PSPEnrollment": false,
+        "PatientEmail": "doc@check.com"
+    }
+}

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { LocalStorageService } from '../shared/services/local-storage.service';
 import { AppConstants } from '../constants/app.constants';
 import { Router } from '@angular/router';
@@ -16,10 +16,12 @@ export class AuthService {
     email: string;
     phone: number;
     fax: string;
-    providers: any[];
+    prescribers: any[];
     portalAccountPkId: number;
     role: any;
   };
+  public userFullName = new BehaviorSubject<string>('');
+
   public publicRoutes: string[] = [
     '/login',
     '/reset-password',
@@ -48,16 +50,16 @@ export class AuthService {
     );
   }
 
-  public logout() {
+  public logout(): Observable<any> {
     const { UserName } = JSON.parse(this.localStorage.getItem('userData'));
-    return this.http
-      .post<any>(`${environment.baseUrl}account/logout`, { Email: UserName })
-      .subscribe(res => this.logoutWithoutToken());
+    return this.http.post<any>(`${environment.baseUrl}account/logout`, {
+      Email: UserName,
+    });
   }
 
   public logoutWithoutToken() {
     this.localStorage.clear();
-    this.router.navigate(['/logout']);
+    this.router.navigate(['/login']);
   }
 
   private handleAuthentication(data: any) {
@@ -68,9 +70,6 @@ export class AuthService {
       RefreshToken,
     } = data.Payload;
     const UserName = data.Parameters.Email;
-    const expirationDate = new Date(
-      new Date().getTime() + this.appConstants.TOKEN_EXPIRY_DURATION * 1000
-    );
     this.localStorage.setItem(
       'userData',
       JSON.stringify({

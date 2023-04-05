@@ -1,0 +1,19 @@
+<div class="form-header">
+  <div class="primary-title">
+    <span>{{ title }}</span>
+  </div>
+  <div class="stepper"></div>
+  <div class="prescriber" *ngIf="selectPrescriberForm">
+    <img
+      src="../../../../assets/images/prescriber_icon.svg"
+      alt="Prescriber Icon" />
+    <div class="prescriber-list">
+      <span class="prescriber-name">Select a Prescriber</span>
+      <app-custom-form
+        formType="select-prescriber"
+        [field]="selectPrescriberField.controls[0]"
+        [form]="selectPrescriberForm"
+        (action)="prescriberChanged.emit($event)"></app-custom-form>
+    </div>
+  </div>
+</div>

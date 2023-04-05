@@ -1,0 +1,218 @@
+{
+  "leftPanel": {
+    "controls": [
+      {
+        "name": "selectName",
+        "value": "",
+        "display": false,
+        "label": "Select Name",
+        "placeholder": "Select Name",
+        "type": "select",
+        "validators": { "required": true }
+      },
+      {
+        "name": "firstName",
+        "value": "",
+        "display": true,
+        "label": "First Name",
+        "placeholder": "Enter your first name",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "lastName",
+        "value": "",
+        "display": true,
+        "label": "Last Name",
+        "placeholder": "Enter your last name",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "ssn",
+        "value": "",
+        "display": true,
+        "label": "Last 4 Digits of SSN",
+        "placeholder": "Enter your last 4 digits of SSN",
+        "type": "text",
+        "validators": { "required": true, "min": 4, "max": 4 }
+      },
+      {
+        "name": "sex",
+        "value": "",
+        "display": true,
+        "label": "Sex",
+        "placeholder": "",
+        "type": "radio",
+        "validators": { "required": true },
+        "options": [
+          {
+            "label": "Male",
+            "value": "M"
+          },
+          {
+            "label": "Female",
+            "value": "F"
+          }
+        ],
+        "disabled": false
+      },
+      {
+        "name": "dob",
+        "value": "",
+        "display": true,
+        "label": "Date of Birth",
+        "placeholder": "mm/dd/yyyy",
+        "type": "date",
+        "validators": { "required": true },
+        "disabled": false
+      },
+      {
+        "name": "patientAddress",
+        "value": "",
+        "display": true,
+        "label": "Patient Address",
+        "placeholder": "Enter your patient address",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "city",
+        "value": "",
+        "display": true,
+        "label": "City",
+        "placeholder": "Enter your city",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "state",
+        "value": "",
+        "display": true,
+        "label": "State",
+        "placeholder": "Enter your state",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "zipcode",
+        "value": "",
+        "display": true,
+        "label": "Zip Code",
+        "placeholder": "Enter your zip code",
+        "type": "text",
+        "validators": { "required": true, "min": 5, "max": 5 }
+      }
+    ]
+  },
+  "rightPanel": {
+    "controls": [
+      {
+        "name": "homePhone",
+        "value": "",
+        "display": true,
+        "label": "Home Phone #",
+        "placeholder": "Enter your home phone number",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "cell Phone",
+        "value": "",
+        "display": true,
+        "label": "Cell Phone #",
+        "placeholder": "Enter your home phone number",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "email",
+        "value": "",
+        "display": true,
+        "label": "Email Address",
+        "placeholder": "Enter your email address",
+        "type": "email",
+        "validators": { "required": true, "email": true }
+      },
+      {
+        "name": "repCaregiverName",
+        "value": "",
+        "display": true,
+        "label": "Patient Representative/Caregiver Name",
+        "placeholder": "Enter your Patient Representative/Caregiver Name",
+        "type": "text",
+        "validators": {},
+        "class": "tm-2"
+      },
+      {
+        "name": "repCaregiverRelation",
+        "value": "",
+        "display": true,
+        "label": "Patient Representative/Caregiver Relationship to Patient",
+        "placeholder": "Select your Patient Representative/Caregiver Relationship to ...",
+        "type": "type",
+        "validators": {},
+        "class": "tm-2"
+      },
+      {
+        "name": "repCaregiverPhone",
+        "value": "",
+        "display": true,
+        "label": "Patient Representative/Caregiver Phone #",
+        "placeholder": "Enter your patient representative/caregiver phone #",
+        "type": "text",
+        "validators": {},
+        "class": "tm-2"
+      },
+      {
+        "name": "applyPap",
+        "value": "N",
+        "label": "Apply for Patient Assistance Program",
+        "placeholder": "Enter your city",
+        "type": "radio",
+        "validators": {},
+        "options": [
+          {
+            "label": "Yes",
+            "value": "Y"
+          },
+          {
+            "label": "No",
+            "value": "N"
+          }
+        ]
+      }
+    ]
+  },
+  "pap": {
+    "controls": [
+      {
+        "name": "mbi",
+        "value": "",
+        "display": true,
+        "label": "Medicare Beneficiary Identifier (MBI)",
+        "placeholder": "Enter your Medicare Beneficiary Identifier (MBI)",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "householdIncome",
+        "value": "",
+        "display": true,
+        "label": "Annual pre-tax household income",
+        "placeholder": "Enter your Annual pre-tax household income",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "familyStrength",
+        "value": "",
+        "display": true,
+        "label": "Number of family members living in household",
+        "placeholder": "Enter your number of family members living in household",
+        "type": "text",
+        "validators": { "required": true }
+      }
+    ]
+  }
+}

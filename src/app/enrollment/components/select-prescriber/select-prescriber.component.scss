@@ -1,0 +1,14 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.facilities-header {
+  background-color: $color-white;
+  padding: 2rem;
+  border-radius: 0.8rem 0.8rem 0 0;
+  border: $border-style;
+}
+.action-panel {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 2rem;
+}

@@ -44,6 +44,11 @@ button:disabled {
   padding: 0.8rem 1.7rem;
 }
 
+.light {
+  background-color: $color-white;
+  color: $color-header;
+  border: $border-style;
+}
 .x-small {
   font-size: 1rem;
   line-height: 2rem;
@@ -100,4 +105,27 @@ button:disabled {
 
 .x-large {
   padding: 0.8rem 8rem;
+}
+
+.login-form-btn {
+  width: 100%;
+  background-color: $color-tertiary;
+  align-items: center;
+  padding: 1.4rem;
+  border: none;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 2.9rem;
+  color: $color-white;
+  border-radius: 10px;
+  justify-content: center;
+}
+
+.toggle-btn {
+  &-1 {
+    border-radius: 0.6rem 0 0 0.6rem;
+  }
+  &-2 {
+    border-radius: 0 0.6rem 0.6rem 0;
+  }
 }

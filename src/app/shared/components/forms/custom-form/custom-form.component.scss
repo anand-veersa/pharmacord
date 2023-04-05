@@ -7,34 +7,39 @@
     line-height: 3rem;
     color: $color-white;
   }
-}
 
-label {
-  font-weight: 700;
-  font-size: 1.7rem;
-  line-height: 2.8rem;
-  color: $color-grey-dark;
+  & > .extLinkDiv {
+    display: flex;
+    justify-content: flex-end;
+    .extLink {
+      margin-top: 0.7rem;
+      font-family: $tertiary-font;
+      font-weight: 700;
+      font-size: 1.8rem;
+      line-height: 2.9rem;
+      text-decoration-line: underline;
+      color: $color-white;
+      cursor: pointer;
+    }
+  }
 
-  .asterick {
-    color: $color-error;
+  .extLinkDiv {
+    display: none;
   }
 }
 
-.login-form > .extLinkDiv {
+::ng-deep .enrollment-form {
   display: flex;
-  justify-content: flex-end;
-  .extLink {
-    margin-top: 0.7rem;
-    font-family: $tertiary-font;
-    font-weight: 700;
-    font-size: 1.8rem;
-    line-height: 2.9rem;
-    text-decoration-line: underline;
-    color: $color-white;
-    cursor: pointer;
+  align-items: center;
+  label {
+    color: $color-grey-dark-4;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    flex-basis: 40%;
   }
-}
-
-.extLinkDiv {
-  display: none;
+  app-custom-input,
+  app-custom-radio {
+    flex-basis: 60%;
+  }
 }

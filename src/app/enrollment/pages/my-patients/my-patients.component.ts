@@ -15,6 +15,7 @@ import { EnrollmentService } from '../../enrollment.service';
 })
 export class MyPatientsComponent implements OnInit {
   public cases = new MatTableDataSource<Patient>([]);
+  public filteredCases = new MatTableDataSource<Patient>([]);
   public displayedColumns: string[] = [];
   public columnSchema: any[] = [];
   public pageSizeOptions: number[] = [10, 20, 50];
@@ -37,13 +38,14 @@ export class MyPatientsComponent implements OnInit {
 
   ngOnInit() {
     this.enrolService.medicineCases.subscribe((data: any[]) => {
-      this.createTableData(data);
+      const dataCasesByPatient = this.sharedService.getPatients(data);
+      this.createTableData(dataCasesByPatient);
     });
     this.searchField = {
       name: 'search',
       label: '',
       value: '',
-      type: 'text',
+      type: 'search',
       placeholder: 'Search',
     };
     this.searchForm = this.sharedService.buildForm({
@@ -51,42 +53,38 @@ export class MyPatientsComponent implements OnInit {
     });
   }
 
-  createTableData(cases: any[]): void {
-    cases.sort(
-      (a, b) => parseInt(b.CaseId.slice(3)) - parseInt(a.CaseId.slice(3))
-    );
-    const uniqueIds: any[] = [];
-    const dataCasesByPatient = cases.filter((c: any) => {
-      const isDuplicate = uniqueIds.includes(c.PatientId + c.DrugGroup.Value);
-      if (!isDuplicate) {
-        uniqueIds.push(c.PatientId + c.DrugGroup.Value);
-        return true;
-      }
-      return;
+  public patientSelected(patient: Patient): void {
+    this.router.navigate([`${patient.PatientId}`], {
+      queryParams: { case: patient.CaseId },
+      relativeTo: this.route,
     });
-    const patientCases: any[] = [];
-    dataCasesByPatient.forEach((item, index) => {
+  }
+
+  public filterPatients(): void {
+    this.filteredCases.data = this.sharedService.filterSearch(
+      this.searchForm.value?.search,
+      this.cases?.data
+    );
+  }
+
+  private createTableData(patientCases: any): void {
+    const cases: any[] = [];
+    patientCases.forEach((item: any) => {
       const patientCase = {
         PatientId: item.PatientId,
         CaseId: item.CaseId,
         FirstName: item.PatientName.split(' ')[0],
         LastName: item.PatientName.split(' ').at(-1),
         DateOfBirth: item.DateOfBirth,
-        Provider: this.sharedService.getProviderName(item['prescriberId ']),
+        Prescriber: this.sharedService.getPrescriberName(item['prescriberId ']),
         DateSubmitted: this.sharedService.getFormattedDate(item.CaseStartDate),
         EnrollmentStatus: item.EnrollmentStatus,
         Product: item.DrugGroup.Value,
         ActionNeeded: item.ActionNeeded ? 'Yes' : 'No',
       };
-      patientCases.push(patientCase);
+      cases.push(patientCase);
     });
-    this.cases.data = patientCases;
-  }
-
-  patientSelected(patient: Patient) {
-    this.router.navigate([`${patient.PatientId}`], {
-      queryParams: { case: patient.CaseId },
-      relativeTo: this.route,
-    });
+    this.cases.data = cases;
+    this.filteredCases.data = cases;
   }
 }

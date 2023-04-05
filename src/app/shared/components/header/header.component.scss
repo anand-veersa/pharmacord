@@ -8,7 +8,7 @@
   &-left {
     .htext {
       font-size: 2.8rem;
-      font-family: $primary-font;
+      font-family: $secondary-font;
       &-top {
         color: $color-header;
         margin-bottom: 0.5rem;
@@ -25,55 +25,57 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    font-family: $secondary-font;
 
     .htext {
       color: $color-tertiary;
       line-height: 3rem;
-      padding-right: 2.6rem;
     }
     .auth {
       display: flex;
       align-items: center;
       color: $color-tertiary;
       font-weight: 700;
+      font-size: 1.6rem;
     }
     .user {
-      padding: 0 2rem;
       display: flex;
       align-items: center;
+      &-welcome {
+        margin-left: 0.5rem;
+        text-decoration: underline;
+        text-underline-position: under;
+      }
     }
     .logout {
-      padding-right: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       cursor: pointer;
+      .exit-icon {
+        padding-right: 0.25rem;
+      }
     }
     .primary-contact {
-      font-size: 2rem;
-      font-family: $primary-font;
-      font-weight: 700;
-    }
-    .secondary-contact {
-      font-size: 1.2rem;
-      font-family: $primary-font;
-      font-weight: 700;
+      display: flex;
+      justify-content: center;
     }
     .office-timings {
-      font-size: 1.4rem;
-      color: $color-grey-dark;
-      font-family: $primary-font;
-      font-weight: 700;
+      color: $color-tertiary;
+      padding-top: 0.5rem;
+    }
+    .text-right {
+      text-align: right;
     }
   }
   &-logo {
     height: 9.5rem;
     width: 16.5rem;
   }
-}
-
-.border-right {
-  padding: 0 2rem;
-  border-right: 2px solid $color-sub-header;
-}
-.border-left {
-  padding: 0 2rem;
-  border-left: 2px solid $color-sub-header;
+  &-divider {
+    border: 2px solid $color-sub-header;
+    opacity: 0.2;
+    margin: 0 2rem;
+    min-height: 5.25rem;
+  }
 }

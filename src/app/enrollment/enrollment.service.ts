@@ -1,11 +1,10 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   BehaviorSubject,
   catchError,
   map,
   Observable,
-  Subject,
   tap,
   throwError,
 } from 'rxjs';
@@ -15,6 +14,7 @@ import { AuthService } from '../auth/auth.service';
 export class EnrollmentService {
   public selectedMedicine = new BehaviorSubject<string>('');
   public medicineCases = new BehaviorSubject<any[]>([]);
+  public submitFormInitiated = new BehaviorSubject<boolean>(false);
   public cases = new BehaviorSubject<any[]>([]);
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -29,12 +29,12 @@ export class EnrollmentService {
       );
   }
 
-  public getProviderCases(
-    providerId: number,
+  public getPrescriberCases(
+    prescriberId: number,
     userPortalPkId: number
   ): Observable<any> {
     return this.http.get<any>(
-      `${environment.baseUrl}provider/cases/prescriber?prescriberIds=${providerId}&masterPortalAccountId=${userPortalPkId}`
+      `${environment.baseUrl}provider/cases/prescriber?prescriberIds=${prescriberId}&masterPortalAccountId=${userPortalPkId}`
     );
   }
 
@@ -60,11 +60,12 @@ export class EnrollmentService {
       PortalAccountPkId,
       Role,
     } = data.Payload;
+    this.authService.userFullName.next(`${FirstName} ${LastName}`);
     this.authService.user = {
       firstName: FirstName,
       lastName: LastName,
       username: Username,
-      providers: Providers,
+      prescribers: Providers,
       email: UserDetails.Email,
       phone: UserDetails.Phone,
       fax: UserDetails.Fax,
