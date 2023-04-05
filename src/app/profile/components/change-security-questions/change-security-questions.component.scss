@@ -4,21 +4,12 @@
 ::ng-deep {
   .change-security-ques {
     padding: 2.4rem 5.5rem;
-    .mat-mdc-form-field-infix {
-      padding: 0 !important;
-      min-height: 3.5rem;
-      max-height: 4rem;
-      font-family: $tertiary-font;
-      font-weight: 700;
-      font-size: 2rem;
-      line-height: 2.9rem;
-      color: $color-grey-dark;
+    @include respond(tab-land) {
+      padding: 1rem;
     }
-
     .mat-mdc-form-field {
-      width: 100%;
       &-subscript-wrapper {
-        display: none;
+        max-height: 1.8rem;
       }
     }
     .input-fields {
@@ -28,13 +19,6 @@
       }
       &-question1 > div {
         padding-top: 5.2rem;
-      }
-      &-question1,
-      &-question2,
-      &-question3 {
-        > div {
-          margin-bottom: 1.8rem;
-        }
       }
       &-answer2 > div {
         margin-bottom: 4rem;
