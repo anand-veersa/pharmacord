@@ -2,10 +2,10 @@ import {
   AfterViewInit,
   Component,
   Input,
+  Output,
   ViewChild,
   ViewContainerRef,
   ChangeDetectorRef,
-  Output,
   EventEmitter,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';

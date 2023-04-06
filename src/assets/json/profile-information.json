@@ -1,0 +1,63 @@
+{
+  "controls": [
+    {
+      "name": "firstName",
+      "value": "",
+      "label": "First Name",
+      "placeholder": "Enter your First Name",
+      "type": "text",
+      "validators": { "required": true },
+      "options": {}
+    },
+    {
+      "name": "lastName",
+      "value": "",
+      "label": "Last Name",
+      "placeholder": "Enter your Last Name",
+      "type": "text",
+      "validators": {
+        "required": true,
+        "pattern": "^[A-Za-z]+$"
+      },
+      "options": {}
+    },
+    {
+      "name": "phone",
+      "value": "",
+      "label": "Phone",
+      "placeholder": "Enter your Phone",
+      "type": "number",
+      "validators": {
+        "required": true,
+        "min": 10,
+        "max": 10
+      },
+      "options": {}
+    },
+    {
+      "name": "fax",
+      "value": "",
+      "label": "Fax",
+      "placeholder": "Enter your Fax",
+      "type": "number",
+      "validators": {
+        "required": true,
+        "min": 10,
+        "max": 10
+      },
+      "options": {}
+    },
+    {
+      "name": "email",
+      "value": "",
+      "label": "Email Address",
+      "placeholder": "Enter your Email Address",
+      "type": "email",
+      "validators": {
+        "required": true,
+        "pattern": "^\\S+@\\S+\\.\\S+$"
+      },
+      "options": {}
+    }
+  ]
+}
