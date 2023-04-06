@@ -7,4 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class AccountSettingsComponent {
   @Input() cases: any[] = [];
+  public facilityTabTitle = 'Manage Practice Office(s)';
+  public facilityTabSubTitle =
+    'Please add or update the Practice/Facility information associated with this account.';
 }

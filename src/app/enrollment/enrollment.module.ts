@@ -25,6 +25,7 @@ import { SubmitEnrollmentService } from './pages/submit-enrollment/submit-enroll
 import { SelectServicesComponent } from './components/select-services/select-services.component';
 import { SelectPatientComponent } from './components/select-patient/select-patient.component';
 import { PrescriberDetailsComponent } from './components/prescriber-details/prescriber-details.component';
+import { AuthModule } from '../auth/auth.module';
 @NgModule({
   declarations: [
     EnrollmentComponent,
@@ -43,6 +44,7 @@ import { PrescriberDetailsComponent } from './components/prescriber-details/pres
     SelectPatientComponent,
     PrescriberDetailsComponent,
   ],
+  providers: [EnrollmentService, SubmitEnrollmentService],
   imports: [
     CommonModule,
     EnrollmentRoutingModule,
@@ -50,7 +52,7 @@ import { PrescriberDetailsComponent } from './components/prescriber-details/pres
     MaterialModule,
     ChartModule,
     PdfJsViewerModule,
+    AuthModule,
   ],
-  providers: [EnrollmentService, SubmitEnrollmentService],
 })
 export class EnrollmentModule {}

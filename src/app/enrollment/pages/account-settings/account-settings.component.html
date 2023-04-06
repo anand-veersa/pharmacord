@@ -1,1 +1,16 @@
-<p>account-settings works!</p>
+<mat-tab-group animationDuration="1000ms">
+  <mat-tab label="Facility">
+    <div class="facility-container">
+      <app-add-facility
+        [title]="facilityTabTitle"
+        [subTitle]="facilityTabSubTitle"
+        requirementFor="accountSetting"></app-add-facility>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Provider">
+    <div class="provider-container">
+      <app-add-healthcare-provider> </app-add-healthcare-provider>
+    </div>
+  </mat-tab>
+</mat-tab-group>

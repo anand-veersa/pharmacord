@@ -1,5 +1,17 @@
 @import '../../../../../assets/styles/abstracts/variables';
 
+label {
+  display: flex;
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 2.8rem;
+  color: $color-grey-dark;
+
+  .asterick {
+    color: $color-error;
+  }
+}
+
 .login-form {
   label {
     font-size: 2rem;
