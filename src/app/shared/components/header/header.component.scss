@@ -4,7 +4,9 @@
   padding-right: 2.4rem;
   display: flex;
   justify-content: space-between;
-
+  &-spacer {
+    padding: 0 7rem 0 4rem;
+  }
   &-left {
     .htext {
       font-size: 2.8rem;
