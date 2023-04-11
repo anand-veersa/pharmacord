@@ -27,8 +27,10 @@
 }
 
 .custom-table {
-  overflow: auto;
   width: 100%;
+  &-wrapper {
+    overflow-x: auto;
+  }
   &-paginator {
     background: $color-blue-light-1;
     display: flex;
