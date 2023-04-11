@@ -122,6 +122,13 @@ button:disabled {
   line-height: 2.4rem;
 }
 
+.tools-and-form-btns {
+  font-family: $primary-font;
+  font-weight: 700;
+  padding: 0.5rem 1.4rem;
+  line-height: 2rem;
+}
+
 .toggle-btn {
   &-1 {
     border-radius: 0.6rem 0 0 0.6rem;
