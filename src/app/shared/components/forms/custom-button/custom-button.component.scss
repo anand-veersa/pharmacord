@@ -93,7 +93,7 @@ button:disabled {
   font-weight: 700;
   line-height: 2.9rem;
   color: $color-white;
-  border-radius: 10px;
+  border-radius: 1rem;
   justify-content: center;
 }
 
@@ -112,21 +112,6 @@ button:disabled {
   font-size: 1.4rem;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
-}
-
-.patient-cases-btn {
-  font-size: 1.8rem;
-  font-family: $primary-font;
-  font-weight: 700;
-  padding: 0.6rem 1.2rem;
-  line-height: 2.4rem;
-}
-
-.tools-and-form-btns {
-  font-family: $primary-font;
-  font-weight: 700;
-  padding: 0.5rem 1.4rem;
-  line-height: 2rem;
 }
 
 .toggle-btn {
