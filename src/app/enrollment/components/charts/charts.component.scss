@@ -9,7 +9,7 @@
   .bar-chart {
     background-color: $color-white;
     border: 2px solid $color-border-3;
-    border-radius: 0.8rem 0px 0px 0.8rem;
+    border-radius: 0.8rem 0 0 0.8rem;
     padding: 3rem;
     width: 75%;
     @include respond(tab-port) {
