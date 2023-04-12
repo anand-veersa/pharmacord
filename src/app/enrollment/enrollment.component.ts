@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { AppConstants } from '../constants/app.constants';
@@ -17,6 +17,12 @@ export class EnrollmentComponent implements OnInit {
   public cases: any[] = [];
   public enableAllMeds: boolean = false;
   public enrollCreationActive: boolean = false;
+  public screenWidth: number;
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.screenWidth = window.innerWidth;
+  }
 
   constructor(
     private enrolService: EnrollmentService,
@@ -49,6 +55,7 @@ export class EnrollmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.screenWidth = window.innerWidth;
     this.enrolService.submitFormInitiated.subscribe(
       state => (this.enrollCreationActive = state)
     );
