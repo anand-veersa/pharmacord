@@ -93,13 +93,22 @@ td {
   border: $border-style;
   background-color: $color-white;
   border-radius: 0.8rem;
-  .panel-fields {
-    display: flex;
-    align-content: flex-start;
-    gap: 3rem;
-    .panel {
-      flex-basis: 48%;
-      padding-right: 4rem;
-    }
+}
+.panel-cont {
+  display: flex;
+  align-content: flex-start;
+  gap: 3rem;
+  .panel {
+    flex-basis: 48%;
+    padding-right: 4rem;
+  }
+  .panel-big {
+    flex-basis: 48%;
+  }
+}
+
+::ng-deep .mat-mdc-form-field {
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
   }
 }

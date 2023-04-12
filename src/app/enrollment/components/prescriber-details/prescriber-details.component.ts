@@ -27,9 +27,8 @@ export class PrescriberDetailsComponent implements OnInit {
       actionType,
       formName: 'prescriber-details',
       form: {
-        ...this.submitEnrolService.patientDetailForm.value,
-        ...this.submitEnrolService.patientRepDetailForm.value,
-        ...this.submitEnrolService.patientRepDetailForm.value,
+        ...this.submitEnrolService.prescriberDetailForm.value,
+        ...this.submitEnrolService.shippingDetailForm.value,
       },
       nextScreen: 'select-insurance',
     });

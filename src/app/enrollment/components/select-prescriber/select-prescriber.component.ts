@@ -70,10 +70,11 @@ export class SelectPrescriberComponent implements OnInit, OnDestroy {
     const prescriber = this.authService.user.prescribers.filter(
       pres => pres.ProviderId === prescriberId
     );
-    this.selectedPrescriber = prescriber[0];
-    this.prescriberFacilities = this.selectedPrescriber.Facilities;
+    this.submitEnrolService.selectedPrescriber = prescriber[0];
+    this.prescriberFacilities =
+      this.submitEnrolService.selectedPrescriber.Facilities;
 
-    this.createTableData(this.selectedPrescriber.Facilities);
+    this.createTableData(this.submitEnrolService.selectedPrescriber.Facilities);
   }
 
   public facilitySelected(facility: any): void {
@@ -91,7 +92,7 @@ export class SelectPrescriberComponent implements OnInit, OnDestroy {
         ? this.submitEnrolService.selectedFacility[0]
         : null,
       nextScreen:
-        actionType === 'back' ? 'select-medication' : 'select-services',
+        actionType === 'back' ? 'select-medication' : 'prescriber-details',
     };
     this.action.emit(actionObj);
   }

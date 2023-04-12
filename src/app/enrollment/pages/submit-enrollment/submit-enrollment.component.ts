@@ -22,7 +22,7 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
   @ViewChild('enrollmentForm', { read: ViewContainerRef })
   enrollmentForm: ViewContainerRef;
   public title: string;
-  public displayScreen: string = 'prescriber-details';
+  public displayScreen: string = 'select-medication';
   public selectedFacility: any;
 
   public prescriberListJson: JsonFormData = { controls: [] };
@@ -64,6 +64,9 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         [form.pharmacy.SpecialityPharmacy];
     }
     if (formName === 'select-patient') {
+      console.log(form);
+    }
+    if (formName === 'prescriber-details') {
       console.log(form);
     }
     console.log(this.submitEnrolService.enrollmentFormPayload);

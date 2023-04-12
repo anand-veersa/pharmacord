@@ -29,14 +29,14 @@
         <app-custom-form
           [field]="control"
           [form]="loginForm"
-          formType="login"></app-custom-form>
+          formType="login-form"></app-custom-form>
       </div>
       <app-custom-button
         [isDisabled]="loginForm ? loginForm.invalid : false"
         btnClass="login-form-btn tm-2"
+        btnText="Login"
         type="submit"
         (action)="onSubmit()">
-        Login
       </app-custom-button>
     </div>
     <div class="login-panel-footer">

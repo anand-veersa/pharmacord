@@ -25,6 +25,7 @@ import { SubmitEnrollmentService } from './pages/submit-enrollment/submit-enroll
 import { SelectServicesComponent } from './components/select-services/select-services.component';
 import { SelectPatientComponent } from './components/select-patient/select-patient.component';
 import { PrescriberDetailsComponent } from './components/prescriber-details/prescriber-details.component';
+import { SelectInsuranceComponent } from './components/select-insurance/select-insurance.component';
 @NgModule({
   declarations: [
     EnrollmentComponent,
@@ -42,6 +43,7 @@ import { PrescriberDetailsComponent } from './components/prescriber-details/pres
     SelectServicesComponent,
     SelectPatientComponent,
     PrescriberDetailsComponent,
+    SelectInsuranceComponent,
   ],
   imports: [
     CommonModule,

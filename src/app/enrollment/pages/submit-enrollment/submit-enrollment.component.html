@@ -31,6 +31,9 @@
       <app-prescriber-details
         *ngSwitchCase="'prescriber-details'"
         (action)="onAction($event)"></app-prescriber-details>
+      <app-select-insurance
+        *ngSwitchCase="'select-insurance'"
+        (action)="onAction($event)"></app-select-insurance>
     </ng-container>
   </div>
 </div>
