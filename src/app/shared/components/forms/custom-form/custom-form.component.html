@@ -1,11 +1,4 @@
-<div
-  [ngClass]="{
-    'login-form': formType === 'login',
-    'enrollment-form': formType === 'enrollment-form',
-    'forgot-username-form': formType === 'forgot-username',
-    'profile-form': formType === 'profile-form',
-    'forgot-username': formType === 'forgot-username'
-  }">
+<div [ngClass]="field.class === 'blockRadio' ? 'block-radio' : formType">
   <ng-container #dynamicForm>
     <label *ngIf="field.label" class="label"
       >{{ field.label }}

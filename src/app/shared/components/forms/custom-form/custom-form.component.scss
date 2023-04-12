@@ -1,4 +1,5 @@
 @import '../../../../../assets/styles/abstracts/variables';
+@import '../../../../../assets/styles/abstracts/mixins';
 
 .login-form {
   label {
@@ -24,19 +25,48 @@
   }
 }
 
-::ng-deep .enrollment-form {
+::ng-deep .enrollment-form,
+.bg-enrollment-form {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   label {
     color: $color-grey-dark-4;
     font-weight: 500;
     font-size: 1.4rem;
     line-height: 1.6rem;
-    flex-basis: 40%;
+  }
+}
+
+::ng-deep .enrollment-form {
+  label {
+    flex-basis: 35%;
   }
   app-custom-input,
   app-custom-radio {
     flex-basis: 60%;
+  }
+}
+::ng-deep .bg {
+  label {
+    flex-basis: 55%;
+  }
+  app-custom-input,
+  app-custom-radio {
+    flex-basis: 40%;
+  }
+}
+
+::ng-deep .block-radio {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80%;
+  @include respond(tab-land) {
+    width: 100%;
+  }
+  & > label {
+    margin-top: 1rem;
   }
 }
 .extLinkDiv {

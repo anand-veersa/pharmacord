@@ -108,8 +108,7 @@
         "label": "Facility NPI #",
         "placeholder": "Enter your Facility NPI #",
         "type": "text",
-        "validators": { "required": true, "min": 10, "max": 10 },
-        "disabled": true
+        "validators": { "required": true, "min": 10, "max": 10 }
       },
       {
         "name": "facilitytaxId",
@@ -183,8 +182,8 @@
             "value": "patientAddress"
           },
           {
-            "label": "Other Address ",
-            "value": "otherAddress "
+            "label": "Other Address",
+            "value": "otherAddress"
           }
         ]
       },
@@ -222,8 +221,7 @@
         "label": "Street",
         "placeholder": "Enter your street",
         "type": "text",
-        "validators": { "required": true },
-        "disabled": true
+        "validators": { "required": true }
       },
       {
         "name": "city",
@@ -232,8 +230,7 @@
         "label": "City",
         "placeholder": "Enter your city",
         "type": "text",
-        "validators": { "required": true },
-        "disabled": true
+        "validators": { "required": true }
       },
       {
         "name": "state",
@@ -242,8 +239,7 @@
         "label": "State",
         "placeholder": "Enter your state",
         "type": "text",
-        "validators": { "required": true },
-        "disabled": true
+        "validators": { "required": true }
       },
       {
         "name": "zipcode",
@@ -252,8 +248,7 @@
         "label": "Zip Code",
         "placeholder": "Enter your zip code",
         "type": "text",
-        "validators": { "required": true, "min": 5, "max": 5 },
-        "disabled": true
+        "validators": { "required": true, "min": 5, "max": 5 }
       },
       {
         "name": "siteOfAdministration",
