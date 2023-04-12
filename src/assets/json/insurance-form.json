@@ -1,0 +1,433 @@
+{
+  "primaryMedical": {
+    "controls": [
+      {
+        "name": "coverageType",
+        "value": "",
+        "display": true,
+        "label": "Type Of Coverage",
+        "placeholder": "",
+        "type": "radio",
+        "validators": { "required": true },
+        "options": [
+          {
+            "label": "Medicare",
+            "value": "Medicare"
+          },
+          {
+            "label": "Medicaid",
+            "value": "Medicaid"
+          },
+          {
+            "label": "Commercial/Private",
+            "value": "Commercial/Private"
+          },
+          {
+            "label": "TRICARE",
+            "value": "TRICARE",
+            "for": "Zejula,Ojjara"
+          },
+          {
+            "label": "Other",
+            "value": "Other"
+          },
+          {
+            "label": "Uninsured",
+            "value": "Uninsured"
+          }
+        ],
+        "class": "blockRadio"
+      },
+      {
+        "name": "insurancePayer",
+        "value": "",
+        "display": true,
+        "label": "Primary Insurance Payer",
+        "placeholder": "Enter your primary insurance payer",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "insuranceName",
+        "value": "",
+        "display": true,
+        "label": "Insurance Name",
+        "placeholder": "Enter your insurance name",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "phone",
+        "value": "",
+        "display": true,
+        "label": "Phone #",
+        "placeholder": "Enter your Phone #",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "policyId",
+        "value": "",
+        "display": true,
+        "label": "Policy ID #",
+        "placeholder": "Enter your policy id",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "group",
+        "value": "",
+        "display": true,
+        "label": "Group #",
+        "placeholder": "Enter your group",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "relationToPatient",
+        "value": "",
+        "display": true,
+        "label": "Policy Holder's Relationship to Patient",
+        "placeholder": "Select relationship to patient",
+        "type": "select",
+        "validators": { "required": true },
+        "options": [
+          {
+            "label": "Self",
+            "value": "Self"
+          },
+          {
+            "label": "Father",
+            "value": "Father"
+          },
+          {
+            "label": "Spouse",
+            "value": "Spouse"
+          }
+        ]
+      },
+      {
+        "name": "policyHolderName",
+        "value": "",
+        "display": true,
+        "label": "Policy Holder's Name",
+        "placeholder": "Enter your policy holder's name",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "policyHolderDob",
+        "value": "",
+        "display": true,
+        "label": "Policy Holder's Date of Birth",
+        "placeholder": "mm/dd/yyyy",
+        "type": "date",
+        "validators": { "required": true }
+      },
+      {
+        "name": "files",
+        "value": "",
+        "display": true,
+        "label": "Attach Front and Back Copy of Insurance Card  ",
+        "placeholder": "",
+        "type": "file",
+        "validators": {}
+      }
+    ]
+  },
+  "secondaryMedical": {
+    "controls": [
+      {
+        "name": "coverageType",
+        "value": "",
+        "display": true,
+        "label": "Type Of Coverage",
+        "placeholder": "",
+        "type": "radio",
+        "validators": { "required": true },
+        "options": [
+          {
+            "label": "Medicare",
+            "value": "Medicare"
+          },
+          {
+            "label": "Medicaid",
+            "value": "Medicaid"
+          },
+          {
+            "label": "Commercial/Private",
+            "value": "Commercial/Private"
+          },
+          {
+            "label": "TRICARE",
+            "value": "TRICARE",
+            "for": "Zejula,Ojjara"
+          },
+          {
+            "label": "Other",
+            "value": "Other"
+          },
+          {
+            "label": "Uninsured",
+            "value": "Uninsured"
+          }
+        ],
+        "class": "blockRadio"
+      },
+      {
+        "name": "insurancePayer",
+        "value": "",
+        "display": true,
+        "label": "Secondary Insurance Payer",
+        "placeholder": "Enter your secondary insurance payer",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "insuranceName",
+        "value": "",
+        "display": true,
+        "label": "Insurance Name",
+        "placeholder": "Enter your insurance name",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "phone",
+        "value": "",
+        "display": true,
+        "label": "Phone #",
+        "placeholder": "Enter your Phone #",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "policyId",
+        "value": "",
+        "display": true,
+        "label": "Policy ID #",
+        "placeholder": "Enter your policy id",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "group",
+        "value": "",
+        "display": true,
+        "label": "Group #",
+        "placeholder": "Enter your group",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "relationToPatient",
+        "value": "",
+        "display": true,
+        "label": "Policy Holder's Relationship to Patient",
+        "placeholder": "Select relationship to patient",
+        "type": "select",
+        "validators": { "required": true },
+        "options": [
+          {
+            "label": "Self",
+            "value": "Self"
+          },
+          {
+            "label": "Father",
+            "value": "Father"
+          },
+          {
+            "label": "Spouse",
+            "value": "Spouse"
+          }
+        ]
+      },
+      {
+        "name": "policyHolderName",
+        "value": "",
+        "display": true,
+        "label": "Policy Holder's Name",
+        "placeholder": "Enter your policy holder's name",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "policyHolderDob",
+        "value": "",
+        "display": true,
+        "label": "Policy Holder's Date of Birth",
+        "placeholder": "mm/dd/yyyy",
+        "type": "date",
+        "validators": { "required": true }
+      },
+      {
+        "name": "files",
+        "value": "",
+        "display": true,
+        "label": "Attach Front and Back Copy of Insurance Card  ",
+        "placeholder": "",
+        "type": "file",
+        "validators": {}
+      }
+    ]
+  },
+  "prescriptionInsurance": {
+    "controls": [
+      {
+        "name": "coverageType",
+        "value": "",
+        "display": true,
+        "label": "Type Of Coverage",
+        "placeholder": "",
+        "type": "radio",
+        "validators": { "required": true },
+        "options": [
+          {
+            "label": "Medicare",
+            "value": "Medicare"
+          },
+          {
+            "label": "Medicaid",
+            "value": "Medicaid"
+          },
+          {
+            "label": "TRICARE",
+            "value": "TRICARE",
+            "for": "Zejula,Ojjara"
+          },
+          {
+            "label": "Commercial/Private",
+            "value": "Commercial/Private"
+          },
+          {
+            "label": "Other",
+            "value": "Other"
+          }
+        ],
+        "class": "blockRadio"
+      },
+      {
+        "name": "insurancePayer",
+        "value": "",
+        "display": true,
+        "label": "Prescription Insurance Payer",
+        "placeholder": "Enter your prescription insurance payer",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "insuranceName",
+        "value": "",
+        "display": true,
+        "label": "Insurance Name",
+        "placeholder": "Enter your insurance name",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "phone",
+        "value": "",
+        "display": true,
+        "label": "Phone #",
+        "placeholder": "Enter your Phone #",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "policyId",
+        "value": "",
+        "display": true,
+        "label": "Policy ID #",
+        "placeholder": "Enter your policy id",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "group",
+        "value": "",
+        "display": true,
+        "label": "Group #",
+        "placeholder": "Enter your group",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "ptan",
+        "value": "",
+        "display": true,
+        "label": "PTAN #",
+        "placeholder": "Enter your PTAN",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "bin",
+        "value": "",
+        "display": true,
+        "label": "BIN",
+        "placeholder": "Enter your BIN",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "pcn",
+        "value": "",
+        "display": true,
+        "label": "PCN",
+        "placeholder": "Enter your PCN",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "relationToPatient",
+        "value": "",
+        "display": true,
+        "label": "Policy Holder's Relationship to Patient",
+        "placeholder": "Select relationship to patient",
+        "type": "select",
+        "validators": { "required": true },
+        "options": [
+          {
+            "label": "Self",
+            "value": "Self"
+          },
+          {
+            "label": "Father",
+            "value": "Father"
+          },
+          {
+            "label": "Spouse",
+            "value": "Spouse"
+          }
+        ]
+      },
+      {
+        "name": "policyHolderName",
+        "value": "",
+        "display": true,
+        "label": "Policy Holder's Name",
+        "placeholder": "Enter your policy holder's name",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "policyHolderDob",
+        "value": "",
+        "display": true,
+        "label": "Policy Holder's Date of Birth",
+        "placeholder": "mm/dd/yyyy",
+        "type": "date",
+        "validators": { "required": true }
+      },
+      {
+        "name": "files",
+        "value": "",
+        "display": true,
+        "label": "Attach Front and Back Copy of Insurance Card  ",
+        "placeholder": "",
+        "type": "file",
+        "validators": {}
+      }
+    ]
+  }
+}

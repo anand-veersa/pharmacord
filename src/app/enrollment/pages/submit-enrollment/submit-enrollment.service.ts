@@ -18,6 +18,7 @@ export class SubmitEnrollmentService {
     'Medication For Patient Enrollment'
   );
   public selectedPrescriberId = new BehaviorSubject<number>(0);
+  public selectedPrescriber: any;
   public medicationForm: FormGroup;
   public medicationJson: JsonFormData = { controls: [] };
   public prescriberForm: FormGroup;
@@ -38,6 +39,10 @@ export class SubmitEnrollmentService {
   public prescriberDetails: JsonFormData = { controls: [] };
   public shippingDetailForm: FormGroup;
   public shippingDetails: JsonFormData = { controls: [] };
+  public firstInsuranceForm: FormGroup;
+  public firstInsuranceDetails: JsonFormData = { controls: [] };
+  public secondInsuranceForm: FormGroup;
+  public secondInsuranceDetails: JsonFormData = { controls: [] };
   public enrollmentFormPayload: EnrollmentFormPayload;
   constructor(
     private authService: AuthService,
@@ -306,39 +311,69 @@ export class SubmitEnrollmentService {
   }
 
   public createPrescriberForm(): void {
+    console.log(this.selectedPrescriber, this.selectedFacility);
     this.http
       .get('/assets/json/prescriber-form.json')
       .subscribe((data: any) => {
         this.prescriberDetails = data.leftPanel;
-        this.prescriberDetails.controls.map(control => {
-          if (control.name === 'dob') {
-            control.maxDate = new Date();
+        this.shippingDetails = data.rightPanel;
+        this.shippingDetails.controls.map(control => {
+          if (control.name === 'siteOfAdministration') {
+            control.display =
+              this.enrollmentFormPayload.DrugGroup === 'Jemperli'
+                ? true
+                : false;
           }
-          if (control.name === 'state') {
-            control.options = this.sharedService.states;
-          }
-          if (control.name === 'selectName') {
-            this.enrolService.medicineCases.subscribe((data: any[]) => {
-              control.options = this.sharedService
-                .getPatients(data)
-                .map(data => {
-                  return {
-                    label: data.PatientName,
-                    value: { patientId: data.PatientId, caseId: data.CaseId },
-                  };
-                });
-            });
-            console.log(control.options);
+          if (control.name === 'shippingAddressType') {
+            control.display =
+              this.enrollmentFormPayload.DrugGroup === 'Jemperli'
+                ? false
+                : true;
           }
         });
-        this.shippingDetails = data.rightPanel;
         this.prescriberDetailForm = this.sharedService.buildForm(
           this.prescriberDetails
         );
+        this.prescriberDetailForm.patchValue({
+          firstName: this.selectedPrescriber.FirstName,
+          lastName: this.selectedPrescriber.LastName,
+          npi: this.selectedPrescriber.NPI,
+          facilityName:
+            this.selectedFacility[0].OfficeName ||
+            this.selectedFacility[0].PracticeGroup,
+          mailingAddress1: this.selectedFacility[0].Address.Line1,
+          mailingAddress2: this.selectedFacility[0].Address.Line2,
+          city: this.selectedFacility[0].Address.City,
+          state: this.selectedFacility[0].Address.State,
+          zipcode: this.selectedFacility[0].Address.Zipcode,
+        });
+        console.log(this.shippingDetails);
         this.shippingDetailForm = this.sharedService.buildForm(
           this.shippingDetails
         );
       });
+  }
+
+  public createInsuranceForm(): void {
+    this.http.get('/assets/json/insurance-form.json').subscribe((data: any) => {
+      data.primaryMedical.controls[0].options =
+        data.primaryMedical.controls[0].options.filter(
+          (option: JsonFormControlOptions) =>
+            !option.for ||
+            option.for.includes(this.enrollmentFormPayload.DrugGroup)
+        );
+      this.firstInsuranceDetails = data.primaryMedical;
+      this.secondInsuranceDetails =
+        this.enrollmentFormPayload.DrugGroup === 'Jemperli'
+          ? data.secondaryMedical
+          : data.prescriptionInsurance;
+      this.firstInsuranceForm = this.sharedService.buildForm(
+        this.firstInsuranceDetails
+      );
+      this.secondInsuranceForm = this.sharedService.buildForm(
+        this.secondInsuranceDetails
+      );
+    });
   }
 
   public getPatientDetails(patientId: number, caseId: string = ''): any {
