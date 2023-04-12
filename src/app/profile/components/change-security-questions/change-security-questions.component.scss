@@ -14,10 +14,14 @@
     }
     .input-fields {
       &-currentPassword > div {
-        border-bottom: 1px solid $color-grey-border;
         padding-bottom: 6rem;
+        max-width: 60%;
+        @include respond(tab-land) {
+          max-width: 100%;
+        }
       }
       &-question1 > div {
+        border-top: 1px solid $color-grey-border;
         padding-top: 5.2rem;
       }
       &-answer2 > div {

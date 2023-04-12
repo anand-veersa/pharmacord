@@ -1,4 +1,4 @@
-<div class="header">
+<div class="header" [ngClass]="{ 'header-spacer': !authService.isLoggedIn() }">
   <div class="header-left">
     <img
       class="header-logo"

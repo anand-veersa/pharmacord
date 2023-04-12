@@ -1,5 +1,13 @@
 @import '../../../../assets/styles/abstracts/variables';
+:host ::ng-deep .mat-mdc-table tbody {
+  tr > td:first-child {
+    font-weight: 700;
+    text-decoration-line: underline;
+  }
+}
 .patient-container {
+  border: 0.2rem solid #dddddd;
+  border-radius: 0.8rem;
   .patient-header {
     padding: 1rem 2rem 1rem 1rem;
     background-color: $color-white;
@@ -17,5 +25,12 @@
       display: flex;
       gap: 1rem;
     }
+  }
+}
+
+:host ::ng-deep .search-block {
+  .mat-mdc-text-field-wrapper {
+    background-color: $color-table-odd-rows;
+    color: $icon-light;
   }
 }

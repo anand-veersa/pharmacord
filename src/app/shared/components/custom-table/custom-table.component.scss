@@ -27,12 +27,15 @@
 }
 
 .custom-table {
-  overflow: auto;
   width: 100%;
+  &-wrapper {
+    overflow-x: auto;
+  }
   &-paginator {
     background: $color-blue-light-1;
     display: flex;
     justify-content: center;
+    border-radius: 0 0 0.8rem 0.8rem;
   }
   .mat-table-row-selected {
     background-color: $color-secondary !important;
