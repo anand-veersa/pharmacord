@@ -23,10 +23,6 @@
       cursor: pointer;
     }
   }
-
-  .extLinkDiv {
-    display: none;
-  }
 }
 
 ::ng-deep .enrollment-form,
@@ -71,5 +67,17 @@
   }
   & > label {
     margin-top: 1rem;
+  }
+}
+.extLinkDiv {
+  display: none;
+}
+
+.profile-form {
+  label {
+    color: $color-black;
+    font-weight: 700;
+    font-size: 1.7rem;
+    line-height: 2rem;
   }
 }

@@ -4,10 +4,9 @@ interface JsonFormValidators {
   required?: boolean;
   requiredTrue?: boolean;
   email?: boolean;
-  minLength?: boolean;
-  maxLength?: boolean;
   pattern?: string;
   nullValidator?: boolean;
+  match?: boolean;
 }
 export interface JsonFormControlOptions {
   label: string;
@@ -17,7 +16,7 @@ export interface JsonFormControlOptions {
 export interface JsonFormControls {
   name: string;
   label: string;
-  value: string | number;
+  value: any;
   type: string;
   placeholder: string;
   options?: JsonFormControlOptions[];

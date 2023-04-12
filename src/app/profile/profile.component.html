@@ -1,0 +1,25 @@
+<div class="profile-container">
+  <mat-tab-group
+    animationDuration="0ms"
+    (selectedIndexChange)="tabChange($event)">
+    <mat-tab label="Change Password">
+      <div *ngIf="tabClicked === 0">
+        <app-change-password></app-change-password>
+      </div>
+    </mat-tab>
+    <mat-tab label="Change Security Questions">
+      <div *ngIf="tabClicked === 1">
+        <app-change-security-questions
+          [allSecurityQuestions]="allSecurityQuestions"
+          [selectedSecurityQuestions]="
+            selectedSecurityQuestions
+          "></app-change-security-questions>
+      </div>
+    </mat-tab>
+    <mat-tab label="Profile Information">
+      <div *ngIf="tabClicked === 2">
+        <app-profile-information></app-profile-information>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

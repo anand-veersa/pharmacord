@@ -11,7 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Patient } from 'src/app/models/cases.model';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
-
+import { matchPasswordsValidator } from '../validators/custom-validators';
 @Injectable({
   providedIn: 'root',
 })
@@ -80,14 +80,15 @@ export class SharedService {
   public buildForm(formData: JsonFormData): FormGroup {
     const formControl: { [key: string]: any } = {};
     formData.controls.forEach(field => {
-      const validators = this.addValidator(field.validators);
       if (field.type === 'checkbox') {
         formControl[field.name] = new FormArray([]);
       } else {
-        formControl[field.name] = new FormControl(
-          { value: field.value, disabled: field.disabled ?? false },
-          validators
-        );
+        formControl[field.name] = new FormControl({
+          value: field.value,
+          disabled: field.disabled ?? false,
+        });
+        const validators = this.addValidator(field.validators, formControl);
+        formControl[field.name].addValidators(validators);
       }
     });
     return new FormGroup(formControl);
@@ -181,7 +182,10 @@ export class SharedService {
     });
   }
 
-  private addValidator(rules: any): ValidationErrors {
+  private addValidator(
+    rules: any,
+    formControl: { [key: string]: any }
+  ): ValidationErrors | null {
     let validators: any[] = [];
     if (!rules) {
       return validators;
@@ -199,8 +203,8 @@ export class SharedService {
           return Validators.minLength(rule[1]);
         case 'pattern':
           return Validators.pattern(rule[1]);
-        case 'email':
-          return rule[1] ? Validators.email : {};
+        case 'match':
+          return matchPasswordsValidator(formControl);
         default:
           return;
       }
