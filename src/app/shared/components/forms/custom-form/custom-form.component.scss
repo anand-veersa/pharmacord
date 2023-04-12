@@ -43,11 +43,12 @@
   display: none;
 }
 
-.profile-form {
+.profile-form,
+.forgot-username {
   label {
     color: $color-black;
     font-weight: 700;
     font-size: 1.7rem;
-    line-height: 2rem;
+    line-height: 2.4rem;
   }
 }

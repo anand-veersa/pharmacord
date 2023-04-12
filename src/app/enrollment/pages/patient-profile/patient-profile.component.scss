@@ -1,7 +1,13 @@
 @import '../../../../assets/styles/abstracts/variables';
+@import '../../../../assets/styles/abstracts/mixins';
+
+:host ::ng-deep .patient-profile-container .mat-mdc-table tbody {
+  tr > td:first-child {
+    font-weight: 700;
+  }
+}
 
 .patient-profile-container {
-  margin: 2rem 3rem;
   background-color: $color-white;
   border: 2px solid $color-border-1;
   border-radius: 0.8rem;
@@ -11,9 +17,28 @@
     justify-content: space-between;
     .title {
       display: flex;
-      gap: 1.5rem;
+      gap: 1rem;
       width: 40%;
       align-items: center;
+      @include respond(tab-land) {
+        width: auto;
+      }
+      .patient-heading {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        .patient-name {
+          font-family: $primary-font;
+          font-weight: 700;
+          font-size: 2.4rem;
+        }
+        .patient-id {
+          font-family: $primary-font;
+          font-weight: 700;
+          font-size: 1.8rem;
+          color: $color-primary;
+        }
+      }
     }
     .action-buttons {
       display: flex;
