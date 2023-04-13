@@ -43,18 +43,16 @@ export class RegistrationComponent implements OnInit {
     'Please enter the information for each healthcare provider (HCP) associated with this new account.';
   public prescriberID: number;
   public facilities: Array<object> = [];
+  public facilitiesDataForOthers: Array<object> = [];
   public UserContactDetails: Array<object> = [];
   constructor(
     private router: Router,
     private http: HttpClient,
     private sharedService: SharedService,
     private authService: AuthService
-  ) {
-    console.log('constructor of registration component');
-  }
+  ) {}
 
   ngOnInit() {
-    console.log('oninit of registration compo');
     this.http
       .get('/assets/json/lookup-information-form.json')
       .subscribe((formData: any) => {
@@ -162,7 +160,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   checkProviderNpi(): void {
-    console.log('checkProviderNpi function clicked');
     const payloadGetProviderDetails = {
       NPI: this.lookupInformationForm.get('providerNpi')?.value,
       FirstName: this.lookupInformationForm.get('providerFirstName')?.value,
@@ -172,7 +169,6 @@ export class RegistrationComponent implements OnInit {
     this.authService.getProviderDetails(payloadGetProviderDetails).subscribe({
       next: (res: any) => {
         if (res.Status === 'SUCCESS') {
-          console.log(this.lookupInformationForm);
           this.validPrescriberNPI = true;
           this.prescriberID = res.Payload[0].Id;
           // set values in a prescriber Account information form
@@ -220,13 +216,11 @@ export class RegistrationComponent implements OnInit {
   }
 
   moveToOthersFirstScreen(eventData: { backBtnClicked: boolean }): void {
-    console.log('moveToOthersFirstScreen triggered');
     this.othersAddFacilityScreen = false;
     this.othersRegistration = true;
   }
 
   moveToAddProviderScreen(eventData: { nextBtnClicked: boolean }): void {
-    console.log('i am in moveToAddProviderScreen ', eventData.nextBtnClicked);
     this.othersAddFacilityScreen = false;
     this.addHealthcareProviderScreen = true;
   }
@@ -241,6 +235,8 @@ export class RegistrationComponent implements OnInit {
     this.facilities = eventData.facilities;
     if (this.prescriberAddFacilityScreen) {
       this.prescriberSaveAndRegisterCall();
+    } else {
+      this.facilitiesDataForOthers = eventData.facilities;
     }
   }
 
@@ -261,7 +257,6 @@ export class RegistrationComponent implements OnInit {
         MasterFacility: facility,
       };
 
-      console.log(facilityRegistrationPayload, 'facilityRegistrationPayload');
       this.sharedService.isLoading.next(true);
       this.authService
         .accountRegistration(facilityRegistrationPayload)
@@ -280,7 +275,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   prescriberSaveAndRegisterCall(): void {
-    console.log(this.UserContactDetails, 'in usercontactdetails function');
     const accountRegistrationPayload = {
       Username: this.createUsernameForm.controls['username'].value,
       EmailAddress:
@@ -340,13 +334,11 @@ export class RegistrationComponent implements OnInit {
 
   checkUsername(controlName: string): void {
     if (controlName === 'username') {
-      console.log(this.createUsernameForm.controls['username'].value);
       const validateUsernamePayload =
         this.createUsernameForm.controls['username'].value;
       this.authService.validateUsername(validateUsernamePayload).subscribe({
         next: (res: any) => {
           if (res.Status === 'SUCCESS') {
-            console.log(res);
             this.invalidUsername = res.Payload;
           }
         },

@@ -11,6 +11,7 @@ import { FormGroup } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { SharedService } from '../../../../shared/services/shared.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-add-facility',
@@ -28,11 +29,14 @@ export class AddFacilityComponent implements OnInit {
     nextBtnClicked: boolean;
   }>();
   @Output() masterFacilities = new EventEmitter<{ facilities: Array<any> }>();
+  @Output() deleteFacilities = new EventEmitter<{ facilities: Array<any> }>();
   public facilities: Array<any> = [];
+  public facilitiesToDelete: Array<any> = [];
   public addFacilityFormData: JsonFormData;
   public addFacilityForm: FormGroup;
   public editClickedIndex: number = -2;
   public editClicked: boolean = false;
+  public existingFacilities: any[] = [];
   public displayedColumns: Array<string> = [
     'PracticeGroup',
     'Address',
@@ -42,6 +46,7 @@ export class AddFacilityComponent implements OnInit {
     'Edit/Delete',
   ];
   public dataSource = this.facilities;
+  public facilitiesForAddHCPScreen: object[] = [];
   @ViewChild(MatTable) table: MatTable<any>;
   //form control values
   // public PracticeGroup: string;
@@ -53,7 +58,11 @@ export class AddFacilityComponent implements OnInit {
   // public Phone: string;
   // public PhoneType: string;
   // public Extension: null;
-  constructor(private sharedService: SharedService, private http: HttpClient) {}
+  constructor(
+    private sharedService: SharedService,
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
   ngOnInit(): void {
     this.http
       .get('/assets/json/add-facility-information-form.json')
@@ -63,7 +72,35 @@ export class AddFacilityComponent implements OnInit {
           this.addFacilityFormData
         );
       });
+
+    if (this.requirementFor === 'accountSetting') {
+      this.sharedService.isLoading.next(true);
+      this.authService.getFacilities().subscribe({
+        next: (res: any) => {
+          if (res.Status === 'SUCCESS') {
+            for (const facility of res.Payload) {
+              facility.Address = [facility.Address];
+            }
+            this.existingFacilities = res.Payload;
+            this.facilities = [...this.existingFacilities];
+            this.sharedService.isLoading.next(false);
+          }
+        },
+        error: err => {
+          this.sharedService.notify('error', err);
+          this.sharedService.isLoading.next(false);
+        },
+      });
+    }
   }
+
+  // ngOnInit(): void {
+  //   setTimeout(() => {
+  //     this.facilities = this.existingFacilities;
+  //     // this.savedFacilities = this.existingFacilities;
+  //     console.log('iam ngonchange', this.existingFacilities);
+  //   }, 0);
+  // }
 
   navigateToPrevious(): void {
     this.backToParentComponent.emit({ backBtnClicked: true });
@@ -71,6 +108,7 @@ export class AddFacilityComponent implements OnInit {
 
   navigateToNext(): void {
     this.navigateToNextComponent.emit({ nextBtnClicked: true });
+    this.sendFacilityData();
   }
 
   addFacility(): void {
@@ -79,7 +117,10 @@ export class AddFacilityComponent implements OnInit {
         {
           City: this.addFacilityForm.value.facilityCity,
           Line1: this.addFacilityForm.value.facilityAddress1,
-          Line2: this.addFacilityForm.value.facilityAddress2,
+          Line2:
+            this.addFacilityForm.value.facilityAddress2 === ''
+              ? null
+              : this.addFacilityForm.value.facilityAddress2,
           State: this.addFacilityForm.value.facilityState,
           Zipcode: this.addFacilityForm.value.facilityZip,
         },
@@ -95,14 +136,67 @@ export class AddFacilityComponent implements OnInit {
       Extension: null,
       Contacts: [],
     };
-    this.facilities.push(facility);
-    this.addFacilityForm.reset();
+    this.facilities = [...this.facilities, facility];
+
     this.dataSource = [...this.dataSource, facility];
+
     this.table?.renderRows();
-    console.log(this.facilities);
+
+    if (this.requirementFor === 'othersRegistration') {
+      const facility = {
+        ///
+        Id: null,
+        Name: this.addFacilityForm.value.practiceName,
+        GroupName: this.addFacilityForm.value.practiceName,
+        Address1: this.addFacilityForm.value.facilityAddress1,
+        Address2:
+          this.addFacilityForm.value.facilityAddress2 === ''
+            ? null
+            : this.addFacilityForm.value.facilityAddress2,
+        City: this.addFacilityForm.value.facilityCity,
+        County: null,
+        State: this.addFacilityForm.value.facilityState,
+        Phone: this.addFacilityForm.value.facilityPhone,
+        Fax: this.addFacilityForm.value.facilityFax,
+        Email: this.addFacilityForm.value.facilityEmail,
+        Zip: this.addFacilityForm.value.facilityZip,
+        ZipSuffixCode: '',
+        isSelected: true,
+      };
+      this.facilitiesForAddHCPScreen = [
+        ...this.facilitiesForAddHCPScreen,
+        facility,
+      ];
+    }
+
+    this.addFacilityForm.reset();
   }
 
   getCompleteAddress(AddressObject: any): string {
+    // if (AddressObject.length === 1) {
+    //   if (AddressObject.Line2 !== null) {
+    //     return (
+    //       AddressObject[0].Line1 +
+    //       ', ' +
+    //       AddressObject[0].Line2 +
+    //       ', ' +
+    //       AddressObject[0].City +
+    //       ', ' +
+    //       AddressObject[0].State +
+    //       ', ' +
+    //       AddressObject[0].Zipcode
+    //     );
+    //   }
+    //   return (
+    //     AddressObject[0].Line1 +
+    //     ', ' +
+    //     AddressObject[0].City +
+    //     ', ' +
+    //     AddressObject[0].State +
+    //     ', ' +
+    //     AddressObject[0].Zipcode
+    //   );
+    // }
     if (AddressObject.Line2 !== null) {
       return (
         AddressObject.Line1 +
@@ -134,7 +228,8 @@ export class AddFacilityComponent implements OnInit {
       facilityFax: formValues.Fax,
       facilityEmail: formValues.Email,
       facilityAddress1: formValues.Address[0].Line1,
-      facilityAddress2: formValues.Address[0].Line2,
+      facilityAddress2:
+        formValues.Address[0].Line2 === '' ? null : formValues.Address[0].Line2,
       facilityCity: formValues.Address[0].City,
       facilityState: formValues.Address[0].State,
       facilityZip: formValues.Address[0].Zipcode,
@@ -148,6 +243,10 @@ export class AddFacilityComponent implements OnInit {
   }
 
   deleteFacility(facilityIndex: number): void {
+    if (this.existingFacilities.includes(this.facilities[facilityIndex])) {
+      this.facilitiesToDelete.push(this.facilities[facilityIndex]);
+    }
+
     this.facilities.splice(facilityIndex, 1);
     this.table.renderRows();
   }
@@ -183,6 +282,20 @@ export class AddFacilityComponent implements OnInit {
   }
 
   sendFacilityData(): void {
-    this.masterFacilities.emit({ facilities: this.facilities });
+    const filterFacilities = [];
+    for (const facility of this.facilities) {
+      if (!this.existingFacilities.includes(facility)) {
+        filterFacilities.push(facility);
+      }
+    }
+
+    if (this.requirementFor === 'othersRegistration') {
+      this.masterFacilities.emit({
+        facilities: this.facilitiesForAddHCPScreen,
+      });
+    } else {
+      this.masterFacilities.emit({ facilities: filterFacilities });
+    }
+    this.deleteFacilities.emit({ facilities: this.facilitiesToDelete });
   }
 }

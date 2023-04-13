@@ -4,13 +4,16 @@
       <app-add-facility
         [title]="facilityTabTitle"
         [subTitle]="facilityTabSubTitle"
+        (masterFacilities)="collectMasterFacilities($event)"
+        (deleteFacilities)="facilitiesToDelete($event)"
         requirementFor="accountSetting"></app-add-facility>
     </div>
   </mat-tab>
 
   <mat-tab label="Provider">
     <div class="provider-container">
-      <app-add-healthcare-provider> </app-add-healthcare-provider>
+      <app-add-healthcare-provider requirementFor="accountSetting">
+      </app-add-healthcare-provider>
     </div>
   </mat-tab>
 </mat-tab-group>

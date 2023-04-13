@@ -43,16 +43,11 @@
 
   <div class="table-container" *ngIf="facilities.length !== 0">
     <table mat-table [dataSource]="facilities" class="mat-elevation-z8">
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-
-      <!-- Position Column -->
       <ng-container matColumnDef="PracticeGroup">
         <th class="" mat-header-cell *matHeaderCellDef>Practice Name</th>
         <td mat-cell *matCellDef="let element">{{ element.PracticeGroup }}</td>
       </ng-container>
 
-      <!-- Name Column -->
       <ng-container matColumnDef="Address">
         <th mat-header-cell *matHeaderCellDef>Address</th>
         <td mat-cell *matCellDef="let element">
@@ -60,13 +55,11 @@
         </td>
       </ng-container>
 
-      <!-- Weight Column -->
       <ng-container matColumnDef="Phone">
         <th mat-header-cell *matHeaderCellDef>Phone</th>
         <td mat-cell *matCellDef="let element">{{ element.Phone }}</td>
       </ng-container>
 
-      <!-- Symbol Column -->
       <ng-container matColumnDef="Fax">
         <th mat-header-cell *matHeaderCellDef>Fax</th>
         <td mat-cell *matCellDef="let element">{{ element.Fax }}</td>
@@ -131,6 +124,7 @@
     <app-custom-button
       btnText="Save"
       btnClass="tertiary x-medium text-x-bold text-xmed"
+      (click)="sendFacilityData()"
       *ngIf="requirementFor === 'accountSetting'">
     </app-custom-button>
   </div>

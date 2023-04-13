@@ -28,6 +28,7 @@ export class AddHealthcareProviderComponent implements OnInit {
   @Input() componentTitle: string = '';
   @Input() componentSubTitle: string = '';
   @Input() requirementFor: string = '';
+  @Input() selectedFacilities: Array<object> = [];
   @Output() collectPrescriberWithFacility = new EventEmitter<{
     prescribersWithSelectedFacility: Array<any>;
   }>();
@@ -73,8 +74,6 @@ export class AddHealthcareProviderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('ngoninit of AddHealthcareProviderComponent');
-
     this.http
       .get('/assets/json/add-provider-form.json')
       .subscribe((formData: any) => {
@@ -173,7 +172,6 @@ export class AddHealthcareProviderComponent implements OnInit {
   }
 
   checkProviderDetails(): void {
-    console.log(this.addProviderForm);
     this.currentNPI = this.addProviderForm.controls['HCPNPI'].value;
     const payloadGetProviderDetails = {
       NPI: this.addProviderForm?.get('HCPNPI')?.value,
@@ -187,10 +185,19 @@ export class AddHealthcareProviderComponent implements OnInit {
           console.log(res);
 
           this.facilities = res.Payload[0].Facilities;
+          this.selectedFacilities = this.selectedFacilities.map(facility => {
+            return { ...facility, isSelected: true };
+          });
+
           this.facilities = this.facilities.map(facility => {
             return { ...facility, isSelected: false };
           });
 
+          this.facilities = [...this.selectedFacilities, ...this.facilities];
+          console.log(
+            [...this.facilities, ...this.selectedFacilities],
+            'combined'
+          );
           this.prescribersWithAllFacility.push({
             [payloadGetProviderDetails.NPI]: this.facilities,
           });
@@ -219,7 +226,6 @@ export class AddHealthcareProviderComponent implements OnInit {
   }
 
   getCheckbox(facility: any): void {
-    console.log(facility);
     if (this.selectedFacility.includes(facility)) {
       this.selectedFacility = this.selectedFacility.filter(item => {
         return item !== facility;
@@ -237,11 +243,9 @@ export class AddHealthcareProviderComponent implements OnInit {
   ): void {
     this.prescribersWithSelectedFacility.splice(prescriberIndex, 1);
     this.prescribersWithSelectedFacility.splice(prescriberIndex, 1);
-    console.log(this.prescribersWithSelectedFacility);
   }
 
   editPrescriberFacilities(prescriberObj: any, prescriberIndex: number): void {
-    console.log(this.prescribersWithAllFacility);
     this.facilities =
       this.prescribersWithAllFacility[prescriberIndex][prescriberObj.NPI];
     this.editNPI = Object.keys(
@@ -251,6 +255,5 @@ export class AddHealthcareProviderComponent implements OnInit {
     this.selectedFacility = this.facilities.filter((facility: any) => {
       return facility.isSelected === true;
     });
-    console.log(this.editNPI);
   }
 }

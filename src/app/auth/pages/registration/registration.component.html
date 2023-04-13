@@ -238,6 +238,12 @@
         btnClass="medium secondary"
         (click)="navigateToSelectAccountType()"></app-custom-button>
       <app-custom-button
+        [isDisabled]="
+          othersAccountInformationForm &&
+          othersAccountInformationForm.invalid &&
+          othersCreateUsernameForm &&
+          othersCreateUsernameForm.invalid
+        "
         btnText="Next >"
         btnClass="medium tertiary"
         (click)="registrationStep2()"></app-custom-button>
@@ -259,6 +265,7 @@
     [title]="addFacilityScreenTitle"
     [subTitle]="addFacilityScreenSubTitle"
     requirementFor="othersRegistration"
+    (masterFacilities)="collectMasterFacilities($event)"
     (backToParentComponent)="moveToOthersFirstScreen($event)"
     (navigateToNextComponent)="moveToAddProviderScreen($event)"
     [hidden]="!othersAddFacilityScreen"></app-add-facility>
@@ -267,6 +274,7 @@
     [componentTitle]="addProviderScreenTitle"
     [componentSubTitle]="addProviderScreenSubTitle"
     [hidden]="!addHealthcareProviderScreen"
+    [selectedFacilities]="facilitiesDataForOthers"
     (backToParentComponent)="backTriggeredFromStepAddProvider($event)"
     requirementFor="othersRegistration"
     (collectPrescriberWithFacility)="

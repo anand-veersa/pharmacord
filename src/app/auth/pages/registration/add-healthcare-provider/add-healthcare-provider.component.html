@@ -204,5 +204,12 @@
       (click)="registrationCall()"
       *ngIf="requirementFor === 'othersRegistration'">
     </app-custom-button>
+
+    <app-custom-button
+      btnText="Save"
+      btnClass="tertiary x-medium text-x-bold text-xmed"
+      (click)="registrationCall()"
+      *ngIf="requirementFor === 'accountSetting'">
+    </app-custom-button>
   </div>
 </div>

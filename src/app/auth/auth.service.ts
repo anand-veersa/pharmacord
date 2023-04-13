@@ -19,6 +19,7 @@ export class AuthService {
     prescribers: any[];
     portalAccountPkId: number;
     role: any;
+    userDetails: object[];
   };
   public userFullName = new BehaviorSubject<string>('');
 
@@ -122,7 +123,6 @@ export class AuthService {
   }
 
   public validateUsername(validateUsernamePayload: string): Observable<any> {
-    console.log(validateUsernamePayload);
     return this.http
       .get(`${environment.baseUrl}account/${validateUsernamePayload}/inuse`)
       .pipe(catchError(this.handleError));
@@ -132,6 +132,14 @@ export class AuthService {
     console.log(data, 'data in auth service');
     return this.http
       .post(`${environment.baseUrl}account`, data)
+      .pipe(catchError(this.handleError));
+  }
+
+  public getFacilities(): Observable<any> {
+    return this.http
+      .get(
+        `${environment.baseUrl}portal/facilities?portalAccountId=${this.user.portalAccountPkId}`
+      )
       .pipe(catchError(this.handleError));
   }
 

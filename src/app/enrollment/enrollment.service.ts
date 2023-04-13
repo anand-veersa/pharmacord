@@ -50,6 +50,21 @@ export class EnrollmentService {
       .pipe(map(response => new Blob([response], { type: 'application/pdf' })));
   }
 
+  public deleteFacility(deletePayload: any): Observable<any> {
+    return this.http
+      .put(
+        `${environment.baseUrl}portal/account/deleteFacility/${this.authService.user.portalAccountPkId}`,
+        deletePayload
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  public updateFacility(addFacilityPayload: any): Observable<any> {
+    return this.http
+      .post(`${environment.baseUrl}account/update`, addFacilityPayload)
+      .pipe(catchError(this.handleError));
+  }
+
   private handleAccountInfo(data: any) {
     const {
       FirstName,
@@ -71,6 +86,7 @@ export class EnrollmentService {
       fax: UserDetails.Fax,
       portalAccountPkId: PortalAccountPkId,
       role: Role,
+      userDetails: UserDetails,
     };
   }
 

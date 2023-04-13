@@ -15,6 +15,10 @@
 
     .mat-mdc-tab-labels {
       gap: 2.4rem;
+
+      .mdc-tab__text-label {
+        color: $color-white;
+      }
     }
   }
 }
