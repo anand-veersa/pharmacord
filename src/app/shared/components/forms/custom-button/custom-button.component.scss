@@ -125,6 +125,7 @@ button:disabled {
 }
 
 .submit-enrollment-btn {
+  font-family: $primary-font;
   @include respond(tab-port) {
     padding: 1.25rem;
     gap: 0;
