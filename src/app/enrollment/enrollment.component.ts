@@ -38,6 +38,7 @@ export class EnrollmentComponent implements OnInit {
           this.enrolService.submitFormInitiated.next(true);
         }
         if (
+          event.url.includes('/dashboard') ||
           event.url.includes('/patients') ||
           event.url.includes('/tools-and-forms')
         ) {
