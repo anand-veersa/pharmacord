@@ -181,6 +181,10 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
     });
   }
 
+  public printPatientDetails() {
+    window.print();
+  }
+
   private getInsuranceName(caseDetail: any, insuranceType: string): string {
     const planNames: string[] = [];
     if (caseDetail.MedicalInsuranceListInfo) {

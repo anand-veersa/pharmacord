@@ -2,6 +2,9 @@
 @import '../../../../assets/styles/abstracts/mixins.scss';
 
 .header {
+  @media print {
+    display: none;
+  }
   padding-right: 2.4rem;
   display: flex;
   justify-content: space-between;

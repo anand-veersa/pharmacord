@@ -14,12 +14,14 @@
     <div class="action-buttons">
       <app-custom-button
         btnText="&#60; Back"
-        btnClass="secondary x-small"></app-custom-button>
+        btnClass="secondary x-small"
+        [routerLink]="['/enrollment/patients']"></app-custom-button>
       <app-custom-button
         btnText="Print"
         btnIcon="print_icon.svg"
         iconPlace="prefix"
-        btnClass="secondary x-small"></app-custom-button>
+        btnClass="secondary x-small"
+        (click)="printPatientDetails()"></app-custom-button>
     </div>
   </div>
   <div class="custom-expansion-content">

@@ -18,6 +18,7 @@ export class EnrollmentComponent implements OnInit {
   public enableAllMeds: boolean = false;
   public enrollCreationActive: boolean = false;
   public screenWidth: number;
+  public hideEnrollmentBtns: boolean = false;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -35,9 +36,12 @@ export class EnrollmentComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         if (event.url.includes('/create')) {
+          this.hideEnrollmentBtns = false;
           this.enrolService.submitFormInitiated.next(true);
         }
-        if (
+        if (event.url.match(/\/patients\/[0-9]/g)?.length) {
+          this.hideEnrollmentBtns = true;
+        } else if (
           event.url.includes('/dashboard') ||
           event.url.includes('/patients') ||
           event.url.includes('/tools-and-forms')
@@ -47,8 +51,10 @@ export class EnrollmentComponent implements OnInit {
           this.enrolService.selectedMedicine.next(
             this.appConstants.MEDICINES.ALL
           );
+          this.hideEnrollmentBtns = false;
         } else {
           this.enableAllMeds = false;
+          this.hideEnrollmentBtns = false;
           this.changeMedicine(this.appConstants.MEDICINES.MEDICINE_1);
         }
       }
