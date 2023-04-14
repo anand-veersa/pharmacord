@@ -1,4 +1,5 @@
 @import '../../../../assets/styles/abstracts/_variables.scss';
+@import '../../../../assets/styles/abstracts/mixins.scss';
 
 .header {
   padding-right: 2.4rem;
@@ -11,9 +12,15 @@
     .htext {
       font-size: 2.8rem;
       font-family: $secondary-font;
+      @include respond(tab-port) {
+        font-size: 2rem;
+      }
       &-top {
         color: $color-header;
         margin-bottom: 0.5rem;
+        @include respond(tab-port) {
+          margin-bottom: 0;
+        }
       }
       &-bottom {
         color: $color-tertiary;
@@ -63,6 +70,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      @include respond(tab-port) {
+        font-size: 1.6rem;
+      }
     }
     .office-timings {
       color: $color-tertiary;
@@ -75,11 +85,17 @@
   &-logo {
     height: 9.5rem;
     width: 16.5rem;
+    @include respond(tab-port) {
+      width: 14.5rem;
+    }
   }
   &-divider {
     border: 2px solid $color-sub-header;
     opacity: 0.2;
     margin: 0 2rem;
     min-height: 5.25rem;
+    @include respond(tab-port) {
+      margin: 0 1rem;
+    }
   }
 }

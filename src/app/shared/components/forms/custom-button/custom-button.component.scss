@@ -1,4 +1,5 @@
 @import '../../../../../assets/styles/abstracts/variables';
+@import '../../../../../assets/styles/abstracts/mixins';
 button {
   color: $color-white;
   border-radius: 0.6rem;
@@ -120,5 +121,12 @@ button:disabled {
   }
   &-2 {
     border-radius: 0 0.6rem 0.6rem 0;
+  }
+}
+
+.submit-enrollment-btn {
+  @include respond(tab-port) {
+    padding: 1.25rem;
+    gap: 0;
   }
 }
