@@ -1,16 +1,21 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { Router, Event, NavigationEnd } from '@angular/router';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router, Event, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { AppConstants } from '../constants/app.constants';
 import { LocalStorageService } from '../shared/services/local-storage.service';
 import { SharedService } from '../shared/services/shared.service';
 import { EnrollmentService } from './enrollment.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomUploadDocumentsComponent } from '../shared/components/custom-upload-documents/custom-upload-documents.component';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-enrollment',
   templateUrl: './enrollment.component.html',
   styleUrls: ['./enrollment.component.scss'],
 })
-export class EnrollmentComponent implements OnInit {
+export class EnrollmentComponent implements OnInit, OnDestroy {
   public currentDate = new Date();
   public selectedMed: string;
   public medicineCases: any[] = [];
@@ -19,6 +24,7 @@ export class EnrollmentComponent implements OnInit {
   public enrollCreationActive: boolean = false;
   public screenWidth: number;
   public hideEnrollmentBtns: boolean = false;
+  private routeSubs: Subscription;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -26,12 +32,15 @@ export class EnrollmentComponent implements OnInit {
   }
 
   constructor(
+    public appConstants: AppConstants,
+    public dialog: MatDialog,
     private enrolService: EnrollmentService,
     private localStorage: LocalStorageService,
     private authService: AuthService,
     private sharedService: SharedService,
     private router: Router,
-    public appConstants: AppConstants
+    private location: Location,
+    private route: ActivatedRoute
   ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -130,5 +139,71 @@ export class EnrollmentComponent implements OnInit {
       );
     }
     this.enrolService.medicineCases.next(medicineCases);
+  }
+
+  public openDialog(): void {
+    const dialogRef = this.dialog.open(CustomUploadDocumentsComponent, {
+      enterAnimationDuration: 0,
+      exitAnimationDuration: 0,
+    });
+
+    dialogRef.componentInstance.attachedDocuments.subscribe(uploadedFiles => {
+      this.handleUploadDocs(uploadedFiles);
+    });
+  }
+
+  public handleUploadDocs(documents: any): void {
+    let count = 0;
+    for (const document of documents) {
+      if (document.size > 10485760) {
+        this.sharedService.notify(
+          'error',
+          `${document.name}  Failed to upload`
+        );
+      } else {
+        this.sharedService.isLoading.next(true);
+        // Looking for a better code here
+        const url = this.location.path();
+        const patientId = url.split('/')[3].split('?')[0];
+        let caseId: string = '';
+
+        this.route.queryParams.subscribe(params => {
+          caseId = params['case'];
+        });
+
+        this.enrolService
+          .uploadDocument(document, patientId, caseId)
+          .subscribe({
+            next: res => {
+              this.sharedService.isLoading.next(true);
+
+              if (res && res.Status === 'SUCCESS') {
+                this.sharedService.notify(
+                  'success',
+                  `${document.name} Uploaded successfully`
+                );
+                count++;
+              } else {
+                this.sharedService.notify(
+                  'error',
+                  `${document.name} Failed to upload `
+                );
+                count++;
+              }
+              if (count === documents.length) {
+                this.sharedService.isLoading.next(false);
+                this.enrolService.documentUploaded.next(true);
+              }
+            },
+            error: err => {
+              this.sharedService.notify('error', err);
+            },
+          });
+      }
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubs.unsubscribe();
   }
 }

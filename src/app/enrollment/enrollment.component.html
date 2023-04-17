@@ -54,6 +54,13 @@
       </div>
       <div class="form-button">
         <app-custom-button
+          *ngIf="hideEnrollmentBtns"
+          btnIcon="upload-supplemental-documents.svg"
+          btnClass="tertiary small text-x-bold submit-enrollment-btn"
+          [btnText]="screenWidth > 820 ? 'Upload Supplemental Documents' : ''"
+          iconPlace="prefix"
+          (click)="openDialog()"></app-custom-button>
+        <app-custom-button
           btnIcon="form_icon.svg"
           btnClass="tertiary small text-x-bold submit-enrollment-btn"
           [btnText]="screenWidth > 820 ? 'Submit Enrollment Form' : ''"
