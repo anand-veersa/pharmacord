@@ -25,6 +25,8 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
   public screenWidth: number;
   public hideEnrollmentBtns: boolean = false;
   private routeSubs: Subscription;
+  private patientId: string = '';
+  private caseId: string = '';
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -142,11 +144,24 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
   }
 
   public openDialog(): void {
+    this.route.children[0].params.subscribe(param => {
+      this.patientId = param['id'];
+    });
+
+    let patientName = '';
+    this.enrolService.cases.subscribe(res => {
+      patientName = res.find(p => p.PatientId === +this.patientId)?.PatientName;
+    });
+
+    this.route.children[0].queryParams.subscribe(queryParam => {
+      this.caseId = queryParam['case'];
+    });
+
     const dialogRef = this.dialog.open(CustomUploadDocumentsComponent, {
       enterAnimationDuration: 0,
       exitAnimationDuration: 0,
+      data: { patientName: patientName, caseId: this.caseId },
     });
-
     dialogRef.componentInstance.attachedDocuments.subscribe(uploadedFiles => {
       this.handleUploadDocs(uploadedFiles);
     });
@@ -162,17 +177,9 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
         );
       } else {
         this.sharedService.isLoading.next(true);
-        // Looking for a better code here
-        const url = this.location.path();
-        const patientId = url.split('/')[3].split('?')[0];
-        let caseId: string = '';
-
-        this.route.queryParams.subscribe(params => {
-          caseId = params['case'];
-        });
 
         this.enrolService
-          .uploadDocument(document, patientId, caseId)
+          .uploadDocument(document, this.patientId, this.caseId)
           .subscribe({
             next: res => {
               this.sharedService.isLoading.next(true);
@@ -204,6 +211,6 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routeSubs.unsubscribe();
+    this.routeSubs?.unsubscribe();
   }
 }

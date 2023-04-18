@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-custom-upload-documents',
@@ -8,6 +9,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class CustomUploadDocumentsComponent {
   @Output() attachedDocuments: EventEmitter<any[]> = new EventEmitter();
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter();
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public data: { patientName: string; caseId: string }
+  ) {}
 
   public browseFile(): void {
     const browseFileRef = document.getElementById('browseFileRef');
