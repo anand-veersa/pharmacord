@@ -1,5 +1,4 @@
 import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
-import { Location } from '@angular/common';
 import { Router, Event, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { AppConstants } from '../constants/app.constants';
@@ -29,7 +28,7 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
   private caseId: string = '';
 
   @HostListener('window:resize', ['$event'])
-  onResize() {
+  onResize(): void {
     this.screenWidth = window.innerWidth;
   }
 
@@ -41,7 +40,6 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private sharedService: SharedService,
     private router: Router,
-    private location: Location,
     private route: ActivatedRoute
   ) {
     this.router.events.subscribe((event: Event) => {
