@@ -4,6 +4,9 @@
   height: 100%;
   .sidenav {
     flex: 1 1 9%;
+    @media print {
+      display: none;
+    }
   }
 
   .main {
@@ -30,10 +33,17 @@
           line-height: 2.8rem;
         }
       }
+
+      @media print {
+        display: none;
+      }
     }
 
     .tab-content {
       padding: 2rem 3rem;
+    }
+    @media print {
+      overflow: initial;
     }
   }
 }

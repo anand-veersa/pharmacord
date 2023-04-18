@@ -20,6 +20,9 @@
     display: flex;
     gap: 3rem;
   }
+  @media print {
+    overflow-wrap: anywhere;
+  }
 }
 mat-expansion-panel {
   box-shadow: none !important;
