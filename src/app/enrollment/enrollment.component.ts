@@ -165,10 +165,10 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
     });
   }
 
-  public handleUploadDocs(documents: any): void {
+  public handleUploadDocs(documents: any[]): void {
     let count = 0;
     for (const document of documents) {
-      if (document.size > 10485760) {
+      if (document.size > this.appConstants.MAX_FILE_SIZE) {
         this.sharedService.notify(
           'error',
           `${document.name}  Failed to upload`

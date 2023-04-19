@@ -36,4 +36,5 @@ export class AppConstants {
       '#40488D',
     ],
   };
+  public MAX_FILE_SIZE = 10485760;
 }

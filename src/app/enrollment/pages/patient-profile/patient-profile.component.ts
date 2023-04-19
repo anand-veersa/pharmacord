@@ -13,7 +13,6 @@ import { EnrollmentService } from '../../enrollment.service';
   styleUrls: ['./patient-profile.component.scss'],
 })
 export class PatientProfileComponent implements OnInit, OnDestroy {
-  private routeSubs: Subscription;
   public patientCasesDataSource = new MatTableDataSource<Case>([]);
   public alertDataSource = new MatTableDataSource<Alert>([]);
   public docDataSource = new MatTableDataSource<CaseDoc>([]);
@@ -36,6 +35,8 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
   public docColumnSchema: any[] = [];
   public pageSizeOptions: number[] = [5, 10, 15];
   public pdfSrc: any = null;
+  private routeSubs: Subscription;
+  private caseId: string = '';
 
   constructor(
     public route: ActivatedRoute,
@@ -70,7 +71,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.onLoad();
     this.enrolService.documentUploaded.subscribe(isNewDocUploaded => {
-      if (isNewDocUploaded) this.onLoad();
+      if (isNewDocUploaded) this.getCaseDetails(this.caseId);
     });
   }
 
@@ -115,7 +116,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
               DocumentURL: doc.DocumentURL,
             });
           });
-          this.openDoc(docs[0]);
+          // this.openDoc(docs[0]);
           this.docDataSource.data = docs;
           const alerts: any[] = [];
           this.caseDetail.Alerts.forEach((item: any) => {
@@ -206,7 +207,8 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
             this.patientCasesDataSource.data = this.patientCases;
           });
           this.selectedCase = { key: 'CaseId', value: results.query['case'] };
-          this.getCaseDetails(results.query['case']);
+          this.caseId = results.query['case'];
+          this.getCaseDetails(this.caseId);
         },
       });
   }
