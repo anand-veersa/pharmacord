@@ -25,10 +25,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(): void {
-    this.sharedService.isLoading.next(true);
-    this.authService.logout().subscribe(res => {
-      this.sharedService.isLoading.next(false);
-      this.router.navigate(['/logout']);
-    });
+    this.router.navigate(['/logout']);
   }
 }

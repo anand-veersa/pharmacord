@@ -140,6 +140,15 @@ export class SharedService {
     return str.charAt(0).toUpperCase() + lower.slice(1);
   }
 
+  public getBase64(file: File) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+
   public filterSearch(
     search: string,
     data: Patient[],

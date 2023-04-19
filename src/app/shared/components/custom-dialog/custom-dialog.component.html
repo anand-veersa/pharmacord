@@ -1,0 +1,20 @@
+<div class="overlay" (click)="action.emit(false)"></div>
+<div class="custom-dialog">
+  <div class="title spaced-layout">
+    <span class="text-med text-x-bold">{{ data.title }}</span>
+    <span><mat-icon>close</mat-icon></span>
+  </div>
+  <div class="tp-2 lp-3 rp3 bp-2">
+    <ng-content></ng-content>
+  </div>
+  <div class="spaced-layout">
+    <app-custom-button
+      btnClass="small secondary"
+      [btnText]="data.closeText"
+      (action)="action.emit(false)"></app-custom-button>
+    <app-custom-button
+      btnClass="small tertiary"
+      [btnText]="data.confirmText"
+      (action)="action.emit(true)"></app-custom-button>
+  </div>
+</div>

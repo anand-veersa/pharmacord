@@ -9,7 +9,9 @@ import { SubmitEnrollmentService } from '../../pages/submit-enrollment/submit-en
 export class SelectInsuranceComponent implements OnInit {
   @Output() title = new EventEmitter();
   @Output() action = new EventEmitter();
-  public primaryInsurance: boolean = false;
+  public firstInsurance: boolean = false;
+  public firstInsuranceFiles: any[] = [];
+  public secondInsurance: boolean = false;
 
   constructor(public submitEnrolService: SubmitEnrollmentService) {}
 
@@ -27,5 +29,27 @@ export class SelectInsuranceComponent implements OnInit {
       },
       nextScreen: actionType === 'back' ? 'prescriber-details' : 'atte',
     });
+  }
+
+  public removeAttachFile(insuranceType: string, index: number): void {
+    if (insuranceType === 'first') {
+      const currentValue =
+        this.submitEnrolService.firstInsuranceForm.controls[
+          'firstInsuranceFiles'
+        ].value;
+      currentValue.splice(index, 1);
+      this.submitEnrolService.firstInsuranceForm
+        .get('firstInsuranceFiles')
+        ?.setValue(currentValue);
+    } else {
+      const currentValue =
+        this.submitEnrolService.secondInsuranceForm.controls[
+          'secondInsuranceFiles'
+        ].value;
+      currentValue.splice(index, 1);
+      this.submitEnrolService.secondInsuranceForm
+        .get('secondInsuranceFiles')
+        ?.setValue(currentValue);
+    }
   }
 }

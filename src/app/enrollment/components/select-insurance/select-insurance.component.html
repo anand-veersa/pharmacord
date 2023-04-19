@@ -9,22 +9,50 @@
         <span> Does the Patient have Primary Insurance? </span>
         <span
           ><app-custom-toggle-button
-            idString="primaryInsurance"
-            (changed)="primaryInsurance = $event"
-            [value]="primaryInsurance"></app-custom-toggle-button
+            idString="firstInsurance"
+            (changed)="firstInsurance = $event"
+            [value]="firstInsurance"></app-custom-toggle-button
         ></span>
       </div>
-      <div
-        *ngFor="
-          let control of submitEnrolService.firstInsuranceDetails.controls
-        "
-        [ngClass]="control.class ? control.class : 'tm-1'">
-        <app-custom-form
-          *ngIf="control.display"
-          [field]="control"
-          [form]="submitEnrolService.firstInsuranceForm"
-          formType="bg enrollment-form"></app-custom-form>
-      </div>
+      <ng-container *ngIf="firstInsurance">
+        <div
+          *ngFor="
+            let control of submitEnrolService.firstInsuranceDetails.controls
+          "
+          [ngClass]="control.class ? control.class : 'tm-1'">
+          <app-custom-form
+            *ngIf="control.display"
+            formType="bg enrollment-form"
+            [field]="control"
+            [form]="submitEnrolService.firstInsuranceForm"></app-custom-form>
+        </div>
+        <div
+          *ngIf="
+            submitEnrolService.firstInsuranceForm.controls[
+              'firstInsuranceFiles'
+            ].value.length > 0
+          "
+          class="document-container tm-2">
+          <div class="header text-small text-x-bold col">
+            <span>Name</span> <span>Action</span>
+          </div>
+          <div
+            class="items col"
+            *ngFor="
+              let data of submitEnrolService.firstInsuranceForm.controls[
+                'firstInsuranceFiles'
+              ].value;
+              let index
+            ">
+            <span class="text-xs">{{ data.file.name }}</span>
+            <span
+              class="error-or-required"
+              (click)="removeAttachFile('first', index)"
+              ><mat-icon>delete_outline</mat-icon></span
+            >
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 
@@ -41,17 +69,54 @@
     <div class="error-or-required tm-1">* Required field</div>
 
     <div>
-      <div
-        *ngFor="
-          let control of submitEnrolService.secondInsuranceDetails.controls
-        "
-        [ngClass]="control.class ?? 'tm-1'">
-        <app-custom-form
-          *ngIf="control.display"
-          [field]="control"
-          [form]="submitEnrolService.secondInsuranceForm"
-          formType="bg enrollment-form"></app-custom-form>
+      <div class="insurance-consent">
+        <span> Does the Patient have Primary Insurance? </span>
+        <span
+          ><app-custom-toggle-button
+            idString="secondInsurance"
+            (changed)="secondInsurance = $event"
+            [value]="secondInsurance"></app-custom-toggle-button
+        ></span>
       </div>
+      <ng-container *ngIf="secondInsurance">
+        <div
+          *ngFor="
+            let control of submitEnrolService.secondInsuranceDetails.controls
+          "
+          [ngClass]="control.class ?? 'tm-1'">
+          <app-custom-form
+            *ngIf="control.display"
+            [field]="control"
+            [form]="submitEnrolService.secondInsuranceForm"
+            formType="bg enrollment-form"></app-custom-form>
+        </div>
+        <div
+          *ngIf="
+            submitEnrolService.secondInsuranceForm.controls[
+              'secondInsuranceFiles'
+            ].value.length > 0
+          "
+          class="document-container tm-2">
+          <div class="header text-small text-x-bold col">
+            <span>Name</span> <span>Action</span>
+          </div>
+          <div
+            class="items col"
+            *ngFor="
+              let data of submitEnrolService.secondInsuranceForm.controls[
+                'secondInsuranceFiles'
+              ].value;
+              let index
+            ">
+            <span class="text-xs">{{ data.file.name }}</span>
+            <span
+              class="error-or-required"
+              (click)="removeAttachFile('second', index)"
+              ><mat-icon>delete_outline</mat-icon></span
+            >
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>
