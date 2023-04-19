@@ -1,0 +1,65 @@
+@import '../../../../assets/styles/abstracts/_variables.scss';
+
+.backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.upload-documents-container {
+  background: $color-white;
+  border: 0.4rem solid $color-header;
+  border-radius: 0.8rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+
+  .header {
+    background: $color-tertiary;
+    color: $color-white;
+    font-family: $primary-font;
+    font-weight: 700;
+    padding: 1.3rem 2.1rem;
+    .title {
+      display: flex;
+      justify-content: space-between;
+      .close-icon {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+  }
+
+  .file-upload {
+    width: 100%;
+    padding: 2rem;
+    border: 0.2rem dashed $color-sub-header;
+    border-radius: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-family: $primary-font;
+
+    .pdf-size {
+      color: #ff0000;
+    }
+
+    .browse-file {
+      display: none;
+    }
+  }
+}

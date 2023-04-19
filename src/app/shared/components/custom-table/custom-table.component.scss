@@ -1,7 +1,12 @@
 @import '../../../../assets/styles/abstracts/_variables.scss';
 
-::ng-deep .custom-table .mat-sort-header-content {
-  text-align: left !important;
+::ng-deep .custom-table {
+  .mat-sort-header-content {
+    text-align: left !important;
+  }
+  .mat-sort-header-arrow {
+    color: $color-primary;
+  }
 }
 ::ng-deep .mat-mdc-table {
   thead {
