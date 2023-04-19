@@ -8,6 +8,8 @@ import {
   ViewChild,
   TemplateRef,
   ViewEncapsulation,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,6 +19,7 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { AuthService } from 'src/app/auth/auth.service';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { SharedService } from '../../../../shared/services/shared.service';
+import { EnrollmentService } from 'src/app/enrollment/enrollment.service';
 
 @Component({
   selector: 'app-add-healthcare-provider',
@@ -61,6 +64,12 @@ export class AddHealthcareProviderComponent implements OnInit {
   public currentNPI: string = '';
   public npiData: any[] = [];
   public editNPI: string = '';
+  // for account setting page
+  public hcpAllFacilities: any[] = [];
+  public providersWithAllFacilities: Array<any> = [];
+  public providersWithSelectedFacilities: any[] = [];
+  public providerAlreadyExist: boolean = false;
+  public facilitiesWithoutProvider: any[] = [];
 
   @ViewChild('dialogRef')
   dialogRef!: TemplateRef<any>;
@@ -70,6 +79,7 @@ export class AddHealthcareProviderComponent implements OnInit {
     private sharedService: SharedService,
     private http: HttpClient,
     private authService: AuthService,
+    private enrolService: EnrollmentService,
     public dialog: MatDialog
   ) {}
 
@@ -82,6 +92,10 @@ export class AddHealthcareProviderComponent implements OnInit {
           this.addProviderFormData
         );
       });
+
+    if (this.requirementFor === 'accountSetting') {
+      this.getUpdatedProviderDetails();
+    }
   }
 
   navigateToPrevious(): void {
@@ -116,7 +130,7 @@ export class AddHealthcareProviderComponent implements OnInit {
         if (
           this.prescribersWithSelectedFacility[npiObject].NPI === this.editNPI
         ) {
-          this.prescribersWithSelectedFacility[npiObject].value =
+          this.prescribersWithSelectedFacility[npiObject].facilities =
             this.selectedFacility;
         }
       }
@@ -124,7 +138,14 @@ export class AddHealthcareProviderComponent implements OnInit {
     } else {
       this.prescribersWithSelectedFacility = [
         ...this.prescribersWithSelectedFacility,
-        { NPI: this.currentNPI, value: this.selectedFacility },
+        {
+          NPI: this.currentNPI,
+          facilities: this.selectedFacility,
+          Name:
+            this.addProviderForm.controls['HCPFirstName'].value +
+            ' ' +
+            this.addProviderForm.controls['HCPLastName'].value,
+        },
       ];
     }
     console.log(
@@ -138,11 +159,15 @@ export class AddHealthcareProviderComponent implements OnInit {
   }
 
   getCompleteAddress(elementObject: any): string {
-    if (elementObject.Address2 !== null) {
+    if (elementObject.Address2 !== null || elementObject.Line2 !== null) {
       return (
-        elementObject.Address1 +
+        (elementObject.Address1 === undefined
+          ? elementObject.Line1
+          : elementObject.Address1) +
         ', ' +
-        elementObject.Address2 +
+        (elementObject.Address2 === undefined
+          ? elementObject.Line2
+          : elementObject.Address2) +
         ', ' +
         elementObject.City +
         ', ' +
@@ -178,41 +203,68 @@ export class AddHealthcareProviderComponent implements OnInit {
       FirstName: this.addProviderForm?.get('HCPFirstName')?.value,
       LastName: this.addProviderForm?.get('HCPLastName')?.value,
     };
-    this.sharedService.isLoading.next(true);
-    this.authService.getProviderDetails(payloadGetProviderDetails).subscribe({
-      next: (res: any) => {
-        if (res.Status === 'SUCCESS') {
-          console.log(res);
+    // debugger;
+    const searchedProviderIndex = this.prescribersWithAllFacility.findIndex(
+      provider => provider.NPI === this.currentNPI
+    );
 
-          this.facilities = res.Payload[0].Facilities;
-          this.selectedFacilities = this.selectedFacilities.map(facility => {
-            return { ...facility, isSelected: true };
-          });
+    if (searchedProviderIndex != -1) {
+      this.editPrescriberFacilities(searchedProviderIndex);
+      this.providerAlreadyExist = true;
+      this.openTempDialog();
+    } else {
+      this.sharedService.isLoading.next(true);
+      this.authService.getProviderDetails(payloadGetProviderDetails).subscribe({
+        next: (res: any) => {
+          if (res.Status === 'SUCCESS') {
+            console.log(res);
 
-          this.facilities = this.facilities.map(facility => {
-            return { ...facility, isSelected: false };
-          });
+            this.facilities = res.Payload[0].Facilities;
 
-          this.facilities = [...this.selectedFacilities, ...this.facilities];
-          console.log(
-            [...this.facilities, ...this.selectedFacilities],
-            'combined'
-          );
-          this.prescribersWithAllFacility.push({
-            [payloadGetProviderDetails.NPI]: this.facilities,
-          });
-          this.openTempDialog();
-          this.npiData.push(payloadGetProviderDetails);
-        } else {
-          this.sharedService.notify('error', res.Errors[0].Message);
-        }
-        this.sharedService.isLoading.next(false);
-      },
-      error: err => {
-        this.sharedService.isLoading.next(false);
-        this.sharedService.notify('error', err);
-      },
-    });
+            //if there is some selected facility already present
+            this.selectedFacilities = this.selectedFacilities.map(facility => {
+              return { ...facility, isSelected: true };
+            });
+
+            this.facilities = this.facilities.map(facility => {
+              return { ...facility, isSelected: false };
+            });
+
+            this.facilities = [...this.selectedFacilities, ...this.facilities];
+            console.log(
+              [...this.facilities, ...this.selectedFacilities],
+              'combined'
+            );
+
+            this.prescribersWithAllFacility = [
+              ...this.prescribersWithAllFacility,
+              {
+                NPI: payloadGetProviderDetails.NPI,
+                Name:
+                  payloadGetProviderDetails.FirstName +
+                  ' ' +
+                  payloadGetProviderDetails.LastName,
+                facilities: this.facilities,
+              },
+            ];
+            console.log(
+              this.prescribersWithAllFacility,
+              'prescriber with all facilities after NPI call'
+            );
+
+            this.openTempDialog();
+            this.npiData.push(payloadGetProviderDetails);
+          } else {
+            this.sharedService.notify('error', res.Errors[0].Message);
+          }
+          this.sharedService.isLoading.next(false);
+        },
+        error: err => {
+          this.sharedService.isLoading.next(false);
+          this.sharedService.notify('error', err);
+        },
+      });
+    }
   }
 
   registrationCall(): void {
@@ -241,19 +293,121 @@ export class AddHealthcareProviderComponent implements OnInit {
     pescriberObject: object,
     prescriberIndex: number
   ): void {
+    this.prescribersWithAllFacility.splice(prescriberIndex, 1);
     this.prescribersWithSelectedFacility.splice(prescriberIndex, 1);
-    this.prescribersWithSelectedFacility.splice(prescriberIndex, 1);
+    console.log(
+      'all and selected after delete',
+      this.prescribersWithAllFacility,
+      this.prescribersWithSelectedFacility
+    );
   }
 
-  editPrescriberFacilities(prescriberObj: any, prescriberIndex: number): void {
+  editPrescriberFacilities(prescriberIndex: number): void {
+    console.log(
+      this.prescribersWithAllFacility,
+      'after edit click',
+      this.prescribersWithAllFacility[prescriberIndex].facilities
+    );
     this.facilities =
-      this.prescribersWithAllFacility[prescriberIndex][prescriberObj.NPI];
-    this.editNPI = Object.keys(
-      this.prescribersWithAllFacility[prescriberIndex]
-    )[0];
+      this.prescribersWithAllFacility[prescriberIndex].facilities;
+    this.editNPI = this.prescribersWithAllFacility[prescriberIndex].NPI;
     this.openTempDialog();
     this.selectedFacility = this.facilities.filter((facility: any) => {
       return facility.isSelected === true;
     });
+  }
+
+  getAllFacilities(): void {
+    this.sharedService.isLoading.next(true);
+    this.authService.getFacilities().subscribe({
+      next: (res: any) => {
+        console.log(res, 'get facilities data');
+        if (res.Status === 'SUCCESS') {
+          this.hcpAllFacilities = res.Payload;
+          this.facilitiesWithoutProvider = [...res.Payload];
+          this.separateFacilities();
+        } else {
+          this.sharedService.notify('error', res.Errors[0]);
+        }
+        this.sharedService.isLoading.next(false);
+      },
+      error: err => {
+        this.sharedService.isLoading.next(false);
+        this.sharedService.notify('error', err);
+      },
+    });
+  }
+
+  getUpdatedProviderDetails(): void {
+    this.sharedService.isLoading.next(true);
+    this.enrolService.getAccountInfo(this.authService.user.username).subscribe({
+      next: (res: any) => {
+        if (res.Status === 'SUCCESS') {
+          for (const provider of res.Payload.Providers) {
+            this.providersWithAllFacilities = [
+              ...this.providersWithAllFacilities,
+              {
+                NPI: provider.NPI,
+                Name: provider.FirstName + ' ' + provider.LastName,
+                facilities: provider.Facilities,
+              },
+            ];
+          }
+          this.prescribersWithAllFacility = this.providersWithAllFacilities;
+
+          this.getAllFacilities();
+        }
+      },
+      error: err => {
+        this.sharedService.isLoading.next(false);
+        this.sharedService.notify('error', err);
+      },
+    });
+    // this.sharedService.isLoading.next(false);
+  }
+
+  separateFacilities(): void {
+    for (const provider of this.providersWithAllFacilities) {
+      let providerDetails: any = {
+        NPI: provider.NPI,
+        Name: provider.Name,
+      };
+      let facilities: any[] = [];
+      for (const facility of this.hcpAllFacilities) {
+        for (const providerFacility of provider.facilities) {
+          if (facility.Id === providerFacility.Id) {
+            const updatedfacility = { ...facility, isSelected: true };
+            facilities = [...facilities, updatedfacility];
+            // place true to facility in allfacilities
+            // providerFacility = { ...providerFacility, isSelected: true };
+            providerFacility.isSelected = true;
+
+            // remove this from facilitiesWithout prescriber
+            const index = this.facilitiesWithoutProvider.indexOf(facility);
+            this.facilitiesWithoutProvider.splice(index, 1);
+          }
+        }
+      }
+      providerDetails = { ...providerDetails, facilities };
+      this.providersWithSelectedFacilities.push(providerDetails);
+    }
+
+    this.facilitiesWithoutProvider.forEach(facility => {
+      facility.isSelected = true;
+    });
+    for (const provider of this.providersWithSelectedFacilities) {
+      provider.facilities = [
+        ...this.facilitiesWithoutProvider,
+        ...provider.facilities,
+      ];
+    }
+    this.prescribersWithSelectedFacility = this.providersWithSelectedFacilities;
+    this.prescribersWithAllFacility = this.providersWithAllFacilities;
+    console.log(
+      this.prescribersWithSelectedFacility,
+      'prescribersWithSelectedFacility '
+    );
+    console.log(this.prescribersWithAllFacility, 'prescribersWithAllFacility');
+    console.log(this.facilitiesWithoutProvider, 'facilities without provider');
   }
 }

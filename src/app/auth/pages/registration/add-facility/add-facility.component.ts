@@ -132,7 +132,7 @@ export class AddFacilityComponent implements OnInit {
       Rank: 1,
       Id: null,
       Phone: this.addFacilityForm.value.facilityPhone,
-      PhoneType: 'office',
+      PhoneType: 'Office',
       Extension: null,
       Contacts: [],
     };

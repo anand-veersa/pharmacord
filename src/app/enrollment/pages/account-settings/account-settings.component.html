@@ -1,6 +1,6 @@
-<mat-tab-group animationDuration="1000ms">
+<mat-tab-group animationDuration="100ms" #tabGroup>
   <mat-tab label="Facility">
-    <div class="facility-container">
+    <div class="facility-container" *ngIf="this.tabGroup.selectedIndex === 0">
       <app-add-facility
         [title]="facilityTabTitle"
         [subTitle]="facilityTabSubTitle"
@@ -11,8 +11,11 @@
   </mat-tab>
 
   <mat-tab label="Provider">
-    <div class="provider-container">
-      <app-add-healthcare-provider requirementFor="accountSetting">
+    <div class="provider-container" *ngIf="this.tabGroup.selectedIndex === 1">
+      <app-add-healthcare-provider
+        [componentTitle]="providerTabTitle"
+        [componentSubTitle]="providerTabSubTitle"
+        requirementFor="accountSetting">
       </app-add-healthcare-provider>
     </div>
   </mat-tab>
