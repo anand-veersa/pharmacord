@@ -12,7 +12,7 @@ export class CustomUploadDocumentsComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: { patientName: string; caseId: string }
+    public data: { patientName: string; caseId: string; progressData: any[] }
   ) {}
 
   public browseFile(): void {
