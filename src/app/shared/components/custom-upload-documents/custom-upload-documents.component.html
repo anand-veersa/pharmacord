@@ -34,5 +34,14 @@
       btnClass="tertiary register-user"
       (action)="browseFile()">
     </app-custom-button>
+    <div
+      *ngFor="let progress of data.progressData"
+      class="upload-document tm-1">
+      <mat-icon> insert_drive_file</mat-icon>
+      <div class="file-container">
+        <span class="text-small file-name">{{ progress.name }}</span>
+        <mat-progress-bar [value]="progress.progress"> </mat-progress-bar>
+      </div>
+    </div>
   </div>
 </div>

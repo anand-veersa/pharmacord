@@ -5,7 +5,7 @@ import { AppConstants } from '../constants/app.constants';
 import { LocalStorageService } from '../shared/services/local-storage.service';
 import { SharedService } from '../shared/services/shared.service';
 import { EnrollmentService } from './enrollment.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CustomUploadDocumentsComponent } from '../shared/components/custom-upload-documents/custom-upload-documents.component';
 import { Subscription } from 'rxjs';
 
@@ -23,7 +23,9 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
   public enrollCreationActive: boolean = false;
   public screenWidth: number;
   public hideEnrollmentBtns: boolean = false;
+  public progressData: any[] = [];
   private routeSubs: Subscription;
+  private dialogRef: MatDialogRef<CustomUploadDocumentsComponent>;
   private patientId: string = '';
   private caseId: string = '';
 
@@ -155,19 +157,27 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
       this.caseId = queryParam['case'];
     });
 
-    const dialogRef = this.dialog.open(CustomUploadDocumentsComponent, {
+    this.dialogRef = this.dialog.open(CustomUploadDocumentsComponent, {
       enterAnimationDuration: 0,
       exitAnimationDuration: 0,
-      data: { patientName: patientName, caseId: this.caseId },
+      data: {
+        patientName: patientName,
+        caseId: this.caseId,
+        progressData: this.progressData,
+      },
     });
-    dialogRef.componentInstance.attachedDocuments.subscribe(uploadedFiles => {
-      this.handleUploadDocs(uploadedFiles);
-    });
+    this.dialogRef.componentInstance.attachedDocuments.subscribe(
+      uploadedFiles => {
+        this.handleUploadDocs(uploadedFiles);
+      }
+    );
+    this.dialogRef.afterClosed().subscribe(() => (this.progressData = []));
   }
 
   public handleUploadDocs(documents: any[]): void {
     let count = 0;
-    for (const document of documents) {
+    this.progressData = Array(documents.length).fill({ name: '', progress: 0 });
+    documents.forEach((document: File, index: number) => {
       if (document.size > this.appConstants.MAX_FILE_SIZE) {
         this.sharedService.notify(
           'error',
@@ -175,14 +185,21 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
         );
       } else {
         this.sharedService.isLoading.next(true);
+        this.progressData[index] = {
+          name: document.name,
+          progress: 50,
+        };
+
+        this.setProgress();
 
         this.enrolService
           .uploadDocument(document, this.patientId, this.caseId)
           .subscribe({
             next: res => {
               this.sharedService.isLoading.next(true);
-
               if (res && res.Status === 'SUCCESS') {
+                this.progressData[index].progress = 100;
+                this.setProgress();
                 this.sharedService.notify(
                   'success',
                   `${document.name} Uploaded successfully`
@@ -205,7 +222,11 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
             },
           });
       }
-    }
+    });
+  }
+
+  private setProgress(): void {
+    this.dialogRef.componentInstance.data.progressData = [...this.progressData];
   }
 
   ngOnDestroy(): void {
