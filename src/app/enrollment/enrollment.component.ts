@@ -23,11 +23,11 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
   public enrollCreationActive: boolean = false;
   public screenWidth: number;
   public hideEnrollmentBtns: boolean = false;
-  public progressData: any[] = [];
   private routeSubs: Subscription;
   private dialogRef: MatDialogRef<CustomUploadDocumentsComponent>;
   private patientId: string = '';
   private caseId: string = '';
+  private progressData: any[] = [];
 
   @HostListener('window:resize', ['$event'])
   onResize(): void {
