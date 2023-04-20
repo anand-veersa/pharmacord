@@ -11,6 +11,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-custom-table',
@@ -23,14 +24,17 @@ export class CustomTableComponent implements AfterViewInit {
   @Input() displayedColumns: string[];
   @Input() pageSizeOptions: number[];
   @Input() pdfSrc: string;
+  @Input() buttonName: string;
   @Input() showBlueHeader: boolean = true;
   @Output() action = new EventEmitter();
+  @Output() buttonClicked = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    public authService: AuthService
   ) {}
   @Input() selected: { key: string; value: any };
   public selectedRow: number;
@@ -47,6 +51,9 @@ export class CustomTableComponent implements AfterViewInit {
     this.action.emit(event);
   }
 
+  public btnClicked(element: any): void {
+    this.buttonClicked.emit(element);
+  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

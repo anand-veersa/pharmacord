@@ -104,8 +104,8 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
                 } else {
                   medicineCases = this.cases.filter(
                     c =>
-                      c.DrugGroup.Value.toLowerCase() ===
-                      this.selectedMed.toLowerCase()
+                      c.DrugGroup.Value?.toLowerCase() ===
+                      this.selectedMed?.toLowerCase()
                   );
                 }
                 this.enrolService.medicineCases.next(medicineCases);

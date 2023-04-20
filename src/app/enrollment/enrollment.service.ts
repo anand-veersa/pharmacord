@@ -88,6 +88,11 @@ export class EnrollmentService {
     return this.http.post<any>(url, formData);
   }
 
+  public acknowledgeAlerts(caseId: string, alertPkId: number): Observable<any> {
+    const url: string = `${environment.baseUrl}cases/alerts/${caseId}/${alertPkId}`;
+    return this.http.delete<any>(url);
+  }
+
   private handleError(errorRes: number): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes) {
