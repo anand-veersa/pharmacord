@@ -35,7 +35,7 @@ export class ChangePasswordComponent implements AfterViewChecked {
     this.profileService.changePassword(changePasswordPayload).subscribe({
       next: (res: any) => {
         if (res.Status === 'SUCCESS') {
-          this.sharedService.notify('success', res.Payload.Message);
+          this.sharedService.notify('success', 'Password updated successfully');
         }
         this.sharedService.isLoading.next(false);
       },

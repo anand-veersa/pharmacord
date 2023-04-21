@@ -20,7 +20,7 @@ export class AuthService {
     portalAccountPkId: number;
     role: any;
   };
-  public userFullName = new BehaviorSubject<string>('');
+  public userName = new BehaviorSubject<string>('');
 
   public publicRoutes: string[] = [
     '/login',

@@ -181,7 +181,7 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
       if (document.size > this.appConstants.MAX_FILE_SIZE) {
         this.sharedService.notify(
           'error',
-          `${document.name}  Failed to upload`
+          `${document.name} failed to upload. Only PDF upto 10mb supported`
         );
       } else {
         this.sharedService.isLoading.next(true);

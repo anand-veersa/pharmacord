@@ -61,7 +61,7 @@ export class EnrollmentService {
       PortalAccountPkId,
       Role,
     } = data.Payload;
-    this.authService.userFullName.next(`${FirstName} ${LastName}`);
+    this.authService.userName.next(Username);
     this.authService.user = {
       firstName: FirstName,
       lastName: LastName,
