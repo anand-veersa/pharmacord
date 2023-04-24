@@ -1,124 +1,163 @@
-<div
-  *ngIf="submitEnrolService.secondInsuranceForm"
-  class="enroll-form panel-cont">
-  <div class="panel-big">
-    <div class="primary-title flex toggle-panel">Primary Insurance</div>
-    <div class="error-or-required tm-1">* Required field</div>
-    <div>
-      <div class="insurance-consent">
-        <span> Does the Patient have Primary Insurance? </span>
-        <span
-          ><app-custom-toggle-button
-            idString="firstInsurance"
-            (changed)="firstInsurance = $event"
-            [value]="firstInsurance"></app-custom-toggle-button
-        ></span>
-      </div>
-      <ng-container *ngIf="firstInsurance">
-        <div
-          *ngFor="
-            let control of submitEnrolService.firstInsuranceDetails.controls
-          "
-          [ngClass]="control.class ? control.class : 'tm-1'">
-          <app-custom-form
-            *ngIf="control.display"
-            formType="bg enrollment-form"
-            [field]="control"
-            [form]="submitEnrolService.firstInsuranceForm"></app-custom-form>
-        </div>
-        <div
-          *ngIf="
-            submitEnrolService.firstInsuranceForm.controls[
-              'firstInsuranceFiles'
-            ].value.length > 0
-          "
-          class="document-container tm-2">
-          <div class="header text-small text-x-bold col">
-            <span>Name</span> <span>Action</span>
-          </div>
-          <div
-            class="items col"
-            *ngFor="
-              let data of submitEnrolService.firstInsuranceForm.controls[
-                'firstInsuranceFiles'
-              ].value;
-              let index
-            ">
-            <span class="text-xs">{{ data.file.name }}</span>
+<div class="enroll-form">
+  <div *ngIf="submitEnrolService.secondInsuranceForm">
+    <div class="panel-cont">
+      <div class="panel-big">
+        <div class="primary-title flex toggle-panel">Primary Insurance</div>
+        <div class="error-or-required tm-1">* Required field</div>
+        <div>
+          <div class="insurance-consent">
+            <span> Does the Patient have Primary Insurance? </span>
             <span
-              class="error-or-required"
-              (click)="removeAttachFile('first', index)"
-              ><mat-icon>delete_outline</mat-icon></span
-            >
+              ><app-custom-toggle-button
+                idString="firstInsurance"
+                (changed)="firstInsurance = $event"
+                [value]="firstInsurance"></app-custom-toggle-button
+            ></span>
           </div>
+          <ng-container *ngIf="firstInsurance">
+            <div
+              *ngFor="
+                let control of submitEnrolService.firstInsuranceDetails.controls
+              "
+              [ngClass]="control.class ? control.class : 'tm-1'">
+              <app-custom-form
+                *ngIf="control.display"
+                formType="bg enrollment-form"
+                [field]="control"
+                [form]="
+                  submitEnrolService.firstInsuranceForm
+                "></app-custom-form>
+            </div>
+            <div
+              *ngIf="
+                submitEnrolService.firstInsuranceForm.controls[
+                  'firstInsuranceFiles'
+                ].value.length > 0
+              "
+              class="document-container tm-2">
+              <div class="header text-small text-x-bold col">
+                <span>Name</span> <span>Action</span>
+              </div>
+              <div
+                class="items col"
+                *ngFor="
+                  let data of submitEnrolService.firstInsuranceForm.controls[
+                    'firstInsuranceFiles'
+                  ].value;
+                  let index
+                ">
+                <span class="text-xs">{{ data.file.name }}</span>
+                <span
+                  class="error-or-required"
+                  (click)="removeAttachFile('first', index)"
+                  ><mat-icon>delete_outline</mat-icon></span
+                >
+              </div>
+            </div>
+          </ng-container>
         </div>
-      </ng-container>
+      </div>
+
+      <mat-divider vertical></mat-divider>
+
+      <div class="panel-big">
+        <div class="primary-title flex toggle-panel">
+          {{
+            submitEnrolService.enrollmentFormPayload.DrugGroup
+              ? 'Secondary Medical Insurance'
+              : 'Prescription Insurance'
+          }}
+        </div>
+        <div class="error-or-required tm-1">* Required field</div>
+
+        <div>
+          <div class="insurance-consent">
+            <span> Does the Patient have Primary Insurance? </span>
+            <span
+              ><app-custom-toggle-button
+                idString="secondInsurance"
+                (changed)="secondInsurance = $event"
+                [value]="secondInsurance"></app-custom-toggle-button
+            ></span>
+          </div>
+          <ng-container *ngIf="secondInsurance">
+            <div
+              *ngFor="
+                let control of submitEnrolService.secondInsuranceDetails
+                  .controls
+              "
+              [ngClass]="control.class ?? 'tm-1'">
+              <app-custom-form
+                *ngIf="control.display"
+                [field]="control"
+                [form]="submitEnrolService.secondInsuranceForm"
+                formType="bg enrollment-form"></app-custom-form>
+            </div>
+            <div
+              *ngIf="
+                submitEnrolService.secondInsuranceForm.controls[
+                  'secondInsuranceFiles'
+                ].value.length > 0
+              "
+              class="document-container tm-2">
+              <div class="header text-small text-x-bold col">
+                <span>Name</span> <span>Action</span>
+              </div>
+              <div
+                class="items col"
+                *ngFor="
+                  let data of submitEnrolService.secondInsuranceForm.controls[
+                    'secondInsuranceFiles'
+                  ].value;
+                  let index
+                ">
+                <span class="text-xs">{{ data.file.name }}</span>
+                <span
+                  class="error-or-required"
+                  (click)="removeAttachFile('second', index)"
+                  ><mat-icon>delete_outline</mat-icon></span
+                >
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
     </div>
   </div>
 
-  <mat-divider vertical></mat-divider>
+  <ng-container *ngIf="firstInsurance || secondInsurance">
+    <mat-divider horizontal></mat-divider>
 
-  <div class="panel-big">
-    <div class="primary-title flex toggle-panel">
-      {{
-        submitEnrolService.enrollmentFormPayload.DrugGroup
-          ? 'Secondary Medical Insurance'
-          : 'Prescription Insurance'
-      }}
-    </div>
-    <div class="error-or-required tm-1">* Required field</div>
-
-    <div>
-      <div class="insurance-consent">
-        <span> Does the Patient have Primary Insurance? </span>
-        <span
-          ><app-custom-toggle-button
-            idString="secondInsurance"
-            (changed)="secondInsurance = $event"
-            [value]="secondInsurance"></app-custom-toggle-button
-        ></span>
-      </div>
-      <ng-container *ngIf="secondInsurance">
+    <div class="panel">
+      <div class="panel-left-50 panels">
         <div
-          *ngFor="
-            let control of submitEnrolService.secondInsuranceDetails.controls
-          "
+          *ngFor="let control of submitEnrolService.priorAuthDetails.controls"
           [ngClass]="control.class ?? 'tm-1'">
           <app-custom-form
             *ngIf="control.display"
+            formType="priorAuth"
             [field]="control"
-            [form]="submitEnrolService.secondInsuranceForm"
-            formType="bg enrollment-form"></app-custom-form>
+            [form]="submitEnrolService.priorAuthForm"
+            (action)="control.name === 'priorAuth1' && showPaStatus1($event)">
+          </app-custom-form>
         </div>
+      </div>
+
+      <div class="panel-right-50 panels">
         <div
-          *ngIf="
-            submitEnrolService.secondInsuranceForm.controls[
-              'secondInsuranceFiles'
-            ].value.length > 0
-          "
-          class="document-container tm-2">
-          <div class="header text-small text-x-bold col">
-            <span>Name</span> <span>Action</span>
-          </div>
-          <div
-            class="items col"
-            *ngFor="
-              let data of submitEnrolService.secondInsuranceForm.controls[
-                'secondInsuranceFiles'
-              ].value;
-              let index
-            ">
-            <span class="text-xs">{{ data.file.name }}</span>
-            <span
-              class="error-or-required"
-              (click)="removeAttachFile('second', index)"
-              ><mat-icon>delete_outline</mat-icon></span
-            >
-          </div>
+          *ngFor="let control of submitEnrolService.appealDetails.controls"
+          [ngClass]="control.class ?? 'tm-1'">
+          <app-custom-form
+            *ngIf="control.display"
+            formType="priorAuth"
+            [field]="control"
+            [form]="submitEnrolService.appealForm"
+            (action)="control.name === 'priorAuth2' && showPaStatus2($event)">
+          </app-custom-form>
         </div>
-      </ng-container>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>
 
 <div *ngIf="submitEnrolService.secondInsuranceForm" class="action-panel">

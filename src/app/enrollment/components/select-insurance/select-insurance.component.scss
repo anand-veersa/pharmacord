@@ -36,3 +36,56 @@
   justify-content: space-between;
   margin-top: 3rem;
 }
+.panel {
+  display: flex;
+}
+.panels {
+  padding-top: 1rem;
+}
+.panel-left-50 {
+  flex: 50%;
+  padding-right: 3rem;
+}
+.panel-right-50 {
+  flex: 50%;
+  padding-left: 3rem;
+}
+.panel-cont {
+  padding-bottom: 2rem;
+}
+
+::ng-deep .priorAuth {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  label {
+    flex-basis: 53%;
+  }
+  flex-wrap: wrap;
+  // app-custom-radio {
+  //   flex-basis: 45%;
+  // }
+}
+
+::ng-deep .priorAuth label {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #5b5b5b;
+}
+
+::ng-deep .priorAuth-radio {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  label {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #5b5b5b;
+  }
+}
+
+::ng-deep .priorAuth .mdc-radio {
+  padding: 0.2rem;
+}
