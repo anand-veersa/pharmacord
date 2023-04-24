@@ -26,6 +26,7 @@
     display: flex;
     justify-content: space-between;
     padding-top: 20rem;
+    flex-direction: row-reverse;
   }
 }
 
@@ -54,13 +55,23 @@
     justify-content: space-between;
     flex-grow: unset;
     flex-basis: unset;
-    width: 100%;
   }
 
   .mat-expansion-panel-header-description {
     display: flex;
     gap: 2rem;
     margin-right: 0;
+    justify-content: end;
+
+    .account-status {
+      margin-right: 15rem;
+      margin-bottom: 0;
+      color: $color-primary;
+
+      .Pending {
+        color: $color-tertiary;
+      }
+    }
   }
 }
 

@@ -59,7 +59,9 @@
           (action)="startEnrollment()"></app-custom-button>
       </div>
     </div>
-    <div [ngClass]="{ 'tab-content': !enrollCreationActive }">
+    <div
+      *ngIf="validPortalAccountID"
+      [ngClass]="{ 'tab-content': !enrollCreationActive }">
       <router-outlet></router-outlet>
     </div>
   </div>

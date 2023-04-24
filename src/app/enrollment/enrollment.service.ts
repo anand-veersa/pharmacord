@@ -50,6 +50,14 @@ export class EnrollmentService {
       .pipe(map(response => new Blob([response], { type: 'application/pdf' })));
   }
 
+  public getFacilities(): Observable<any> {
+    return this.http
+      .get(
+        `${environment.baseUrl}portal/facilities?portalAccountId=${this.authService.user.portalAccountPkId}`
+      )
+      .pipe(catchError(this.handleError));
+  }
+
   public deleteFacility(deletePayload: any): Observable<any> {
     return this.http
       .put(
@@ -62,6 +70,21 @@ export class EnrollmentService {
   public updateFacility(addFacilityPayload: any): Observable<any> {
     return this.http
       .post(`${environment.baseUrl}account/update`, addFacilityPayload)
+      .pipe(catchError(this.handleError));
+  }
+
+  public updateFacilityData(updateFacilityData: any): Observable<any> {
+    return this.http
+      .post(`${environment.baseUrl}/portal/updateFacility`, updateFacilityData)
+      .pipe(catchError(this.handleError));
+  }
+
+  public deleteProvider(deleteProviderPayload: any): Observable<any> {
+    return this.http
+      .put(
+        `${environment.baseUrl}/portal/account/deleteProvider/${this.authService.user.portalAccountPkId}`,
+        deleteProviderPayload
+      )
       .pipe(catchError(this.handleError));
   }
 

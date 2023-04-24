@@ -17,6 +17,7 @@ export class EnrollmentComponent implements OnInit {
   public cases: any[] = [];
   public enableAllMeds: boolean = false;
   public enrollCreationActive: boolean = false;
+  public validPortalAccountID: boolean = false;
 
   constructor(
     private enrolService: EnrollmentService,
@@ -59,6 +60,7 @@ export class EnrollmentComponent implements OnInit {
       )
       .subscribe({
         next: (res: any) => {
+          this.validPortalAccountID = true;
           this.enrolService
             .getPrescriberCases(
               this.authService.user.prescribers[0].ProviderId,

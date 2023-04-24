@@ -135,14 +135,6 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-  public getFacilities(): Observable<any> {
-    return this.http
-      .get(
-        `${environment.baseUrl}portal/facilities?portalAccountId=${this.user.portalAccountPkId}`
-      )
-      .pipe(catchError(this.handleError));
-  }
-
   private handleError(errorRes: number) {
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes) {

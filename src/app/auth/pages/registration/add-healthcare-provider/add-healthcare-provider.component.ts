@@ -10,6 +10,8 @@ import {
   ViewEncapsulation,
   OnChanges,
   SimpleChanges,
+  AfterViewInit,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -27,13 +29,18 @@ import { EnrollmentService } from 'src/app/enrollment/enrollment.service';
   styleUrls: ['./add-healthcare-provider.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AddHealthcareProviderComponent implements OnInit {
+export class AddHealthcareProviderComponent
+  implements OnInit, OnChanges, AfterViewInit
+{
   @Input() componentTitle: string = '';
   @Input() componentSubTitle: string = '';
   @Input() requirementFor: string = '';
-  @Input() selectedFacilities: Array<object> = [];
+  @Input() newOnboardingFacilities: any[] = []; // from onboarding previous screen
   @Output() collectPrescriberWithFacility = new EventEmitter<{
     prescribersWithSelectedFacility: Array<any>;
+  }>();
+  @Output() prescriberToDelete = new EventEmitter<{
+    deletePrescribers: string[];
   }>();
   @Output() backToParentComponent = new EventEmitter<{
     backBtnClicked: boolean;
@@ -56,20 +63,31 @@ export class AddHealthcareProviderComponent implements OnInit {
     'Fax',
     'Email',
   ];
+  public accountSettingAccordianColumns: string[] = [
+    'PracticeGroup',
+    'Address',
+    'Phone',
+    'Fax',
+    'Email',
+    'Status',
+  ];
   public facilities: Array<object> = [];
   public prescribersWithAllFacility: any[] = [];
   public prescribersWithSelectedFacility: any[] = [];
-  public selectedFacility: object[] = [];
+  public selectedFacilityInProgress: object[] = []; // it will have the current selected facilities of dialouge box
 
   public currentNPI: string = '';
+  public currentPrescriberId: string = '';
   public npiData: any[] = [];
   public editNPI: string = '';
+  public disableDialougeBtn: boolean = false;
   // for account setting page
   public hcpAllFacilities: any[] = [];
-  public providersWithAllFacilities: Array<any> = [];
-  public providersWithSelectedFacilities: any[] = [];
+  @Input() providersWithAllFacilities: Array<any> = [];
+  @Input() providersWithSelectedFacilities: any[] = [];
   public providerAlreadyExist: boolean = false;
   public facilitiesWithoutProvider: any[] = [];
+  public deletePrescribers: string[] = [];
 
   @ViewChild('dialogRef')
   dialogRef!: TemplateRef<any>;
@@ -80,7 +98,8 @@ export class AddHealthcareProviderComponent implements OnInit {
     private http: HttpClient,
     private authService: AuthService,
     private enrolService: EnrollmentService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -94,11 +113,36 @@ export class AddHealthcareProviderComponent implements OnInit {
       });
 
     if (this.requirementFor === 'accountSetting') {
-      this.getUpdatedProviderDetails();
+      // this.getUpdatedProviderDetails();
+    }
+  }
+
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.requirementFor === 'accountSetting') {
+      this.prescribersWithSelectedFacility = [
+        ...this.providersWithSelectedFacilities,
+      ];
+      this.prescribersWithAllFacility = [...this.providersWithAllFacilities];
+    } else if (this.requirementFor === 'othersRegistration') {
+      console.log(
+        this.newOnboardingFacilities,
+        'facilities from prev screen of onboarding'
+      );
+      //  update the facilities of all
+      this.prescribersWithAllFacility = [];
+      this.prescribersWithSelectedFacility = [];
     }
   }
 
   navigateToPrevious(): void {
+    this.prescribersWithAllFacility = [];
+    this.selectedFacilityInProgress = [];
+    this.prescribersWithSelectedFacility = [];
+    this.addProviderForm.reset();
     this.backToParentComponent.emit({ backBtnClicked: true });
   }
 
@@ -121,6 +165,7 @@ export class AddHealthcareProviderComponent implements OnInit {
     myCompDialog.afterClosed().subscribe(res => {
       // Trigger After Dialog Closed
       console.log('After Closed', { res });
+      this.selectedFacilityInProgress = [];
     });
   }
 
@@ -131,7 +176,7 @@ export class AddHealthcareProviderComponent implements OnInit {
           this.prescribersWithSelectedFacility[npiObject].NPI === this.editNPI
         ) {
           this.prescribersWithSelectedFacility[npiObject].facilities =
-            this.selectedFacility;
+            this.selectedFacilityInProgress;
         }
       }
       this.editNPI = '';
@@ -140,11 +185,12 @@ export class AddHealthcareProviderComponent implements OnInit {
         ...this.prescribersWithSelectedFacility,
         {
           NPI: this.currentNPI,
-          facilities: this.selectedFacility,
+          facilities: this.selectedFacilityInProgress,
           Name:
             this.addProviderForm.controls['HCPFirstName'].value +
             ' ' +
             this.addProviderForm.controls['HCPLastName'].value,
+          PrescriberId: this.currentPrescriberId,
         },
       ];
     }
@@ -153,8 +199,9 @@ export class AddHealthcareProviderComponent implements OnInit {
       this.npiData,
       'NPI table data'
     );
-    this.selectedFacility = [];
+    this.selectedFacilityInProgress = [];
     this.currentNPI = '';
+    this.currentPrescriberId = '';
     this.addProviderForm.reset();
   }
 
@@ -188,12 +235,17 @@ export class AddHealthcareProviderComponent implements OnInit {
   }
 
   getPrescriberName(NPI: string): string {
-    if (NPI === 'recently added') {
+    if (NPI === 'recently-added') {
       const lastObj = this.npiData[this.npiData.length - 1];
       return lastObj.FirstName + ' ' + lastObj.LastName;
+    } else {
+      for (const prescriber of this.prescribersWithAllFacility) {
+        if (prescriber.NPI == NPI) {
+          return prescriber.Name;
+        }
+      }
     }
-    const values = this.npiData.find(obj => obj.NPI === NPI);
-    return values.FirstName + ' ' + values.LastName;
+    return '';
   }
 
   checkProviderDetails(): void {
@@ -208,33 +260,40 @@ export class AddHealthcareProviderComponent implements OnInit {
       provider => provider.NPI === this.currentNPI
     );
 
+    //check if already existing
     if (searchedProviderIndex != -1) {
       this.editPrescriberFacilities(searchedProviderIndex);
       this.providerAlreadyExist = true;
-      this.openTempDialog();
     } else {
+      //apicall
       this.sharedService.isLoading.next(true);
       this.authService.getProviderDetails(payloadGetProviderDetails).subscribe({
         next: (res: any) => {
           if (res.Status === 'SUCCESS') {
             console.log(res);
 
+            this.currentPrescriberId = res.Payload[0].Id;
             this.facilities = res.Payload[0].Facilities;
 
-            //if there is some selected facility already present
-            this.selectedFacilities = this.selectedFacilities.map(facility => {
-              return { ...facility, isSelected: true };
+            //adding key to an objects
+            this.facilities = this.facilities.map((facility: any) => {
+              return {
+                ...facility,
+                isSelected: false,
+                OfficeName: facility.GroupName,
+              };
             });
 
-            this.facilities = this.facilities.map(facility => {
-              return { ...facility, isSelected: false };
-            });
+            if (this.requirementFor === 'othersRegistration') {
+              this.facilities = [
+                ...this.newOnboardingFacilities,
+                ...this.facilities,
+              ];
 
-            this.facilities = [...this.selectedFacilities, ...this.facilities];
-            console.log(
-              [...this.facilities, ...this.selectedFacilities],
-              'combined'
-            );
+              this.selectedFacilityInProgress = [
+                ...this.newOnboardingFacilities,
+              ];
+            }
 
             this.prescribersWithAllFacility = [
               ...this.prescribersWithAllFacility,
@@ -245,6 +304,7 @@ export class AddHealthcareProviderComponent implements OnInit {
                   ' ' +
                   payloadGetProviderDetails.LastName,
                 facilities: this.facilities,
+                PrescriberId: res.Payload[0].Id,
               },
             ];
             console.log(
@@ -271,6 +331,16 @@ export class AddHealthcareProviderComponent implements OnInit {
     this.collectPrescriberWithFacility.emit({
       prescribersWithSelectedFacility: this.prescribersWithSelectedFacility,
     });
+
+    this.prescribersWithSelectedFacility = [];
+
+    if (this.requirementFor === 'accountSetting') {
+      this.prescriberToDelete.emit({
+        deletePrescribers: this.deletePrescribers,
+      });
+
+      this.deletePrescribers = [];
+    }
   }
 
   toggleAccordian(): boolean {
@@ -278,21 +348,42 @@ export class AddHealthcareProviderComponent implements OnInit {
   }
 
   getCheckbox(facility: any): void {
-    if (this.selectedFacility.includes(facility)) {
-      this.selectedFacility = this.selectedFacility.filter(item => {
-        return item !== facility;
-      });
+    if (this.selectedFacilityInProgress.includes(facility)) {
+      this.selectedFacilityInProgress = this.selectedFacilityInProgress.filter(
+        item => {
+          return item !== facility;
+        }
+      );
       facility['isSelected'] = false;
+      if (this.newOnboardingFacilities.includes(facility)) {
+        const index = this.newOnboardingFacilities.indexOf(facility);
+        this.newOnboardingFacilities[index].isSelected = false;
+      }
     } else {
-      this.selectedFacility.push(facility);
+      this.selectedFacilityInProgress.push(facility);
       facility['isSelected'] = true;
+      if (this.newOnboardingFacilities.includes(facility)) {
+        const index = this.newOnboardingFacilities.indexOf(facility);
+        this.newOnboardingFacilities[index].isSelected = true;
+        this.disableDialougeBtn = false;
+      }
     }
+
+    // check all facility from prevOnboarding screens are fine
+    this.newOnboardingFacilities.forEach(facility => {
+      if (facility.isSelected === false) {
+        this.disableDialougeBtn = true;
+      }
+    });
   }
 
   deletePrescriberValues(
     pescriberObject: object,
     prescriberIndex: number
   ): void {
+    this.deletePrescribers.push(
+      this.prescribersWithAllFacility[prescriberIndex].PrescriberId
+    );
     this.prescribersWithAllFacility.splice(prescriberIndex, 1);
     this.prescribersWithSelectedFacility.splice(prescriberIndex, 1);
     console.log(
@@ -305,21 +396,23 @@ export class AddHealthcareProviderComponent implements OnInit {
   editPrescriberFacilities(prescriberIndex: number): void {
     console.log(
       this.prescribersWithAllFacility,
-      'after edit click',
+      'all pwf after edit click rpf',
       this.prescribersWithAllFacility[prescriberIndex].facilities
     );
     this.facilities =
       this.prescribersWithAllFacility[prescriberIndex].facilities;
     this.editNPI = this.prescribersWithAllFacility[prescriberIndex].NPI;
     this.openTempDialog();
-    this.selectedFacility = this.facilities.filter((facility: any) => {
-      return facility.isSelected === true;
-    });
+    this.selectedFacilityInProgress = this.facilities.filter(
+      (facility: any) => {
+        return facility.isSelected === true;
+      }
+    );
   }
 
   getAllFacilities(): void {
     this.sharedService.isLoading.next(true);
-    this.authService.getFacilities().subscribe({
+    this.enrolService.getFacilities().subscribe({
       next: (res: any) => {
         console.log(res, 'get facilities data');
         if (res.Status === 'SUCCESS') {
@@ -350,6 +443,7 @@ export class AddHealthcareProviderComponent implements OnInit {
                 NPI: provider.NPI,
                 Name: provider.FirstName + ' ' + provider.LastName,
                 facilities: provider.Facilities,
+                PrescriberId: provider.PrescriberId,
               },
             ];
           }

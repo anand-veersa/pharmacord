@@ -49,6 +49,24 @@
               Provider Name - {{ pescriberObject.Name }}
             </mat-panel-title>
             <mat-panel-description>
+              <div
+                class="account-status text-small text-x-bold"
+                *ngIf="this.requirementFor === 'accountSetting'">
+                Confirmation Status:
+                <span
+                  class="value"
+                  [ngClass]="
+                    pescriberObject.AccountStatus === 'Pending'
+                      ? 'Pending'
+                      : 'Approved'
+                  ">
+                  {{
+                    pescriberObject.AccountStatus === 'Pending'
+                      ? ' Pending Approval'
+                      : ' '
+                  }}</span
+                >
+              </div>
               <app-custom-button
                 btnText="Edit"
                 btnClass="xm-small secondary"
@@ -104,12 +122,28 @@
                 <th mat-header-cell *matHeaderCellDef>Email</th>
                 <td mat-cell *matCellDef="let element">{{ element.Email }}</td>
               </ng-container>
-              <tr mat-header-row *matHeaderRowDef="accordianColumns"></tr>
+              <ng-container
+                matColumnDef="Status"
+                *ngIf="this.requirementFor === 'accountSetting'">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.AccountStatus }}
+                </td>
+              </ng-container>
+              <tr
+                mat-header-row
+                *matHeaderRowDef="
+                  this.requirementFor === 'accountSetting'
+                    ? accountSettingAccordianColumns
+                    : accordianColumns
+                "></tr>
               <tr
                 mat-row
                 *matRowDef="
                   let row;
-                  columns: accordianColumns;
+                  columns: this.requirementFor === 'accountSetting'
+                    ? accountSettingAccordianColumns
+                    : accordianColumns;
                   let i = index
                 "></tr>
             </table>
@@ -133,7 +167,12 @@
         are both associated with.
       </span>
       <span class="text-x-bold text-med"
-        >Provider Name: {{ 'recently added' }}</span
+        >Provider Name:
+        {{
+          getPrescriberName(
+            this.editNPI === '' ? 'recently-added' : this.editNPI
+          )
+        }}</span
       >
       <table mat-table [dataSource]="facilities" class="mat-elevation-z8">
         <ng-container matColumnDef="Checkbox">
@@ -147,7 +186,7 @@
 
         <ng-container matColumnDef="PracticeGroup">
           <th class="" mat-header-cell *matHeaderCellDef>Practice Name</th>
-          <td mat-cell *matCellDef="let element">{{ element.GroupName }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.OfficeName }}</td>
         </ng-container>
 
         <ng-container matColumnDef="Address">
@@ -191,6 +230,7 @@
         mat-dialog-close
         btnText="Close"
         btnClass="secondary small text-x-bold text-xmed"
+        [isDisabled]="disableDialougeBtn"
         (click)="closeDialog()">
       </app-custom-button>
     </div>
@@ -201,23 +241,24 @@
   <div class="footer-buttons">
     <app-custom-button
       *ngIf="requirementFor === 'othersRegistration'"
+      btnText="Save and Register"
+      btnClass="tertiary x-medium text-x-bold text-xmed"
+      (click)="registrationCall()"
+      [isDisabled]="this.prescribersWithSelectedFacility.length === 0">
+    </app-custom-button>
+
+    <app-custom-button
+      *ngIf="requirementFor === 'othersRegistration'"
       btnText="< Back"
       btnClass="secondary s-medium text-x-bold text-xmed"
       (click)="navigateToPrevious()">
     </app-custom-button>
 
     <app-custom-button
-      btnText="Save and Register"
-      btnClass="tertiary x-medium text-x-bold text-xmed"
-      (click)="registrationCall()"
-      *ngIf="requirementFor === 'othersRegistration'">
-    </app-custom-button>
-
-    <app-custom-button
+      *ngIf="requirementFor === 'accountSetting'"
       btnText="Save"
       btnClass="tertiary x-medium text-x-bold text-xmed"
-      (click)="registrationCall()"
-      *ngIf="requirementFor === 'accountSetting'">
+      (click)="registrationCall()">
     </app-custom-button>
   </div>
 </div>

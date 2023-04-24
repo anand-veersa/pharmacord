@@ -38,6 +38,10 @@
               src="../../../../assets/images/selected-prescriber.svg"
               alt="selected-prescriber-logo"
               *ngIf="prescriberRegistrationCard" />
+            <img
+              *ngIf="prescriberRegistrationCard"
+              src="../../../../assets/images/check-icon.svg"
+              class="check-icon" />
           </div>
           <span class="img-label text-small text-x-bold">Provider</span>
         </div>
@@ -54,6 +58,10 @@
               src="../../../../assets/images/selected-hcp.svg"
               alt="selected-HCP-logo"
               *ngIf="othersRegistrationCard" />
+            <img
+              *ngIf="othersRegistrationCard"
+              src="../../../../assets/images/check-icon.svg"
+              class="check-icon" />
           </div>
           <div class="img-label">
             <p class="text-small text-x-bold">Healthcare</p>
@@ -274,7 +282,7 @@
     [componentTitle]="addProviderScreenTitle"
     [componentSubTitle]="addProviderScreenSubTitle"
     [hidden]="!addHealthcareProviderScreen"
-    [selectedFacilities]="facilitiesDataForOthers"
+    [newOnboardingFacilities]="facilitiesDataForOthers"
     (backToParentComponent)="backTriggeredFromStepAddProvider($event)"
     requirementFor="othersRegistration"
     (collectPrescriberWithFacility)="

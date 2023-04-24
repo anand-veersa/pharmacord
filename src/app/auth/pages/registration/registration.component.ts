@@ -1,17 +1,18 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Form, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { AuthService } from '../../auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit, OnChanges {
   public lookupInformationFormData: JsonFormData;
   public lookupInformationForm: FormGroup;
   public confirmAccountInformationFormData: JsonFormData;
@@ -43,8 +44,10 @@ export class RegistrationComponent implements OnInit {
     'Please enter the information for each healthcare provider (HCP) associated with this new account.';
   public prescriberID: number;
   public facilities: Array<object> = [];
-  public facilitiesDataForOthers: Array<object> = [];
+  public facilitiesDataForOthers: any[] = [];
   public UserContactDetails: Array<object> = [];
+  public facilityIdsData: any[] = [];
+  public prescribersWithSelectedFacility: any[] = [];
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -97,6 +100,10 @@ export class RegistrationComponent implements OnInit {
           this.othersCreateUsernameFormData
         );
       });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes, 'changes in registration component');
   }
 
   toggleSelection(): void {
@@ -243,14 +250,20 @@ export class RegistrationComponent implements OnInit {
   collectPrescriberWithFacility(eventData: {
     prescribersWithSelectedFacility: any[];
   }): void {
-    console.log(eventData.prescribersWithSelectedFacility);
+    this.prescribersWithSelectedFacility =
+      eventData.prescribersWithSelectedFacility;
+    console.log(
+      this.prescribersWithSelectedFacility,
+      'facilities came on Save and register'
+    );
+    this.othersSaveAndRegisterCall();
   }
 
   accountFacilitiesRegistration(prevResponse: any, prevPayload: any): void {
     prevPayload['IsNewUser'] = false;
     prevPayload['UserContactDetails'][0]['Id'] = prevResponse.contactId;
     delete prevPayload.PrescriberId;
-    this.facilities.forEach((facility: any) => {
+    this.facilities.forEach((facility: any, index: number) => {
       const facilityRegistrationPayload = {
         ...prevPayload,
         MasterAccountId: prevResponse.masterPortalAccountId,
@@ -263,7 +276,21 @@ export class RegistrationComponent implements OnInit {
         .subscribe({
           next: (res: any) => {
             if (res.Status === 'SUCCESS') {
-              console.log(res.Payload.facilityId);
+              console.log(res.Payload.facilityId, 'facility ID');
+              // this.sharedService.isLoading.next(false);
+              // this.thankYouScreen = true;
+              if (this.othersRegistrationCard) {
+                this.facilityIdsData = [
+                  ...this.facilityIdsData,
+                  res.Payload.facilityId,
+                ];
+                if (this.facilityIdsData.length === this.facilities.length) {
+                  this.prescriberFacilitiesRegistration(
+                    prevResponse,
+                    prevPayload
+                  );
+                }
+              }
             }
           },
           error: err => {
@@ -272,6 +299,7 @@ export class RegistrationComponent implements OnInit {
         });
       this.sharedService.isLoading.next(false);
     });
+    this.sharedService.isLoading.next(false);
   }
 
   prescriberSaveAndRegisterCall(): void {
@@ -290,7 +318,7 @@ export class RegistrationComponent implements OnInit {
       },
       UserContactDetails: this.UserContactDetails,
     };
-
+    this.sharedService.isLoading.next(true);
     this.authService.accountRegistration(accountRegistrationPayload).subscribe({
       next: (res: any) => {
         if (res.Status === 'SUCCESS') {
@@ -317,10 +345,129 @@ export class RegistrationComponent implements OnInit {
 
   othersSaveAndRegisterCall(): void {
     // API call for Others registration will be handle here
+    const othersAccountRegistrationPayload = {
+      Username: this.othersCreateUsernameForm.controls['username'].value,
+      EmailAddress:
+        this.othersAccountInformationForm.controls['confirmAccountEmail'].value,
+      Password: this.othersCreateUsernameForm.controls['newPassword'].value,
+      PasswordConfirmation:
+        this.othersCreateUsernameForm.controls['confirmNewPassword'].value,
+      IsNewUser: true,
+      Role: {
+        RolePkId: 5, // 5 for Others
+      },
+      UserContactDetails: this.UserContactDetails,
+    };
+
+    // account registration for other
+    this.authService
+      .accountRegistration(othersAccountRegistrationPayload)
+      .subscribe({
+        next: (res: any) => {
+          if (res.Status === 'SUCCESS') {
+            console.log(res);
+            if (res.Errors.length !== 0) {
+              this.sharedService.notify('error', res.Errors[0]);
+            }
+            this.facilities = [...this.facilitiesDataForOthers];
+
+            this.accountFacilitiesRegistration(
+              res.Payload,
+              othersAccountRegistrationPayload
+            );
+
+            // this.prescriberFacilitiesRegistration();
+            console.log(
+              res.Payload.contactId,
+              'contact and portalAccId',
+              res.Payload.masterPortalAccountId
+            );
+          }
+        },
+        error: err => {
+          this.sharedService.isLoading.next(false);
+          this.sharedService.notify('error', err);
+        },
+      });
 
     // after effects of Call
-    this.addHealthcareProviderScreen = false;
-    this.thankYouScreen = true;
+    // this.addHealthcareProviderScreen = false;
+    // this.thankYouScreen = true;
+  }
+
+  prescriberFacilitiesRegistration(prevResponse: any, prevPayload: any): void {
+    for (const provider of this.prescribersWithSelectedFacility) {
+      for (const facilityIndex in this.facilityIdsData) {
+        provider.facilities[facilityIndex].Id =
+          this.facilityIdsData[facilityIndex];
+      }
+
+      for (const provider of this.prescribersWithSelectedFacility) {
+        const providerWithFacilitiesPayload = {
+          Username: prevPayload.Username,
+          Password: prevPayload.Password,
+          EmailAddress: prevPayload.EmailAddress,
+          PasswordConfirmation: prevPayload.PasswordConfirmation,
+          MasterAccountId: prevResponse.masterPortalAccountId,
+          IsNewUser: false,
+          PrescriberId: provider.PrescriberId,
+          Facilities: this.formatFacilities(provider.facilities),
+        };
+
+        this.authService
+          .accountRegistration(providerWithFacilitiesPayload)
+          .subscribe({
+            next: (res: any) => {
+              if (res.Status === 'SUCCESS') {
+                console.log(res);
+              }
+            },
+            error: err => {
+              this.sharedService.isLoading.next(false);
+              this.sharedService.notify('error', err);
+            },
+          });
+      }
+    }
+    console.log(
+      this.prescribersWithSelectedFacility,
+      'facilitiesDataForOthers before registration'
+    );
+  }
+
+  formatFacilities(facilities: any[]) {
+    let facilityPayload: any[] = [];
+
+    for (const facility of facilities) {
+      if ('Address' in facility) {
+        delete facility.PhoneType;
+        facility.Address = facility.Address[0];
+        facilityPayload = [...facilityPayload, facility];
+      } else {
+        facilityPayload = [
+          ...facilityPayload,
+          {
+            Address: {
+              City: facility.City,
+              Line1: facility.Address1,
+              Line2: facility.Address2 === '' ? null : facility.Address2,
+              State: facility.State,
+              Zipcode: facility.Zip,
+            },
+            PracticeGroup: facility.GroupName,
+            Email: facility.Email,
+            Fax: facility.Fax,
+            OfficeName: facility.GroupName,
+            Rank: 1,
+            Id: facility.Id,
+            Phone: facility.Phone,
+            Extension: null,
+            Contacts: [],
+          },
+        ];
+      }
+    }
+    return facilityPayload;
   }
 
   resetLookupForm(): void {
