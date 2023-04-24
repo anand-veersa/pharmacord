@@ -1,4 +1,6 @@
 @import '../../../../assets/styles/abstracts/variables';
+@import '../../../../assets/styles/abstracts/mixins';
+
 .insurance-consent {
   display: flex;
   gap: 4rem;
@@ -38,6 +40,10 @@
 }
 .panel {
   display: flex;
+
+  @include respond(tab-land) {
+    flex-direction: column;
+  }
 }
 .panels {
   padding-top: 1rem;
@@ -45,13 +51,22 @@
 .panel-left-50 {
   flex: 50%;
   padding-right: 3rem;
+  @include respond(tab-land) {
+    padding-right: 0;
+  }
 }
 .panel-right-50 {
   flex: 50%;
   padding-left: 3rem;
+  @include respond(tab-land) {
+    padding-left: 0;
+  }
 }
 .panel-cont {
   padding-bottom: 2rem;
+  @include respond(tab-land) {
+    flex-direction: column;
+  }
 }
 
 ::ng-deep .priorAuth {
@@ -61,10 +76,15 @@
   label {
     flex-basis: 53%;
   }
-  flex-wrap: wrap;
+
+  // flex-wrap: wrap;
   // app-custom-radio {
   //   flex-basis: 45%;
   // }
+}
+
+::ng-deep app-custom-datepicker {
+  width: 45%;
 }
 
 ::ng-deep .priorAuth label {
@@ -77,7 +97,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
 
   label {
     font-size: 1.4rem;

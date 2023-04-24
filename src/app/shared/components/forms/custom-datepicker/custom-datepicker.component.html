@@ -1,15 +1,22 @@
 <form [formGroup]="form">
-  <mat-form-field>
+  <mat-form-field class="custom-datepicker-field">
     <input
       matInput
       [min]="field.minDate"
       [max]="field.maxDate"
       [matDatepicker]="fieldId"
       [formControlName]="field.name"
-      [disabled]="field.disabled ?? false" />
+      [disabled]="field.disabled ?? false"
+      class="custom-datepicker-input"
+      placeholder="mm/dd/yyyy" />
     <mat-datepicker-toggle
       matIconSuffix
-      [for]="fieldId"></mat-datepicker-toggle>
+      class="custom-datepicker-toggle"
+      [for]="fieldId">
+      <mat-icon matDatepickerToggleIcon>
+        <img src="../../../../../assets/images/calendar.svg" alt="cal" />
+      </mat-icon>
+    </mat-datepicker-toggle>
     <mat-datepicker #fieldId></mat-datepicker>
   </mat-form-field>
   <app-custom-error
