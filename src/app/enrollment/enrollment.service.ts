@@ -89,8 +89,9 @@ export class EnrollmentService {
   }
 
   public acknowledgeAlerts(caseId: string, alertPkId: number): Observable<any> {
-    const url: string = `${environment.baseUrl}cases/alerts/${caseId}/${alertPkId}`;
-    return this.http.delete<any>(url);
+    return this.http.delete<any>(
+      `${environment.baseUrl}cases/alerts/${caseId}/${alertPkId}`
+    );
   }
 
   private handleError(errorRes: number): Observable<never> {
