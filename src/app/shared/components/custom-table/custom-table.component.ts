@@ -32,9 +32,9 @@ export class CustomTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
+    public authService: AuthService,
     private _liveAnnouncer: LiveAnnouncer,
-    private changeDetector: ChangeDetectorRef,
-    public authService: AuthService
+    private changeDetector: ChangeDetectorRef
   ) {}
   @Input() selected: { key: string; value: any };
   public selectedRow: number;
