@@ -25,7 +25,6 @@ import { CustomExpansionPanelComponent } from './components/custom-expansion-pan
 import { CustomDatepickerComponent } from './components/forms/custom-datepicker/custom-datepicker.component';
 import { ToggleButtonComponent } from './components/custom-toggle-button/toggle.component';
 import { CustomUploadDocumentsComponent } from './components/custom-upload-documents/custom-upload-documents.component';
-import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.
     CustomDatepickerComponent,
     ToggleButtonComponent,
     CustomUploadDocumentsComponent,
-    CustomDialogComponent,
   ],
   imports: [
     CommonModule,
