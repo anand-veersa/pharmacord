@@ -20,6 +20,9 @@
     display: flex;
     gap: 3rem;
   }
+  @media print {
+    overflow-wrap: anywhere;
+  }
 }
 mat-expansion-panel {
   box-shadow: none !important;
@@ -42,4 +45,7 @@ mat-expansion-panel {
 }
 ::ng-deep .custom-expansion-content .mat-expansion-indicator {
   display: none;
+}
+:host ::ng-deep .expansion-body .custom-table-wrapper {
+  border-radius: 0.8rem;
 }

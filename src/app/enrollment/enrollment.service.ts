@@ -16,6 +16,7 @@ export class EnrollmentService {
   public medicineCases = new BehaviorSubject<any[]>([]);
   public submitFormInitiated = new BehaviorSubject<boolean>(false);
   public cases = new BehaviorSubject<any[]>([]);
+  public documentUploaded = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   public getAccountInfo(username: string): Observable<any> {
@@ -111,6 +112,19 @@ export class EnrollmentService {
       role: Role,
       userDetails: UserDetails,
     };
+  }
+
+  public uploadDocument(
+    fileToUpload: File,
+    patientId: string,
+    caseId: string
+  ): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('Document', fileToUpload);
+    formData.append('CaseId', caseId);
+    formData.append('PatientId', patientId);
+    const url: string = `${environment.baseUrl}documents`;
+    return this.http.post<any>(url, formData);
   }
 
   private handleError(errorRes: number): Observable<never> {

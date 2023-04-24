@@ -26,6 +26,7 @@ import { SelectServicesComponent } from './components/select-services/select-ser
 import { SelectPatientComponent } from './components/select-patient/select-patient.component';
 import { PrescriberDetailsComponent } from './components/prescriber-details/prescriber-details.component';
 import { AuthModule } from '../auth/auth.module';
+import { SelectInsuranceComponent } from './components/select-insurance/select-insurance.component';
 @NgModule({
   declarations: [
     EnrollmentComponent,
@@ -43,6 +44,7 @@ import { AuthModule } from '../auth/auth.module';
     SelectServicesComponent,
     SelectPatientComponent,
     PrescriberDetailsComponent,
+    SelectInsuranceComponent,
   ],
   providers: [EnrollmentService, SubmitEnrollmentService],
   imports: [

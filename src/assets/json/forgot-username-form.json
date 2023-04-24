@@ -2,7 +2,7 @@
   "controls": [
     {
       "name": "firstName",
-      "value": "DR",
+      "value": "",
       "label": "First Name",
       "placeholder": "Enter your First Name",
       "type": "text",
@@ -14,7 +14,7 @@
     },
     {
       "name": "lastName",
-      "value": "MD",
+      "value": "",
       "label": "Last Name",
       "placeholder": "Enter your Last Name",
       "type": "text",
@@ -28,7 +28,7 @@
     },
     {
       "name": "email",
-      "value": "abc@gmail.com",
+      "value": "",
       "label": "Email Address",
       "placeholder": "Enter your Email Address",
       "type": "email",

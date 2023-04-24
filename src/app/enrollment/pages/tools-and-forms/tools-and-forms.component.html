@@ -17,6 +17,7 @@
             Prescriber Portal User Guide
           </li>
           <li
+            *ngIf="tools.medicine !== 'OJJAARA'"
             class="forms-item"
             (click)="
               showPdf(
@@ -29,30 +30,30 @@
           </li>
         </ul>
       </section>
-      <section class="product-info">
+      <section *ngIf="tools.medicine !== 'OJJAARA'" class="product-info">
         <h5>PRODUCT INFORMATION</h5>
         <ul class="forms-list">
           <li
             class="forms-item"
             (click)="
               showPdf(
-                tools.presciptionInformation,
+                tools.sampleLetterOfAppeal,
                 1,
-                tools.medicine + '_Prescription_Information.pdf'
+                tools.medicine + '_Sample_Letter_Of_Appeal.pdf'
               )
             ">
-            Prescribing Information
+            Sample Letter of Appeal
           </li>
           <li
             class="forms-item"
             (click)="
               showPdf(
-                tools.presciptionInformation,
-                5,
-                tools.medicine + '_Prescription_Information.pdf'
+                tools.sampleLetterOfMedicalNecessity,
+                1,
+                tools.medicine + '_Sample_Letter_Of_Medical_Necessity.pdf'
               )
             ">
-            Medication Guide
+            Sample Letter of Medical Necessity
           </li>
         </ul>
       </section>

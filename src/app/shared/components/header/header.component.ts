@@ -18,10 +18,10 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (!this.authService.isLoggedIn()) return;
-    this.authService.userFullName.subscribe(
-      fullName => (this.userName = fullName)
-    );
+    this.authService?.userFullName.subscribe(fullName => {
+      if (!this.authService.isLoggedIn()) return;
+      this.userName = fullName;
+    });
   }
 
   logout(): void {

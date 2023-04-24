@@ -1,6 +1,6 @@
 <!-- <label class="custom-input-label">{{ inputControl.label }}</label> -->
 <form [formGroup]="form">
-  <mat-form-field>
+  <mat-form-field [ngClass]="{ disabled: field.disabled }">
     <span matPrefix *ngIf="inputPrefix"><mat-icon>search</mat-icon></span>
     <input
       matInput
@@ -9,8 +9,7 @@
       floatLabel="false"
       [formControlName]="field.name"
       [type]="field.type"
-      [placeholder]="field.placeholder"
-      [disabled]="field.disabled ?? false" />
+      [placeholder]="field.placeholder" />
   </mat-form-field>
   <app-custom-error
     *ngIf="this.form.controls[this.field.name].touched"

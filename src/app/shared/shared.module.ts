@@ -23,6 +23,8 @@ import { CustomErrorComponent } from './components/forms/custom-error/custom-err
 import { CustomTableComponent } from './components/custom-table/custom-table.component';
 import { CustomExpansionPanelComponent } from './components/custom-expansion-panel/custom-expansion-panel.component';
 import { CustomDatepickerComponent } from './components/forms/custom-datepicker/custom-datepicker.component';
+import { ToggleButtonComponent } from './components/custom-toggle-button/toggle.component';
+import { CustomUploadDocumentsComponent } from './components/custom-upload-documents/custom-upload-documents.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { CustomDatepickerComponent } from './components/forms/custom-datepicker/
     CustomTableComponent,
     CustomExpansionPanelComponent,
     CustomDatepickerComponent,
+    ToggleButtonComponent,
+    CustomUploadDocumentsComponent,
   ],
   imports: [
     CommonModule,
@@ -63,6 +67,8 @@ import { CustomDatepickerComponent } from './components/forms/custom-datepicker/
     CustomSpinnerComponent,
     CustomTableComponent,
     CustomExpansionPanelComponent,
+    ToggleButtonComponent,
+    CustomUploadDocumentsComponent,
   ],
   providers: [LocalStorageService],
 })

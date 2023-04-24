@@ -83,7 +83,10 @@ export class SharedService {
       if (field.type === 'checkbox') {
         formControl[field.name] = new FormArray([]);
       } else {
-        formControl[field.name] = new FormControl(field.value);
+        formControl[field.name] = new FormControl({
+          value: field.value,
+          disabled: field.disabled ?? false,
+        });
         const validators = this.addValidator(field.validators, formControl);
         formControl[field.name].addValidators(validators);
       }

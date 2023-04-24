@@ -1,7 +1,7 @@
 @import '../../../../../assets/styles/abstracts/variables';
 @import '../../../../../assets/styles/abstracts/mixins';
 
-::ng-deep .medication-form {
+::ng-deep .medication-form-radio {
   display: flex;
   justify-content: space-between;
   width: 60%;
@@ -20,7 +20,7 @@
   }
 }
 
-::ng-deep .generic-form {
+::ng-deep .generic-form-radio {
   display: flex;
   justify-content: space-between;
   label {
@@ -32,7 +32,7 @@
     flex-basis: 25%;
   }
 }
-::ng-deep .enrollment-form {
+::ng-deep .enrollment-form-radio {
   display: flex;
   justify-content: space-between;
   label {
@@ -40,10 +40,21 @@
     line-height: 1.6rem;
     color: $color-grey-dark-4;
   }
+  mat-radio-group {
+    flex-wrap: wrap;
+  }
   mat-radio-button {
     flex-basis: 50%;
     label {
       flex-basis: 100%;
     }
+  }
+}
+
+::ng-deep .block-radio-group-radio {
+  display: flex;
+  margin-left: -1rem;
+  mat-radio-button {
+    flex-basis: 27%;
   }
 }

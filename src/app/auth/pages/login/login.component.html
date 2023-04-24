@@ -23,17 +23,17 @@
     </div>
   </div>
   <div class="login-panel">
-    <div class="login-panel-header">LOGIN</div>
+    <div class="login-panel-header">Login</div>
     <div class="login-panel-body">
       <div class="input-field tm-1" *ngFor="let control of formData?.controls">
         <app-custom-form
           [field]="control"
           [form]="loginForm"
-          formType="login"></app-custom-form>
+          formType="login-form"></app-custom-form>
       </div>
       <app-custom-button
         [isDisabled]="loginForm ? loginForm.invalid : false"
-        btnClass="login-form-btn tm-2"
+        btnClass="login-form-btn tm-1"
         btnText="Login"
         type="submit"
         (action)="onSubmit()">

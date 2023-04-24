@@ -4,19 +4,24 @@
       <img
         src="../../../../assets/images/patient_icon.svg"
         alt="Patient Icon" />
-      <figcaption>
-        <span>{{ patientCases[0]?.PatientName }}</span>
-        <span> (Patient Id: {{ patientCases[0]?.PatientId }})</span>
+      <figcaption class="patient-heading">
+        <span class="patient-name">{{ patientCases[0]?.PatientName }}</span>
+        <span class="patient-id">
+          (Patient Id: {{ patientCases[0]?.PatientId }})</span
+        >
       </figcaption>
     </div>
     <div class="action-buttons">
       <app-custom-button
         btnText="&#60; Back"
-        btnClass="secondary x-small"></app-custom-button>
+        btnClass="secondary x-small"
+        [routerLink]="['/enrollment/patients']"></app-custom-button>
       <app-custom-button
         btnText="Print"
         btnIcon="print_icon.svg"
-        btnClass="secondary x-small"></app-custom-button>
+        iconPlace="prefix"
+        btnClass="secondary x-small"
+        (click)="printPatientDetails()"></app-custom-button>
     </div>
   </div>
   <div class="custom-expansion-content">
