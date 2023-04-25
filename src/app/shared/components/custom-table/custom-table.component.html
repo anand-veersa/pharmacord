@@ -33,7 +33,18 @@
           mat-cell
           *matCellDef="let element; let i = index"
           (click)="onAction(element)">
-          {{ element[column.key] }}
+          <app-custom-button
+            *ngIf="column.key === buttonName; else else_block"
+            btnClass="secondary x-small"
+            [btnText]="buttonName"
+            [isDisabled]="
+              authService.user && authService.user.role?.RolePkId !== 3
+            "
+            (action)="btnClicked(element)">
+          </app-custom-button>
+          <ng-template #else_block>
+            {{ element[column.key] }}
+          </ng-template>
         </td>
       </ng-container>
 

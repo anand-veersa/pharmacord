@@ -7,6 +7,7 @@ import { JsonFormControls } from 'src/app/models/json-form-data.model';
 import { Patient } from 'src/app/models/cases.model';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { EnrollmentService } from '../../enrollment.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-my-patients',
@@ -26,7 +27,8 @@ export class MyPatientsComponent implements OnInit {
     private http: HttpClient,
     private sharedService: SharedService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private datepipe: DatePipe
   ) {
     this.http.get('/assets/json/patients-table.json').subscribe((data: any) => {
       this.columnSchema = data.columns;
@@ -75,7 +77,7 @@ export class MyPatientsComponent implements OnInit {
         CaseId: item.CaseId,
         FirstName: item.PatientName.split(' ')[0],
         LastName: item.PatientName.split(' ').at(-1),
-        DateOfBirth: item.DateOfBirth,
+        DateOfBirth: this.datepipe.transform(item.DateOfBirth, 'MM/dd/yyyy'),
         Prescriber: this.sharedService.getPrescriberName(item['prescriberId ']),
         DateSubmitted: this.sharedService.getFormattedDate(item.CaseStartDate),
         EnrollmentStatus: item.EnrollmentStatus,

@@ -61,7 +61,7 @@ export class EnrollmentService {
       PortalAccountPkId,
       Role,
     } = data.Payload;
-    this.authService.userFullName.next(`${FirstName} ${LastName}`);
+    this.authService.userName.next(Username);
     this.authService.user = {
       firstName: FirstName,
       lastName: LastName,
@@ -86,6 +86,12 @@ export class EnrollmentService {
     formData.append('PatientId', patientId);
     const url: string = `${environment.baseUrl}documents`;
     return this.http.post<any>(url, formData);
+  }
+
+  public acknowledgeAlerts(caseId: string, alertPkId: number): Observable<any> {
+    return this.http.delete<any>(
+      `${environment.baseUrl}cases/alerts/${caseId}/${alertPkId}`
+    );
   }
 
   private handleError(errorRes: number): Observable<never> {

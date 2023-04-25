@@ -104,8 +104,8 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
                 } else {
                   medicineCases = this.cases.filter(
                     c =>
-                      c.DrugGroup.Value.toLowerCase() ===
-                      this.selectedMed.toLowerCase()
+                      c.DrugGroup.Value?.toLowerCase() ===
+                      this.selectedMed?.toLowerCase()
                   );
                 }
                 this.enrolService.medicineCases.next(medicineCases);
@@ -181,7 +181,7 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
       if (document.size > this.appConstants.MAX_FILE_SIZE) {
         this.sharedService.notify(
           'error',
-          `${document.name}  Failed to upload`
+          `${document.name} failed to upload. Only PDF upto 10mb supported`
         );
       } else {
         this.sharedService.isLoading.next(true);
