@@ -18,8 +18,10 @@ export class CustomExpansionPanelComponent {
   @Input() cardLeftPanel: any;
   @Input() cardRightPanel: any;
   @Input() pdfSrc: string;
+  @Input() buttonName: string;
   @Input() selected: { key: string; value: any };
   @Output() action = new EventEmitter();
+  @Output() buttonClicked = new EventEmitter();
 
   public originalOrder = (
     a: KeyValue<number, string>,

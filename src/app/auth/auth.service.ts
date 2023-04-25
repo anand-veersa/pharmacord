@@ -21,7 +21,7 @@ export class AuthService {
     role: any;
     userDetails: object[];
   };
-  public userFullName = new BehaviorSubject<string>('');
+  public userName = new BehaviorSubject<string>('');
 
   public publicRoutes: string[] = [
     '/login',

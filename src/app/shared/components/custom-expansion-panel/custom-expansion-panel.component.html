@@ -11,7 +11,9 @@
         [pageSizeOptions]="pageSizeOptions"
         [pdfSrc]="pdfSrc"
         [selected]="selected"
-        (action)="action.emit($event)">
+        [buttonName]="buttonName"
+        (action)="action.emit($event)"
+        (buttonClicked)="buttonClicked.emit($event)">
       </app-custom-table>
     </ng-container>
     <ng-container *ngIf="contentType === 'card'">

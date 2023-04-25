@@ -54,7 +54,11 @@
         [dataSource]="alertDataSource"
         [columnSchema]="alertColumnSchema"
         [displayedColumns]="alertDisplayedColumns"
-        [pageSizeOptions]="pageSizeOptions"></app-custom-expansion-panel>
+        [pageSizeOptions]="pageSizeOptions"
+        [buttonName]="'Acknowledge'"
+        (buttonClicked)="
+          acknowledgeClicked($event)
+        "></app-custom-expansion-panel>
 
       <!-- Case Documents -->
       <app-custom-expansion-panel
