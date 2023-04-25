@@ -46,7 +46,6 @@ import { SelectInsuranceComponent } from './components/select-insurance/select-i
     PrescriberDetailsComponent,
     SelectInsuranceComponent,
   ],
-  providers: [EnrollmentService, SubmitEnrollmentService],
   imports: [
     CommonModule,
     EnrollmentRoutingModule,
