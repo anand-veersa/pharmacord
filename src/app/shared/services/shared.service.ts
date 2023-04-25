@@ -87,7 +87,8 @@ export class SharedService {
           value: field.value,
           disabled: field.disabled ?? false,
         });
-        const validators = this.addValidator(field.validators, formControl);
+        let validators = this.addValidator(field.validators, formControl);
+        validators = validators?.filter(validator => validator !== null);
         formControl[field.name].addValidators(validators);
       }
     });
@@ -191,10 +192,7 @@ export class SharedService {
     });
   }
 
-  private addValidator(
-    rules: any,
-    formControl: { [key: string]: any }
-  ): ValidationErrors | null {
+  private addValidator(rules: any, formControl: { [key: string]: any }): any[] {
     let validators: any[] = [];
     if (!rules) {
       return validators;
@@ -203,7 +201,7 @@ export class SharedService {
       switch (rule[0]) {
         case 'required':
           if (!rule[1]) {
-            return;
+            return null;
           }
           return Validators.required;
         case 'max':
@@ -215,7 +213,7 @@ export class SharedService {
         case 'match':
           return matchPasswordsValidator(formControl);
         default:
-          return;
+          return null;
       }
     });
     return validators;
