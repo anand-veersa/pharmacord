@@ -48,6 +48,8 @@ export class RegistrationComponent implements OnInit, OnChanges {
   public UserContactDetails: Array<object> = [];
   public facilityIdsData: any[] = [];
   public prescribersWithSelectedFacility: any[] = [];
+  public stepperLabelsProvider: string[] = ['', '', ''];
+  public stepperLabelsHCP: string[] = ['', '', '', ''];
   constructor(
     private router: Router,
     private http: HttpClient,

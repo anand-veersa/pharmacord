@@ -2,7 +2,12 @@
   <div class="primary-title">
     <span>{{ title }}</span>
   </div>
-  <div class="stepper"></div>
+  <div class="stepper">
+    <app-custom-stepper
+      [labelsData]="stepperLables"
+      [selectedStepNumber]="1"
+      requirementFor="enrollment"></app-custom-stepper>
+  </div>
   <div class="prescriber" *ngIf="selectPrescriberForm">
     <img
       src="../../../../assets/images/prescriber_icon.svg"

@@ -1,10 +1,10 @@
 <div class="registration-container" *ngIf="!thankYouScreen">
   <div class="registration-header">
-    <!-- <mat-stepper>
-      <mat-step [editable]="false" [completed]="true"> </mat-step>
-      <mat-step [editable]="false" [completed]="true"> </mat-step>
-      <mat-step [editable]="false" [completed]="false"> </mat-step>
-    </mat-stepper> -->
+    <app-custom-stepper
+      [selectedStepNumber]="0"
+      [labelsData]="
+        prescriberRegistrationCard ? stepperLabelsProvider : stepperLabelsHCP
+      "></app-custom-stepper>
 
     <div class="title-and-stepper text-x-bold">
       <span>Create New Account</span>

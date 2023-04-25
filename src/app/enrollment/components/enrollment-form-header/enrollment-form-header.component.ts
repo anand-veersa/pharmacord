@@ -22,6 +22,14 @@ export class EnrollmentFormHeaderComponent implements OnInit, OnDestroy {
   @Output() prescriberChanged = new EventEmitter();
   public title: string = '';
   public titleSubscription: Subscription;
+  public stepperLables: string[] = [
+    'Services Requested',
+    'Patient Information',
+    'Prescriber Information',
+    'Insurance Information',
+    'Clinical Information',
+    'Attestation and Signatures',
+  ];
 
   constructor(private submitEnrolService: SubmitEnrollmentService) {}
 

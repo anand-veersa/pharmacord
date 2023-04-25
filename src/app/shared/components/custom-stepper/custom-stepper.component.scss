@@ -1,0 +1,100 @@
+@import '../../../../assets/styles/abstracts/_variables.scss';
+@import '../../../../assets/styles/abstracts/mixins';
+
+:host ::ng-deep .mat-horizontal-content-container {
+  display: none;
+}
+
+.onBoarding {
+  ::ng-deep .mat-horizontal-stepper-header-container {
+    background-color: $color-tertiary !important;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header::before,
+  .mat-stepper-horizontal-line {
+    border-top-color: $color-white !important;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header::after {
+    border-top-color: $color-white;
+  }
+
+  ::ng-deep .mat-step-header .mat-step-icon {
+    background-color: unset;
+  }
+
+  ::ng-deep .mat-step-header .mat-step-icon-state-done {
+    background-color: $color-white;
+    color: $color-header !important;
+  }
+
+  ::ng-deep .mat-step-header .mat-step-icon-selected {
+    background-color: $color-white;
+    color: $color-header !important;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header .mat-step-icon {
+    border: 1px solid $color-white;
+    color: $color-white;
+  }
+}
+
+.enrollment {
+  ::ng-deep .mat-horizontal-stepper-header-container {
+    background-color: $color-white !important;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header::before,
+  .mat-stepper-horizontal-line {
+    border-top-color: $color-grey-border !important;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header::after {
+    border-top-color: $color-grey-border;
+  }
+
+  ::ng-deep .mat-step-header .mat-step-icon {
+    background-color: unset;
+  }
+
+  ::ng-deep .mat-step-header .mat-step-icon-state-done {
+    background-color: $color-tertiary;
+    color: $color-header !important;
+  }
+
+  ::ng-deep .mat-step-header .mat-step-icon-selected {
+    background-color: $color-tertiary;
+    color: $color-header !important;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header .mat-step-icon {
+    border: 1px solid $color-grey-border;
+    color: $color-grey-border;
+  }
+
+  :host
+    ::ng-deep
+    .mat-stepper-label-position-bottom
+    .mat-horizontal-stepper-header {
+    padding: 0 !important;
+    padding-top: 24px !important;
+  }
+
+  ::ng-deep .mat-step-text-label {
+    text-overflow: inherit;
+    white-space: normal;
+  }
+
+  ::ng-deep .mat-step-label {
+    padding: 6px 0 0 0 !important;
+    text-align: center !important;
+    width: 120% !important;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+    color: $color-header;
+
+    @include respond(tab-port) {
+      display: none;
+    }
+  }
+}

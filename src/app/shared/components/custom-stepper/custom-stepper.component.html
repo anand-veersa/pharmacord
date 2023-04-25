@@ -1,0 +1,8 @@
+<mat-stepper
+  [linear]="true"
+  labelPosition="bottom"
+  #stepper
+  [ngClass]="requirementFor">
+  <mat-step [label]="label" [editable]="false" *ngFor="let label of labelsData">
+  </mat-step>
+</mat-stepper>
