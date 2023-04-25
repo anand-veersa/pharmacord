@@ -2,13 +2,13 @@
   <mat-form-field class="custom-datepicker-field">
     <input
       matInput
+      class="custom-datepicker-input"
+      placeholder="mm/dd/yyyy"
       [min]="field.minDate"
       [max]="field.maxDate"
       [matDatepicker]="fieldId"
       [formControlName]="field.name"
-      [disabled]="field.disabled ?? false"
-      class="custom-datepicker-input"
-      placeholder="mm/dd/yyyy" />
+      [disabled]="field.disabled ?? false" />
     <mat-datepicker-toggle
       matIconSuffix
       class="custom-datepicker-toggle"
