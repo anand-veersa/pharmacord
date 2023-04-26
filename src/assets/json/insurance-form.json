@@ -36,7 +36,7 @@
             "value": "Uninsured"
           }
         ],
-        "class": "blockRadio"
+        "class": "block-radio"
       },
       {
         "name": "insurancePayer",
@@ -172,7 +172,7 @@
             "value": "Uninsured"
           }
         ],
-        "class": "blockRadio"
+        "class": "block-radio"
       },
       {
         "name": "insurancePayer",
@@ -304,7 +304,7 @@
             "value": "Other"
           }
         ],
-        "class": "blockRadio"
+        "class": "block-radio"
       },
       {
         "name": "insurancePayer",

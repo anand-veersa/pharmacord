@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <ul class="checkbox-group">
+  <ul [ngClass]="field.class">
     <li
       class="checkbox"
       *ngFor="let option of field.options; let index = index">
@@ -7,6 +7,9 @@
         color="primary"
         [checked]="isSame(checked, option.value)"
         (change)="onChecked($event.checked, option.value, index)">
+        <span *ngIf="field.validators?.required" class="error-or-required"
+          >*</span
+        >
         {{ option.label }}
       </mat-checkbox>
     </li>
