@@ -15,6 +15,6 @@ export class CustomSelectComponent {
   @Output() action = new EventEmitter();
 
   public selectionChanged(event: MatSelectChange): void {
-    this.action.emit(event.value);
+    this.action.emit({ value: event.value, field: this.field });
   }
 }

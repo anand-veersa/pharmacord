@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { JsonFormControls } from 'src/app/models/json-form-data.model';
 import isEqual from 'lodash.isequal';
@@ -8,10 +8,11 @@ import isEqual from 'lodash.isequal';
   styleUrls: ['./custom-checkbox.component.scss'],
 })
 export class CustomCheckboxComponent implements OnInit {
-  @Input() checked: any[];
+  @Input() checked: any[] = [];
   @Input() form: FormGroup;
   @Input() field: JsonFormControls;
   @Input() formType: string = '';
+  @Output() action: EventEmitter<any> = new EventEmitter<any>();
 
   public ngOnInit(): void {
     if (this.checked.length > 0) {
@@ -35,5 +36,6 @@ export class CustomCheckboxComponent implements OnInit {
     } else {
       formArray.removeAt(index);
     }
+    this.action.emit({ isChecked, field: this.field });
   }
 }
