@@ -24,6 +24,7 @@ import { CustomTableComponent } from './components/custom-table/custom-table.com
 import { CustomExpansionPanelComponent } from './components/custom-expansion-panel/custom-expansion-panel.component';
 import { CustomDatepickerComponent } from './components/forms/custom-datepicker/custom-datepicker.component';
 import { ToggleButtonComponent } from './components/custom-toggle-button/toggle.component';
+import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
 import { CustomUploadDocumentsComponent } from './components/custom-upload-documents/custom-upload-documents.component';
 
 @NgModule({
@@ -43,6 +44,7 @@ import { CustomUploadDocumentsComponent } from './components/custom-upload-docum
     CustomExpansionPanelComponent,
     CustomDatepickerComponent,
     ToggleButtonComponent,
+    CustomDialogComponent,
     CustomUploadDocumentsComponent,
   ],
   imports: [
@@ -68,6 +70,7 @@ import { CustomUploadDocumentsComponent } from './components/custom-upload-docum
     CustomTableComponent,
     CustomExpansionPanelComponent,
     ToggleButtonComponent,
+    CustomDialogComponent,
     CustomUploadDocumentsComponent,
   ],
   providers: [LocalStorageService],
