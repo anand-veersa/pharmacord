@@ -109,6 +109,11 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
+  public refreshTokens(Email: string, RefreshToken: string): Observable<any> {
+    const url: string = `${environment.baseUrl}account/refreshToken`;
+    return this.http.post<any>(url, { Email, RefreshToken });
+  }
+
   private handleError(errorRes: number) {
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes) {
