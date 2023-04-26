@@ -22,7 +22,7 @@ export class AppConstants {
     BAR_CHART_LABELS: [
       'Intake',
       'Insurance Auth Required',
-      'Financial ServiceIn Progress',
+      'Financial Services In Progress',
       'PAP In Process',
       'Other',
       'Total',
@@ -36,4 +36,5 @@ export class AppConstants {
       '#40488D',
     ],
   };
+  public MAX_FILE_SIZE = 10485760;
 }

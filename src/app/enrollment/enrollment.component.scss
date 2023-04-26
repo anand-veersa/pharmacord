@@ -4,6 +4,9 @@
   height: 100%;
   .sidenav {
     flex: 1 1 9%;
+    @media print {
+      display: none;
+    }
   }
 
   .main {
@@ -15,11 +18,12 @@
       background-color: $color-white;
       padding: 1.6rem 1.3rem 1.6rem 3.5rem;
       position: sticky;
-      z-index: 999;
+      z-index: 100;
       top: 0;
       justify-content: space-between;
 
-      .medicine-list {
+      .medicine-list,
+      .form-button {
         display: flex;
         gap: 1rem;
         align-items: center;
@@ -29,10 +33,17 @@
           line-height: 2.8rem;
         }
       }
+
+      @media print {
+        display: none;
+      }
     }
 
     .tab-content {
       padding: 2rem 3rem;
+    }
+    @media print {
+      overflow: initial;
     }
   }
 }

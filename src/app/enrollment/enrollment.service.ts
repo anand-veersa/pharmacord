@@ -16,6 +16,7 @@ export class EnrollmentService {
   public medicineCases = new BehaviorSubject<any[]>([]);
   public submitFormInitiated = new BehaviorSubject<boolean>(false);
   public cases = new BehaviorSubject<any[]>([]);
+  public documentUploaded = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   public getAccountInfo(username: string): Observable<any> {
@@ -60,7 +61,7 @@ export class EnrollmentService {
       PortalAccountPkId,
       Role,
     } = data.Payload;
-    this.authService.userFullName.next(`${FirstName} ${LastName}`);
+    this.authService.userName.next(Username);
     this.authService.user = {
       firstName: FirstName,
       lastName: LastName,
@@ -72,6 +73,25 @@ export class EnrollmentService {
       portalAccountPkId: PortalAccountPkId,
       role: Role,
     };
+  }
+
+  public uploadDocument(
+    fileToUpload: File,
+    patientId: string,
+    caseId: string
+  ): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('Document', fileToUpload);
+    formData.append('CaseId', caseId);
+    formData.append('PatientId', patientId);
+    const url: string = `${environment.baseUrl}documents`;
+    return this.http.post<any>(url, formData);
+  }
+
+  public acknowledgeAlerts(caseId: string, alertPkId: number): Observable<any> {
+    return this.http.delete<any>(
+      `${environment.baseUrl}cases/alerts/${caseId}/${alertPkId}`
+    );
   }
 
   private handleError(errorRes: number): Observable<never> {
