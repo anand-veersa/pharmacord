@@ -66,6 +66,13 @@
     background-color: $color-tertiary;
     color: $color-header !important;
   }
+  ::ng-deep .mat-step-icon-state-done .mat-step-icon-content {
+    color: $color-white;
+  }
+
+  ::ng-deep .mat-step-icon-selected .mat-step-icon-content {
+    color: $color-white;
+  }
 
   ::ng-deep .mat-horizontal-stepper-header .mat-step-icon {
     border: 1px solid $color-grey-border;
@@ -83,6 +90,10 @@
   ::ng-deep .mat-step-text-label {
     text-overflow: inherit;
     white-space: normal;
+  }
+
+  ::ng-deep .mat-step-label-active {
+    color: $color-tertiary !important;
   }
 
   ::ng-deep .mat-step-label {
