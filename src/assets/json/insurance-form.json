@@ -25,7 +25,7 @@
           {
             "label": "TRICARE",
             "value": "TRICARE",
-            "for": "Zejula,Ojjara"
+            "for": "Zejula, Ojjaara"
           },
           {
             "label": "Other",
@@ -125,8 +125,8 @@
         "validators": { "required": true }
       },
       {
-        "name": "files",
-        "value": "",
+        "name": "firstInsuranceFiles",
+        "value": [],
         "display": true,
         "label": "Attach Front and Back Copy of Insurance Card  ",
         "placeholder": "",
@@ -161,7 +161,7 @@
           {
             "label": "TRICARE",
             "value": "TRICARE",
-            "for": "Zejula,Ojjara"
+            "for": "Zejula, Ojjaara"
           },
           {
             "label": "Other",
@@ -261,7 +261,7 @@
         "validators": { "required": true }
       },
       {
-        "name": "files",
+        "name": "secondInsuranceFiles",
         "value": "",
         "display": true,
         "label": "Attach Front and Back Copy of Insurance Card  ",
@@ -293,7 +293,7 @@
           {
             "label": "TRICARE",
             "value": "TRICARE",
-            "for": "Zejula,Ojjara"
+            "for": "Zejula, Ojjaara"
           },
           {
             "label": "Commercial/Private",
@@ -420,7 +420,7 @@
         "validators": { "required": true }
       },
       {
-        "name": "files",
+        "name": "secondInsuranceFiles",
         "value": "",
         "display": true,
         "label": "Attach Front and Back Copy of Insurance Card  ",

@@ -37,3 +37,16 @@
     </ng-container>
   </div>
 </div>
+
+<app-custom-dialog
+  *ngIf="openExitDialog"
+  [data]="{ title: 'Confirmation', closeText: 'No', confirmText: 'Yes' }"
+  (action)="confirmExit($event)">
+  <div class="flex">
+    <img src="../../../../assets/images/tri_alert_icon.svg" alt="Alert" />
+    <div>
+      <h4>Are you sure you want to exit the patient enrollment process?</h4>
+      <h4>Any information filled in will be lost.</h4>
+    </div>
+  </div>
+</app-custom-dialog>

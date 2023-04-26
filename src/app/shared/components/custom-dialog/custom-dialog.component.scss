@@ -1,0 +1,26 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.custom-dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: $border-style-3;
+  border-radius: 0.3rem;
+  border-radius: 5px;
+  background: white;
+  z-index: 1000;
+  width: 61rem;
+  height: 27rem;
+
+  .title {
+    background-color: $color-tertiary;
+  }
+  .spaced-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    color: $color-white;
+  }
+}

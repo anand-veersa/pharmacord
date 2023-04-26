@@ -7,8 +7,7 @@
         ? formType + '-radio'
         : 'generic-form'
     "
-    [formControlName]="field.name"
-    [disabled]="field.disabled ?? false">
+    [formControlName]="field.name">
     <mat-radio-button
       class="example-radio-button"
       *ngFor="let option of field.options"

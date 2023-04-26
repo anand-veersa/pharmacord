@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import {
-  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -8,6 +7,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { EnrollmentScreenNextData } from 'src/app/models/enrollment-form.model';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { EnrollmentService } from '../../enrollment.service';
@@ -24,9 +24,11 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
   public title: string;
   public displayScreen: string = 'select-medication';
   public selectedFacility: any;
-
+  public formInitiated: boolean = false;
+  public openExitDialog: boolean = false;
   public prescriberListJson: JsonFormData = { controls: [] };
   public selectPrescriberForm: FormGroup;
+  public exitSubject = new Subject<boolean>();
 
   constructor(
     public submitEnrolService: SubmitEnrollmentService,
@@ -53,6 +55,7 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     // if(actionType=== 'next') {
     if (formName === 'select-medication') {
       this.submitEnrolService.enrollmentFormPayload.DrugGroup = form.DrugGroup;
+      this.formInitiated = true;
     }
     if (formName === 'select-prescriber') {
       this.selectedFacility = form;
@@ -106,6 +109,15 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
   public getPrescribersFormData(formData: any): void {
     this.selectPrescriberForm = formData.selectPrescriberForm;
     this.prescriberListJson = formData.prescriberListJson;
+  }
+
+  public openDialog(): void {
+    this.openExitDialog = true;
+  }
+
+  public confirmExit(action: boolean) {
+    this.openExitDialog = false;
+    this.exitSubject.next(action);
   }
 
   ngOnDestroy(): void {

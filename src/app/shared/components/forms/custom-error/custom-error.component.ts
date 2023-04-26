@@ -19,6 +19,7 @@ export class CustomErrorComponent implements OnChanges {
   getErrorMessage() {
     //TODO: OPTIMIZE THIS BLOCK
     this.errorMessage = '';
+    console.log(this.errors);
     if (!this.errors) return;
     const errorKeys = Object.keys(this.errors);
     if (errorKeys.includes('required')) {
@@ -28,6 +29,8 @@ export class CustomErrorComponent implements OnChanges {
     } else if (errorKeys.includes('maxlength')) {
       this.errorMessage = `${this.field.label} should not exceed  ${this.field.validators.max} characters`;
     } else if (errorKeys.includes('passwordNotMatch')) {
+      this.errorMessage = `Passwords do not match`;
+    } else if (errorKeys.includes('maxSizeExceeded')) {
       this.errorMessage = `Passwords do not match`;
     } else {
       this.errorMessage = `${this.field.label} is invalid`;
