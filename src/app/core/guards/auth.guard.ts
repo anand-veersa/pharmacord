@@ -11,8 +11,9 @@ import {
   UrlSegment,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { SubmitEnrollmentComponent } from 'src/app/enrollment/pages/submit-enrollment/submit-enrollment.component';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +43,7 @@ export class AuthGuard
     return true;
   }
   canDeactivate(
-    component: unknown,
+    component: SubmitEnrollmentComponent,
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot
@@ -51,8 +52,13 @@ export class AuthGuard
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return true;
+    if (!component.formInitiated) return true;
+    let subject = new Subject<boolean>();
+    component.openDialog();
+    subject = component.exitSubject;
+    return subject.asObservable();
   }
+
   canLoad(
     route: Route,
     segments: UrlSegment[]
@@ -80,4 +86,8 @@ export class AuthGuard
     }
     return true;
   }
+}
+
+interface ComponentType<T = any> {
+  new (...args: any[]): T;
 }
