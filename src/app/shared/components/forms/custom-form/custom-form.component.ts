@@ -86,7 +86,10 @@ export class CustomFormComponent implements AfterViewInit {
     if (componentInstance === CustomCheckboxComponent) {
       dynamicComponent.setInput('checked', this.checked);
     }
-    if (componentInstance === CustomSelectComponent) {
+    if (
+      componentInstance === CustomSelectComponent ||
+      componentInstance === CustomRadioComponent
+    ) {
       dynamicComponent.instance.action.subscribe((data: string | number) =>
         this.action.emit(data)
       );

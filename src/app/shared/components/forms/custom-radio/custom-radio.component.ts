@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatRadioChange } from '@angular/material/radio';
 import { JsonFormControls } from 'src/app/models/json-form-data.model';
 
 @Component({
@@ -11,4 +12,9 @@ export class CustomRadioComponent {
   @Input() form: FormGroup;
   @Input() formType: string = '';
   @Input() field: JsonFormControls;
+  @Output() action = new EventEmitter<string>();
+
+  onChange(e: MatRadioChange) {
+    this.action.emit(e.value);
+  }
 }
