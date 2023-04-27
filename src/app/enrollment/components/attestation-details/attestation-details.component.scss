@@ -24,3 +24,7 @@
     display: none;
   }
 }
+
+::ng-deep .links {
+  color: $color-tertiary;
+}

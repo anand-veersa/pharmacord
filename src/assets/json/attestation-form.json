@@ -106,7 +106,8 @@
           "value": {
             "Id": 2,
             "Name": "patientSupportProgram"
-          }
+          },
+          "for": "Zejula,Ojjaara"
         }
       ]
     },
@@ -146,7 +147,7 @@
         {
           "label": "Patient Representative will sign the enrollment form",
           "value": "Patient Representative will sign the enrollment form",
-          "for": "Zejula,Ojjara"
+          "for": "Zejula,Ojjaara"
         },
         {
           "label": "Patient will sign the enrollment form",
@@ -222,7 +223,6 @@
         "required": true,
         "pattern": "^\\S+@\\S+\\.\\S+$"
       },
-      "options": {},
       "required": true
     },
     {
@@ -239,7 +239,6 @@
         "required": true,
         "pattern": "^\\S+@\\S+\\.\\S+$"
       },
-      "options": {},
       "required": true
     }
   ]

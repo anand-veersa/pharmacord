@@ -411,11 +411,15 @@ export class SubmitEnrollmentService {
     this.http
       .get('/assets/json/attestation-form.json')
       .subscribe((data: any) => {
-        data.controls[7].options = data.controls[7].options.filter(
-          (option: JsonFormControlOptions) =>
-            !option.for ||
-            option.for.includes(this.enrollmentFormPayload.DrugGroup)
-        );
+        data.controls.forEach((item: any) => {
+          if (item.type === 'select' || item.type === 'checkbox') {
+            item.options = item.options.filter(
+              (option: JsonFormControlOptions) =>
+                !option.for ||
+                option.for.includes(this.enrollmentFormPayload.DrugGroup)
+            );
+          }
+        });
         this.attestationDetails = data;
 
         this.attestationForm = this.sharedService.buildForm(

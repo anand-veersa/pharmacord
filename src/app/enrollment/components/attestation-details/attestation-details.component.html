@@ -55,3 +55,14 @@
     "
     (action)="onAction('next')"></app-custom-button>
 </div>
+
+<app-custom-dialog
+  *ngIf="showConfirmationDialog"
+  [data]="{
+    title: dialogTitle,
+    confirmText: 'Ok',
+    noOfButtons: 1,
+    htmlString: dialogDescription
+  }"
+  (action)="confirmConsent($event)">
+</app-custom-dialog>
