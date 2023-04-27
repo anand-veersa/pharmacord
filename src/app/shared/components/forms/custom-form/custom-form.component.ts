@@ -16,6 +16,7 @@ import { CustomDatepickerComponent } from '../custom-datepicker/custom-datepicke
 import { CustomInputComponent } from '../custom-input/custom-input.component';
 import { CustomRadioComponent } from '../custom-radio/custom-radio.component';
 import { CustomSelectComponent } from '../custom-select/custom-select.component';
+import { CustomTextareaComponent } from '../custom-textarea/custom-textarea.component';
 
 @Component({
   selector: 'app-custom-form',
@@ -29,13 +30,17 @@ export class CustomFormComponent implements AfterViewInit {
   @Input() formType: string = '';
   @Input() field: JsonFormControls;
   @Input() inputPrefix: string;
-  @Input() checked: any[];
+  @Input() checked: any[] = [];
   @Output() action = new EventEmitter();
 
   public supportedDynamicComponents = [
     {
       type: 'text',
       component: CustomInputComponent,
+    },
+    {
+      type: 'textarea',
+      component: CustomTextareaComponent,
     },
     {
       type: 'search',

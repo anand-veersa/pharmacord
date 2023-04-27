@@ -66,6 +66,9 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
       this.submitEnrolService.enrollmentFormPayload.PreferredSpecialityPharmacy =
         [form.pharmacy.SpecialityPharmacy];
     }
+    if (formName === 'select-prescription') {
+      console.log(form);
+    }
     if (formName === 'select-patient') {
       console.log(form);
     }

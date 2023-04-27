@@ -43,6 +43,14 @@ export class SubmitEnrollmentService {
   public firstInsuranceDetails: JsonFormData = { controls: [] };
   public secondInsuranceForm: FormGroup;
   public secondInsuranceDetails: JsonFormData = { controls: [] };
+
+  public prescriptionInfoForm: FormGroup;
+  public prescriptionInfoDetails: JsonFormData = { controls: [] };
+  public clinicalInfoForm: FormGroup;
+  public clinicalInfoDetails: JsonFormData = { controls: [] };
+  public currentLineOfTherapyForm: FormGroup;
+  public currentLineOfTherapyDetails: JsonFormData = { controls: [] };
+
   public enrollmentFormPayload: EnrollmentFormPayload;
   constructor(
     private authService: AuthService,
@@ -384,6 +392,76 @@ export class SubmitEnrollmentService {
       );
       this.secondInsuranceForm = this.sharedService.buildForm(
         this.secondInsuranceDetails
+      );
+    });
+  }
+
+  public createPrescriptionForm(): void {
+    this.http.get('/assets/json/pres-info.json').subscribe((data: any) => {
+      // data.primaryMedical.controls[0].options =
+      //   data.primaryMedical.controls[0].options.filter(
+      //     (option: JsonFormControlOptions) =>
+      //       !option.for ||
+      //       option.for.includes(this.enrollmentFormPayload.DrugGroup)
+      //   );
+      // data.secondaryMedical.controls[0].options =
+      //   data.secondaryMedical.controls[0].options.filter(
+      //     (option: JsonFormControlOptions) =>
+      //       !option.for ||
+      //       option.for.includes(this.enrollmentFormPayload.DrugGroup)
+      //   );
+      data.prescriptionInfo.controls[0].options =
+        data.prescriptionInfo.controls[0].options.filter(
+          (option: JsonFormControlOptions) =>
+            !option.for ||
+            option.for.includes(this.enrollmentFormPayload.DrugGroup)
+        );
+      // this.firstInsuranceDetails = data.primaryMedical;
+      // this.secondInsuranceDetails =
+      //   this.enrollmentFormPayload.DrugGroup === 'Jemperli'
+      //     ? data.secondaryMedical
+      //     : data.prescriptionInsurance;
+      // this.firstInsuranceForm = this.sharedService.buildForm(
+      //   this.firstInsuranceDetails
+      // );
+      // this.secondInsuranceForm = this.sharedService.buildForm(
+      //   this.secondInsuranceDetails
+      // );
+
+      data.prescriptionInfo.controls = data.prescriptionInfo.controls.filter(
+        (el: any) =>
+          !el.for || el.for.includes(this.enrollmentFormPayload.DrugGroup)
+      );
+      data.clinicalInfo.controls = data.clinicalInfo.controls.filter(
+        (el: any) =>
+          !el.for || el.for.includes(this.enrollmentFormPayload.DrugGroup)
+      );
+      data.currentLineOfTherapy.controls =
+        data.currentLineOfTherapy.controls.filter(
+          (el: any) =>
+            !el.for || el.for.includes(this.enrollmentFormPayload.DrugGroup)
+        );
+
+      this.prescriptionInfoDetails = data.prescriptionInfo;
+      this.clinicalInfoDetails = data.clinicalInfo;
+      this.currentLineOfTherapyDetails = data.currentLineOfTherapy;
+      // debugger;
+      // console.log('inside build');
+
+      // if(['Zejula', 'Ojjaara'].includes(this.enrollmentFormPayload.DrugGroup)){
+      // console.log('inside includes if ', this.enrollmentFormPayload.DrugGroup);
+      // }
+
+      this.prescriptionInfoForm = this.sharedService.buildForm(
+        this.prescriptionInfoDetails
+      );
+
+      this.clinicalInfoForm = this.sharedService.buildForm(
+        this.clinicalInfoDetails
+      );
+
+      this.currentLineOfTherapyForm = this.sharedService.buildForm(
+        this.currentLineOfTherapyDetails
       );
     });
   }

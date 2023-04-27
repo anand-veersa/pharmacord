@@ -1,0 +1,278 @@
+{
+  "clinicalInfo": {
+    "controls": [
+      {
+        "name": "patientFirstName",
+        "value": "",
+        "display": true,
+        "label": "Patient First Name",
+        "placeholder": "Enter your First name",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "patientLastName ",
+        "value": "",
+        "display": true,
+        "label": "Patient Last Name",
+        "placeholder": "Enter your Last Name ",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "patientDateOfBirth",
+        "value": "",
+        "display": true,
+        "label": "Date of Birth",
+        "placeholder": "mm/dd/yyyy",
+        "type": "date",
+        "validators": { "required": true },
+        "disabled": false
+      },
+      {
+        "name": "treatmentStartDate",
+        "value": "",
+        "display": true,
+        "label": "Treatment Start Date",
+        "placeholder": "mm/dd/yyyy",
+        "type": "date",
+        "validators": {},
+        "disabled": false,
+        "for": "Zejula, Ojjaara"
+      },
+      {
+        "name": "primaryDiagnosis *",
+        "value": "",
+        "display": true,
+        "label": "Primary Diagnosis *",
+        "placeholder": "Enter your Primary Diagnosis",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "primaryDiagnosisICD-10Code",
+        "value": "",
+        "display": true,
+        "label": "Primary Diagnosis ICD-10 Code",
+        "placeholder": "Enter your Primary Diagnosis ICD-10 Code",
+        "type": "text",
+        "validators": { "required": true }
+      },
+      {
+        "name": "secondaryDiagnosis",
+        "value": "",
+        "display": true,
+        "label": "Secondary Diagnosis",
+        "placeholder": "Enter your Secondary Diagnosis",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "secondaryDiagnosisICD-10Code",
+        "value": "",
+        "display": true,
+        "label": "Secondary Diagnosis ICD-10 Code",
+        "placeholder": "Enter your Secondary Diagnosis ICD-10 Code",
+        "type": "text",
+        "validators": {}
+      }
+    ]
+  },
+  "currentLineOfTherapy": {
+    "controls": [
+      {
+        "name": "",
+        "value": "",
+        "display": true,
+        "label": "",
+        "placeholder": "",
+        "type": "radio",
+        "validators": { "required": true },
+        "options": [
+          {
+            "label": "1st line",
+            "value": "1st line"
+          },
+          {
+            "label": "2nd line",
+            "value": "2nd line"
+          },
+          {
+            "label": "3rd line",
+            "value": "3rd line"
+          },
+          {
+            "label": "4th line",
+            "value": "4th line"
+          }
+        ],
+        "class": "blockRadio"
+      },
+      {
+        "name": "BRCA Test",
+        "value": "",
+        "display": true,
+        "label": "BRCA Test",
+        "placeholder": "",
+        "type": "radio",
+        "validators": {},
+        "options": [
+          {
+            "label": "Positive",
+            "value": "Psitive"
+          },
+          {
+            "label": "Negative",
+            "value": "Negative"
+          },
+          {
+            "label": "Results Pending",
+            "value": "Results Pending"
+          },
+          {
+            "label": "No Teste",
+            "value": "No Test"
+          }
+        ],
+        "class": "blockRadio"
+      },
+      {
+        "name": "HRD Test",
+        "value": "",
+        "display": true,
+        "label": "HRD Test",
+        "placeholder": "",
+        "type": "radio",
+        "validators": {},
+        "options": [
+          {
+            "label": "Positive",
+            "value": "Psitive"
+          },
+          {
+            "label": "Negative",
+            "value": "Negative"
+          },
+          {
+            "label": "Results Pending",
+            "value": "Results Pending"
+          },
+          {
+            "label": "No Teste",
+            "value": "No Test"
+          }
+        ],
+        "class": "blockRadio"
+      },
+      {
+        "name": "knownDrugAllergies",
+        "value": "",
+        "display": true,
+        "label": "Known Drug Allergies",
+        "placeholder": "Enter your Known Drug Allergies",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "notes",
+        "value": "",
+        "display": true,
+        "label": "Notes",
+        "placeholder": "Enter your Notess",
+        "type": "text",
+        "validators": {}
+      }
+    ]
+  },
+  "prescriptionInfo": {
+    "controls": [
+      {
+        "name": "prescriptionMedicine",
+        "value": "",
+        "display": true,
+        "label": "",
+        "placeholder": "",
+        "type": "checkbox",
+        "validators": {},
+        "for": "Zejula, Ojjaara",
+        "options": [
+          {
+            "label": "ZEJULA: Standard Prescription",
+            "value": {
+              "Id": 1,
+              "Name": "standard"
+            },
+            "for": "Zejula"
+          },
+          {
+            "label": "ZEJULA: Quick Start Program",
+            "subLabel": "For patients experiencing a delay in coverage at first dispense",
+            "value": {
+              "Id": 1,
+              "Name": "quickStartProgram"
+            },
+            "for": "Zejula"
+          },
+          {
+            "label": "ZEJULA: Bridge Program",
+            "subLabel": "For patients experiencing coverage interruptions while already on treatment",
+            "value": {
+              "Id": 1,
+              "Name": ""
+            },
+            "for": "Zejula"
+          },
+          {
+            "label": "OJJAARA: Standard Prescription",
+            "value": {
+              "Id": 1,
+              "Name": "standard"
+            },
+            "for": "Ojjaara"
+          },
+          {
+            "label": "OJJAARA: Quick Start Program",
+            "subLabel": "For patients experiencing a delay in coverage at first dispense",
+            "value": {
+              "Id": 1,
+              "Name": "quickStartProgram"
+            },
+            "for": "Ojjaara"
+          },
+          {
+            "label": "OJJAARA: Bridge Program",
+            "subLabel": "For patients experiencing coverage interruptions while already on treatment",
+            "value": {
+              "Id": 1,
+              "Name": ""
+            },
+            "for": "Ojjaara"
+          }
+        ]
+      },
+      {
+        "name": "prescriptionSignature",
+        "value": "",
+        "display": true,
+        "label": "Prescription Signature",
+        "placeholder": "Select Prescription Signature",
+        "type": "select",
+        "validators": { "required": true },
+        "options": [
+          {
+            "label": "Dispense as written",
+            "value": "Dispense as written"
+          },
+          {
+            "label": "Substitute Permitted",
+            "value": "Substitute Permitted"
+          }
+        ]
+      },
+      {
+        "label": "Note: Signature will be obtained during the next step.",
+        "display": true
+      }
+    ]
+  }
+}

@@ -27,7 +27,8 @@ export class SelectInsuranceComponent implements OnInit {
         ...this.submitEnrolService.firstInsuranceForm.value,
         ...this.submitEnrolService.secondInsuranceForm.value,
       },
-      nextScreen: actionType === 'back' ? 'prescriber-details' : 'atte',
+      nextScreen:
+        actionType === 'back' ? 'prescriber-details' : 'select-prescription',
     });
   }
 

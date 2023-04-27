@@ -8,6 +8,9 @@
         [checked]="isSame(checked, option.value)"
         (change)="onChecked($event.checked, option.value, index)">
         {{ option.label }}
+        <div>
+          {{ option.subLabel }}
+        </div>
       </mat-checkbox>
     </li>
   </ul>

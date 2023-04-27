@@ -10,6 +10,7 @@ interface JsonFormValidators {
 }
 export interface JsonFormControlOptions {
   label: string;
+  subLabel?: string;
   value: any;
   for?: string;
 }

@@ -1,0 +1,187 @@
+<div class="enroll-form panel-cont">
+  <div class="panel-big">
+    <div class="primary-title flex toggle-panel">Clinical Information</div>
+    <div class="error-or-required tm-1">* Required field</div>
+    <div>
+      <!-- <div class="insurance-consent">
+        <span> Does the Patient have Primary Insurance? </span>
+        <span
+          ><app-custom-toggle-button
+            idString="firstInsurance"
+            (changed)="firstInsurance = $event"
+            [value]="firstInsurance"></app-custom-toggle-button
+        ></span>
+      </div> -->
+      <!-- <ng-container> -->
+      <div
+        *ngFor="let control of submitEnrolService.clinicalInfoDetails.controls"
+        [ngClass]="control.class ? control.class : 'tm-1'">
+        <app-custom-form
+          *ngIf="control.display"
+          formType="bg enrollment-form"
+          [field]="control"
+          [form]="submitEnrolService.clinicalInfoForm"></app-custom-form>
+      </div>
+      <!-- <div
+          *ngIf="
+            submitEnrolService.firstInsuranceForm.controls[
+              'firstInsuranceFiles'
+            ].value.length > 0
+          "
+          class="document-container tm-2">
+          <div class="header text-small text-x-bold col">
+            <span>Name</span> <span>Action</span>
+          </div>
+          <div
+            class="items col"
+            *ngFor="
+              let data of submitEnrolService.firstInsuranceForm.controls[
+                'firstInsuranceFiles'
+              ].value;
+              let index
+            ">
+            <span class="text-xs">{{ data.file.name }}</span>
+            <span
+              class="error-or-required"
+              (click)="removeAttachFile('first', index)"
+              ><mat-icon>delete_outline</mat-icon></span
+            >
+          </div>
+        </div> -->
+      <!-- </ng-container> -->
+    </div>
+    <div
+      *ngIf="
+        ['Zejula', 'Ojjaara'].includes(
+          submitEnrolService.enrollmentFormPayload.DrugGroup
+        )
+      "
+      class="primary-title flex toggle-panel">
+      Current Line Of Therapy
+    </div>
+    <!-- <div class="error-or-required tm-1">* Required field</div> -->
+    <div>
+      <div
+        *ngFor="
+          let control of submitEnrolService.currentLineOfTherapyDetails.controls
+        "
+        [ngClass]="control.class ? control.class : 'tm-1'">
+        <app-custom-form
+          *ngIf="control.display"
+          formType="bg enrollment-form"
+          [field]="control"
+          [form]="
+            submitEnrolService.currentLineOfTherapyForm
+          "></app-custom-form>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider vertical></mat-divider>
+
+  <div class="panel-big">
+    <ng-container
+      *ngIf="
+        ['Zejula', 'Ojjaara'].includes(
+          submitEnrolService.enrollmentFormPayload.DrugGroup
+        )
+      ">
+      <div class="primary-title flex toggle-panel">
+        <!-- {{
+          submitEnrolService.enrollmentFormPayload.DrugGroup
+            ? 'Secondary Medical Insurance'
+            : 'Prescription Insurance'
+        }} -->
+        Prescription Information
+      </div>
+      <div class="error-or-required tm-1">
+        * Atleast one medication is required
+      </div>
+    </ng-container>
+
+    <div>
+      <div
+        *ngFor="
+          let control of submitEnrolService.prescriptionInfoDetails.controls
+        "
+        [ngClass]="control.class ? control.class : 'tm-1'">
+        <app-custom-form
+          *ngIf="control.display"
+          formType="bg enrollment-form"
+          [field]="control"
+          [form]="submitEnrolService.prescriptionInfoForm"></app-custom-form>
+      </div>
+      <div
+        *ngIf="
+          ['Zejula', 'Ojjaara'].includes(
+            submitEnrolService.enrollmentFormPayload.DrugGroup
+          )
+        "
+        class="bg enrollment-form">
+        <div class="note-text">
+          <strong>Note: </strong> Signature will be obtained during the next
+          step.
+        </div>
+      </div>
+      <!-- <div class="insurance-consent">
+        <span> Does the Patient have Primary Insurance? </span>
+        <span
+          ><app-custom-toggle-button
+            idString="secondInsurance"
+            (changed)="secondInsurance = $event"
+            [value]="secondInsurance"></app-custom-toggle-button
+        ></span>
+      </div> -->
+      <!-- <ng-container *ngIf="secondInsurance">
+        <div
+          *ngFor="
+            let control of submitEnrolService.secondInsuranceDetails.controls
+          "
+          [ngClass]="control.class ?? 'tm-1'">
+          <app-custom-form
+            *ngIf="control.display"
+            [field]="control"
+            [form]="submitEnrolService.secondInsuranceForm"
+            formType="bg enrollment-form"></app-custom-form>
+        </div>
+        <div
+          *ngIf="
+            submitEnrolService.secondInsuranceForm.controls[
+              'secondInsuranceFiles'
+            ].value.length > 0
+          "
+          class="document-container tm-2">
+          <div class="header text-small text-x-bold col">
+            <span>Name</span> <span>Action</span>
+          </div>
+          <div
+            class="items col"
+            *ngFor="
+              let data of submitEnrolService.secondInsuranceForm.controls[
+                'secondInsuranceFiles'
+              ].value;
+              let index
+            ">
+            <span class="text-xs">{{ data.file.name }}</span>
+            <span
+              class="error-or-required"
+              (click)="removeAttachFile('second', index)"
+              ><mat-icon>delete_outline</mat-icon></span
+            >
+          </div>
+        </div>
+      </ng-container> -->
+    </div>
+  </div>
+</div>
+
+<div class="action-panel">
+  <app-custom-button
+    btnClass="small secondary"
+    btnText="&#60; Back"
+    (action)="onAction('back')"></app-custom-button>
+  <app-custom-button
+    btnClass="small tertiary"
+    btnText="Next &#62;"
+    (action)="onAction('next')"></app-custom-button>
+</div>

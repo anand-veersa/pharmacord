@@ -1,0 +1,37 @@
+<!-- <label class="custom-input-label">{{ inputControl.label }}</label> -->
+<form [formGroup]="form">
+  <mat-form-field
+    *ngIf="field.type !== 'file'"
+    [ngClass]="{ disabled: field.disabled }">
+    <span matPrefix *ngIf="inputPrefix"><mat-icon>search</mat-icon></span>
+    <textarea
+      matInput
+      [ngClass]="{ 'common-form-input': formType !== 'login' }"
+      class="form-field-input"
+      floatLabel="false"
+      [formControlName]="field.name"
+      [type]="field.type"
+      [placeholder]="field.placeholder">
+    </textarea>
+  </mat-form-field>
+
+  <div *ngIf="field.type === 'file'">
+    <div
+      [ngClass]="{ 'disabled-uploader': files.length === 2 }"
+      class="file-upload-input"
+      (click)="browseFile($event, field.name)">
+      <button class="browse">Browse</button>
+    </div>
+    <input
+      type="file"
+      hidden
+      accept=".pdf"
+      [id]="field.name"
+      (change)="setAttachDoc($event)" />
+  </div>
+  <app-custom-error
+    *ngIf="form.controls[this.field.name].touched"
+    [form]="form"
+    [field]="field"
+    [errors]="form.get(field.name)?.errors"></app-custom-error>
+</form>
