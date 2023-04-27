@@ -18,7 +18,7 @@
         [ngClass]="control.class ? control.class : 'tm-1'">
         <app-custom-form
           *ngIf="control.display"
-          formType="bg enrollment-form"
+          formType="sg pres-form"
           [field]="control"
           [form]="submitEnrolService.clinicalInfoForm"></app-custom-form>
       </div>
@@ -68,7 +68,7 @@
         [ngClass]="control.class ? control.class : 'tm-1'">
         <app-custom-form
           *ngIf="control.display"
-          formType="bg enrollment-form"
+          formType="sg pres-form"
           [field]="control"
           [form]="
             submitEnrolService.currentLineOfTherapyForm
@@ -107,9 +107,19 @@
         [ngClass]="control.class ? control.class : 'tm-1'">
         <app-custom-form
           *ngIf="control.display"
-          formType="bg enrollment-form"
+          formType="sg pres-form"
           [field]="control"
           [form]="submitEnrolService.prescriptionInfoForm"></app-custom-form>
+
+        <!-- <div *ngIf="control.type==='checkbox' && control.value.length > 0">
+          works ?
+          <app-custom-prescription
+        *ngIf="control.display && control.type === prescription"
+        formType="sg pres-form"
+        [field]="control"
+        [form]="submitEnrolService.prescriptionInfoForm"
+        >
+        </div> -->
       </div>
       <div
         *ngIf="
@@ -142,7 +152,7 @@
             *ngIf="control.display"
             [field]="control"
             [form]="submitEnrolService.secondInsuranceForm"
-            formType="bg enrollment-form"></app-custom-form>
+            formType="sg pres-form"></app-custom-form>
         </div>
         <div
           *ngIf="
@@ -174,6 +184,12 @@
     </div>
   </div>
 </div>
+
+<!-- <div class="enroll-form panel-cont">
+  <div class="panel-big">
+     <app-custom-prescription [field]="sampleField"></app-custom-prescription>
+  </div>
+</div> -->
 
 <div class="action-panel">
   <app-custom-button

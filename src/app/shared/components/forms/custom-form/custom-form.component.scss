@@ -61,6 +61,39 @@
     flex-basis: 45%;
   }
 }
+::ng-deep .pres-form,
+.sg-pres-form {
+  display: flex;
+  align-items: center;
+  label {
+    color: $color-grey-dark-4;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+  }
+  .sub-label {
+    @extend label;
+    font-weight: 400;
+  }
+}
+
+::ng-deep .sg {
+  label {
+    flex-basis: 50%;
+  }
+  app-custom-checkbox {
+    label {
+      flex-basis: unset;
+    }
+  }
+  app-custom-textarea,
+  app-custom-input,
+  app-custom-radio,
+  app-custom-select,
+  app-custom-datepicker {
+    flex-basis: 45%;
+  }
+}
 
 ::ng-deep .block-radio {
   display: flex;

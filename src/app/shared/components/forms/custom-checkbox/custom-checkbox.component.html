@@ -7,14 +7,15 @@
         color="primary"
         [checked]="isSame(checked, option.value)"
         (change)="onChecked($event.checked, option.value, index)">
-        <span *ngIf="field.validators?.required" class="error-or-required"
+        <!-- <span *ngIf="option.validators?.required" class="error-or-required"
           >*</span
-        >
+        > -->
         {{ option.label }}
-        <div>
+        <div class="sub-label">
           {{ option.subLabel }}
         </div>
       </mat-checkbox>
+      <ng-content></ng-content>
     </li>
   </ul>
 </form>
