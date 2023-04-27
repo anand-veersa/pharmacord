@@ -43,6 +43,9 @@ export class SubmitEnrollmentService {
   public firstInsuranceDetails: JsonFormData = { controls: [] };
   public secondInsuranceForm: FormGroup;
   public secondInsuranceDetails: JsonFormData = { controls: [] };
+  public attestationForm: FormGroup;
+  public attestationDetails: JsonFormData = { controls: [] };
+
   public enrollmentFormPayload: EnrollmentFormPayload;
   constructor(
     private authService: AuthService,
@@ -392,6 +395,22 @@ export class SubmitEnrollmentService {
     return patientData;
   }
 
+  public createAttestationForm(): void {
+    this.http
+      .get('/assets/json/attestation-form.json')
+      .subscribe((data: any) => {
+        data.controls[7].options = data.controls[7].options.filter(
+          (option: JsonFormControlOptions) =>
+            !option.for ||
+            option.for.includes(this.enrollmentFormPayload.DrugGroup)
+        );
+        this.attestationDetails = data;
+
+        this.attestationForm = this.sharedService.buildForm(
+          this.attestationDetails
+        );
+      });
+  }
   public resetForms(): void {
     if (this.medicationForm) this.medicationForm.reset();
     if (this.prescriberForm) this.prescriberForm.reset();
