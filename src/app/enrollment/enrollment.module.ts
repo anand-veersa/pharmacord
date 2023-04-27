@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
 import { EnrollmentRoutingModule } from './enrollment-routing.module';
@@ -55,6 +55,6 @@ import { SelectPrescriptionComponent } from './components/select-prescription/se
     ChartModule,
     PdfJsViewerModule,
   ],
-  providers: [EnrollmentService, SubmitEnrollmentService],
+  providers: [EnrollmentService, SubmitEnrollmentService, DatePipe],
 })
 export class EnrollmentModule {}

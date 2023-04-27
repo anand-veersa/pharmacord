@@ -1,0 +1,48 @@
+<div class="backdrop" [mat-dialog-close]="true"></div>
+<div class="upload-documents-container">
+  <div class="header">
+    <div class="title">
+      <p class="text-med text-x-bold">Upload Supplemental Documents</p>
+      <p class="text-med text-x-bold close-icon" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </p>
+    </div>
+    <span class="text-xs">
+      Please add any document you want to submit for the Patient:
+      {{ data.patientName }} with Case ID: {{ data.caseId }}
+    </span>
+  </div>
+  <div class="wrapper">
+    <button class="file-upload bm-1" (click)="browseFile()">
+      <input
+        type="file"
+        id="browseFileRef"
+        class="browse-file"
+        multiple
+        (change)="setAttachDoc($event)"
+        accept="application/pdf" />
+      <img
+        src="../../../../assets/images/upload-documents.svg"
+        alt="Upload icon"
+        class="bm-1" />
+      <p class="text-large text-x-bold">Drag and drop file here</p>
+      <p class="text-xxs pdf-size">Only PDF up to 10 mb supported</p>
+    </button>
+    <p class="text-large text-x-bold">or</p>
+    <app-custom-button
+      btnText="Browse file"
+      btnClass="tertiary register-user"
+      (action)="browseFile()">
+    </app-custom-button>
+    <div
+      *ngFor="let progress of data.progressData"
+      class="upload-document tm-1">
+      <mat-icon> insert_drive_file</mat-icon>
+      <div class="file-container">
+        <span class="text-small file-name">{{ progress.name }}</span>
+        <mat-progress-bar class="progress-bar" [value]="progress.progress">
+        </mat-progress-bar>
+      </div>
+    </div>
+  </div>
+</div>

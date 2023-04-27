@@ -26,6 +26,7 @@ import { CustomDatepickerComponent } from './components/forms/custom-datepicker/
 import { ToggleButtonComponent } from './components/custom-toggle-button/toggle.component';
 import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
 import { CustomTextareaComponent } from './components/forms/custom-textarea/custom-textarea.component';
+import { CustomUploadDocumentsComponent } from './components/custom-upload-documents/custom-upload-documents.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { CustomTextareaComponent } from './components/forms/custom-textarea/cust
     ToggleButtonComponent,
     CustomDialogComponent,
     CustomTextareaComponent,
+    CustomUploadDocumentsComponent,
   ],
   imports: [
     CommonModule,
@@ -71,6 +73,7 @@ import { CustomTextareaComponent } from './components/forms/custom-textarea/cust
     CustomExpansionPanelComponent,
     ToggleButtonComponent,
     CustomDialogComponent,
+    CustomUploadDocumentsComponent,
   ],
   providers: [LocalStorageService],
 })

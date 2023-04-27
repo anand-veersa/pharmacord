@@ -39,10 +39,16 @@
           color: $color-primary;
         }
       }
+      @media print {
+        width: auto;
+      }
     }
     .action-buttons {
       display: flex;
       gap: 1.5rem;
+      @media print {
+        display: none;
+      }
     }
   }
 }
