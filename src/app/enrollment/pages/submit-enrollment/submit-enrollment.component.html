@@ -4,7 +4,7 @@
     [selectPrescriberField]="prescriberListJson"
     [displayedScreen]="displayScreen"
     (prescriberChanged)="
-      submitEnrolService.selectedPrescriberId.next($event)
+      submitEnrolService.selectedPrescriberId.next($event.value)
     "></app-enrollment-form-header>
   <div class="submit-enrollment-container">
     <!-- <ng-container #enrollmentForm></ng-container> -->

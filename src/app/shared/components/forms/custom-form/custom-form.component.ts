@@ -88,10 +88,12 @@ export class CustomFormComponent implements AfterViewInit {
     }
     if (
       componentInstance === CustomSelectComponent ||
-      componentInstance === CustomRadioComponent
+      componentInstance === CustomRadioComponent ||
+      componentInstance === CustomCheckboxComponent
     ) {
-      dynamicComponent.instance.action.subscribe((data: string | number) =>
-        this.action.emit(data)
+      dynamicComponent.instance.action.subscribe(
+        (data: string | number | { value: string | number; field: any }) =>
+          this.action.emit(data)
       );
     }
     this.changeDetectorRef.detectChanges();
