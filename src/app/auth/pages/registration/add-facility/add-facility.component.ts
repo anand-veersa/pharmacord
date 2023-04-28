@@ -25,6 +25,7 @@ export class AddFacilityComponent implements OnInit, OnChanges {
   @Input() subTitle: string = '';
   @Input() requirementFor: string = '';
   @Input() hcpAllFacilities: any[] = []; // for account settings
+  @Output() action = new EventEmitter();
   @Output() backToParentComponent = new EventEmitter<{
     backBtnClicked: boolean;
   }>();
@@ -55,16 +56,7 @@ export class AddFacilityComponent implements OnInit, OnChanges {
   public dataSource = this.facilities;
   public facilitiesForAddHCPScreen: object[] = [];
   @ViewChild(MatTable) table: MatTable<any>;
-  //form control values
-  // public PracticeGroup: string;
-  // public Email: string;
-  // public Fax: string;
-  // public OfficeName: string;
-  // public Rank: 1;
-  // public Id: string;
-  // public Phone: string;
-  // public PhoneType: string;
-  // public Extension: null;
+
   constructor(
     private sharedService: SharedService,
     private http: HttpClient,
@@ -83,27 +75,39 @@ export class AddFacilityComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.hcpAllFacilities.forEach(facility => {
+      facility.Address = [facility.Address];
+    });
     this.existingFacilities = [...this.hcpAllFacilities];
-    console.log(
-      'ngonchanges of add facility with exisitingfacilities as ',
-      this.existingFacilities
-    );
-
     if (this.requirementFor === 'accountSetting') {
       this.facilities = [...this.hcpAllFacilities];
     }
   }
 
-  navigateToPrevious(): void {
-    this.backToParentComponent.emit({ backBtnClicked: true });
+  public onAction(actionType: string): void {
+    const actionObj = {
+      actionType,
+      nextScreen: '',
+    };
+
+    if (actionType === 'next') {
+      this.sendFacilityData();
+      actionObj.nextScreen = 'add-healthcare-provider';
+    } else if (
+      actionType === 'back' &&
+      this.requirementFor === 'prescriberRegistration'
+    ) {
+      actionObj.nextScreen = 'prescriberRegistration';
+    } else if (
+      actionType === 'back' &&
+      this.requirementFor === 'othersRegistration'
+    ) {
+      actionObj.nextScreen = 'othersRegistration';
+    }
+    this.action.emit(actionObj);
   }
 
-  navigateToNext(): void {
-    this.navigateToNextComponent.emit({ nextBtnClicked: true });
-    this.sendFacilityData();
-  }
-
-  addFacility(): void {
+  public addFacility(): void {
     const facility = {
       Address: [
         {
@@ -133,33 +137,6 @@ export class AddFacilityComponent implements OnInit, OnChanges {
     this.dataSource = [...this.dataSource, facility];
 
     this.table?.renderRows();
-
-    // if (this.requirementFor === 'othersRegistration') {
-    //   const facility = {
-    //     ///
-    //     Id: null,
-    //     Name: this.addFacilityForm.value.practiceName,
-    //     GroupName: this.addFacilityForm.value.practiceName,
-    //     Address1: this.addFacilityForm.value.facilityAddress1,
-    //     Address2:
-    //       this.addFacilityForm.value.facilityAddress2 === ''
-    //         ? null
-    //         : this.addFacilityForm.value.facilityAddress2,
-    //     City: this.addFacilityForm.value.facilityCity,
-    //     County: null,
-    //     State: this.addFacilityForm.value.facilityState,
-    //     Phone: this.addFacilityForm.value.facilityPhone,
-    //     Fax: this.addFacilityForm.value.facilityFax,
-    //     Email: this.addFacilityForm.value.facilityEmail,
-    //     Zip: this.addFacilityForm.value.facilityZip,
-    //     ZipSuffixCode: '',
-    //     isSelected: true,
-    //   };
-    //   this.facilitiesForAddHCPScreen = [
-    //     ...this.facilitiesForAddHCPScreen,
-    //     facility,
-    //   ];
-    // }
     this.facilitiesForAddHCPScreen = [
       ...this.facilitiesForAddHCPScreen,
       facility,
@@ -167,31 +144,7 @@ export class AddFacilityComponent implements OnInit, OnChanges {
     this.addFacilityForm.reset();
   }
 
-  getCompleteAddress(AddressObject: any): string {
-    // if (AddressObject.length === 1) {
-    //   if (AddressObject.Line2 !== null) {
-    //     return (
-    //       AddressObject[0].Line1 +
-    //       ', ' +
-    //       AddressObject[0].Line2 +
-    //       ', ' +
-    //       AddressObject[0].City +
-    //       ', ' +
-    //       AddressObject[0].State +
-    //       ', ' +
-    //       AddressObject[0].Zipcode
-    //     );
-    //   }
-    //   return (
-    //     AddressObject[0].Line1 +
-    //     ', ' +
-    //     AddressObject[0].City +
-    //     ', ' +
-    //     AddressObject[0].State +
-    //     ', ' +
-    //     AddressObject[0].Zipcode
-    //   );
-    // }
+  public getCompleteAddress(AddressObject: any): string {
     if (AddressObject.Line2 !== null) {
       return (
         AddressObject.Line1 +
@@ -216,7 +169,7 @@ export class AddFacilityComponent implements OnInit, OnChanges {
     );
   }
 
-  setValuesToForm(facilityData: any): void {
+  private setValuesToForm(facilityData: any): void {
     this.addFacilityForm.setValue({
       practiceName: facilityData.PracticeGroup,
       facilityPhone: facilityData.Phone,
@@ -231,13 +184,13 @@ export class AddFacilityComponent implements OnInit, OnChanges {
     });
   }
 
-  editFacility(cellData: any, facilityIndex: number): void {
+  public editFacility(cellData: any, facilityIndex: number): void {
     this.setValuesToForm(cellData);
     this.editClickedIndex = facilityIndex;
     this.editClicked = true;
   }
 
-  deleteFacility(facilityIndex: number): void {
+  public deleteFacility(facilityIndex: number): void {
     if (this.existingFacilities.includes(this.facilities[facilityIndex])) {
       this.facilitiesToDelete.push(this.facilities[facilityIndex]);
     }
@@ -248,13 +201,13 @@ export class AddFacilityComponent implements OnInit, OnChanges {
     this.table.renderRows();
   }
 
-  cancleEdit(): void {
+  public cancleEdit(): void {
     this.addFacilityForm.reset();
     this.editClicked = false;
     this.editClickedIndex = -2;
   }
 
-  updateFacility(): void {
+  public updateFacility(): void {
     this.facilities[this.editClickedIndex].PracticeGroup =
       this.addFacilityForm.value.practiceName;
     this.facilities[this.editClickedIndex].phone =
@@ -287,7 +240,7 @@ export class AddFacilityComponent implements OnInit, OnChanges {
     this.cancleEdit();
   }
 
-  sendFacilityData(): void {
+  public sendFacilityData(): void {
     const filterFacilities = [];
     for (const facility of this.facilities) {
       if (!this.existingFacilities.includes(facility)) {
