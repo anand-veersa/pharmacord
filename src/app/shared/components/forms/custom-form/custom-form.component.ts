@@ -14,6 +14,7 @@ import { JsonFormControls } from 'src/app/models/json-form-data.model';
 import { CustomCheckboxComponent } from '../custom-checkbox/custom-checkbox.component';
 import { CustomDatepickerComponent } from '../custom-datepicker/custom-datepicker.component';
 import { CustomInputComponent } from '../custom-input/custom-input.component';
+import { CustomPrescriptionComponent } from '../custom-prescription/custom-prescription.component';
 import { CustomRadioComponent } from '../custom-radio/custom-radio.component';
 import { CustomSelectComponent } from '../custom-select/custom-select.component';
 import { CustomTextareaComponent } from '../custom-textarea/custom-textarea.component';
@@ -65,6 +66,10 @@ export class CustomFormComponent implements AfterViewInit {
     {
       type: 'checkbox',
       component: CustomCheckboxComponent,
+    },
+    {
+      type: 'prescription',
+      component: CustomPrescriptionComponent,
     },
   ];
   constructor(

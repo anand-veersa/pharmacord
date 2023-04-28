@@ -17,10 +17,17 @@
         *ngFor="let control of submitEnrolService.clinicalInfoDetails.controls"
         [ngClass]="control.class ? control.class : 'tm-1'">
         <app-custom-form
-          *ngIf="control.display"
+          *ngIf="control.display && control.type !== 'radio'"
           formType="sg pres-form"
           [field]="control"
           [form]="submitEnrolService.clinicalInfoForm"></app-custom-form>
+
+        <app-custom-form
+          *ngIf="control.display && control.type === 'radio'"
+          formType="sg pres-form"
+          [field]="control"
+          [form]="submitEnrolService.clinicalInfoForm"
+          (action)="onRadioClick($event)"></app-custom-form>
       </div>
       <!-- <div
           *ngIf="
@@ -56,7 +63,7 @@
           submitEnrolService.enrollmentFormPayload.DrugGroup
         )
       "
-      class="primary-title flex toggle-panel">
+      class="primary-title flex toggle-panel tm-1 bm-1">
       Current Line Of Therapy
     </div>
     <!-- <div class="error-or-required tm-1">* Required field</div> -->
@@ -106,10 +113,17 @@
         "
         [ngClass]="control.class ? control.class : 'tm-1'">
         <app-custom-form
-          *ngIf="control.display"
+          *ngIf="control.display && control.type !== 'checkbox'"
           formType="sg pres-form"
           [field]="control"
           [form]="submitEnrolService.prescriptionInfoForm"></app-custom-form>
+
+        <app-custom-form
+          *ngIf="control.display && control.type === 'checkbox'"
+          formType="sg pres-form"
+          [field]="control"
+          [form]="submitEnrolService.prescriptionInfoForm"
+          (action)="onCheckboxClick($event)"></app-custom-form>
 
         <!-- <div *ngIf="control.type==='checkbox' && control.value.length > 0">
           works ?
@@ -128,7 +142,7 @@
           )
         "
         class="bg enrollment-form">
-        <div class="note-text">
+        <div class="note-text tm-1">
           <strong>Note: </strong> Signature will be obtained during the next
           step.
         </div>

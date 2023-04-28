@@ -82,6 +82,25 @@ export class SharedService {
     formData.controls.forEach(field => {
       if (field.type === 'checkbox') {
         formControl[field.name] = new FormArray([]);
+      } else if (field.type === 'prescription') {
+        formControl[field.name] = new FormGroup({
+          qty: new FormControl({
+            value: field.qty,
+            disabled: field.qty ? true : false,
+          }),
+          refills: new FormControl({
+            value: field.refills,
+            disabled: field.refills ? true : false,
+          }),
+          doa: new FormControl({
+            value: field.doa,
+            disabled: field.disabled ?? false,
+          }),
+          strength: new FormControl({
+            value: field.strength,
+            disabled: field.disabled ?? false,
+          }),
+        });
       } else {
         formControl[field.name] = new FormControl({
           value: field.value,

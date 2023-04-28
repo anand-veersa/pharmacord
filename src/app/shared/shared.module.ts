@@ -27,6 +27,7 @@ import { ToggleButtonComponent } from './components/custom-toggle-button/toggle.
 import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
 import { CustomTextareaComponent } from './components/forms/custom-textarea/custom-textarea.component';
 import { CustomUploadDocumentsComponent } from './components/custom-upload-documents/custom-upload-documents.component';
+import { CustomPrescriptionComponent } from './components/forms/custom-prescription/custom-prescription.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { CustomUploadDocumentsComponent } from './components/custom-upload-docum
     CustomDialogComponent,
     CustomTextareaComponent,
     CustomUploadDocumentsComponent,
+    CustomPrescriptionComponent,
   ],
   imports: [
     CommonModule,
@@ -74,6 +76,7 @@ import { CustomUploadDocumentsComponent } from './components/custom-upload-docum
     ToggleButtonComponent,
     CustomDialogComponent,
     CustomUploadDocumentsComponent,
+    CustomPrescriptionComponent,
   ],
   providers: [LocalStorageService],
 })

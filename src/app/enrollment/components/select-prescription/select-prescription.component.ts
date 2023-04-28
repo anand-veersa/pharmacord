@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { JsonFormControls } from 'src/app/models/json-form-data.model';
 import { SubmitEnrollmentService } from '../../pages/submit-enrollment/submit-enrollment.service';
 
 @Component({
@@ -16,8 +17,37 @@ export class SelectPrescriptionComponent implements OnInit {
     this.submitEnrolService.createPrescriptionForm();
   }
 
+  onCheckboxClick(ev: any) {
+    console.log('checkbox click', ev);
+    this.submitEnrolService.prescriptionInfoDetails.controls.forEach(
+      (control: JsonFormControls) => {
+        if (control.name === `${ev.field.name}Pres`) {
+          if (ev.isChecked) {
+            control.display = true;
+          } else {
+            control.display = false;
+          }
+        }
+      }
+    );
+  }
+
+  onRadioClick(ev: any) {
+    console.log(ev);
+    this.submitEnrolService.clinicalInfoDetails.controls.forEach(
+      (control: JsonFormControls) => {
+        if (control.name === 'otherICD10Code') {
+          if (ev === 'Other') {
+            control.display = true;
+          } else {
+            control.display = false;
+          }
+        }
+      }
+    );
+  }
+
   public onAction(actionType: string): void {
-    console.log('hey', actionType);
     this.action.emit({
       actionType,
       formName: 'select-prescription',

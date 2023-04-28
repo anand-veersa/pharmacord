@@ -15,7 +15,7 @@
     </textarea>
   </mat-form-field>
 
-  <div *ngIf="field.type === 'file'">
+  <!-- <div *ngIf="field.type === 'file'">
     <div
       [ngClass]="{ 'disabled-uploader': files.length === 2 }"
       class="file-upload-input"
@@ -28,7 +28,7 @@
       accept=".pdf"
       [id]="field.name"
       (change)="setAttachDoc($event)" />
-  </div>
+  </div> -->
   <app-custom-error
     *ngIf="form.controls[this.field.name].touched"
     [form]="form"

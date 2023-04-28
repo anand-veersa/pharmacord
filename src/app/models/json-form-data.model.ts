@@ -28,6 +28,10 @@ export interface JsonFormControls {
   extLink?: string;
   display?: boolean;
   disabled?: boolean;
+  qty?: number;
+  refills?: number;
+  doa?: string | number;
+  strength?: string;
 }
 export interface JsonFormData {
   controls: JsonFormControls[];

@@ -54,7 +54,7 @@
         "for": "Zejula, Ojjaara"
       },
       {
-        "name": "primaryDiagnosisICD10Code",
+        "name": "primaryDiagnosisICD-10Code",
         "value": "",
         "display": true,
         "label": "Primary Diagnosis ICD-10 Code",
@@ -64,7 +64,7 @@
         "for": "Zejula, Ojjaara"
       },
       {
-        "name": "diagnosisICD10Code",
+        "name": "diagnosisICD-10Code",
         "value": "",
         "display": true,
         "label": "Diagnosis ICD-10 Code",
@@ -84,17 +84,17 @@
         "for": "Jemperli"
       },
       {
-        "name": "otherICD10Code",
+        "name": "otherICD-10Code",
         "value": "",
         "display": false,
-        "label": "Other ICD Code",
+        "label": "",
         "placeholder": "",
         "type": "text",
         "validators": { "required": true },
         "for": "Jemperli"
       },
       {
-        "name": "mismatchrepairstatusMMR",
+        "name": "mismatchrepairstatus(MMR)",
         "value": "",
         "display": true,
         "label": "Mismatch repair status (MMR)",
@@ -123,8 +123,8 @@
         "validators": { "required": true },
         "options": [
           {
-            "label": "Treatment with platinum containing regimen",
-            "value": "Treatment with platinum containing regimen"
+            "label": "Treatment with platinum-containing regimen",
+            "value": "Treatment with platinum-containing regimen"
           },
           {
             "label": "Other",
@@ -144,7 +144,7 @@
         "for": "Zejula, Ojjaara"
       },
       {
-        "name": "secondaryDiagnosisICD10Code",
+        "name": "secondaryDiagnosisICD-10Code",
         "value": "",
         "display": true,
         "label": "Secondary Diagnosis ICD-10 Code",
@@ -303,14 +303,14 @@
   "prescriptionInfo": {
     "controls": [
       {
-        "name": "zejStd",
+        "name": "prescriptionMedicine",
         "value": "",
         "display": true,
         "label": "",
         "placeholder": "",
         "type": "checkbox",
         "validators": {},
-        "for": "Zejula",
+        "for": "Zejula, Ojjaara",
         "options": [
           {
             "label": "ZEJULA: Standard Prescription",
@@ -319,30 +319,7 @@
               "Name": "standard"
             },
             "for": "Zejula"
-          }
-        ]
-      },
-      {
-        "name": "zejStdPres",
-        "label": "",
-        "display": false,
-        "value": "",
-        "type": "prescription",
-        "placeholder": "",
-        "qty": 15,
-        "refills": 14,
-        "for": "Zejula"
-      },
-      {
-        "name": "zejQSP",
-        "value": "",
-        "display": true,
-        "label": "",
-        "placeholder": "",
-        "type": "checkbox",
-        "validators": {},
-        "for": "Zejula",
-        "options": [
+          },
           {
             "label": "ZEJULA: Quick Start Program",
             "subLabel": "For patients experiencing a delay in coverage at first dispense",
@@ -351,28 +328,7 @@
               "Name": "quickStartProgram"
             },
             "for": "Zejula"
-          }
-        ]
-      },
-      {
-        "name": "zejQSPPres",
-        "label": "",
-        "display": false,
-        "value": "",
-        "type": "prescription",
-        "placeholder": "",
-        "for": "Zejula"
-      },
-      {
-        "name": "zejBridge",
-        "value": "",
-        "display": true,
-        "label": "",
-        "placeholder": "",
-        "type": "checkbox",
-        "validators": {},
-        "for": "Zejula",
-        "options": [
+          },
           {
             "label": "ZEJULA: Bridge Program",
             "subLabel": "For patients experiencing coverage interruptions while already on treatment",
@@ -381,30 +337,7 @@
               "Name": ""
             },
             "for": "Zejula"
-          }
-        ]
-      },
-      {
-        "name": "zejBridgePres",
-        "label": "",
-        "display": false,
-        "value": "",
-        "type": "prescription",
-        "placeholder": "",
-        "qty": 15,
-        "refills": 14,
-        "for": "Zejula"
-      },
-      {
-        "name": "ojjaaraStd",
-        "value": "",
-        "display": true,
-        "label": "",
-        "placeholder": "",
-        "type": "checkbox",
-        "validators": {},
-        "for": "Ojjaara",
-        "options": [
+          },
           {
             "label": "OJJAARA: Standard Prescription",
             "value": {
@@ -412,28 +345,7 @@
               "Name": "standard"
             },
             "for": "Ojjaara"
-          }
-        ]
-      },
-      {
-        "name": "ojjaaraStdPres",
-        "label": "",
-        "display": false,
-        "value": "",
-        "type": "prescription",
-        "placeholder": "",
-        "for": "Ojjaara"
-      },
-      {
-        "name": "ojjaaraQSP",
-        "value": "",
-        "display": true,
-        "label": "",
-        "placeholder": "",
-        "type": "checkbox",
-        "validators": {},
-        "for": "Ojjaara",
-        "options": [
+          },
           {
             "label": "OJJAARA: Quick Start Program",
             "subLabel": "For patients experiencing a delay in coverage at first dispense",
@@ -442,54 +354,20 @@
               "Name": "quickStartProgram"
             },
             "for": "Ojjaara"
-          }
-        ]
-      },
-      {
-        "name": "ojjaaraQSPPres",
-        "label": "",
-        "display": false,
-        "value": "",
-        "type": "prescription",
-        "placeholder": "",
-        "qty": 15,
-        "refills": 14,
-        "for": "Ojjaara"
-      },
-      {
-        "name": "ojjaaraBridge",
-        "value": "",
-        "display": true,
-        "label": "",
-        "placeholder": "",
-        "type": "checkbox",
-        "validators": {},
-        "for": "Ojjaara",
-        "options": [
+          },
           {
             "label": "OJJAARA: Bridge Program",
             "subLabel": "For patients experiencing coverage interruptions while already on treatment",
             "value": {
               "Id": 1,
-              "Name": "Bridge"
+              "Name": ""
             },
             "for": "Ojjaara"
           }
         ]
       },
       {
-        "name": "ojjaaraBridgePres",
-        "label": "",
-        "display": false,
-        "value": "",
-        "type": "prescription",
-        "placeholder": "",
-        "qty": 15,
-        "refills": 14,
-        "for": "Ojjaara"
-      },
-      {
-        "name": "jemperliIV",
+        "name": "prescriptionMedicine",
         "value": "",
         "display": true,
         "label": "",
@@ -509,20 +387,9 @@
         ]
       },
       {
-        "name": "jemperliIVPres",
-        "label": "",
-        "display": false,
-        "value": "",
-        "type": "prescription",
-        "placeholder": "",
-        "qty": 15,
-        "refills": 14,
-        "for": "Jemperli"
-      },
-      {
         "type": "textarea",
         "name": "jemperliIVStrength",
-        "display": false,
+        "display": true,
         "label": "Strength/Form",
         "disabled": true,
         "for": "Jemperli",
@@ -530,13 +397,14 @@
       },
       {
         "type": "textarea",
-        "display": false,
+        "display": true,
         "name": "jemperliIVDoa",
         "label": "Directions of Administration",
         "disabled": true,
         "for": "Jemperli",
         "value": "• Dose 1 through 4: 500 mg every 3 weeks.• Subsequent dosing beginning 3 weeks after Dose 4 (Dose5 onwards): 1000 mg every 6 weeks.• Administer as an intravenous infusion over 30 minutes."
       },
+
       {
         "name": "prescriptionSignature",
         "value": "",
@@ -556,7 +424,8 @@
             "value": "Substitute Permitted"
           }
         ]
-      }
+      },
+      {}
     ]
   }
 }

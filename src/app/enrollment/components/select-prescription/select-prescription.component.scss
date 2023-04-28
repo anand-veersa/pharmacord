@@ -43,3 +43,6 @@
   font-size: 1.4rem;
   line-height: 1.6rem;
 }
+:host ::ng-deep app-custom-prescription {
+  flex-basis: 100%;
+}
