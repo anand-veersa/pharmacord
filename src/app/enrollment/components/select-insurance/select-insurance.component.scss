@@ -1,9 +1,35 @@
+@import '../../../../assets/styles/abstracts/variables';
 .insurance-consent {
   display: flex;
   gap: 4rem;
   align-items: center;
 }
+.document-container {
+  background: $color-white;
+  border: $border-style;
+  border-radius: 0.8rem;
 
+  .col {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header {
+    color: $color-primary;
+    padding: 1.6rem 2.5rem;
+    border-bottom: 5px solid $light-border-1;
+  }
+  .items {
+    color: $color-grey-dark;
+    padding: 0.4rem 2.5rem;
+    background-color: $color-table-odd-rows;
+    border-bottom: 1px solid $light-border-2;
+    &:last-child {
+      border-radius: 0 0 0.8rem 0.8rem;
+    }
+  }
+}
 .action-panel {
   display: flex;
   width: 100%;

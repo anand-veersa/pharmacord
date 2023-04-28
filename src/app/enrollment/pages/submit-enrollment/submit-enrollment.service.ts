@@ -255,7 +255,7 @@ export class SubmitEnrollmentService {
           Id: 2,
           Name: 'Onco360 Oncology Pharmacy',
         },
-        for: 'Ojjara',
+        for: 'Ojjaara',
       },
     ];
     this.filteredPharmacies.controls.pop();
@@ -358,6 +358,18 @@ export class SubmitEnrollmentService {
     this.http.get('/assets/json/insurance-form.json').subscribe((data: any) => {
       data.primaryMedical.controls[0].options =
         data.primaryMedical.controls[0].options.filter(
+          (option: JsonFormControlOptions) =>
+            !option.for ||
+            option.for.includes(this.enrollmentFormPayload.DrugGroup)
+        );
+      data.secondaryMedical.controls[0].options =
+        data.secondaryMedical.controls[0].options.filter(
+          (option: JsonFormControlOptions) =>
+            !option.for ||
+            option.for.includes(this.enrollmentFormPayload.DrugGroup)
+        );
+      data.prescriptionInsurance.controls[0].options =
+        data.prescriptionInsurance.controls[0].options.filter(
           (option: JsonFormControlOptions) =>
             !option.for ||
             option.for.includes(this.enrollmentFormPayload.DrugGroup)
