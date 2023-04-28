@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SubmitEnrollmentService } from '../../pages/submit-enrollment/submit-enrollment.service';
 import { AppConstants } from 'src/app/constants/app.constants';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { JsonFormControls } from 'src/app/models/json-form-data.model';
 
 @Component({
   selector: 'app-attestation-details',
@@ -13,6 +15,11 @@ export class AttestationDetailsComponent implements OnInit {
   public showConfirmationDialog: boolean = false;
   public dialogTitle: string = '';
   public dialogDescription: string = '';
+  private rowClicked: {
+    checkboxRef: MatCheckbox;
+    isChecked: true;
+    field: JsonFormControls;
+  };
 
   constructor(
     public submitEnrolService: SubmitEnrollmentService,
@@ -24,6 +31,7 @@ export class AttestationDetailsComponent implements OnInit {
   }
 
   public clickedConsent(event: any): void {
+    this.rowClicked = event;
     if (event.field.name === 'prescriberSignatureOptions') {
       const arr = [
         'textingConsent',
@@ -68,28 +76,28 @@ export class AttestationDetailsComponent implements OnInit {
 
     switch (event.field.name) {
       case 'prescriberDeclaration':
-        this.showConfirmationDialog = true;
+        if (event.isChecked) this.showConfirmationDialog = true;
         this.dialogTitle = 'Prescriber Declaration';
         this.dialogDescription = this.appConstants.prescriberDeclation;
         break;
       case 'textingConsent':
-        this.showConfirmationDialog = true;
+        if (event.isChecked) this.showConfirmationDialog = true;
         this.dialogTitle = 'Texting Consent (Rates May Apply)';
         this.dialogDescription = this.appConstants.textingConsent;
         break;
       case 'patientAssistanceProgram':
-        this.showConfirmationDialog = true;
+        if (event.isChecked) this.showConfirmationDialog = true;
         this.dialogTitle =
           'Patient Assistance Program (PAP) for uninsured and eligible Medicare patients';
         this.dialogDescription = this.appConstants.papConsent;
         break;
       case 'patientSupportProgram':
-        this.showConfirmationDialog = true;
+        if (event.isChecked) this.showConfirmationDialog = true;
         this.dialogTitle = 'Patient Support Program (Optional)';
         this.dialogDescription = this.appConstants.pspConsent;
         break;
       case 'hippaAuthorization': {
-        this.showConfirmationDialog = true;
+        if (event.isChecked) this.showConfirmationDialog = true;
         this.dialogTitle = 'HIPAA Patient Authorization';
         const drugGroup =
           this.submitEnrolService?.enrollmentFormPayload.DrugGroup;
@@ -114,7 +122,14 @@ export class AttestationDetailsComponent implements OnInit {
     });
   }
 
-  public confirmConsent(event: boolean): void {
+  public confirmConsent(confirmation: boolean): void {
     this.showConfirmationDialog = false;
+    if (confirmation) {
+      this.rowClicked.field.value = true;
+      this.rowClicked.checkboxRef.checked = true;
+    } else {
+      this.rowClicked.checkboxRef.checked = false;
+      this.rowClicked.field.value = false;
+    }
   }
 }

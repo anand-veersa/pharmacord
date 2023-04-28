@@ -4,6 +4,7 @@
       class="checkbox"
       *ngFor="let option of field.options; let index = index">
       <mat-checkbox
+        #checkbox
         color="primary"
         [checked]="isSame(checked, option.value)"
         (change)="onChecked($event.checked, option.value, index)">
