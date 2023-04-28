@@ -23,8 +23,12 @@
   .mat-mdc-form-field-subscript-wrapper {
     display: none;
   }
-}
-
-::ng-deep .links {
-  color: $color-tertiary;
+  .links {
+    color: $color-tertiary;
+  }
+  .dialog-consent {
+    color: $color-primary;
+    font-weight: 500;
+    text-decoration-line: underline;
+  }
 }

@@ -29,7 +29,7 @@
       "preventDefaultSelection": true,
       "options": [
         {
-          "label": "I have read and agree to the Prescriber Declaration",
+          "label": " I have read and agree to the <span class='dialog-consent'> Prescriber Declaration</span>",
           "value": {
             "Id": 2,
             "Name": "prescriberDeclaration"
@@ -68,7 +68,7 @@
       "preventDefaultSelection": true,
       "options": [
         {
-          "label": "I have read and agree to the Texting Consent",
+          "label": "I have read and agree to the <span class='dialog-consent'> Texting Consent</span>",
           "value": {
             "Id": 2,
             "Name": "textingConsent"
@@ -87,7 +87,7 @@
       "preventDefaultSelection": true,
       "options": [
         {
-          "label": "I have read and agree to the Patient Assistance Program Enrollment",
+          "label": "I have read and agree to the <span class='dialog-consent'> Patient Assistance Program Enrollment</span>",
           "value": {
             "Id": 2,
             "Name": "patientAssistanceProgram"
@@ -106,7 +106,7 @@
       "preventDefaultSelection": true,
       "options": [
         {
-          "label": "I have read and agree to the Patient Support Program (Optional)",
+          "label": "I have read and agree to the <span class='dialog-consent'>Patient Support Program (Optional)</span>",
           "value": {
             "Id": 2,
             "Name": "patientSupportProgram"
@@ -126,7 +126,7 @@
       "preventDefaultSelection": true,
       "options": [
         {
-          "label": "I have read and agree to the HIPAA Patient Authorization",
+          "label": " I have read and agree to the <span class='dialog-consent'>HIPAA Patient Authorization</span>",
           "value": {
             "Id": 2,
             "Name": "hippaAuthorization"

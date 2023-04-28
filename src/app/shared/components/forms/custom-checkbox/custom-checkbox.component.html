@@ -11,7 +11,12 @@
         <span *ngIf="field.validators?.required" class="error-or-required"
           >*</span
         >
-        {{ option.label }}
+        <span
+          *ngIf="field.preventDefaultSelection; else else_block"
+          [innerHTML]="sanitizedHtml"></span>
+        <ng-template #else_block>
+          {{ option.label }}
+        </ng-template>
       </mat-checkbox>
     </li>
   </ul>
