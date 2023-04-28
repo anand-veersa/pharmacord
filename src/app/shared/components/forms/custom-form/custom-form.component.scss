@@ -75,11 +75,14 @@
     @extend label;
     font-weight: 400;
   }
+  app-custom-select {
+    flex-basis: 60%;
+  }
 }
 
 ::ng-deep .sg {
   label {
-    flex-basis: 50%;
+    flex-basis: 44%;
   }
   app-custom-checkbox {
     label {
@@ -89,7 +92,6 @@
   app-custom-textarea,
   app-custom-input,
   app-custom-radio,
-  app-custom-select,
   app-custom-datepicker {
     flex-basis: 45%;
   }

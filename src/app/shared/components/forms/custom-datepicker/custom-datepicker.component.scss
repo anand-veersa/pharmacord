@@ -20,7 +20,11 @@
     border: 1px solid #adadad;
     border-radius: 4px;
   }
-  // .mat-mdc-form-field-infix {
-  //   padding-top: 0rem !important;
-  // }
+  .mat-mdc-form-field-infix {
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    min-height: 3.5rem;
+    max-height: 4rem;
+  }
 }
