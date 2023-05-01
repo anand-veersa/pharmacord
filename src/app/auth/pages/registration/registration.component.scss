@@ -18,6 +18,11 @@
     color: $color-white;
     padding: 1.4rem 2rem;
 
+    .stepper-and-header {
+      display: flex;
+      align-items: center;
+    }
+
     .title-and-stepper {
       display: flex;
       justify-content: space-between;

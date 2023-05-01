@@ -5,7 +5,18 @@
   display: none;
 }
 
-.onBoarding {
+::ng-deep
+  .mat-stepper-label-position-bottom
+  .mat-horizontal-stepper-header
+  .mat-step-label {
+  padding: 0 !important;
+}
+
+::ng-deep .mat-horizontal-stepper-header {
+  pointer-events: none !important;
+}
+
+:host .onBoarding {
   ::ng-deep .mat-horizontal-stepper-header-container {
     background-color: $color-tertiary !important;
   }
@@ -13,6 +24,18 @@
   ::ng-deep .mat-horizontal-stepper-header::before,
   .mat-stepper-horizontal-line {
     border-top-color: $color-white !important;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header {
+    padding: 0 24px !important;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header::before {
+    top: 12px !important;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header::after {
+    top: 12px !important;
   }
 
   ::ng-deep .mat-horizontal-stepper-header::after {

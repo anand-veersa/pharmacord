@@ -1,14 +1,19 @@
 <div class="registration-container" *ngIf="!thankYouScreen">
   <div class="registration-header">
-    <app-custom-stepper
-      [selectedStepNumber]="0"
-      [labelsData]="
-        prescriberRegistrationCard ? stepperLabelsProvider : stepperLabelsHCP
-      "
-      requirementFor="onBoarding"></app-custom-stepper>
-
-    <div class="title-and-stepper text-x-bold">
-      <span>Create New Account</span>
+    <div class="stepper-and-header">
+      <div class="title-and-stepper text-x-bold">
+        <span>Create New Account</span>
+      </div>
+      <div class="stepper-container">
+        <app-custom-stepper
+          [selectedStepNumber]="stepNumber"
+          [labelsData]="
+            prescriberRegistrationCard
+              ? stepperLabelsProvider
+              : stepperLabelsHCP
+          "
+          requirementFor="onBoarding"></app-custom-stepper>
+      </div>
     </div>
     <span class="info-text text-small text-x-bold">
       Please complete all fields below to create your account.

@@ -50,6 +50,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
   public prescribersWithSelectedFacility: any[] = [];
   public stepperLabelsProvider: string[] = ['', '', ''];
   public stepperLabelsHCP: string[] = ['', '', '', ''];
+  public stepNumber: number = 0;
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -115,6 +116,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
 
   registrationStep1(): void {
     this.accountTypeSelection = false;
+    this.stepNumber++;
     if (this.prescriberRegistrationCard) {
       this.prescriberRegistration = true;
     } else {
@@ -166,6 +168,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
 
   navigateToLogin(): void {
     this.router.navigate(['/login']);
+    this.stepNumber = 0;
   }
 
   checkProviderNpi(): void {
@@ -235,6 +238,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
   }
 
   navigateToSelectAccountType(): void {
+    this.stepNumber = 0;
     this.othersRegistration = false;
     this.prescriberRegistration = false;
     this.accountTypeSelection = true;
