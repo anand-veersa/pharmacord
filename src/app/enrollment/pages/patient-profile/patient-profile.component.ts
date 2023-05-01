@@ -13,7 +13,6 @@ import { EnrollmentService } from '../../enrollment.service';
   styleUrls: ['./patient-profile.component.scss'],
 })
 export class PatientProfileComponent implements OnInit, OnDestroy {
-  private routeSubs: Subscription;
   public patientCasesDataSource = new MatTableDataSource<Case>([]);
   public alertDataSource = new MatTableDataSource<Alert>([]);
   public docDataSource = new MatTableDataSource<CaseDoc>([]);
@@ -36,6 +35,8 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
   public docColumnSchema: any[] = [];
   public pageSizeOptions: number[] = [5, 10, 15];
   public pdfSrc: any = null;
+  private routeSubs: Subscription;
+  private caseId: string = '';
 
   constructor(
     public route: ActivatedRoute,
@@ -68,36 +69,10 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.routeSubs = combineLatest([this.route.params, this.route.queryParams])
-      .pipe(map(results => ({ params: results[0]['id'], query: results[1] })))
-      .subscribe({
-        next: results => {
-          this.patientId = results.params;
-          this.sharedService.isLoading.next(true);
-          this.enrolService.cases.subscribe((cases: any[]) => {
-            this.patientCases = [];
-            cases.forEach(c => {
-              if (c.PatientId !== +results.params) {
-                return;
-              }
-              this.patientCases.push({
-                PatientName: c.PatientName,
-                PatientId: c.PatientId,
-                CaseId: c.CaseId,
-                DateSubmitted: this.sharedService.getFormattedDate(
-                  c.CaseStartDate
-                ),
-                EnrollmentStatus: c.EnrollmentStatus,
-                Product: c.DrugGroup.Value,
-                ActionNeeded: c.ActionNeeded ? 'Yes' : 'No',
-              });
-            });
-            this.patientCasesDataSource.data = this.patientCases;
-          });
-          this.selectedCase = { key: 'CaseId', value: results.query['case'] };
-          this.getCaseDetails(results.query['case']);
-        },
-      });
+    this.onLoad();
+    this.enrolService.documentUploaded.subscribe(isNewDocUploaded => {
+      if (isNewDocUploaded) this.getCaseDetails(this.caseId);
+    });
   }
 
   public getCaseDetails(caseId: string): void {
@@ -141,7 +116,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
               DocumentURL: doc.DocumentURL,
             });
           });
-          this.openDoc(docs[0]);
+          // this.openDoc(docs[0]);
           this.docDataSource.data = docs;
           const alerts: any[] = [];
           this.caseDetail.Alerts.forEach((item: any) => {
@@ -152,6 +127,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
                 ),
                 RequiredAction: item.Alert,
                 Acknowledge: 'Acknowledge',
+                AlertPkId: item.AlertPkId,
               });
             }
           });
@@ -181,6 +157,29 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
     });
   }
 
+  public printPatientDetails() {
+    window.print();
+  }
+
+  public acknowledgeClicked(event: any) {
+    this.sharedService.isLoading.next(true);
+    this.enrolService
+      .acknowledgeAlerts(this.caseId, event.AlertPkId)
+      .subscribe({
+        next: res => {
+          if (res && res.Status === 'SUCCESS') {
+            this.getCaseDetails(this.caseId);
+            this.sharedService.isLoading.next(false);
+            this.sharedService.notify('success', 'Successfully acknowledged');
+          }
+        },
+        error: err => {
+          this.sharedService.isLoading.next(false);
+          this.sharedService.notify('error', 'Error in acknowledge');
+        },
+      });
+  }
+
   private getInsuranceName(caseDetail: any, insuranceType: string): string {
     const planNames: string[] = [];
     if (caseDetail.MedicalInsuranceListInfo) {
@@ -200,6 +199,39 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
     return planNames ? planNames.join(';') : '---';
   }
 
+  private onLoad() {
+    this.routeSubs = combineLatest([this.route.params, this.route.queryParams])
+      .pipe(map(results => ({ params: results[0]['id'], query: results[1] })))
+      .subscribe({
+        next: results => {
+          this.patientId = results.params;
+          this.sharedService.isLoading.next(true);
+          this.enrolService.cases.subscribe((cases: any[]) => {
+            this.patientCases = [];
+            cases.forEach(c => {
+              if (c.PatientId !== +results.params) {
+                return;
+              }
+              this.patientCases.push({
+                PatientName: c.PatientName,
+                PatientId: c.PatientId,
+                CaseId: c.CaseId,
+                DateSubmitted: this.sharedService.getFormattedDate(
+                  c.CaseStartDate
+                ),
+                EnrollmentStatus: c.EnrollmentStatus,
+                Product: c.DrugGroup.Value,
+                ActionNeeded: c.ActionNeeded ? 'Yes' : 'No',
+              });
+            });
+            this.patientCasesDataSource.data = this.patientCases;
+          });
+          this.selectedCase = { key: 'CaseId', value: results.query['case'] };
+          this.caseId = results.query['case'];
+          this.getCaseDetails(this.caseId);
+        },
+      });
+  }
   ngOnDestroy(): void {
     this.routeSubs.unsubscribe();
   }

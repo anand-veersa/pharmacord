@@ -7,11 +7,17 @@
 }
 .header {
   border-bottom: 0.8rem solid $color-header;
+  @media print {
+    display: none;
+  }
 }
 
 .footer {
   flex: 1 1 22%;
   border-top: 0.8rem solid $color-header;
+  @media print {
+    display: none;
+  }
 }
 
 .main {
@@ -26,6 +32,11 @@
 
   .spinner {
     margin: auto;
+  }
+
+  @media print {
+    min-height: initial;
+    overflow: initial;
   }
 }
 

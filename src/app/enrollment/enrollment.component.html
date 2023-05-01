@@ -5,56 +5,65 @@
   <div class="main">
     <div class="action-panel" *ngIf="!enrollCreationActive">
       <div class="medicine-list">
-        <app-custom-button
-          *ngIf="enableAllMeds"
-          [btnClass]="
-            selectedMed === appConstants.MEDICINES.ALL
-              ? 'tertiary small'
-              : 'inactive small'
-          "
-          [btnText]="appConstants.MEDICINES.ALL"
-          (action)="
-            changeMedicine(appConstants.MEDICINES.ALL)
-          "></app-custom-button>
-        <app-custom-button
-          [btnClass]="
-            selectedMed === appConstants.MEDICINES.MEDICINE_1
-              ? 'tertiary small'
-              : 'inactive small'
-          "
-          [btnText]="appConstants.MEDICINES.MEDICINE_1"
-          (action)="
-            changeMedicine(appConstants.MEDICINES.MEDICINE_1)
-          "></app-custom-button>
-        <app-custom-button
-          [btnClass]="
-            selectedMed === appConstants.MEDICINES.MEDICINE_2
-              ? 'tertiary small'
-              : 'inactive small'
-          "
-          [btnText]="appConstants.MEDICINES.MEDICINE_2"
-          (action)="
-            changeMedicine(appConstants.MEDICINES.MEDICINE_2)
-          "></app-custom-button>
-        <app-custom-button
-          [btnClass]="
-            selectedMed === appConstants.MEDICINES.MEDICINE_3
-              ? 'tertiary small'
-              : 'inactive small'
-          "
-          [btnText]="appConstants.MEDICINES.MEDICINE_3"
-          (action)="
-            changeMedicine(appConstants.MEDICINES.MEDICINE_3)
-          "></app-custom-button>
+        <div *ngIf="!hideEnrollmentBtns" class="medicine-list">
+          <app-custom-button
+            *ngIf="enableAllMeds"
+            [btnClass]="
+              selectedMed === appConstants.MEDICINES.ALL
+                ? 'tertiary small'
+                : 'inactive small'
+            "
+            [btnText]="appConstants.MEDICINES.ALL"
+            (action)="
+              changeMedicine(appConstants.MEDICINES.ALL)
+            "></app-custom-button>
+          <app-custom-button
+            [btnClass]="
+              selectedMed === appConstants.MEDICINES.MEDICINE_1
+                ? 'tertiary small'
+                : 'inactive small'
+            "
+            [btnText]="appConstants.MEDICINES.MEDICINE_1"
+            (action)="
+              changeMedicine(appConstants.MEDICINES.MEDICINE_1)
+            "></app-custom-button>
+          <app-custom-button
+            [btnClass]="
+              selectedMed === appConstants.MEDICINES.MEDICINE_2
+                ? 'tertiary small'
+                : 'inactive small'
+            "
+            [btnText]="appConstants.MEDICINES.MEDICINE_2"
+            (action)="
+              changeMedicine(appConstants.MEDICINES.MEDICINE_2)
+            "></app-custom-button>
+          <app-custom-button
+            [btnClass]="
+              selectedMed === appConstants.MEDICINES.MEDICINE_3
+                ? 'tertiary small'
+                : 'inactive small'
+            "
+            [btnText]="appConstants.MEDICINES.MEDICINE_3"
+            (action)="
+              changeMedicine(appConstants.MEDICINES.MEDICINE_3)
+            "></app-custom-button>
+        </div>
         <span class="text-xs text-x-bold">{{
           currentDate | date : 'MMM d, y'
         }}</span>
       </div>
       <div class="form-button">
         <app-custom-button
+          *ngIf="hideEnrollmentBtns"
+          btnIcon="upload-supplemental-documents.svg"
+          btnClass="tertiary small text-x-bold submit-enrollment-btn"
+          [btnText]="screenWidth > 820 ? 'Upload Supplemental Documents' : ''"
+          iconPlace="prefix"
+          (action)="openDialog()"></app-custom-button>
+        <app-custom-button
           btnIcon="form_icon.svg"
-          btnClass="tertiary small text-x-bold"
-          btnText="Submit Enrollment Form"
+          btnClass="tertiary small text-x-bold submit-enrollment-btn"
+          [btnText]="screenWidth > 820 ? 'Submit Enrollment Form' : ''"
           iconPlace="prefix"
           (action)="startEnrollment()"></app-custom-button>
       </div>

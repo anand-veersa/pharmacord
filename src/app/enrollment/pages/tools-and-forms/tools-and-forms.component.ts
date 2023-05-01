@@ -33,14 +33,16 @@ export class ToolsAndFormsComponent implements OnInit {
           this.toolsAndFormsData.push({
             medicine: med,
             enrollmentForm: `${med}_Enrollment_Form`,
-            presciptionInformation: `${med}_PI`,
+            sampleLetterOfAppeal: `${med}_LOA`,
+            sampleLetterOfMedicalNecessity: `${med}_LOMN`,
           });
         });
       } else {
         this.toolsAndFormsData.push({
           medicine: this.selectedMedicine,
           enrollmentForm: `${this.selectedMedicine}_Enrollment_Form`,
-          presciptionInformation: `${this.selectedMedicine}_PI`,
+          sampleLetterOfAppeal: `${this.selectedMedicine}_LOA`,
+          sampleLetterOfMedicalNecessity: `${this.selectedMedicine}_LOMN`,
         });
       }
     });
