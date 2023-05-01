@@ -1001,7 +1001,7 @@
 
     <form [formGroup]="prescriptionInfoForm">
       <div *ngIf="['Zejula'].includes(medicine)" class="form-group">
-        <div class="form-checkbox-group">
+        <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
               type="checkbox"
@@ -1035,7 +1035,7 @@
           refills: undefined
         }"></app-custom-prescription>
       <div *ngIf="['Zejula'].includes(medicine)" class="form-group">
-        <div class="form-checkbox-group">
+        <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
               type="checkbox"
@@ -1072,7 +1072,7 @@
           refills: 14
         }"></app-custom-prescription>
       <div *ngIf="['Zejula'].includes(medicine)" class="form-group">
-        <div class="form-checkbox-group">
+        <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
               type="checkbox"
@@ -1110,7 +1110,7 @@
           refills: 14
         }"></app-custom-prescription>
       <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
-        <div class="form-checkbox-group">
+        <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
               type="checkbox"
@@ -1144,7 +1144,7 @@
           refills: undefined
         }"></app-custom-prescription>
       <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
-        <div class="form-checkbox-group">
+        <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
               type="checkbox"
@@ -1181,7 +1181,7 @@
           refills: 14
         }"></app-custom-prescription>
       <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
-        <div class="form-checkbox-group">
+        <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
               type="checkbox"
@@ -1219,7 +1219,7 @@
           refills: 14
         }"></app-custom-prescription>
       <div *ngIf="['Jemperli'].includes(medicine)" class="form-group">
-        <div class="form-checkbox-group">
+        <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
               type="checkbox"
@@ -1595,5 +1595,10 @@
   <app-custom-button
     btnClass="small tertiary"
     btnText="Next &#62;"
+    [isDisabled]="
+      prescriptionInfoForm.invalid &&
+      clinicalInfoForm.invalid &&
+      currentLineOfTherapyForm.invalid
+    "
     (action)="onAction('next')"></app-custom-button>
 </div>

@@ -15,7 +15,8 @@
 
   & > label {
     flex-basis: 40%;
-    min-height: 2.6rem;
+    min-height: 3.5rem;
+    // max-height: 4rem;
   }
 
   &.row-radio {
@@ -25,21 +26,24 @@
   textarea {
     font-family: 'Roboto';
     font-style: normal;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
+    font-weight: 400;
   }
 }
 
 .form-control {
-  min-height: 2.6rem;
+  min-height: 3.5rem;
+  max-height: 4rem;
+  font-weight: 500;
+  font-size: 1.6rem;
   flex-basis: 60%;
   padding-top: 0.5rem;
   padding-bottom: 0.6rem;
   padding-left: 1.2rem;
   border: 1px solid #adadad;
   border-radius: 5px;
-  font-size: 1.2rem;
   color: rgb(85, 86, 91);
-  // color: rgb(85, 86, 91, 0.4); // idk why this doesn't work
+  // color: rgb(85, 86, 91, 0.4);
 }
 
 .form-control-with-error {
@@ -48,20 +52,19 @@
   flex-basis: 60%;
   font-size: 1.2rem;
   .form-control {
-    // all: unset;
     flex-basis: unset;
   }
-  // .error-message {
-  // color: red;
-  // font-size: 1.2rem;
-  // }
 }
 
 .form-checkbox-group {
   flex-basis: 60%;
 
+  &.no-label {
+    flex-basis: unset;
+  }
+
   input[type='checkbox'] {
-    accent-color: $color-tertiary;
+    accent-color: $checkbox-color;
     margin-right: 1rem;
     width: 1.5rem;
     height: 1.5rem;
@@ -92,9 +95,6 @@
 .form-radio-group,
 .form-control,
 .form-checkbox-group {
-  font-weight: 400;
-  font-size: 1.2rem;
-
   .large-bold {
     font-weight: 500;
     font-size: 1.4rem;
