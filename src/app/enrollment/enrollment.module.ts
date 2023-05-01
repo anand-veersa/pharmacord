@@ -26,6 +26,8 @@ import { SelectServicesComponent } from './components/select-services/select-ser
 import { SelectPatientComponent } from './components/select-patient/select-patient.component';
 import { PrescriberDetailsComponent } from './components/prescriber-details/prescriber-details.component';
 import { SelectInsuranceComponent } from './components/select-insurance/select-insurance.component';
+import { SelectPrescriptionComponent } from './components/select-prescription/select-prescription.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     EnrollmentComponent,
@@ -44,6 +46,7 @@ import { SelectInsuranceComponent } from './components/select-insurance/select-i
     SelectPatientComponent,
     PrescriberDetailsComponent,
     SelectInsuranceComponent,
+    SelectPrescriptionComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +55,7 @@ import { SelectInsuranceComponent } from './components/select-insurance/select-i
     MaterialModule,
     ChartModule,
     PdfJsViewerModule,
+    ReactiveFormsModule,
   ],
   providers: [EnrollmentService, SubmitEnrollmentService],
 })

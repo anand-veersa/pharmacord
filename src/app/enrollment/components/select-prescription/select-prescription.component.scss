@@ -1,0 +1,100 @@
+.form-group {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  color: #5b5b5b;
+
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+  & > label {
+    flex-basis: 40%;
+    min-height: 2.6rem;
+  }
+
+  &.row-radio {
+    display: block;
+  }
+
+  textarea {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 1.2rem;
+  }
+}
+
+.form-control {
+  min-height: 2.6rem;
+  flex-basis: 60%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.6rem;
+  padding-left: 1.2rem;
+  border: 1px solid #adadad;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  color: rgb(85, 86, 91);
+  // color: rgb(85, 86, 91, 0.4); // idk why this doesn't work
+}
+
+.form-checkbox-group {
+  flex-basis: 60%;
+
+  input[type='checkbox'] {
+    margin-right: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.form-radio-group {
+  flex-basis: 60%;
+  &.row-radio-group {
+    display: flex;
+
+    .form-radio {
+      flex-basis: 20%;
+      font-weight: 500;
+      font-size: 1.4rem;
+    }
+  }
+
+  input[type='radio'] {
+    margin-right: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.form-radio-group,
+.form-control,
+.form-checkbox-group {
+  font-weight: 400;
+  font-size: 1.2rem;
+
+  .large-bold {
+    font-weight: 500;
+    font-size: 1.4rem;
+  }
+
+  .subLabel {
+    font-weight: 400;
+    font-size: 1.4rem;
+  }
+}
+
+.form-check {
+  // margin-top: 1rem;
+  display: flex;
+  margin-top: 1rem;
+  // align-items: baseline;
+}
+.form-radio {
+  // margin-top: 1rem;
+  display: flex;
+  margin-top: 1rem;
+  align-items: baseline;
+}

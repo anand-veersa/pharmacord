@@ -52,7 +52,7 @@ export class SelectMedicationComponent implements OnInit {
         actionType,
         formName: 'select-medication',
         form: this.submitEnrolService.medicationForm.value,
-        nextScreen: 'select-insurance',
+        nextScreen: 'select-prescription',
       });
     }
   }

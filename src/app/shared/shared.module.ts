@@ -25,6 +25,7 @@ import { CustomExpansionPanelComponent } from './components/custom-expansion-pan
 import { CustomDatepickerComponent } from './components/forms/custom-datepicker/custom-datepicker.component';
 import { ToggleButtonComponent } from './components/custom-toggle-button/toggle.component';
 import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
+import { CustomPrescriptionComponent } from './components/forms/custom-prescription/custom-prescription.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.
     CustomDatepickerComponent,
     ToggleButtonComponent,
     CustomDialogComponent,
+    CustomPrescriptionComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +71,7 @@ import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.
     CustomExpansionPanelComponent,
     ToggleButtonComponent,
     CustomDialogComponent,
+    CustomPrescriptionComponent,
   ],
   providers: [LocalStorageService],
 })

@@ -1,0 +1,99 @@
+<form [formGroup]="form">
+  <div class="pres-info" [formGroupName]="field.name">
+    <div class="strength">
+      <div class="title">
+        Strength/Form
+        <span class="error-or-required" *ngIf="isStrengthRequired">*</span>
+      </div>
+      <div *ngIf="['Zejula'].includes(medicineName)" class="value" disabled>
+        <input type="text" value="100 mg capsules" disabled />
+      </div>
+      <div *ngIf="['Ojjaara'].includes(medicineName)" class="value" disabled>
+        <!-- <app-custom-radio
+            [field]="radio"
+            [form]="form.get(field.name)!"
+            formType="sg pres-form"></app-custom-radio> -->
+        <mat-radio-group
+          [ngClass]="
+            radio.class === 'block-radio'
+              ? 'block-radio-group'
+              : formType
+              ? formType + '-radio'
+              : 'generic-form'
+          "
+          [formControlName]="'strength'"
+          required>
+          <mat-radio-button
+            class="example-radio-button"
+            *ngFor="let option of radio.options"
+            [value]="option.value"
+            color="primary">
+            <!-- (change)="onChange($event)" -->
+            {{ option.label }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div *ngIf="['Jemperli'].includes(medicineName)" class="value">
+        <div class="text-area">
+          Injection: clear to slightly opalescent, colorless to yellow solution
+          supplied in a carton containing one 500 mg/10 mL (50 mg/mL),
+          single-dose vial (NDC 0173-0898-03).
+        </div>
+      </div>
+    </div>
+    <div class="dosage" *ngIf="['Zejula', 'Ojjaara'].includes(medicineName)">
+      <div class="title"></div>
+      <div class="value">
+        <div class="qty">
+          <div class="title">
+            Quantity
+            <span class="error-or-required" *ngIf="isQtyRequired">*</span>
+          </div>
+          <input
+            type="number"
+            [value]="quantity"
+            [disabled]="isQtyDisabled"
+            [formControlName]="'qty'" />
+        </div>
+        <div class="refills">
+          <div class="title">
+            Refills
+            <span class="error-or-required" *ngIf="isRefillsRequired">*</span>
+          </div>
+          <input
+            type="number"
+            [required]="isQtyRequired"
+            [value]="refills"
+            [disabled]="isRefillsDisabled"
+            [formControlName]="'refills'" />
+        </div>
+      </div>
+    </div>
+    <div class="doa">
+      <div class="title">
+        Directions for Administration
+        <span class="error-or-required" *ngIf="isDoaRequired">*</span>
+      </div>
+      <div class="value">
+        <div *ngIf="['Zejula'].includes(medicineName)" class="doa-value">
+          Take
+          <input
+            type="number"
+            [required]="isRefillsRequired"
+            class="doa-input"
+            [formControlName]="'doa'" />
+          capsules by mouth, with or without food at the same time each day
+          (preferably in the evening)
+        </div>
+        <div *ngIf="['Ojjaara'].includes(medicineName)" class="value" disabled>
+          <input type="text" class="text-input" [value]="doa" disabled />
+        </div>
+        <div *ngIf="['Jemperli'].includes(medicineName)" class="text-area">
+          • Dose 1 through 4: 500 mg every 3 weeks. • Subsequent dosing
+          beginning 3 weeks after Dose 4 (Dose 5 onwards): 1000 mg every 6
+          weeks. • Administer as an intravenous infusion over 30 minutes.
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
