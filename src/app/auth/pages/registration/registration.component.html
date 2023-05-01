@@ -1,0 +1,303 @@
+<div class="registration-container" *ngIf="!thankYouScreen">
+  <div class="registration-header">
+    <div class="title-and-stepper text-x-bold">
+      <span>Create New Account</span>
+    </div>
+    <span class="info-text text-small text-x-bold">
+      Please complete all fields below to create your account.
+    </span>
+  </div>
+
+  <!-- account Type Selection -->
+  <div class="account-type-selection" *ngIf="accountTypeSelection">
+    <div class="main-container">
+      <div class="title">
+        <p class="text-xxl text-x-bold">Tell us more about you.</p>
+        <p class="text-large text-x-bold">
+          Which type of account would you like to create?
+        </p>
+      </div>
+      <div class="selection-cards">
+        <div class="img-label-group">
+          <div
+            (click)="toggleSelection()"
+            [ngClass]="
+              prescriberRegistrationCard ? 'selectedCard' : 'prescriber-img'
+            ">
+            <img
+              src="../../../../assets/images/unselected-prescriber.svg"
+              alt="unselected-prescriber-logo"
+              *ngIf="!prescriberRegistrationCard" />
+            <img
+              src="../../../../assets/images/selected-prescriber.svg"
+              alt="selected-prescriber-logo"
+              *ngIf="prescriberRegistrationCard" />
+            <img
+              *ngIf="prescriberRegistrationCard"
+              src="../../../../assets/images/check-icon.svg"
+              class="check-icon" />
+          </div>
+          <span class="img-label text-small text-x-bold">Provider</span>
+        </div>
+
+        <div class="img-label-group">
+          <div
+            (click)="toggleSelection()"
+            [ngClass]="othersRegistrationCard ? 'selectedCard' : 'hcp-img'">
+            <img
+              src="../../../../assets/images/unselected-hcp.svg"
+              alt="unselected-HCP-logo"
+              *ngIf="!othersRegistrationCard" />
+            <img
+              src="../../../../assets/images/selected-hcp.svg"
+              alt="selected-HCP-logo"
+              *ngIf="othersRegistrationCard" />
+            <img
+              *ngIf="othersRegistrationCard"
+              src="../../../../assets/images/check-icon.svg"
+              class="check-icon" />
+          </div>
+          <div class="img-label">
+            <p class="text-small text-x-bold">Healthcare</p>
+            <p class="text-small text-x-bold">Professional</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="registration-footer">
+      <app-custom-button
+        btnText="&lt; Back to Login"
+        btnClass="medium secondary"
+        (click)="navigateToLogin()"></app-custom-button>
+      <app-custom-button
+        btnText="Next &gt;"
+        btnClass="medium tertiary"
+        (click)="registrationStep1()"></app-custom-button>
+    </div>
+  </div>
+
+  <!-- Prescriber Screens starts here  -->
+  <div class="prescriber-registration" *ngIf="prescriberRegistration">
+    <div class="prescriber-registration-main">
+      <div class="upper-forms">
+        <div class="lookup-information">
+          <p class="step-title text-x-bold text-large">
+            Step 1: Lookup Information
+          </p>
+          <p class="step-sub-title text-medium text-xmed">
+            Please look up your information from our provider registry to
+            associate with this new account.
+            <span class="error-or-required">* Required field</span>
+          </p>
+          <div class="lookup-form-fields">
+            <div
+              [class]="'input-fields-' + control.name"
+              *ngFor="
+                let control of lookupInformationFormData?.controls;
+                let i = index
+              ">
+              <app-custom-form
+                [field]="control"
+                [form]="lookupInformationForm"
+                formType="prescriber-lookup"></app-custom-form>
+            </div>
+            <app-custom-button
+              *ngIf="!validPrescriberNPI"
+              btnText="Find"
+              [isDisabled]="
+                lookupInformationForm && lookupInformationForm.invalid
+              "
+              btnClass="secondary xx-small"
+              (click)="checkProviderNpi()"></app-custom-button>
+            <app-custom-button
+              *ngIf="validPrescriberNPI && findPrescriberBtnClicked"
+              btnText="Reset"
+              btnClass="secondary xx-small"
+              (click)="resetLookupForm()"></app-custom-button>
+          </div>
+          <div
+            class="wrong-Npi-error-msg"
+            *ngIf="!validPrescriberNPI && findPrescriberBtnClicked">
+            <p class="text-xs">
+              One or more pieces of information entered do not match our
+              records. Please try again or contact us for additional assistance.
+            </p>
+          </div>
+        </div>
+        <div class="confirm-account-information">
+          <p class="step-title text-x-bold text-large">
+            Step 2: Confirm Account Information
+          </p>
+          <div class="form-container">
+            <p class="step-sub-title text-medium text-xmed">
+              Please confirm and update your information for this new account.
+              <span class="error-or-required">* Required field</span>
+            </p>
+            <div class="confirm-form-fields">
+              <div
+                [class]="control.name"
+                *ngFor="
+                  let control of confirmAccountInformationFormData?.controls
+                ">
+                <app-custom-form
+                  [field]="control"
+                  [form]="confirmAccountInformationForm"
+                  formType="prescriber-confirm-information"></app-custom-form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="create-username">
+        <p class="step-title text-x-bold text-large">
+          Step 3: Create Username and Password
+        </p>
+        <p class="step-sub-title text-medium text-xmed">
+          Create a username and password to access your new online account.
+          <span class="error-or-required">* Required field</span>
+        </p>
+        <div class="create-username-fields">
+          <span class="text-med text-x-bold">Create Login</span>
+          <div class="create-username-form-fields">
+            <div
+              class="create-form-input-fields"
+              *ngFor="let control of createUsernameFormData?.controls">
+              <app-custom-form
+                (focusout)="checkUsername(control.name)"
+                [field]="control"
+                [form]="createUsernameForm"
+                [customErrorMsg]="invalidUsernameError"
+                [isCustomError]="invalidUsername"
+                formType="create-username-form"></app-custom-form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="registration-footer">
+      <app-custom-button
+        btnText="&lt; Back"
+        btnClass="medium secondary"
+        (click)="navigateToSelectAccountType()"></app-custom-button>
+      <app-custom-button
+        [isDisabled]="
+          lookupInformationForm.invalid ||
+          createUsernameForm.invalid ||
+          confirmAccountInformationForm.invalid ||
+          !invalidUsername
+        "
+        btnText="Next &gt;"
+        btnClass="medium tertiary"
+        (click)="registrationStep2()"></app-custom-button>
+    </div>
+  </div>
+
+  <!-- Others Screens Start here -->
+  <div class="others-registration" *ngIf="othersRegistration">
+    <div class="others-registration-main">
+      <div class="others-account-information">
+        <p class="text-x-bold text-large">Account Information</p>
+        <p class="step-sub-title text-medium text-xmed">
+          Please confirm and update your information for this new account.
+          <span class="error-or-required">* Required field</span>
+        </p>
+        <div class="account-information-fields">
+          <div
+            [class]="control.name"
+            *ngFor="let control of othersAccountInformationFormData?.controls">
+            <app-custom-form
+              [field]="control"
+              [form]="othersAccountInformationForm"
+              formType="prescriber-confirm-information"></app-custom-form>
+          </div>
+        </div>
+      </div>
+      <div class="others-create-username">
+        <p class="step-sub-title text-medium text-xmed">
+          Create a username and password to access your new online account.
+          <span class="error-or-required">* Required field</span>
+        </p>
+        <div class="others-create-username-fields">
+          <span class="text-med text-x-bold tp-1">Create Login</span>
+          <div class="others-create-username-form-fields">
+            <div
+              class="others-create-form-input-fields"
+              *ngFor="let control of othersCreateUsernameFormData?.controls">
+              <app-custom-form
+                [field]="control"
+                [form]="othersCreateUsernameForm"
+                formType="others-create-username-form"></app-custom-form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="registration-footer">
+      <app-custom-button
+        btnText="&lt; Back"
+        btnClass="medium secondary"
+        (click)="navigateToSelectAccountType()"></app-custom-button>
+      <app-custom-button
+        [isDisabled]="
+          othersAccountInformationForm &&
+          othersAccountInformationForm.invalid &&
+          othersCreateUsernameForm &&
+          othersCreateUsernameForm.invalid
+        "
+        btnText="Next &gt;"
+        btnClass="medium tertiary"
+        (click)="registrationStep2()"></app-custom-button>
+    </div>
+  </div>
+
+  <ng-container [ngSwitch]="displayScreen">
+    <!-- first for prescriber -->
+    <app-add-facility
+      *ngSwitchCase="'add-facility-prescriber'"
+      (masterFacilities)="collectMasterFacilities($event)"
+      [title]="addFacilityScreenTitle"
+      [subTitle]="addFacilityScreenSubTitle"
+      requirementFor="prescriberRegistration"
+      (action)="onAction($event)"></app-add-facility>
+
+    <!-- compos for Others -->
+    <app-add-facility
+      *ngSwitchCase="'add-facility-others'"
+      [title]="addFacilityScreenTitle"
+      [subTitle]="addFacilityScreenSubTitle"
+      requirementFor="othersRegistration"
+      (masterFacilities)="collectMasterFacilities($event)"
+      (action)="onAction($event)"></app-add-facility>
+
+    <app-add-healthcare-provider
+      *ngSwitchCase="'add-healthcare-provider'"
+      [componentTitle]="addProviderScreenTitle"
+      [componentSubTitle]="addProviderScreenSubTitle"
+      [newOnboardingFacilities]="facilitiesDataForOthers"
+      requirementFor="othersRegistration"
+      (collectPrescriberWithFacility)="collectPrescriberWithFacility($event)"
+      (action)="onAction($event)"></app-add-healthcare-provider>
+  </ng-container>
+</div>
+
+<!--  thankyou screen -->
+<div class="thankyou-screen-container" *ngIf="thankYouScreen">
+  <p class="text-x-bold text-xxxl">Thank You for Registering!</p>
+  <div class="information">
+    <p class="text-med">
+      Your registration request has been submitted. A confirmation email has
+      been sent to the email address entered during the registration process.
+      You will receive another email notification within 2 business days
+      regarding your account approval.
+    </p>
+    <p class="text-med">
+      If you have any questions, please contact us at 1-844-447-5662.
+    </p>
+  </div>
+  <app-custom-button
+    btnText="Back to Login"
+    btnClass="medium tertiary"
+    (click)="navigateToLogin()"></app-custom-button>
+</div>

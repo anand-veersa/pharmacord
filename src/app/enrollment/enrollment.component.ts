@@ -21,6 +21,7 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
   public cases: any[] = [];
   public enableAllMeds: boolean = false;
   public enrollCreationActive: boolean = false;
+  public validPortalAccountID: boolean = false;
   public screenWidth: number;
   public hideEnrollmentBtns: boolean = false;
   private routeSubs: Subscription;
@@ -84,6 +85,7 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: (res: any) => {
+          this.validPortalAccountID = true;
           this.enrolService
             .getPrescriberCases(
               this.authService.user.prescribers[0].ProviderId,

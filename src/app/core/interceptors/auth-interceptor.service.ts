@@ -20,7 +20,7 @@ export class AuthInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const headers: any = {
       ClientId: environment.clientId,
-      ProgramId: '500034',
+      ProgramId: environment.programId,
     };
     if (
       this.authService.isLoggedIn() &&

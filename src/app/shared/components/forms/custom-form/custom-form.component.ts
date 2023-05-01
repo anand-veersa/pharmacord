@@ -29,6 +29,8 @@ export class CustomFormComponent implements AfterViewInit {
   @Input() formType: string = '';
   @Input() field: JsonFormControls;
   @Input() inputPrefix: string;
+  @Input() customErrorMsg: string;
+  @Input() isCustomError: boolean;
   @Input() checked: any[];
   @Output() action = new EventEmitter();
 
@@ -75,8 +77,14 @@ export class CustomFormComponent implements AfterViewInit {
     dynamicComponent.setInput('form', this.form);
     dynamicComponent.setInput('field', this.field);
     dynamicComponent.setInput('formType', this.formType);
+    if (this.customErrorMsg) {
+      dynamicComponent.setInput('customErrorMsg', this.customErrorMsg);
+      dynamicComponent.setInput('isCustomError', this.isCustomError);
+    }
     if (componentInstance === CustomInputComponent) {
-      dynamicComponent.setInput('inputPrefix', this.inputPrefix);
+      if (componentInstance === CustomInputComponent) {
+        dynamicComponent.setInput('inputPrefix', this.inputPrefix);
+      }
     }
     if (componentInstance === CustomCheckboxComponent) {
       dynamicComponent.setInput('checked', this.checked);

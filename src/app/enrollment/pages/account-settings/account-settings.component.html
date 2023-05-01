@@ -1,1 +1,28 @@
-<p>account-settings works!</p>
+<mat-tab-group animationDuration="100ms" #tabGroup>
+  <mat-tab label="Facility">
+    <div class="facility-container">
+      <app-add-facility
+        [title]="facilityTabTitle"
+        [subTitle]="facilityTabSubTitle"
+        (masterFacilities)="collectMasterFacilities($event)"
+        (deleteFacilities)="facilitiesToDelete($event)"
+        (updateFacilities)="updateFacilitiesCall($event)"
+        [hcpAllFacilities]="hcpAllFacilities"
+        requirementFor="accountSetting"></app-add-facility>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Provider">
+    <div class="provider-container" *ngIf="this.tabGroup.selectedIndex === 1">
+      <app-add-healthcare-provider
+        [componentTitle]="providerTabTitle"
+        [componentSubTitle]="providerTabSubTitle"
+        [providersWithSelectedFacilities]="prescribersWithSelectedFacility"
+        [providersWithAllFacilities]="prescribersWithAllFacility"
+        (prescriberToDelete)="deleteProviderWithFacilities($event)"
+        (collectPrescriberWithFacility)="updateProviderCall($event)"
+        requirementFor="accountSetting">
+      </app-add-healthcare-provider>
+    </div>
+  </mat-tab>
+</mat-tab-group>

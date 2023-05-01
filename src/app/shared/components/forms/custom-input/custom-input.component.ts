@@ -19,6 +19,8 @@ export class CustomInputComponent implements OnInit {
   @Input() fieldName: string;
   @Input() formType: string = '';
   @Input() inputPrefix: string;
+  @Input() customErrorMsg: string;
+  @Input() isCustomError: boolean;
   public errors: ValidationErrors | null | undefined;
   public files: any[] = [];
   public disableUploader: boolean = false;

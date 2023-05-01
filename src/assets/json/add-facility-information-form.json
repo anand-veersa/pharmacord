@@ -1,0 +1,372 @@
+{
+  "controls": [
+    {
+      "name": "practiceName",
+      "value": "",
+      "label": "Practice Name",
+      "placeholder": "",
+      "type": "text",
+      "reqErrorMsg": "Practice Name is Required",
+      "validityErrorMsg": "",
+      "validators": {
+        "required": true
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "facilityPhone",
+      "value": "",
+      "label": "Phone",
+      "placeholder": "",
+      "type": "number",
+      "reqErrorMsg": "Phone number is Required",
+      "validityErrorMsg": "Phone number is not vaild",
+      "validators": {
+        "required": true,
+        "max": 10,
+        "min": 10
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "facilityFax",
+      "value": "",
+      "label": "Fax",
+      "placeholder": "",
+      "type": "number",
+      "reqErrorMsg": "Fax is a required",
+      "validityErrorMsg": "Fax number is not valid",
+      "validators": {
+        "required": true,
+        "max": 10,
+        "min": 10
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "facilityEmail",
+      "value": "",
+      "label": "Email",
+      "placeholder": "",
+      "type": "email",
+      "reqErrorMsg": "",
+      "validityErrorMsg": "Invalid Email",
+      "validators": {
+        "required": true,
+        "pattern": "^\\S+@\\S+\\.\\S+$"
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "facilityAddress1",
+      "value": "",
+      "label": "Address 1",
+      "placeholder": "",
+      "type": "text",
+      "reqErrorMsg": "Address 1 is a required field",
+      "validityErrorMsg": "",
+      "validators": {
+        "required": true
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "facilityAddress2",
+      "value": "",
+      "label": "Address 2",
+      "placeholder": "",
+      "type": "text",
+      "reqErrorMsg": "",
+      "validityErrorMsg": "",
+      "validators": {},
+      "required": false,
+      "options": []
+    },
+    {
+      "name": "facilityCity",
+      "value": "",
+      "label": "City",
+      "placeholder": "",
+      "type": "text",
+      "reqErrorMsg": "City is required",
+      "validityErrorMsg": "",
+      "validators": {
+        "required": true
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "facilityState",
+      "value": "",
+      "label": "State",
+      "placeholder": "",
+      "type": "select",
+      "reqErrorMsg": "State is a required field",
+      "validityErrorMsg": "",
+      "validators": {
+        "required": true
+      },
+      "required": true,
+      "options": [
+        {
+          "label": "AL",
+          "value": "AL"
+        },
+        {
+          "label": "AK",
+          "value": "AK"
+        },
+        {
+          "label": "AR",
+          "value": "AR"
+        },
+        {
+          "label": "AS",
+          "value": "AS"
+        },
+        {
+          "label": "AZ",
+          "value": "AZ"
+        },
+        {
+          "label": "CA",
+          "value": "CA"
+        },
+        {
+          "label": "CO",
+          "value": "CO"
+        },
+        {
+          "label": "CT",
+          "value": "CT"
+        },
+        {
+          "label": "DE",
+          "value": "DE"
+        },
+        {
+          "label": "DC",
+          "value": "DC"
+        },
+        {
+          "label": "FM",
+          "value": "FM"
+        },
+        {
+          "label": "FL",
+          "value": "FL"
+        },
+        {
+          "label": "GA",
+          "value": "GA"
+        },
+        {
+          "label": "GU",
+          "value": "GU"
+        },
+        {
+          "label": "HI",
+          "value": "HI"
+        },
+        {
+          "label": "IA",
+          "value": "IA"
+        },
+        {
+          "label": "ID",
+          "value": "ID"
+        },
+        {
+          "label": "IL",
+          "value": "IL"
+        },
+        {
+          "label": "IN",
+          "value": "IN"
+        },
+        {
+          "label": "KS",
+          "value": "KS"
+        },
+        {
+          "label": "KY",
+          "value": "KY"
+        },
+        {
+          "label": "LA",
+          "value": "LA"
+        },
+        {
+          "label": "MA",
+          "value": "MA"
+        },
+        {
+          "label": "MD",
+          "value": "MD"
+        },
+        {
+          "label": "ME",
+          "value": "ME"
+        },
+        {
+          "label": "MH",
+          "value": "MH"
+        },
+        {
+          "label": "MI",
+          "value": "MI"
+        },
+        {
+          "label": "MN",
+          "value": "MN"
+        },
+        {
+          "label": "MO",
+          "value": "MO"
+        },
+        {
+          "label": "MP",
+          "value": "MP"
+        },
+        {
+          "label": "MS",
+          "value": "MS"
+        },
+        {
+          "label": "MT",
+          "value": "MT"
+        },
+        {
+          "label": "NC",
+          "value": "NC"
+        },
+        {
+          "label": "ND",
+          "value": "ND"
+        },
+        {
+          "label": "NE",
+          "value": "NE"
+        },
+        {
+          "label": "NH",
+          "value": "NH"
+        },
+        {
+          "label": "NJ",
+          "value": "NJ"
+        },
+        {
+          "label": "NM",
+          "value": "NM"
+        },
+        {
+          "label": "NV",
+          "value": "NV"
+        },
+        {
+          "label": "NY",
+          "value": "NY"
+        },
+        {
+          "label": "OH",
+          "value": "OH"
+        },
+        {
+          "label": "OK",
+          "value": "OK"
+        },
+        {
+          "label": "OR",
+          "value": "OR"
+        },
+        {
+          "label": "PA",
+          "value": "PA"
+        },
+        {
+          "label": "PR",
+          "value": "PR"
+        },
+        {
+          "label": "PW",
+          "value": "PW"
+        },
+        {
+          "label": "RI",
+          "value": "RI"
+        },
+        {
+          "label": "SC",
+          "value": "SC"
+        },
+        {
+          "label": "SD",
+          "value": "SD"
+        },
+        {
+          "label": "TN",
+          "value": "TN"
+        },
+        {
+          "label": "TX",
+          "value": "TX"
+        },
+        {
+          "label": "UT",
+          "value": "UT"
+        },
+        {
+          "label": "VA",
+          "value": "VA"
+        },
+        {
+          "label": "VI",
+          "value": "VI"
+        },
+        {
+          "label": "VT",
+          "value": "VT"
+        },
+        {
+          "label": "WA",
+          "value": "WA"
+        },
+        {
+          "label": "WI",
+          "value": "WI"
+        },
+        {
+          "label": "WV",
+          "value": "WV"
+        },
+        {
+          "label": "WY",
+          "value": "WY"
+        }
+      ]
+    },
+    {
+      "name": "facilityZip",
+      "value": "",
+      "label": "Zip",
+      "placeholder": "",
+      "type": "number",
+      "reqErrorMsg": "Zip is a required field",
+      "validityErrorMsg": "invalid Zip",
+      "validators": {
+        "required": true,
+        "max": 5,
+        "min": 5
+      },
+      "required": true,
+      "options": []
+    }
+  ]
+}
