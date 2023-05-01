@@ -19,6 +19,7 @@ export class EnrollmentFormHeaderComponent implements OnInit, OnDestroy {
   @Input() displayedScreen: string = '';
   @Input() selectPrescriberForm: FormGroup;
   @Input() selectPrescriberField: JsonFormData;
+  @Input() stepNumber: number = 0;
   @Output() prescriberChanged = new EventEmitter();
   public title: string = '';
   public titleSubscription: Subscription;
@@ -30,13 +31,24 @@ export class EnrollmentFormHeaderComponent implements OnInit, OnDestroy {
     'Clinical Information',
     'Attestation and Signatures',
   ];
-
+  public showStepper: boolean = false;
+  public prescriberName: string = 'Ritik kaushik';
   constructor(private submitEnrolService: SubmitEnrollmentService) {}
 
   ngOnInit(): void {
     this.titleSubscription = this.submitEnrolService.headerTitle.subscribe(
       title => (this.title = title)
     );
+  }
+
+  ngOnChanges() {
+    console.log(this.stepNumber, 'in enrollment');
+
+    if (this.stepNumber >= 2) {
+      this.showStepper = true;
+    } else {
+      this.showStepper = false;
+    }
   }
 
   ngOnDestroy(): void {

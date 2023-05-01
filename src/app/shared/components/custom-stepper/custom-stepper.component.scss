@@ -27,15 +27,17 @@
   }
 
   ::ng-deep .mat-horizontal-stepper-header {
-    padding: 0 24px !important;
+    padding: 0 !important;
   }
 
   ::ng-deep .mat-horizontal-stepper-header::before {
     top: 12px !important;
+    width: calc(50% - 12px);
   }
 
   ::ng-deep .mat-horizontal-stepper-header::after {
     top: 12px !important;
+    width: calc(50% - 12px);
   }
 
   ::ng-deep .mat-horizontal-stepper-header::after {
@@ -65,6 +67,14 @@
 .enrollment {
   ::ng-deep .mat-horizontal-stepper-header-container {
     background-color: $color-white !important;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header::before {
+    width: calc(50% - 12px) !important;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header::after {
+    width: calc(50% - 12px) !important;
   }
 
   ::ng-deep .mat-horizontal-stepper-header::before,

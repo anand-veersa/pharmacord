@@ -30,7 +30,7 @@ export class PrescriberDetailsComponent implements OnInit {
         ...this.submitEnrolService.prescriberDetailForm.value,
         ...this.submitEnrolService.shippingDetailForm.value,
       },
-      nextScreen: 'select-insurance',
+      nextScreen: actionType === 'back' ? 'select-patient' : 'select-insurance',
     });
   }
 }

@@ -107,6 +107,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   public registrationStep2(): void {
+    this.stepNumber++;
     if (this.prescriberRegistration) {
       this.prescriberRegistration = false;
       this.prescriberAddFacilityScreen = true;
@@ -157,7 +158,8 @@ export class RegistrationComponent implements OnInit {
     nextScreen,
   }: RegistrationScreenNextData): void {
     this.displayScreen = nextScreen;
-
+    this.stepNumber =
+      actionType === 'back' ? this.stepNumber - 1 : this.stepNumber + 1;
     if (actionType === 'back' && this.prescriberRegistrationCard) {
       this.prescriberAddFacilityScreen = false;
       this.prescriberRegistration = true;

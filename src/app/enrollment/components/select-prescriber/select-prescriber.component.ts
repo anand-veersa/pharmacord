@@ -92,7 +92,7 @@ export class SelectPrescriberComponent implements OnInit, OnDestroy {
         ? this.submitEnrolService.selectedFacility[0]
         : null,
       nextScreen:
-        actionType === 'back' ? 'select-medication' : 'prescriber-details',
+        actionType === 'back' ? 'select-medication' : 'select-services',
     };
     this.action.emit(actionObj);
   }
