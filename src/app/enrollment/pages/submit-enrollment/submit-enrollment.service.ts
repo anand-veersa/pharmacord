@@ -412,7 +412,7 @@ export class SubmitEnrollmentService {
       .get('/assets/json/attestation-form.json')
       .subscribe((data: any) => {
         const isPap = this.servicesForm
-          .get('Services')
+          ?.get('Services')
           ?.value.findIndex(
             (el: any) => el.Name === 'PatientAssistanceProgram'
           );
