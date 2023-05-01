@@ -110,7 +110,7 @@ export class AttestationDetailsComponent implements OnInit {
       actionType,
       formName: 'attestation-details',
       form: this.submitEnrolService.attestationForm.value,
-      nextScreen: actionType === 'back' ? 'select-insurance' : 'atte',
+      nextScreen: actionType === 'back' ? 'select-prescription' : 'atte',
     });
   }
 
