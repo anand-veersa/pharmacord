@@ -72,6 +72,9 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     if (formName === 'prescriber-details') {
       console.log(form);
     }
+    if (formName === 'attestation-details') {
+      console.log(form);
+    }
     console.log(this.submitEnrolService.enrollmentFormPayload);
   }
 
