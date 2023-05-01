@@ -72,6 +72,8 @@ import { CustomPrescriptionComponent } from './components/forms/custom-prescript
     ToggleButtonComponent,
     CustomDialogComponent,
     CustomPrescriptionComponent,
+    CustomErrorComponent,
+    CustomDatepickerComponent,
   ],
   providers: [LocalStorageService],
 })

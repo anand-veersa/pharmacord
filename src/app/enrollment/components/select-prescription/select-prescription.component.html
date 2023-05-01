@@ -12,11 +12,28 @@
               >*</span
             ></label
           >
-          <input
-            type="text"
-            formControlName="patientFirstName"
-            class="form-control"
-            placeholder="Enter your First name" />
+          <div class="form-control-with-error">
+            <input
+              type="text"
+              formControlName="patientFirstName"
+              class="form-control"
+              placeholder="Enter your First name" />
+            <app-custom-error
+              *ngIf="clinicalInfoForm.controls['patientFirstName'].touched"
+              [form]="clinicalInfoForm"
+              [field]="{
+                name: 'patientFirstName',
+                value: '',
+                display: true,
+                label: 'Patient First Name',
+                placeholder: 'Enter your First name',
+                type: 'text',
+                validators: { required: true },
+                for: 'Zejula, Ojjaara, Jemperli'
+              }"
+              [errors]="clinicalInfoForm.get('patientFirstName')?.errors">
+            </app-custom-error>
+          </div>
         </div>
         <div
           *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
@@ -26,11 +43,28 @@
               >*</span
             ></label
           >
-          <input
-            type="text"
-            formControlName="patientLastName"
-            class="form-control"
-            placeholder="Enter your Last Name " />
+          <div class="form-control-with-error">
+            <input
+              type="text"
+              formControlName="patientLastName"
+              class="form-control"
+              placeholder="Enter your Last Name " />
+            <app-custom-error
+              *ngIf="clinicalInfoForm.controls['patientLastName'].touched"
+              [form]="clinicalInfoForm"
+              [field]="{
+                name: 'patientLastName',
+                value: '',
+                display: true,
+                label: 'Patient Last Name',
+                placeholder: 'Enter your Last Name ',
+                type: 'text',
+                validators: { required: true },
+                for: 'Zejula, Ojjaara, Jemperli'
+              }"
+              [errors]="clinicalInfoForm.get('patientLastName')?.errors">
+            </app-custom-error>
+          </div>
         </div>
         <div
           *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
@@ -40,11 +74,33 @@
               >*</span
             ></label
           >
-          <input
-            type="date"
-            formControlName="patientDateOfBirth"
-            class="form-control"
-            placeholder="mm/dd/yyyy" />
+          <div class="form-control-with-error">
+            <!-- <input
+              type="date"
+              formControlName="patientDateOfBirth"
+              class="form-control"
+              placeholder="mm/dd/yyyy" />
+
+            <app-custom-error
+              *ngIf="clinicalInfoForm.controls['patientDateOfBirth'].touched"
+              [form]="clinicalInfoForm"
+              [field]="{
+                name: 'patientDateOfBirth',
+                value: '',
+                display: true,
+                label: 'Date of Birth',
+                placeholder: 'mm/dd/yyyy',
+                type: 'date',
+                validators: { required: true },
+                disabled: false,
+                for: 'Zejula, Ojjaara, Jemperli'
+              }"
+              [errors]="clinicalInfoForm.get('patientDateOfBirth')?.errors">
+            </app-custom-error> -->
+            <app-custom-datepicker
+              [form]="clinicalInfoForm"
+              [field]="patientDateOfBirthField"></app-custom-datepicker>
+          </div>
         </div>
         <div
           *ngIf="['Zejula', 'Ojjaara'].includes(medicine)"
@@ -54,11 +110,33 @@
               >*</span
             ></label
           >
-          <input
-            type="date"
-            formControlName="treatmentStartDate"
-            class="form-control"
-            placeholder="mm/dd/yyyy" />
+          <div class="form-control-with-error">
+            <!-- <input
+              type="date"
+              formControlName="treatmentStartDate"
+              class="form-control"
+              placeholder="mm/dd/yyyy" />
+
+              <app-custom-error
+                *ngIf="clinicalInfoForm.controls['treatmentStartDate'].touched"
+                [form]="clinicalInfoForm"
+                [field]="{
+                  name: 'treatmentStartDate',
+                  value: '',
+                  display: true,
+                  label: 'Treatment Start Date',
+                  placeholder: 'mm/dd/yyyy',
+                  type: 'date',
+                  validators: {},
+                  disabled: false,
+                  for: 'Zejula, Ojjaara'
+                }"
+                [errors]="clinicalInfoForm.get('treatmentStartDate')?.errors"> 
+              </app-custom-error> -->
+            <app-custom-datepicker
+              [form]="clinicalInfoForm"
+              [field]="treatmentStartDate"></app-custom-datepicker>
+          </div>
         </div>
         <div
           *ngIf="['Zejula', 'Ojjaara'].includes(medicine)"
@@ -68,11 +146,28 @@
               >*</span
             ></label
           >
-          <input
-            type="text"
-            formControlName="primaryDiagnosis"
-            class="form-control"
-            placeholder="Enter your Primary Diagnosis" />
+          <div class="form-control-with-error">
+            <input
+              type="text"
+              formControlName="primaryDiagnosis"
+              class="form-control"
+              placeholder="Enter your Primary Diagnosis" />
+            <app-custom-error
+              *ngIf="clinicalInfoForm.controls['primaryDiagnosis'].touched"
+              [form]="clinicalInfoForm"
+              [field]="{
+                name: 'primaryDiagnosis',
+                value: '',
+                display: true,
+                label: 'Primary Diagnosis',
+                placeholder: 'Enter your Primary Diagnosis',
+                type: 'text',
+                validators: { required: true },
+                for: 'Zejula, Ojjaara'
+              }"
+              [errors]="clinicalInfoForm.get('primaryDiagnosis')?.errors">
+            </app-custom-error>
+          </div>
         </div>
         <div
           *ngIf="['Zejula', 'Ojjaara'].includes(medicine)"
@@ -84,11 +179,32 @@
               >*</span
             ></label
           >
-          <input
-            type="text"
-            formControlName="primaryDiagnosisICD10Code"
-            class="form-control"
-            placeholder="Enter your Primary Diagnosis ICD-10 Code" />
+          <div class="form-control-with-error">
+            <input
+              type="text"
+              formControlName="primaryDiagnosisICD10Code"
+              class="form-control"
+              placeholder="Enter your Primary Diagnosis ICD-10 Code" />
+            <app-custom-error
+              *ngIf="
+                clinicalInfoForm.controls['primaryDiagnosisICD10Code'].touched
+              "
+              [form]="clinicalInfoForm"
+              [field]="{
+                name: 'primaryDiagnosisICD10Code',
+                value: '',
+                display: true,
+                label: 'Primary Diagnosis ICD-10 Code',
+                placeholder: 'Enter your Primary Diagnosis ICD-10 Code',
+                type: 'text',
+                validators: { required: true },
+                for: 'Zejula, Ojjaara'
+              }"
+              [errors]="
+                clinicalInfoForm.get('primaryDiagnosisICD10Code')?.errors
+              ">
+            </app-custom-error>
+          </div>
         </div>
         <div *ngIf="['Jemperli'].includes(medicine)" class="form-group">
           <label
@@ -96,7 +212,7 @@
               >*</span
             ></label
           >
-          <div class="form-radio-group -group">
+          <div class="form-radio-group">
             <div
               *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
               class="form-radio">
@@ -117,22 +233,43 @@
                 formControlName="diagnosisICD10Code"
                 class="form-radio-input"
                 value="Other" />
-              <label class="form-radio-label">Other</label>
+              <label class="form-radio-label label-with-input">Other </label>
+              <div class="form-control-with-error">
+                <input
+                  type="text"
+                  formControlName="otherICD10Code"
+                  class="form-control"
+                  [required]="
+                    clinicalInfoForm.get('diagnosisICD10Code')?.value ===
+                    'Other'
+                  "
+                  placeholder="" />
+                <app-custom-error
+                  *ngIf="clinicalInfoForm.controls['otherICD10Code'].touched"
+                  [form]="clinicalInfoForm"
+                  [field]="{
+                    name: 'otherICD10Code',
+                    value: '',
+                    display: false,
+                    label: 'Other ICD Code',
+                    placeholder: '',
+                    type: 'text',
+                    validators: { required: true },
+                    for: 'Jemperli'
+                  }"
+                  [errors]="clinicalInfoForm.get('otherICD10Code')?.errors">
+                </app-custom-error>
+              </div>
             </div>
           </div>
         </div>
-        <div *ngIf="['Jemperli'].includes(medicine)" class="form-group">
+        <!-- <div *ngIf="['Jemperli'].includes(medicine)" class="form-group">
           <label
             >Other ICD Code<span *ngIf="true" class="error-or-required"
               >*</span
             ></label
           >
-          <input
-            type="text"
-            formControlName="otherICD10Code"
-            class="form-control"
-            placeholder="" />
-        </div>
+        </div> -->
         <div *ngIf="['Jemperli'].includes(medicine)" class="form-group">
           <label
             >Mismatch repair status (MMR)<span
@@ -228,11 +365,28 @@
               >*</span
             ></label
           >
-          <input
-            type="text"
-            formControlName="secondaryDiagnosis"
-            class="form-control"
-            placeholder="Enter your Secondary Diagnosis" />
+          <div class="form-control-with-error">
+            <input
+              type="text"
+              formControlName="secondaryDiagnosis"
+              class="form-control"
+              placeholder="Enter your Secondary Diagnosis" />
+            <app-custom-error
+              *ngIf="clinicalInfoForm.controls['secondaryDiagnosis'].touched"
+              [form]="clinicalInfoForm"
+              [field]="{
+                name: 'secondaryDiagnosis',
+                value: '',
+                display: true,
+                label: 'Secondary Diagnosis',
+                placeholder: 'Enter your Secondary Diagnosis',
+                type: 'text',
+                validators: {},
+                for: 'Zejula, Ojjaara'
+              }"
+              [errors]="clinicalInfoForm.get('secondaryDiagnosis')?.errors">
+            </app-custom-error>
+          </div>
         </div>
         <div
           *ngIf="['Zejula', 'Ojjaara'].includes(medicine)"
@@ -244,11 +398,32 @@
               >*</span
             ></label
           >
-          <input
-            type="text"
-            formControlName="secondaryDiagnosisICD10Code"
-            class="form-control"
-            placeholder="Enter your Secondary Diagnosis ICD-10 Code" />
+          <div class="form-control-with-error">
+            <input
+              type="text"
+              formControlName="secondaryDiagnosisICD10Code"
+              class="form-control"
+              placeholder="Enter your Secondary Diagnosis ICD-10 Code" />
+            <app-custom-error
+              *ngIf="
+                clinicalInfoForm.controls['secondaryDiagnosisICD10Code'].touched
+              "
+              [form]="clinicalInfoForm"
+              [field]="{
+                name: 'secondaryDiagnosisICD10Code',
+                value: '',
+                display: true,
+                label: 'Secondary Diagnosis ICD-10 Code',
+                placeholder: 'Enter your Secondary Diagnosis ICD-10 Code',
+                type: 'text',
+                validators: {},
+                for: 'Zejula, Ojjaara'
+              }"
+              [errors]="
+                clinicalInfoForm.get('secondaryDiagnosisICD10Code')?.errors
+              ">
+            </app-custom-error>
+          </div>
         </div>
       </form>
     </div>
@@ -261,7 +436,307 @@
       class="primary-title flex toggle-panel tm-1 bm-1">
       Current Line Of Therapy
     </div>
-    <div>
+    <form [formGroup]="currentLineOfTherapyForm">
+      <div *ngIf="['Zejula'].includes(medicine)" class="form-group row-radio">
+        <div class="form-radio-group row-radio-group">
+          <div
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-radio">
+            <input
+              type="radio"
+              formControlName="currentLineOfTherapy"
+              class="form-radio-input"
+              value="1st line" />
+            <label class="form-radio-label">1st line</label>
+          </div>
+          <div
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-radio">
+            <input
+              type="radio"
+              formControlName="currentLineOfTherapy"
+              class="form-radio-input"
+              value="2nd line" />
+            <label class="form-radio-label">2nd line</label>
+          </div>
+          <div
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-radio">
+            <input
+              type="radio"
+              formControlName="currentLineOfTherapy"
+              class="form-radio-input"
+              value="3rd line" />
+            <label class="form-radio-label">3rd line</label>
+          </div>
+          <div
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-radio">
+            <input
+              type="radio"
+              formControlName="currentLineOfTherapy"
+              class="form-radio-input"
+              value="4th line" />
+            <label class="form-radio-label">4th line</label>
+          </div>
+          <div
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-radio">
+            <input
+              type="radio"
+              formControlName="currentLineOfTherapy"
+              class="form-radio-input"
+              value="4th line+" />
+            <label class="form-radio-label">4th line+</label>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="['Zejula'].includes(medicine)" class="form-group row-radio">
+        <label
+          >BRCA Test<span *ngIf="false" class="error-or-required"
+            >*</span
+          ></label
+        >
+        <div class="form-radio-group row-radio-group">
+          <div
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-radio">
+            <input
+              type="radio"
+              formControlName="bRCATest"
+              class="form-radio-input"
+              value="Positive" />
+            <label class="form-radio-label">Positive</label>
+          </div>
+          <div
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-radio">
+            <input
+              type="radio"
+              formControlName="bRCATest"
+              class="form-radio-input"
+              value="Negative" />
+            <label class="form-radio-label">Negative</label>
+          </div>
+          <div
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-radio">
+            <input
+              type="radio"
+              formControlName="bRCATest"
+              class="form-radio-input"
+              value="Results Pending" />
+            <label class="form-radio-label">Results Pending</label>
+          </div>
+          <div
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-radio">
+            <input
+              type="radio"
+              formControlName="bRCATest"
+              class="form-radio-input"
+              value="No Test" />
+            <label class="form-radio-label">No Test</label>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="['Zejula'].includes(medicine)" class="form-group row-radio">
+        <label
+          >HRD Test<span *ngIf="false" class="error-or-required">*</span></label
+        >
+        <div class="form-radio-group row-radio-group">
+          <div
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-radio">
+            <input
+              type="radio"
+              formControlName="hRDTest"
+              class="form-radio-input"
+              value="Positive" />
+            <label class="form-radio-label">Positive</label>
+          </div>
+          <div
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-radio">
+            <input
+              type="radio"
+              formControlName="hRDTest"
+              class="form-radio-input"
+              value="Negative" />
+            <label class="form-radio-label">Negative</label>
+          </div>
+          <div
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-radio">
+            <input
+              type="radio"
+              formControlName="hRDTest"
+              class="form-radio-input"
+              value="Results Pending" />
+            <label class="form-radio-label">Results Pending</label>
+          </div>
+          <div
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-radio">
+            <input
+              type="radio"
+              formControlName="hRDTest"
+              class="form-radio-input"
+              value="No Test" />
+            <label class="form-radio-label">No Test</label>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+        <label
+          >Previous Therapies<span *ngIf="false" class="error-or-required"
+            >*</span
+          ></label
+        >
+        <div class="form-control-with-error">
+          <input
+            type="text"
+            formControlName="previousTherapies"
+            class="form-control"
+            placeholder="Enter your Previous Therapies " />
+          <app-custom-error
+            *ngIf="
+              currentLineOfTherapyForm.controls['previousTherapies'].touched
+            "
+            [form]="currentLineOfTherapyForm"
+            [field]="{
+              name: 'previousTherapies',
+              value: '',
+              display: true,
+              label: 'Previous Therapies',
+              placeholder: 'Enter your Previous Therapies ',
+              type: 'text',
+              validators: {},
+              for: 'Ojjaara'
+            }"
+            [errors]="
+              currentLineOfTherapyForm.get('previousTherapies')?.errors
+            ">
+          </app-custom-error>
+        </div>
+      </div>
+      <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+        <label
+          >Latest Hemoglobin (g/dL)<span *ngIf="false" class="error-or-required"
+            >*</span
+          ></label
+        >
+        <div class="form-control-with-error">
+          <input
+            type="text"
+            formControlName="latestHemoglobin"
+            class="form-control"
+            placeholder="Enter your Latest Hemoglobin " />
+          <app-custom-error
+            *ngIf="
+              currentLineOfTherapyForm.controls['latestHemoglobin'].touched
+            "
+            [form]="currentLineOfTherapyForm"
+            [field]="{
+              name: 'latestHemoglobin',
+              value: '',
+              display: true,
+              label: 'Latest Hemoglobin (g/dL)',
+              placeholder: 'Enter your Latest Hemoglobin ',
+              type: 'text',
+              validators: {},
+              for: 'Ojjaara'
+            }"
+            [errors]="currentLineOfTherapyForm.get('latestHemoglobin')?.errors">
+          </app-custom-error>
+        </div>
+      </div>
+      <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+        <label
+          >Date of Last Transfusion<span *ngIf="false" class="error-or-required"
+            >*</span
+          ></label
+        >
+        <div class="form-control-with-error">
+          <!-- <input
+            type="date"
+            formControlName="dateOfLastTransfusion"
+            class="form-control"
+            placeholder="" />
+
+          <app-custom-error
+            *ngIf="
+              currentLineOfTherapyForm.controls['dateOfLastTransfusion']
+                .touched
+            "
+            [form]="currentLineOfTherapyForm"
+            [field]="{
+              name: 'dateOfLastTransfusion',
+              value: '',
+              display: true,
+              label: 'Date of Last Transfusion',
+              placeholder: '',
+              type: 'date',
+              validators: {},
+              for: 'Ojjaara'
+            }"
+            [errors]="
+              currentLineOfTherapyForm.get('dateOfLastTransfusion')?.errors
+            ">
+          </app-custom-error> -->
+
+          <app-custom-datepicker
+            [form]="currentLineOfTherapyForm"
+            [field]="dateOfLastTransfusion">
+          </app-custom-datepicker>
+        </div>
+      </div>
+      <div *ngIf="['Zejula', 'Ojjaara'].includes(medicine)" class="form-group">
+        <label
+          >Known Drug Allergies<span *ngIf="false" class="error-or-required"
+            >*</span
+          ></label
+        >
+        <div class="form-control-with-error">
+          <input
+            type="text"
+            formControlName="knownDrugAllergies"
+            class="form-control"
+            placeholder="Enter your Known Drug Allergies" />
+          <app-custom-error
+            *ngIf="
+              currentLineOfTherapyForm.controls['knownDrugAllergies'].touched
+            "
+            [form]="currentLineOfTherapyForm"
+            [field]="{
+              name: 'knownDrugAllergies',
+              value: '',
+              display: true,
+              label: 'Known Drug Allergies',
+              placeholder: 'Enter your Known Drug Allergies',
+              type: 'text',
+              validators: {},
+              for: 'Zejula , Ojjaara '
+            }"
+            [errors]="
+              currentLineOfTherapyForm.get('knownDrugAllergies')?.errors
+            ">
+          </app-custom-error>
+        </div>
+      </div>
+      <label><span *ngIf="false" class="error-or-required">*</span></label>
+      <div *ngIf="['Zejula', 'Ojjaara'].includes(medicine)" class="form-group">
+        <label
+          >Notes<span *ngIf="false" class="error-or-required">*</span></label
+        >
+        <textarea
+          formControlName="notes"
+          class="form-control"
+          placeholder="Enter your Notes">
+        </textarea>
+      </div>
+    </form>
+    <!-- <div>
       <form [formGroup]="currentLineOfTherapyForm">
         <div *ngIf="['Zejula'].includes(medicine)" class="form-group row-radio">
           <div class="form-radio-group row-radio-group">
@@ -483,7 +958,7 @@
           </textarea>
         </div>
       </form>
-    </div>
+    </div> -->
 
     <!-- <div>
         <div
@@ -523,7 +998,292 @@
         * Atleast one medication is required
       </div>
     </ng-container>
-    <div>
+
+    <form [formGroup]="prescriptionInfoForm">
+      <div *ngIf="['Zejula'].includes(medicine)" class="form-group">
+        <div class="form-checkbox-group">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              (change)="
+                onCheckChange({
+                  ev: $event,
+                  form: prescriptionInfoForm,
+                  formArrName: 'zejStd'
+                })
+              "
+              class="form-check-input"
+              value="zejStd" />
+            <div>
+              <label class="form-check-label large-bold"
+                >ZEJULA: Standard Prescription
+                <span *ngIf="false" class="error-or-required">*</span></label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-custom-prescription
+        *ngIf="
+          ['Zejula'].includes(medicine) &&
+          prescriptionInfoForm?.get('zejStd')?.value?.length! > 0
+        "
+        [form]="prescriptionInfoForm"
+        [field]="{
+          name: 'zejStdPres',
+          qty: undefined,
+          refills: undefined
+        }"></app-custom-prescription>
+      <div *ngIf="['Zejula'].includes(medicine)" class="form-group">
+        <div class="form-checkbox-group">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              (change)="
+                onCheckChange({
+                  ev: $event,
+                  form: prescriptionInfoForm,
+                  formArrName: 'zejQSP'
+                })
+              "
+              class="form-check-input"
+              value="zejQSP" />
+            <div>
+              <label class="form-check-label large-bold"
+                >ZEJULA: Quick Start Program
+                <span *ngIf="false" class="error-or-required">*</span></label
+              >
+              <div class="subLabel">
+                For patients experiencing a delay in coverage at first dispense
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-custom-prescription
+        *ngIf="
+          ['Zejula'].includes(medicine) &&
+          prescriptionInfoForm?.get('zejQSP')?.value?.length! > 0
+        "
+        [form]="prescriptionInfoForm"
+        [field]="{
+          name: 'zejQSPPres',
+          qty: 15,
+          refills: 14
+        }"></app-custom-prescription>
+      <div *ngIf="['Zejula'].includes(medicine)" class="form-group">
+        <div class="form-checkbox-group">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              (change)="
+                onCheckChange({
+                  ev: $event,
+                  form: prescriptionInfoForm,
+                  formArrName: 'zejBridge'
+                })
+              "
+              class="form-check-input"
+              value="zejBridge" />
+            <div>
+              <label class="form-check-label large-bold"
+                >ZEJULA: Bridge Program
+                <span *ngIf="false" class="error-or-required">*</span></label
+              >
+              <div class="subLabel">
+                For patients experiencing coverage interruptions while already
+                on treatment
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-custom-prescription
+        *ngIf="
+          ['Zejula'].includes(medicine) &&
+          prescriptionInfoForm?.get('zejBridge')?.value?.length! > 0
+        "
+        [form]="prescriptionInfoForm"
+        [field]="{
+          name: 'zejBridgePres',
+          qty: 15,
+          refills: 14
+        }"></app-custom-prescription>
+      <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+        <div class="form-checkbox-group">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              (change)="
+                onCheckChange({
+                  ev: $event,
+                  form: prescriptionInfoForm,
+                  formArrName: 'ojjaaraStd'
+                })
+              "
+              class="form-check-input"
+              value="ojjaaraStd" />
+            <div>
+              <label class="form-check-label large-bold"
+                >OJJAARA: Standard Prescription
+                <span *ngIf="false" class="error-or-required">*</span></label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-custom-prescription
+        *ngIf="
+          ['Ojjaara'].includes(medicine) &&
+          prescriptionInfoForm?.get('ojjaaraStd')?.value?.length! > 0
+        "
+        [form]="prescriptionInfoForm"
+        [field]="{
+          name: 'ojjaaraStdPres',
+          qty: undefined,
+          refills: undefined
+        }"></app-custom-prescription>
+      <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+        <div class="form-checkbox-group">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              (change)="
+                onCheckChange({
+                  ev: $event,
+                  form: prescriptionInfoForm,
+                  formArrName: 'ojjaaraQSP'
+                })
+              "
+              class="form-check-input"
+              value="ojjaaraQSP" />
+            <div>
+              <label class="form-check-label large-bold"
+                >OJJAARA: Quick Start Program
+                <span *ngIf="false" class="error-or-required">*</span></label
+              >
+              <div class="subLabel">
+                For patients experiencing a delay in coverage at first dispense
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-custom-prescription
+        *ngIf="
+          ['Ojjaara'].includes(medicine) &&
+          prescriptionInfoForm?.get('ojjaaraQSP')?.value?.length! > 0
+        "
+        [form]="prescriptionInfoForm"
+        [field]="{
+          name: 'ojjaaraQSPPres',
+          qty: 15,
+          refills: 14
+        }"></app-custom-prescription>
+      <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+        <div class="form-checkbox-group">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              (change)="
+                onCheckChange({
+                  ev: $event,
+                  form: prescriptionInfoForm,
+                  formArrName: 'ojjaaraBridge'
+                })
+              "
+              class="form-check-input"
+              value="ojjaaraBridge" />
+            <div>
+              <label class="form-check-label large-bold"
+                >OJJAARA: Bridge Program
+                <span *ngIf="false" class="error-or-required">*</span></label
+              >
+              <div class="subLabel">
+                For patients experiencing coverage interruptions while already
+                on treatment
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-custom-prescription
+        *ngIf="
+          ['Ojjaara'].includes(medicine) &&
+          prescriptionInfoForm?.get('ojjaaraBridge')?.value?.length! > 0
+        "
+        [form]="prescriptionInfoForm"
+        [field]="{
+          name: 'ojjaaraBridgePres',
+          qty: 15,
+          refills: 14
+        }"></app-custom-prescription>
+      <div *ngIf="['Jemperli'].includes(medicine)" class="form-group">
+        <div class="form-checkbox-group">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              (change)="
+                onCheckChange({
+                  ev: $event,
+                  form: prescriptionInfoForm,
+                  formArrName: 'jemperliIV'
+                })
+              "
+              class="form-check-input"
+              value="JemperliIV" />
+            <div>
+              <label class="form-check-label large-bold"
+                >JEMPERLI IV
+                <span *ngIf="true" class="error-or-required">*</span></label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-custom-prescription
+        *ngIf="
+          ['Jemperli'].includes(medicine) &&
+          prescriptionInfoForm?.get('jemperliIV')?.value?.length! > 0
+        "
+        [form]="prescriptionInfoForm"
+        [field]="{
+          name: 'jemperliIVPres',
+          qty: 15,
+          refills: 14
+        }"></app-custom-prescription>
+      <div *ngIf="['Zejula', 'Ojjaara'].includes(medicine)" class="form-group">
+        <label
+          >Prescription Signature<span *ngIf="true" class="error-or-required"
+            >*</span
+          ></label
+        >
+        <!-- <select formControlName="prescriptionSignature">
+          <option
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-check"
+            value="">
+            Select Prescription Signature
+          </option>
+          <option
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-check"
+            value="Dispense as written">
+            Dispense as written
+          </option>
+          <option
+            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            class="form-check"
+            value="Substitute Permitted">
+            Substitute Permitted
+          </option>
+        </select> -->
+        <app-custom-select
+          [form]="prescriptionInfoForm"
+          [field]="presSignatureSelectField"></app-custom-select>
+      </div>
+    </form>
+    <!-- <div>
       <form [formGroup]="prescriptionInfoForm">
         <div *ngIf="['Zejula'].includes(medicine)" class="form-group">
           <div class="form-checkbox-group">
@@ -809,7 +1569,7 @@
           </select>
         </div>
       </form>
-    </div>
+    </div> -->
     <div>
       <div
         *ngIf="
@@ -818,7 +1578,7 @@
           )
         "
         class="bg enrollment-form">
-        <div class="note-text tm-2">
+        <div class="note-text tm-1">
           <strong>Note: </strong> Signature will be obtained during the next
           step.
         </div>

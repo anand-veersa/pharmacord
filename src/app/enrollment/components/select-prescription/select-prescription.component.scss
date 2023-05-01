@@ -1,3 +1,5 @@
+@import '../../../../assets/styles/abstracts/variables';
+@import '../../../../assets/styles/abstracts/mixins';
 .form-group {
   font-family: 'Roboto';
   font-style: normal;
@@ -40,10 +42,26 @@
   // color: rgb(85, 86, 91, 0.4); // idk why this doesn't work
 }
 
+.form-control-with-error {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 60%;
+  font-size: 1.2rem;
+  .form-control {
+    // all: unset;
+    flex-basis: unset;
+  }
+  // .error-message {
+  // color: red;
+  // font-size: 1.2rem;
+  // }
+}
+
 .form-checkbox-group {
   flex-basis: 60%;
 
   input[type='checkbox'] {
+    accent-color: $color-tertiary;
     margin-right: 1rem;
     width: 1.5rem;
     height: 1.5rem;
@@ -52,6 +70,7 @@
 
 .form-radio-group {
   flex-basis: 60%;
+
   &.row-radio-group {
     display: flex;
 
@@ -63,6 +82,7 @@
   }
 
   input[type='radio'] {
+    accent-color: $color-secondary;
     margin-right: 1rem;
     width: 1rem;
     height: 1rem;
@@ -97,4 +117,15 @@
   display: flex;
   margin-top: 1rem;
   align-items: baseline;
+}
+
+.label-with-input {
+  flex-basis: 12%;
+}
+
+.action-panel {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 3rem;
 }
