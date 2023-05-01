@@ -127,6 +127,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
                 ),
                 RequiredAction: item.Alert,
                 Acknowledge: 'Acknowledge',
+                AlertPkId: item.AlertPkId,
               });
             }
           });
@@ -158,6 +159,25 @@ export class PatientProfileComponent implements OnInit, OnDestroy {
 
   public printPatientDetails() {
     window.print();
+  }
+
+  public acknowledgeClicked(event: any) {
+    this.sharedService.isLoading.next(true);
+    this.enrolService
+      .acknowledgeAlerts(this.caseId, event.AlertPkId)
+      .subscribe({
+        next: res => {
+          if (res && res.Status === 'SUCCESS') {
+            this.getCaseDetails(this.caseId);
+            this.sharedService.isLoading.next(false);
+            this.sharedService.notify('success', 'Successfully acknowledged');
+          }
+        },
+        error: err => {
+          this.sharedService.isLoading.next(false);
+          this.sharedService.notify('error', 'Error in acknowledge');
+        },
+      });
   }
 
   private getInsuranceName(caseDetail: any, insuranceType: string): string {

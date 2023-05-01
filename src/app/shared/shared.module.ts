@@ -24,6 +24,7 @@ import { CustomTableComponent } from './components/custom-table/custom-table.com
 import { CustomExpansionPanelComponent } from './components/custom-expansion-panel/custom-expansion-panel.component';
 import { CustomDatepickerComponent } from './components/forms/custom-datepicker/custom-datepicker.component';
 import { ToggleButtonComponent } from './components/custom-toggle-button/toggle.component';
+import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
 import { CustomUploadDocumentsComponent } from './components/custom-upload-documents/custom-upload-documents.component';
 import { CustomStepperComponent } from './components/custom-stepper/custom-stepper.component';
 
@@ -44,6 +45,7 @@ import { CustomStepperComponent } from './components/custom-stepper/custom-stepp
     CustomExpansionPanelComponent,
     CustomDatepickerComponent,
     ToggleButtonComponent,
+    CustomDialogComponent,
     CustomUploadDocumentsComponent,
     CustomStepperComponent,
   ],
@@ -70,6 +72,7 @@ import { CustomStepperComponent } from './components/custom-stepper/custom-stepp
     CustomTableComponent,
     CustomExpansionPanelComponent,
     ToggleButtonComponent,
+    CustomDialogComponent,
     CustomUploadDocumentsComponent,
     CustomStepperComponent,
   ],

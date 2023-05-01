@@ -1,5 +1,8 @@
 @import '../../../../assets/styles/abstracts/_variables.scss';
 
+::ng-deep .progress-bar span.mdc-linear-progress__bar-inner {
+  border-color: $color-tertiary;
+}
 .backdrop {
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
@@ -51,6 +54,9 @@
         width: 100%;
         .file-name {
           line-height: 3rem;
+        }
+        .mat-mdc-progress-bar {
+          border-radius: 0.8rem;
         }
       }
     }

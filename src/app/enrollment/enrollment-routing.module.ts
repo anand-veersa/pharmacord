@@ -23,6 +23,7 @@ const routes: Routes = [
       {
         path: 'create',
         component: SubmitEnrollmentComponent,
+        canDeactivate: [AuthGuard],
       },
       {
         path: 'dashboard',

@@ -1,6 +1,8 @@
 <!-- <label class="custom-input-label">{{ inputControl.label }}</label> -->
 <form [formGroup]="form">
-  <mat-form-field [ngClass]="{ disabled: field.disabled }">
+  <mat-form-field
+    *ngIf="field.type !== 'file'"
+    [ngClass]="{ disabled: field.disabled }">
     <span matPrefix *ngIf="inputPrefix"><mat-icon>search</mat-icon></span>
     <input
       matInput
@@ -11,11 +13,24 @@
       [type]="field.type"
       [placeholder]="field.placeholder" />
   </mat-form-field>
+
+  <div *ngIf="field.type === 'file'">
+    <div
+      [ngClass]="{ 'disabled-uploader': files.length === 2 }"
+      class="file-upload-input"
+      (click)="browseFile($event, field.name)">
+      <button class="browse">Browse</button>
+    </div>
+    <input
+      type="file"
+      hidden
+      accept=".pdf"
+      [id]="field.name"
+      (change)="setAttachDoc($event)" />
+  </div>
   <app-custom-error
-    *ngIf="this.form.controls[this.field.name].touched"
+    *ngIf="form.controls[this.field.name].touched"
     [form]="form"
     [field]="field"
-    [errors]="this.form.get(field.name)?.errors">
-    <p class="invalid-username">{{ customErrorMsg }}</p>
-  </app-custom-error>
+    [errors]="form.get(field.name)?.errors"></app-custom-error>
 </form>

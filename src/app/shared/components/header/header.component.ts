@@ -26,17 +26,13 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService?.userFullName.subscribe(fullName => {
+    this.authService?.userName.subscribe(fullName => {
       if (!this.authService.isLoggedIn()) return;
       this.userName = fullName;
     });
   }
 
   logout(): void {
-    this.sharedService.isLoading.next(true);
-    this.authService.logout().subscribe(res => {
-      this.sharedService.isLoading.next(false);
-      this.router.navigate(['/logout']);
-    });
+    this.router.navigate(['/logout']);
   }
 }
