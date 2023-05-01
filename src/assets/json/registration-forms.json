@@ -1,0 +1,182 @@
+{
+  "lookupInformationForm": {
+    "controls": [
+      {
+        "name": "providerNpi",
+        "value": "",
+        "label": "Provider NPI",
+        "placeholder": "Enter Provider's NPI",
+        "type": "number",
+        "reqErrorMsg": "Provider's NPI is a required field",
+        "validityErrorMsg": "Invalid NPI",
+        "validators": {
+          "required": true,
+          "max": 10,
+          "min": 10
+        },
+        "required": true,
+        "options": []
+      },
+      {
+        "name": "providerFirstName",
+        "value": "",
+        "label": "First Name",
+        "placeholder": "Enter First Name",
+        "type": "text",
+        "reqErrorMsg": "First Name is a required field",
+        "validityErrorMsg": "",
+        "validators": {
+          "required": true
+        },
+        "required": true,
+        "options": []
+      },
+      {
+        "name": "providerLastName",
+        "value": "",
+        "label": "Last Name",
+        "placeholder": "Enter Last Name",
+        "type": "text",
+        "reqErrorMsg": "Last Name is a required field",
+        "validityErrorMsg": "",
+        "validators": {
+          "required": true
+        },
+        "required": true,
+        "options": []
+      }
+    ]
+  },
+  "confirmAccountInformationForm": {
+    "controls": [
+      {
+        "name": "confirmAccountFirstName",
+        "value": "",
+        "label": "First Name",
+        "placeholder": "Enter First Name",
+        "type": "text",
+        "reqErrorMsg": "First Name is a required field",
+        "validityErrorMsg": "",
+        "validators": {
+          "required": true
+        },
+        "required": true,
+        "options": []
+      },
+      {
+        "name": "confirmAccountLastName",
+        "value": "",
+        "label": "Last Name",
+        "placeholder": "Enter Last Name",
+        "type": "text",
+        "reqErrorMsg": "Last Name is a required field",
+        "validityErrorMsg": "",
+        "validators": {
+          "required": true
+        },
+        "required": true,
+        "options": []
+      },
+      {
+        "name": "confirmAccountPhone",
+        "value": "",
+        "label": "Phone",
+        "placeholder": "Enter Phone",
+        "type": "number",
+        "reqErrorMsg": "Phone number is Required",
+        "validityErrorMsg": "Phone number is not vaild",
+        "validators": {
+          "required": true,
+          "max": 10,
+          "min": 10
+        },
+        "required": true,
+        "options": []
+      },
+      {
+        "name": "confirmAccountFax",
+        "value": "",
+        "label": "Fax",
+        "placeholder": "Enter Fax",
+        "type": "number",
+        "reqErrorMsg": "Fax is a required",
+        "validityErrorMsg": "Fax number is not valid",
+        "validators": {
+          "required": true,
+          "max": 10,
+          "min": 10
+        },
+        "required": true,
+        "options": []
+      },
+      {
+        "name": "confirmAccountEmail",
+        "value": "",
+        "label": "Email",
+        "placeholder": "Enter Email",
+        "type": "email",
+        "reqErrorMsg": "Email is required",
+        "validityErrorMsg": "Invalid Email",
+        "validators": {
+          "required": true,
+          "pattern": "^\\S+@\\S+\\.\\S+$"
+        },
+        "required": true,
+        "options": []
+      }
+    ]
+  },
+  "createUsernamePasswordForm": {
+    "controls": [
+      {
+        "name": "username",
+        "value": "",
+        "label": "Username",
+        "placeholder": "",
+        "type": "text",
+        "reqErrorMsg": "Username Required",
+        "validityErrorMsg": "Invalid Username",
+        "validators": {
+          "required": true
+        },
+        "required": false,
+        "options": [],
+        "extLink": "Forgot Username?"
+      },
+      {
+        "name": "newPassword",
+        "value": "",
+        "label": "New Password",
+        "placeholder": "",
+        "type": "password",
+        "reqErrorMsg": "New Password Required",
+        "validityErrorMsg": "Invalid New Password",
+        "validators": {
+          "required": true,
+          "max": 14,
+          "min": 8,
+          "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]+).{8,30}$"
+        },
+        "options": [],
+        "required": true
+      },
+      {
+        "name": "confirmNewPassword",
+        "value": "",
+        "label": "Confirm New Password",
+        "placeholder": "",
+        "type": "password",
+        "reqErrorMsg": "Confirm New Password Required",
+        "validityErrorMsg": "Invalid Confirm New Password",
+        "validators": {
+          "required": true,
+          "max": 14,
+          "min": 8,
+          "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]+).{8,30}$"
+        },
+        "options": [],
+        "required": true
+      }
+    ]
+  }
+}

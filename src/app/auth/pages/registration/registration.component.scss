@@ -1,0 +1,298 @@
+@import '../../../../assets/styles/abstracts/variables';
+@import '../../../../assets/styles/abstracts/mixins';
+
+.registration-container {
+  display: flex;
+  flex-direction: column;
+  margin: 1.2rem 7rem 2rem 7rem;
+  background-color: $color-white;
+  border-radius: 8px;
+
+  .registration-header {
+    background: $color-tertiary;
+    border-radius: 8px 8px 0px 0px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $color-white;
+    padding: 1.4rem 2rem;
+
+    .title-and-stepper {
+      display: flex;
+      justify-content: space-between;
+      font-size: 2.5rem;
+      line-height: 2.9rem;
+    }
+  }
+
+  .main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    padding: 4rem 4.8rem;
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .selection-cards {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+
+      .img-label-group {
+        position: relative;
+
+        .hcp-img,
+        .prescriber-img {
+          display: flex;
+          justify-content: center;
+          border: 1px solid $color-header;
+          border-radius: 1rem;
+          margin-bottom: 1.4rem;
+          img {
+            padding: 3rem;
+          }
+        }
+        .img-label {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .check-icon {
+          position: absolute;
+          top: -3.8rem;
+          right: -3.8rem;
+        }
+      }
+    }
+  }
+
+  .selectedCard {
+    background-color: $color-tertiary;
+    border: none;
+    display: flex;
+    justify-content: center;
+    border: 1px solid $color-tertiary;
+    border-radius: 10px;
+    margin-bottom: 1.4rem;
+    img {
+      padding: 3rem;
+    }
+  }
+
+  .registration-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 4rem 4.8rem;
+  }
+
+  .prescriber-registration {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    &-main {
+      display: flex;
+      padding: 2.4rem 4rem;
+      flex-direction: column;
+      gap: 2rem;
+
+      .upper-forms {
+        display: flex;
+        flex-direction: row;
+
+        @include respond(mini-tab-port) {
+          flex-direction: column;
+          gap: 3rem;
+        }
+
+        .lookup-information {
+          min-width: 65%;
+
+          .lookup-form-fields {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: end;
+            gap: 3.5rem;
+
+            .input-fields-providerNpi {
+              width: 100%;
+            }
+            .input-fields-providerFirstName,
+            .input-fields-providerLastName {
+              width: 42%;
+            }
+          }
+
+          .wrong-Npi-error-msg {
+            border-radius: 3px;
+            background: rgba(228, 155, 19, 0.2);
+            color: $color-error;
+            text-align: center;
+            margin-top: 2.1rem;
+          }
+        }
+
+        .confirm-account-information {
+          display: flex;
+          flex-direction: column;
+          padding-left: 2rem;
+
+          @include respond(mini-tab-port) {
+            padding: 0;
+            padding-top: 2rem;
+            border-top: 1px solid $color-light-grey-border;
+          }
+
+          .form-container {
+            padding-left: 2.2rem;
+            border-left: 1px solid $color-light-grey-border;
+
+            @include respond(mini-tab-port) {
+              padding: 0;
+              border: none;
+            }
+          }
+
+          .confirm-form-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+
+            .confirmAccountFirstName,
+            .confirmAccountLastName,
+            .confirmAccountPhone,
+            .confirmAccountFax {
+              width: 16rem;
+
+              @include respond(tab-land) {
+                width: 26rem;
+              }
+              @include respond(tab-port) {
+                width: 20rem;
+              }
+            }
+            .confirmAccountEmail {
+              width: 34rem;
+
+              @include respond(tab-land) {
+                width: 26rem;
+              }
+
+              @include respond(tab-port) {
+                width: 20rem;
+              }
+            }
+          }
+        }
+      }
+
+      .create-username {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding-top: 2.1rem;
+        border-top: 2px solid $color-light-grey-border;
+
+        .create-username-fields,
+        .create-username-form-fields {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 3rem;
+        }
+
+        .create-form-input-fields {
+          width: 25rem;
+        }
+      }
+    }
+  }
+
+  .others-registration {
+    display: flex;
+    flex-direction: column;
+
+    .others-registration-main {
+      padding: 2.4rem 4rem;
+      display: flex;
+      flex-direction: column;
+
+      .others-account-information {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        padding-bottom: 3.4rem;
+        border-bottom: 2px solid $color-light-grey-border;
+
+        .account-information-fields {
+          display: flex;
+          gap: 2.8rem;
+          flex-wrap: wrap;
+
+          .confirmAccountFirstName,
+          .confirmAccountLastName,
+          .confirmAccountPhone,
+          .confirmAccountFax {
+            width: 23%;
+          }
+
+          .confirmAccountEmail {
+            width: 48%;
+          }
+        }
+      }
+
+      .others-create-username {
+        padding-top: 2.4rem;
+        display: flex;
+        flex-direction: column;
+
+        .others-create-username-fields {
+          display: flex;
+          gap: 3rem;
+          align-items: center;
+
+          .others-create-username-form-fields {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+
+            .others-create-form-input-fields {
+              width: 25rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.thankyou-screen-container {
+  background-color: $color-white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4rem;
+  padding: 5.4rem 30.4rem;
+  margin: 7.5rem 7.5rem 18.1rem 7.5rem;
+
+  .information {
+    width: 68.4rem;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    gap: 2.4rem;
+  }
+}

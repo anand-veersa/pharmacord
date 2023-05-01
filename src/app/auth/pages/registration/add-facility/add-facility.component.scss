@@ -1,0 +1,103 @@
+@import '../../../../../assets/styles/abstracts/variables';
+
+.add-facility-container {
+  padding: 2.4rem 7rem;
+
+  .form-container {
+    .form-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.4rem;
+
+      .input-field {
+        &-practiceName,
+        &-facilityPhone,
+        &-facilityFax,
+        &-facilityEmail,
+        &-facilityAddress1,
+        &-facilityAddress2 {
+          width: 28.5rem;
+        }
+
+        &-facilityCity {
+          width: 12.8rem;
+        }
+
+        &-facilityState {
+          width: 9.5rem;
+        }
+
+        &-facilityZip {
+          width: 11.1rem;
+        }
+      }
+
+      .form-buttons {
+        align-self: flex-end;
+        display: flex;
+        gap: 1rem;
+      }
+    }
+  }
+
+  .table-container {
+    margin-top: 4.1rem;
+    width: 100%;
+    max-height: 32rem;
+    overflow-y: scroll;
+
+    table {
+      border: 1px solid $color-grey-border;
+      border-radius: 0.8rem;
+      width: 100%;
+      border-collapse: collapse;
+
+      .activeEdit {
+        background: #c4c4c4 !important;
+        border: 1px dashed #000000;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f8fb;
+      }
+
+      tr:nth-child(odd) {
+        background-color: $color-white;
+      }
+
+      th {
+        font-family: $primary-font;
+        color: $color-primary;
+        padding: 1.3rem 2.2rem;
+        text-align: left;
+        font-size: 1.6rem;
+        line-height: 1.8rem;
+        font-weight: 700;
+        border-bottom: 4px solid $color-border-3;
+      }
+
+      tr {
+        td {
+          padding: 1.3rem 2.2rem;
+          text-align: left;
+          font-family: $primary-font;
+          align-items: center;
+          color: $color-sub-header;
+        }
+
+        .button-cell {
+          display: flex;
+          justify-content: flex-start;
+          gap: 1.1rem;
+        }
+      }
+    }
+  }
+
+  .footer-container {
+    padding-top: 3.5rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+}
