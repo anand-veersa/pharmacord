@@ -7,7 +7,7 @@
   <div
     *ngIf="data.htmlString; else else_block"
     class="custom-dialog-content tp-2 lp-3 rp-3 bp-2"
-    [innerHTML]="sanitizedHtml"></div>
+    [innerHTML]="this.data.htmlString | safe : 'html'"></div>
   <ng-template #else_block>
     <div class="custom-dialog-content tp-2 lp-3 rp-3 bp-2">
       <ng-content></ng-content>

@@ -9,7 +9,6 @@ import {
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { JsonFormControls } from 'src/app/models/json-form-data.model';
 import isEqual from 'lodash.isequal';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-custom-checkbox',
@@ -23,19 +22,11 @@ export class CustomCheckboxComponent implements OnInit {
   @Input() formType: string = '';
   @Output() action: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('checkbox') checkboxRef: any;
-  sanitizedHtml: SafeHtml;
-
-  constructor(private sanitizer: DomSanitizer) {}
 
   public ngOnInit(): void {
     if (this.checked.length > 0) {
       const formArray = <FormArray>this.form.controls[this.field.name];
       this.checked.forEach(value => formArray.push(new FormControl(value)));
-    }
-    if (this.field.preventDefaultSelection) {
-      this.sanitizedHtml = this.sanitizer.bypassSecurityTrustHtml(
-        this.field.options?.[0].label || ''
-      );
     }
   }
 

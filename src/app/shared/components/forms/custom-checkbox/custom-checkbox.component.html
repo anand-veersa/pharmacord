@@ -13,7 +13,8 @@
         >
         <span
           *ngIf="field.preventDefaultSelection; else else_block"
-          [innerHTML]="sanitizedHtml"></span>
+          [innerHTML]="field.options?.[0]!.label | safe : 'html'">
+        </span>
         <ng-template #else_block>
           {{ option.label }}
         </ng-template>
