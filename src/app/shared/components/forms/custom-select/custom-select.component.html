@@ -1,7 +1,7 @@
 <form
   [formGroup]="form"
   [ngClass]="{ 'prescriber-select': formType === 'select-prescriber' }">
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="custom-select">
     <mat-select
       (selectionChange)="selectionChanged($event)"
       [formControlName]="field.name"
