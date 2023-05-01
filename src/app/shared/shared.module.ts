@@ -26,6 +26,7 @@ import { CustomDatepickerComponent } from './components/forms/custom-datepicker/
 import { ToggleButtonComponent } from './components/custom-toggle-button/toggle.component';
 import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
 import { CustomUploadDocumentsComponent } from './components/custom-upload-documents/custom-upload-documents.component';
+import { NumberformatDirective } from './directives/phone-format.directive';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { CustomUploadDocumentsComponent } from './components/custom-upload-docum
     ToggleButtonComponent,
     CustomDialogComponent,
     CustomUploadDocumentsComponent,
+    NumberformatDirective,
   ],
   imports: [
     CommonModule,
@@ -72,6 +74,7 @@ import { CustomUploadDocumentsComponent } from './components/custom-upload-docum
     ToggleButtonComponent,
     CustomDialogComponent,
     CustomUploadDocumentsComponent,
+    NumberformatDirective,
   ],
   providers: [LocalStorageService],
 })

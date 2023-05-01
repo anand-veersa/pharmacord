@@ -212,7 +212,8 @@
         "label": "Phone #",
         "placeholder": "Enter your phone #",
         "type": "text",
-        "validators": { "required": true }
+        "subType": "phone",
+        "validators": { "required": true, "min": 14, "max": 14 }
       },
       {
         "name": "street",

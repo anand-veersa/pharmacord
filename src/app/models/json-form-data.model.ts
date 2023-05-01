@@ -18,6 +18,7 @@ export interface JsonFormControls {
   label: string;
   value: any;
   type: string;
+  subType?: string;
   placeholder: string;
   options?: JsonFormControlOptions[];
   validators?: JsonFormValidators;

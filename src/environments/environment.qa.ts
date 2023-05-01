@@ -4,4 +4,5 @@ export const environment = {
   baseUrl: 'https://ext-api.pharmacord.com/portalqa/api/v1.0/',
   pdfHost: 'https://ext-api.pharmacord.com/portalqa',
   baseUrlDoc: 'https://ext-api.pharmacord.com/gatewayqa/api/v1.0/',
+  setTimeoutInterval: 15,
 };

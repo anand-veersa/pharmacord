@@ -38,7 +38,8 @@ export class AuthInterceptor {
         if (
           error instanceof HttpErrorResponse &&
           [401].includes(error.status) &&
-          !modifiedRequest.url.includes('account/refreshToken')
+          !modifiedRequest.url.includes('account/refreshToken') &&
+          !modifiedRequest.url.includes('logout')
         ) {
           return this.handleAuthError(modifiedRequest, next);
         } else if ([401, 403].includes(error.status)) {

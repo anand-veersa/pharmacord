@@ -19,7 +19,6 @@ export class CustomErrorComponent implements OnChanges {
   getErrorMessage() {
     //TODO: OPTIMIZE THIS BLOCK
     this.errorMessage = '';
-    console.log(this.errors);
     if (!this.errors) return;
     const errorKeys = Object.keys(this.errors);
     if (errorKeys.includes('required')) {
