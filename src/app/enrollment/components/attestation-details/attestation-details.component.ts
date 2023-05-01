@@ -20,6 +20,7 @@ export class AttestationDetailsComponent implements OnInit {
     isChecked: true;
     field: JsonFormControls;
   };
+  private attestationConsentClicked: boolean = false;
 
   constructor(
     public submitEnrolService: SubmitEnrollmentService,
@@ -48,33 +49,24 @@ export class AttestationDetailsComponent implements OnInit {
         if (arr.includes(field.name)) {
           if (event.value === 'Download to print and sign')
             field.display = this.showPatientSignature = false;
-          else field.display = this.showPatientSignature = true;
+          else {
+            field.display = this.showPatientSignature = true;
+            // To filter Patient Signature on change of PrescriberSignature too
+            this.setPatientSignatureOptions();
+          }
         }
       });
     }
 
-    if (event.field.name === 'patientSignatureOptions') {
-      this.submitEnrolService.attestationDetails.controls.forEach(field => {
-        if (
-          event.value ===
-            'Authorized Representative will sign the enrollment form' ||
-          event.value === 'Patient Representative will sign the enrollment form'
-        ) {
-          if (field.name === 'patientEmail') field.display = false;
-          else field.display = true;
-        } else if (event.value === 'Patient will sign the enrollment form') {
-          if (
-            field.name === 'patientRepresentativeName' ||
-            field.name === 'relationshipToPatient' ||
-            field.name === 'representativeEmail'
-          )
-            field.display = false;
-          else field.display = true;
-        }
-      });
-    }
+    if (event.field.name === 'patientSignatureOptions')
+      this.setPatientSignatureOptions();
 
     switch (event.field.name) {
+      case 'attestationConsent':
+        this.showConfirmationDialog = false;
+        this.attestationConsentClicked = !this.attestationConsentClicked;
+        this.confirmConsent(this.attestationConsentClicked);
+        break;
       case 'prescriberDeclaration':
         if (event.isChecked) this.showConfirmationDialog = true;
         this.dialogTitle = 'Prescriber Declaration';
@@ -125,11 +117,43 @@ export class AttestationDetailsComponent implements OnInit {
   public confirmConsent(confirmation: boolean): void {
     this.showConfirmationDialog = false;
     if (confirmation) {
-      this.rowClicked.field.value = true;
+      this.submitEnrolService.attestationForm
+        ?.get(this.rowClicked.field.name)
+        ?.setValue(true);
       this.rowClicked.checkboxRef.checked = true;
     } else {
       this.rowClicked.checkboxRef.checked = false;
-      this.rowClicked.field.value = false;
+      this.submitEnrolService.attestationForm
+        ?.get(this.rowClicked.field.name)
+        ?.setValue(false);
     }
+  }
+
+  private setPatientSignatureOptions() {
+    const patientSignatureOptions =
+      this.submitEnrolService.attestationForm?.get(
+        'patientSignatureOptions'
+      )?.value;
+    this.submitEnrolService.attestationDetails.controls.forEach(field => {
+      if (
+        patientSignatureOptions ===
+          'Authorized Representative will sign the enrollment form' ||
+        patientSignatureOptions ===
+          'Patient Representative will sign the enrollment form'
+      ) {
+        if (field.name === 'patientEmail') field.display = false;
+        else field.display = true;
+      } else if (
+        patientSignatureOptions === 'Patient will sign the enrollment form'
+      ) {
+        if (
+          field.name === 'patientRepresentativeName' ||
+          field.name === 'relationshipToPatient' ||
+          field.name === 'representativeEmail'
+        )
+          field.display = false;
+        else field.display = true;
+      }
+    });
   }
 }

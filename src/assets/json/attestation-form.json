@@ -8,6 +8,7 @@
       "placeholder": "",
       "type": "checkbox",
       "validators": { "required": true },
+      "preventDefaultSelection": true,
       "options": [
         {
           "label": "I certify that the information I have entered is complete and accurate to the best of my knowledge. By selecting this option, an email will be sent to the patient for the purpose of obtaining an electronic signature, and the Prescriber identified on this Enrollment Form attests to having received the patient's consent and approval to send emails to the email address entered below.",

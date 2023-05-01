@@ -24,7 +24,7 @@ export class CustomCheckboxComponent implements OnInit {
   @ViewChild('checkbox') checkboxRef: any;
 
   public ngOnInit(): void {
-    if (this.checked.length > 0) {
+    if (this.checked.length > 0 && !this.field.preventDefaultSelection) {
       const formArray = <FormArray>this.form.controls[this.field.name];
       this.checked.forEach(value => formArray.push(new FormControl(value)));
     }
