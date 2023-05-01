@@ -79,11 +79,11 @@
 
     <div class="registration-footer">
       <app-custom-button
-        btnText="< Back to Login"
+        btnText="&lt; Back to Login"
         btnClass="medium secondary"
         (click)="navigateToLogin()"></app-custom-button>
       <app-custom-button
-        btnText="Next"
+        btnText="Next &gt;"
         btnClass="medium tertiary"
         (click)="registrationStep1()"></app-custom-button>
     </div>
@@ -189,7 +189,7 @@
     </div>
     <div class="registration-footer">
       <app-custom-button
-        btnText="< Back"
+        btnText="&lt; Back"
         btnClass="medium secondary"
         (click)="navigateToSelectAccountType()"></app-custom-button>
       <app-custom-button
@@ -199,7 +199,7 @@
           confirmAccountInformationForm.invalid ||
           !invalidUsername
         "
-        btnText="Next >"
+        btnText="Next &gt;"
         btnClass="medium tertiary"
         (click)="registrationStep2()"></app-custom-button>
     </div>
@@ -248,7 +248,7 @@
 
     <div class="registration-footer">
       <app-custom-button
-        btnText="< Back"
+        btnText="&lt; Back"
         btnClass="medium secondary"
         (click)="navigateToSelectAccountType()"></app-custom-button>
       <app-custom-button
@@ -258,42 +258,40 @@
           othersCreateUsernameForm &&
           othersCreateUsernameForm.invalid
         "
-        btnText="Next >"
+        btnText="Next &gt;"
         btnClass="medium tertiary"
         (click)="registrationStep2()"></app-custom-button>
     </div>
   </div>
 
-  <!-- For the Case of Prescriber -->
-  <app-add-facility
-    [title]="addFacilityScreenTitle"
-    [subTitle]="addFacilityScreenSubTitle"
-    requirementFor="prescriberRegistration"
-    (backToParentComponent)="backTriggeredFromStep2($event)"
-    (masterFacilities)="collectMasterFacilities($event)"
-    *ngIf="prescriberAddFacilityScreen"></app-add-facility>
+  <ng-container [ngSwitch]="displayScreen">
+    <!-- first for prescriber -->
+    <app-add-facility
+      *ngSwitchCase="'add-facility-prescriber'"
+      (masterFacilities)="collectMasterFacilities($event)"
+      [title]="addFacilityScreenTitle"
+      [subTitle]="addFacilityScreenSubTitle"
+      requirementFor="prescriberRegistration"
+      (action)="onAction($event)"></app-add-facility>
 
-  <!-- For the case of Others -->
+    <!-- compos for Others -->
+    <app-add-facility
+      *ngSwitchCase="'add-facility-others'"
+      [title]="addFacilityScreenTitle"
+      [subTitle]="addFacilityScreenSubTitle"
+      requirementFor="othersRegistration"
+      (masterFacilities)="collectMasterFacilities($event)"
+      (action)="onAction($event)"></app-add-facility>
 
-  <app-add-facility
-    [title]="addFacilityScreenTitle"
-    [subTitle]="addFacilityScreenSubTitle"
-    requirementFor="othersRegistration"
-    (masterFacilities)="collectMasterFacilities($event)"
-    (backToParentComponent)="moveToOthersFirstScreen($event)"
-    (navigateToNextComponent)="moveToAddProviderScreen($event)"
-    [hidden]="!othersAddFacilityScreen"></app-add-facility>
-
-  <app-add-healthcare-provider
-    [componentTitle]="addProviderScreenTitle"
-    [componentSubTitle]="addProviderScreenSubTitle"
-    [hidden]="!addHealthcareProviderScreen"
-    [newOnboardingFacilities]="facilitiesDataForOthers"
-    (backToParentComponent)="backTriggeredFromStepAddProvider($event)"
-    requirementFor="othersRegistration"
-    (collectPrescriberWithFacility)="
-      collectPrescriberWithFacility($event)
-    "></app-add-healthcare-provider>
+    <app-add-healthcare-provider
+      *ngSwitchCase="'add-healthcare-provider'"
+      [componentTitle]="addProviderScreenTitle"
+      [componentSubTitle]="addProviderScreenSubTitle"
+      [newOnboardingFacilities]="facilitiesDataForOthers"
+      requirementFor="othersRegistration"
+      (collectPrescriberWithFacility)="collectPrescriberWithFacility($event)"
+      (action)="onAction($event)"></app-add-healthcare-provider>
+  </ng-container>
 </div>
 
 <!--  thankyou screen -->

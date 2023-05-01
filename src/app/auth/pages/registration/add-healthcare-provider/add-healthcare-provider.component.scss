@@ -4,7 +4,6 @@
 
   .form-container {
     display: flex;
-    // align-items: end;
     flex-wrap: wrap;
     gap: 1.8rem;
 
@@ -30,13 +29,13 @@
   }
 }
 
-.accordian-container {
+.accordion-container {
   margin-top: 2rem;
 
-  .all-accordians {
+  .all-accordions {
     margin-top: 2rem;
   }
-  .accordian-content {
+  .accordion-content {
     max-height: 21rem;
     overflow: auto;
   }

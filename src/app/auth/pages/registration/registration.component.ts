@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { AuthService } from '../../auth.service';
+import { RegistrationScreenNextData } from '../../../models/registration-form-model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent implements OnInit, OnChanges {
+export class RegistrationComponent implements OnInit {
   public lookupInformationFormData: JsonFormData;
   public lookupInformationForm: FormGroup;
   public confirmAccountInformationFormData: JsonFormData;
@@ -51,6 +52,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
   public stepperLabelsProvider: string[] = ['', '', ''];
   public stepperLabelsHCP: string[] = ['', '', '', ''];
   public stepNumber: number = 0;
+  public displayScreen: string = '';
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -60,61 +62,41 @@ export class RegistrationComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.http
-      .get('/assets/json/lookup-information-form.json')
+      .get('/assets/json/registration-forms.json')
       .subscribe((formData: any) => {
-        this.lookupInformationFormData = formData;
+        this.lookupInformationFormData = formData.lookupInformationForm;
+        this.confirmAccountInformationFormData =
+          formData.confirmAccountInformationForm;
+        this.createUsernameFormData = formData.createUsernamePasswordForm;
         this.lookupInformationForm = this.sharedService.buildForm(
           this.lookupInformationFormData
         );
-      });
-
-    this.http
-      .get('/assets/json/confirm-account-information-form.json')
-      .subscribe((formData: any) => {
-        this.confirmAccountInformationFormData = formData;
         this.confirmAccountInformationForm = this.sharedService.buildForm(
           this.confirmAccountInformationFormData
         );
-      });
-
-    this.http
-      .get('/assets/json/create-username-password-form.json')
-      .subscribe((formData: any) => {
-        this.createUsernameFormData = formData;
         this.createUsernameForm = this.sharedService.buildForm(
           this.createUsernameFormData
         );
-      });
 
-    this.http
-      .get('/assets/json/confirm-account-information-form.json')
-      .subscribe((formData: any) => {
-        this.othersAccountInformationFormData = formData;
+        // others form
+        this.othersAccountInformationFormData =
+          formData.confirmAccountInformationForm;
+        this.othersCreateUsernameFormData = formData.createUsernamePasswordForm;
         this.othersAccountInformationForm = this.sharedService.buildForm(
           this.othersAccountInformationFormData
         );
-      });
-
-    this.http
-      .get('/assets/json/create-username-password-form.json')
-      .subscribe((formData: any) => {
-        this.othersCreateUsernameFormData = formData;
         this.othersCreateUsernameForm = this.sharedService.buildForm(
           this.othersCreateUsernameFormData
         );
       });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes, 'changes in registration component');
-  }
-
-  toggleSelection(): void {
+  public toggleSelection(): void {
     this.othersRegistrationCard = !this.othersRegistrationCard;
     this.prescriberRegistrationCard = !this.othersRegistrationCard;
   }
 
-  registrationStep1(): void {
+  public registrationStep1(): void {
     this.accountTypeSelection = false;
     this.stepNumber++;
     if (this.prescriberRegistrationCard) {
@@ -124,10 +106,11 @@ export class RegistrationComponent implements OnInit, OnChanges {
     }
   }
 
-  registrationStep2(): void {
+  public registrationStep2(): void {
     if (this.prescriberRegistration) {
       this.prescriberRegistration = false;
       this.prescriberAddFacilityScreen = true;
+      this.displayScreen = 'add-facility-prescriber';
       this.UserContactDetails.push({
         FirstName:
           this.confirmAccountInformationForm.controls['confirmAccountFirstName']
@@ -147,6 +130,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
     } else {
       this.othersRegistration = false;
       this.othersAddFacilityScreen = true;
+      this.displayScreen = 'add-facility-others';
       this.UserContactDetails.push({
         FirstName:
           this.othersAccountInformationForm.controls['confirmAccountFirstName']
@@ -166,12 +150,36 @@ export class RegistrationComponent implements OnInit, OnChanges {
     }
   }
 
-  navigateToLogin(): void {
+  public onAction({
+    actionType,
+    formName,
+    form,
+    nextScreen,
+  }: RegistrationScreenNextData): void {
+    this.displayScreen = nextScreen;
+
+    if (actionType === 'back' && this.prescriberRegistrationCard) {
+      this.prescriberAddFacilityScreen = false;
+      this.prescriberRegistration = true;
+      this.displayScreen = '';
+    } else if (actionType === 'back' && nextScreen === 'othersRegistration') {
+      this.othersRegistration = true;
+      this.othersAddFacilityScreen = false;
+    } else if (actionType === 'back' && nextScreen === 'add-facility-others') {
+      this.addHealthcareProviderScreen = false;
+      this.othersAddFacilityScreen = true;
+    } else if (actionType === 'next') {
+      this.othersAddFacilityScreen = false;
+      this.addHealthcareProviderScreen = true;
+    }
+  }
+
+  public navigateToLogin(): void {
     this.router.navigate(['/login']);
     this.stepNumber = 0;
   }
 
-  checkProviderNpi(): void {
+  public checkProviderNpi(): void {
     const payloadGetProviderDetails = {
       NPI: this.lookupInformationForm.get('providerNpi')?.value,
       FirstName: this.lookupInformationForm.get('providerFirstName')?.value,
@@ -244,7 +252,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
     this.accountTypeSelection = true;
   }
 
-  collectMasterFacilities(eventData: { facilities: any }): void {
+  public collectMasterFacilities(eventData: { facilities: any }): void {
     this.facilities = eventData.facilities;
     if (this.prescriberAddFacilityScreen) {
       this.prescriberSaveAndRegisterCall();
@@ -253,19 +261,18 @@ export class RegistrationComponent implements OnInit, OnChanges {
     }
   }
 
-  collectPrescriberWithFacility(eventData: {
+  public collectPrescriberWithFacility(eventData: {
     prescribersWithSelectedFacility: any[];
   }): void {
     this.prescribersWithSelectedFacility =
       eventData.prescribersWithSelectedFacility;
-    console.log(
-      this.prescribersWithSelectedFacility,
-      'facilities came on Save and register'
-    );
     this.othersSaveAndRegisterCall();
   }
 
-  accountFacilitiesRegistration(prevResponse: any, prevPayload: any): void {
+  private accountFacilitiesRegistration(
+    prevResponse: any,
+    prevPayload: any
+  ): void {
     prevPayload['IsNewUser'] = false;
     prevPayload['UserContactDetails'][0]['Id'] = prevResponse.contactId;
     delete prevPayload.PrescriberId;
@@ -282,7 +289,6 @@ export class RegistrationComponent implements OnInit, OnChanges {
         .subscribe({
           next: (res: any) => {
             if (res.Status === 'SUCCESS') {
-              console.log(res.Payload.facilityId, 'facility ID');
               // this.sharedService.isLoading.next(false);
               // this.thankYouScreen = true;
               if (this.othersRegistrationCard) {
@@ -296,6 +302,11 @@ export class RegistrationComponent implements OnInit, OnChanges {
                     prevPayload
                   );
                 }
+              } else if (
+                this.prescriberRegistrationCard &&
+                index === this.facilities.length - 1
+              ) {
+                this.thankYouScreen = true;
               }
             }
           },
@@ -308,7 +319,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
     this.sharedService.isLoading.next(false);
   }
 
-  prescriberSaveAndRegisterCall(): void {
+  public prescriberSaveAndRegisterCall(): void {
     const accountRegistrationPayload = {
       Username: this.createUsernameForm.controls['username'].value,
       EmailAddress:
@@ -328,7 +339,6 @@ export class RegistrationComponent implements OnInit, OnChanges {
     this.authService.accountRegistration(accountRegistrationPayload).subscribe({
       next: (res: any) => {
         if (res.Status === 'SUCCESS') {
-          console.log(res);
           if (res.Errors.length !== 0) {
             this.sharedService.notify('error', res.Errors[0]);
           }
@@ -349,7 +359,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
     // this.thankYouScreen = true;
   }
 
-  othersSaveAndRegisterCall(): void {
+  private othersSaveAndRegisterCall(): void {
     // API call for Others registration will be handle here
     const othersAccountRegistrationPayload = {
       Username: this.othersCreateUsernameForm.controls['username'].value,
@@ -371,7 +381,6 @@ export class RegistrationComponent implements OnInit, OnChanges {
       .subscribe({
         next: (res: any) => {
           if (res.Status === 'SUCCESS') {
-            console.log(res);
             if (res.Errors.length !== 0) {
               this.sharedService.notify('error', res.Errors[0]);
             }
@@ -383,11 +392,6 @@ export class RegistrationComponent implements OnInit, OnChanges {
             );
 
             // this.prescriberFacilitiesRegistration();
-            console.log(
-              res.Payload.contactId,
-              'contact and portalAccId',
-              res.Payload.masterPortalAccountId
-            );
           }
         },
         error: err => {
@@ -395,13 +399,12 @@ export class RegistrationComponent implements OnInit, OnChanges {
           this.sharedService.notify('error', err);
         },
       });
-
-    // after effects of Call
-    // this.addHealthcareProviderScreen = false;
-    // this.thankYouScreen = true;
   }
 
-  prescriberFacilitiesRegistration(prevResponse: any, prevPayload: any): void {
+  private prescriberFacilitiesRegistration(
+    prevResponse: any,
+    prevPayload: any
+  ): void {
     for (const provider of this.prescribersWithSelectedFacility) {
       for (const facilityIndex in this.facilityIdsData) {
         provider.facilities[facilityIndex].Id =
@@ -419,14 +422,12 @@ export class RegistrationComponent implements OnInit, OnChanges {
           PrescriberId: provider.PrescriberId,
           Facilities: this.formatFacilities(provider.facilities),
         };
-
+        this.sharedService.isLoading.next(true);
         this.authService
           .accountRegistration(providerWithFacilitiesPayload)
           .subscribe({
             next: (res: any) => {
-              if (res.Status === 'SUCCESS') {
-                console.log(res);
-              }
+              this.sharedService.isLoading.next(false);
             },
             error: err => {
               this.sharedService.isLoading.next(false);
@@ -435,13 +436,9 @@ export class RegistrationComponent implements OnInit, OnChanges {
           });
       }
     }
-    console.log(
-      this.prescribersWithSelectedFacility,
-      'facilitiesDataForOthers before registration'
-    );
   }
 
-  formatFacilities(facilities: any[]) {
+  private formatFacilities(facilities: any[]) {
     let facilityPayload: any[] = [];
 
     for (const facility of facilities) {
@@ -476,7 +473,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
     return facilityPayload;
   }
 
-  resetLookupForm(): void {
+  public resetLookupForm(): void {
     this.validPrescriberNPI = false;
     this.lookupInformationForm.reset();
     this.lookupInformationForm.controls['providerNpi'].enable();
@@ -485,7 +482,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
     this.confirmAccountInformationForm.reset();
   }
 
-  checkUsername(controlName: string): void {
+  public checkUsername(controlName: string): void {
     if (controlName === 'username') {
       const validateUsernamePayload =
         this.createUsernameForm.controls['username'].value;
@@ -496,7 +493,8 @@ export class RegistrationComponent implements OnInit, OnChanges {
           }
         },
         error: (err: any) => {
-          console.log(err);
+          this.sharedService.isLoading.next(false);
+          this.sharedService.notify('error', err);
         },
       });
     }

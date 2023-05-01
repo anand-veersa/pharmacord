@@ -47,17 +47,15 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('init of account setting');
     this.getAllFacilities();
   }
 
   ngAfterViewInit() {
     this.cdr.detectChanges();
-    console.log('afterViewInit => ', this.tabGroup.selectedIndex);
   }
 
   // collect and update call for each facility coming
-  collectMasterFacilities(eventData: { facilities: any }): void {
+  public collectMasterFacilities(eventData: { facilities: any }): void {
     this.facilities = eventData.facilities;
     const ContactsPayload: any = {
       ...this.authService.user.userDetails,
@@ -69,7 +67,6 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
     };
     delete ContactsPayload['AccountStatus'];
 
-    console.log(ContactsPayload, 'user contact details');
     for (const facility of eventData.facilities) {
       facility.Contacts?.push(ContactsPayload);
       const addFacilityPayload = {
@@ -81,7 +78,6 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
       this.enrolService.updateFacility(addFacilityPayload).subscribe({
         next: (res: any) => {
           if (res.Status === 'SUCCESS') {
-            console.log(res.payload, 'after upload');
             this.getUpdatedProviderDetails();
             this.getAllFacilities();
           }
@@ -93,15 +89,13 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  facilitiesToDelete(eventData: { facilities: any }): void {
-    console.log(eventData.facilities, 'to Delte');
-
+  public facilitiesToDelete(eventData: { facilities: any }): void {
     for (const facility of eventData.facilities) {
       const deletePayload = [facility.Id];
       this.enrolService.deleteFacility(deletePayload).subscribe({
         next: (res: any) => {
           if (res.Status === 'SUCCESS') {
-            console.log(res.Payload, 'after delete payload');
+            console.log(res.Status);
           }
         },
         error: err => {
@@ -111,20 +105,16 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  deleteProviderWithFacilities(eventData: { deletePrescribers: string[] }) {
-    console.log(
-      'delete the prescriber with the ID ',
-      eventData.deletePrescribers
-    );
-    // Url: https://ext-api.pharmacord.com/portaldev/api/v1.0/portal/account/deleteProvider/386
+  public deleteProviderWithFacilities(eventData: {
+    deletePrescribers: string[];
+  }) {
     const deletePrescriber = eventData.deletePrescribers;
-
     if (deletePrescriber.length > 0) {
       this.sharedService.isLoading.next(true);
       this.enrolService.deleteProvider(deletePrescriber).subscribe({
         next: (res: any) => {
           if (res.Status === 'SUCCESS') {
-            console.log('delete provider API success with res', res);
+            console.log(res.Status);
           }
 
           this.sharedService.isLoading.next(false);
@@ -137,7 +127,9 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  updateProviderCall(eventData: { prescribersWithSelectedFacility: any[] }) {
+  public updateProviderCall(eventData: {
+    prescribersWithSelectedFacility: any[];
+  }) {
     let prescriberForUpdateCall: any[] = [];
 
     for (const prescriberNewData of eventData.prescribersWithSelectedFacility) {
@@ -172,8 +164,6 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
 
       // }
     }
-
-    console.log(prescriberForUpdateCall, 'prescriberForUpdateCall');
     // for (const prescriberOldData of this.prescribersWithSelectedFacility){
     //   for(const prescriberNewData of eventData.prescribersWithSelectedFacility){
     //     if (prescriberOldData.NPI === prescriberNewData.NPI){
@@ -237,7 +227,7 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
         this.enrolService.updateFacility(updateFacilityPayload).subscribe({
           next: (res: any) => {
             if (res.Status === 'SUCCESS') {
-              console.log('new prescriber added and Response is', res);
+              console.log(res.Status);
             }
           },
           error: err => {
@@ -250,12 +240,10 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
   }
 
   // here we will have the updated values of all facilities wrt providers
-  getUpdatedProviderDetails(): void {
+  private getUpdatedProviderDetails(): void {
     this.sharedService.isLoading.next(true);
     this.enrolService.getAccountInfo(this.authService.user.username).subscribe({
       next: (res: any) => {
-        console.log(res, 'get updated account info ');
-        // this.formatPrescriberData(res.Payload.Providers);
         for (const provider of res.Payload.Providers) {
           this.providersWithAllFacilities = [
             ...this.providersWithAllFacilities,
@@ -280,7 +268,7 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  updateFacilitiesCall(eventData: { facilitiesToUpdate: any[] }): void {
+  public updateFacilitiesCall(eventData: { facilitiesToUpdate: any[] }): void {
     if (eventData.facilitiesToUpdate.length > 0) {
       for (const facilityData of eventData.facilitiesToUpdate) {
         facilityData.Address = {
@@ -303,7 +291,7 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
         this.enrolService.updateFacilityData(updateFacilityPayload).subscribe({
           next: (res: any) => {
             if (res.Status === 'SUCCESS') {
-              console.log(res, 'response after updating the facility data');
+              console.log(res.Status);
             }
             this.sharedService.isLoading.next(false);
           },
@@ -318,11 +306,10 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
 
   // here we will get the all facilities of HCP working
   // shifted to add-hcp compo
-  getAllFacilities(): void {
+  public getAllFacilities(): void {
     this.sharedService.isLoading.next(true);
     this.enrolService.getFacilities().subscribe({
       next: (res: any) => {
-        console.log(res, 'get facilities data');
         if (res.Status === 'SUCCESS') {
           this.hcpAllFacilities = res.Payload;
           this.facilitiesWithoutProvider = [...res.Payload];
@@ -341,7 +328,7 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
   }
 
   //moved to add-healthcare
-  separateFacilities(): void {
+  private separateFacilities(): void {
     const prescriberData = this.authService.user.prescribers;
 
     for (const provider of prescriberData) {

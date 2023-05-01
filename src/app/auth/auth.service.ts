@@ -129,7 +129,6 @@ export class AuthService {
   }
 
   public accountRegistration(data: any): Observable<any> {
-    console.log(data, 'data in auth service');
     return this.http
       .post(`${environment.baseUrl}account`, data)
       .pipe(catchError(this.handleError));
