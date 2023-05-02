@@ -25,6 +25,7 @@ import { SubmitEnrollmentService } from './pages/submit-enrollment/submit-enroll
 import { SelectServicesComponent } from './components/select-services/select-services.component';
 import { SelectPatientComponent } from './components/select-patient/select-patient.component';
 import { PrescriberDetailsComponent } from './components/prescriber-details/prescriber-details.component';
+import { AuthModule } from '../auth/auth.module';
 import { SelectInsuranceComponent } from './components/select-insurance/select-insurance.component';
 import { AttestationDetailsComponent } from './components/attestation-details/attestation-details.component';
 @NgModule({
@@ -54,6 +55,7 @@ import { AttestationDetailsComponent } from './components/attestation-details/at
     MaterialModule,
     ChartModule,
     PdfJsViewerModule,
+    AuthModule,
   ],
   providers: [EnrollmentService, SubmitEnrollmentService, DatePipe],
 })

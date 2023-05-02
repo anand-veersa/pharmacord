@@ -1,0 +1,48 @@
+{
+  "controls": [
+    {
+      "name": "HCPNPI",
+      "value": "",
+      "label": "HCP NPI",
+      "placeholder": "",
+      "type": "number",
+      "reqErrorMsg": "NPI is a required field",
+      "validityErrorMsg": "",
+      "validators": {
+        "required": true,
+        "max": 10,
+        "min": 10
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "HCPFirstName",
+      "value": "",
+      "label": "HCP First Name",
+      "placeholder": "",
+      "type": "text",
+      "reqErrorMsg": "First Name is a required field",
+      "validityErrorMsg": "",
+      "validators": {
+        "required": true
+      },
+      "required": true,
+      "options": []
+    },
+    {
+      "name": "HCPLastName",
+      "value": "",
+      "label": "HCP Last Name",
+      "placeholder": "",
+      "type": "text",
+      "reqErrorMsg": "Last Name is Required",
+      "validityErrorMsg": "",
+      "validators": {
+        "required": true
+      },
+      "required": true,
+      "options": []
+    }
+  ]
+}
