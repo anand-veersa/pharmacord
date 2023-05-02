@@ -5,7 +5,13 @@
     <div>
       <form [formGroup]="clinicalInfoForm">
         <div
-          *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+          *ngIf="
+            [
+              appConstants.MEDICINES.MEDICINE_1,
+              appConstants.MEDICINES.MEDICINE_2,
+              appConstants.MEDICINES.MEDICINE_3
+            ].includes(medicine)
+          "
           class="form-group">
           <label
             >Patient First Name<span *ngIf="true" class="error-or-required"
@@ -36,7 +42,13 @@
           </div>
         </div>
         <div
-          *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+          *ngIf="
+            [
+              appConstants.MEDICINES.MEDICINE_2,
+              appConstants.MEDICINES.MEDICINE_3,
+              appConstants.MEDICINES.MEDICINE_1
+            ].includes(medicine)
+          "
           class="form-group">
           <label
             >Patient Last Name<span *ngIf="true" class="error-or-required"
@@ -67,7 +79,13 @@
           </div>
         </div>
         <div
-          *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+          *ngIf="
+            [
+              appConstants.MEDICINES.MEDICINE_2,
+              appConstants.MEDICINES.MEDICINE_3,
+              appConstants.MEDICINES.MEDICINE_1
+            ].includes(medicine)
+          "
           class="form-group">
           <label
             >Date of Birth<span *ngIf="true" class="error-or-required"
@@ -103,7 +121,12 @@
           </div>
         </div>
         <div
-          *ngIf="['Zejula', 'Ojjaara'].includes(medicine)"
+          *ngIf="
+            [
+              appConstants.MEDICINES.MEDICINE_2,
+              appConstants.MEDICINES.MEDICINE_3
+            ].includes(medicine)
+          "
           class="form-group">
           <label
             >Treatment Start Date<span *ngIf="false" class="error-or-required"
@@ -139,7 +162,12 @@
           </div>
         </div>
         <div
-          *ngIf="['Zejula', 'Ojjaara'].includes(medicine)"
+          *ngIf="
+            [
+              appConstants.MEDICINES.MEDICINE_2,
+              appConstants.MEDICINES.MEDICINE_3
+            ].includes(medicine)
+          "
           class="form-group">
           <label
             >Primary Diagnosis<span *ngIf="true" class="error-or-required"
@@ -170,7 +198,12 @@
           </div>
         </div>
         <div
-          *ngIf="['Zejula', 'Ojjaara'].includes(medicine)"
+          *ngIf="
+            [
+              appConstants.MEDICINES.MEDICINE_2,
+              appConstants.MEDICINES.MEDICINE_3
+            ].includes(medicine)
+          "
           class="form-group">
           <label
             >Primary Diagnosis ICD-10 Code<span
@@ -206,7 +239,9 @@
             </app-custom-error>
           </div>
         </div>
-        <div *ngIf="['Jemperli'].includes(medicine)" class="form-group">
+        <div
+          *ngIf="[appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
+          class="form-group">
           <label
             >Diagnosis ICD-10 Code<span *ngIf="true" class="error-or-required"
               >*</span
@@ -214,7 +249,13 @@
           >
           <div class="form-radio-group">
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="
+                [
+                  appConstants.MEDICINES.MEDICINE_2,
+                  appConstants.MEDICINES.MEDICINE_3,
+                  appConstants.MEDICINES.MEDICINE_1
+                ].includes(medicine)
+              "
               class="form-radio">
               <input
                 type="radio"
@@ -226,7 +267,13 @@
               >
             </div>
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="
+                [
+                  appConstants.MEDICINES.MEDICINE_2,
+                  appConstants.MEDICINES.MEDICINE_3,
+                  appConstants.MEDICINES.MEDICINE_1
+                ].includes(medicine)
+              "
               class="form-radio">
               <input
                 type="radio"
@@ -255,7 +302,7 @@
                     placeholder: '',
                     type: 'text',
                     validators: { required: true },
-                    for: 'Jemperli'
+                    for: appConstants.MEDICINES.MEDICINE_1
                   }"
                   [errors]="clinicalInfoForm.get('otherICD10Code')?.errors">
                 </app-custom-error>
@@ -263,14 +310,16 @@
             </div>
           </div>
         </div>
-        <!-- <div *ngIf="['Jemperli'].includes(medicine)" class="form-group">
+        <!-- <div *ngIf="[appConstants.MEDICINES.MEDICINE_1].includes(medicine)" class="form-group">
           <label
             >Other ICD Code<span *ngIf="true" class="error-or-required"
               >*</span
             ></label
           >
         </div> -->
-        <div *ngIf="['Jemperli'].includes(medicine)" class="form-group">
+        <div
+          *ngIf="[appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
+          class="form-group">
           <label
             >Mismatch repair status (MMR)<span
               *ngIf="true"
@@ -327,7 +376,9 @@
             </div>
           </div>
         </div>
-        <div *ngIf="['Jemperli'].includes(medicine)" class="form-group">
+        <div
+          *ngIf="[appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
+          class="form-group">
           <label
             >Endometrial cancer prior therapies
             <span *ngIf="true" class="error-or-required">*</span></label
@@ -380,7 +431,12 @@
           </div>
         </div>
         <div
-          *ngIf="['Zejula', 'Ojjaara'].includes(medicine)"
+          *ngIf="
+            [
+              appConstants.MEDICINES.MEDICINE_2,
+              appConstants.MEDICINES.MEDICINE_3
+            ].includes(medicine)
+          "
           class="form-group">
           <label
             >Secondary Diagnosis<span *ngIf="false" class="error-or-required"
@@ -411,7 +467,12 @@
           </div>
         </div>
         <div
-          *ngIf="['Zejula', 'Ojjaara'].includes(medicine)"
+          *ngIf="
+            [
+              appConstants.MEDICINES.MEDICINE_2,
+              appConstants.MEDICINES.MEDICINE_3
+            ].includes(medicine)
+          "
           class="form-group">
           <label
             >Secondary Diagnosis ICD-10 Code<span
@@ -451,18 +512,27 @@
     </div>
     <div
       *ngIf="
-        ['Zejula', 'Ojjaara'].includes(
-          submitEnrolService.enrollmentFormPayload.DrugGroup
-        )
+        [
+          appConstants.MEDICINES.MEDICINE_2,
+          appConstants.MEDICINES.MEDICINE_3
+        ].includes(submitEnrolService.enrollmentFormPayload.DrugGroup)
       "
       class="primary-title flex toggle-panel tm-1 bm-1">
       Current Line Of Therapy
     </div>
     <form [formGroup]="currentLineOfTherapyForm">
-      <div *ngIf="['Zejula'].includes(medicine)" class="form-group row-radio">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)"
+        class="form-group row-radio">
         <div class="form-radio-group row-radio-group">
           <div
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="
+              [
+                appConstants.MEDICINES.MEDICINE_2,
+                appConstants.MEDICINES.MEDICINE_3,
+                appConstants.MEDICINES.MEDICINE_1
+              ].includes(medicine)
+            "
             class="form-radio">
             <input
               type="radio"
@@ -472,7 +542,13 @@
             <label class="form-radio-label">1st line</label>
           </div>
           <div
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="
+              [
+                appConstants.MEDICINES.MEDICINE_2,
+                appConstants.MEDICINES.MEDICINE_3,
+                appConstants.MEDICINES.MEDICINE_1
+              ].includes(medicine)
+            "
             class="form-radio">
             <input
               type="radio"
@@ -482,7 +558,13 @@
             <label class="form-radio-label">2nd line</label>
           </div>
           <div
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="
+              [
+                appConstants.MEDICINES.MEDICINE_2,
+                appConstants.MEDICINES.MEDICINE_3,
+                appConstants.MEDICINES.MEDICINE_1
+              ].includes(medicine)
+            "
             class="form-radio">
             <input
               type="radio"
@@ -492,7 +574,13 @@
             <label class="form-radio-label">3rd line</label>
           </div>
           <div
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="
+              [
+                appConstants.MEDICINES.MEDICINE_2,
+                appConstants.MEDICINES.MEDICINE_3,
+                appConstants.MEDICINES.MEDICINE_1
+              ].includes(medicine)
+            "
             class="form-radio">
             <input
               type="radio"
@@ -502,7 +590,13 @@
             <label class="form-radio-label">4th line</label>
           </div>
           <div
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="
+              [
+                appConstants.MEDICINES.MEDICINE_2,
+                appConstants.MEDICINES.MEDICINE_3,
+                appConstants.MEDICINES.MEDICINE_1
+              ].includes(medicine)
+            "
             class="form-radio">
             <input
               type="radio"
@@ -513,7 +607,9 @@
           </div>
         </div>
       </div>
-      <div *ngIf="['Zejula'].includes(medicine)" class="form-group row-radio">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)"
+        class="form-group row-radio">
         <label
           >BRCA Test<span *ngIf="false" class="error-or-required"
             >*</span
@@ -521,7 +617,13 @@
         >
         <div class="form-radio-group row-radio-group">
           <div
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="
+              [
+                appConstants.MEDICINES.MEDICINE_2,
+                appConstants.MEDICINES.MEDICINE_3,
+                appConstants.MEDICINES.MEDICINE_1
+              ].includes(medicine)
+            "
             class="form-radio">
             <input
               type="radio"
@@ -531,7 +633,13 @@
             <label class="form-radio-label">Positive</label>
           </div>
           <div
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="
+              [
+                appConstants.MEDICINES.MEDICINE_2,
+                appConstants.MEDICINES.MEDICINE_3,
+                appConstants.MEDICINES.MEDICINE_1
+              ].includes(medicine)
+            "
             class="form-radio">
             <input
               type="radio"
@@ -541,7 +649,13 @@
             <label class="form-radio-label">Negative</label>
           </div>
           <div
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="
+              [
+                appConstants.MEDICINES.MEDICINE_2,
+                appConstants.MEDICINES.MEDICINE_3,
+                appConstants.MEDICINES.MEDICINE_1
+              ].includes(medicine)
+            "
             class="form-radio">
             <input
               type="radio"
@@ -551,7 +665,13 @@
             <label class="form-radio-label">Results Pending</label>
           </div>
           <div
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="
+              [
+                appConstants.MEDICINES.MEDICINE_2,
+                appConstants.MEDICINES.MEDICINE_3,
+                appConstants.MEDICINES.MEDICINE_1
+              ].includes(medicine)
+            "
             class="form-radio">
             <input
               type="radio"
@@ -562,13 +682,21 @@
           </div>
         </div>
       </div>
-      <div *ngIf="['Zejula'].includes(medicine)" class="form-group row-radio">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)"
+        class="form-group row-radio">
         <label
           >HRD Test<span *ngIf="false" class="error-or-required">*</span></label
         >
         <div class="form-radio-group row-radio-group">
           <div
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="
+              [
+                appConstants.MEDICINES.MEDICINE_2,
+                appConstants.MEDICINES.MEDICINE_3,
+                appConstants.MEDICINES.MEDICINE_1
+              ].includes(medicine)
+            "
             class="form-radio">
             <input
               type="radio"
@@ -578,7 +706,13 @@
             <label class="form-radio-label">Positive</label>
           </div>
           <div
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="
+              [
+                appConstants.MEDICINES.MEDICINE_2,
+                appConstants.MEDICINES.MEDICINE_3,
+                appConstants.MEDICINES.MEDICINE_1
+              ].includes(medicine)
+            "
             class="form-radio">
             <input
               type="radio"
@@ -588,7 +722,13 @@
             <label class="form-radio-label">Negative</label>
           </div>
           <div
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="
+              [
+                appConstants.MEDICINES.MEDICINE_2,
+                appConstants.MEDICINES.MEDICINE_3,
+                appConstants.MEDICINES.MEDICINE_1
+              ].includes(medicine)
+            "
             class="form-radio">
             <input
               type="radio"
@@ -598,7 +738,13 @@
             <label class="form-radio-label">Results Pending</label>
           </div>
           <div
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="
+              [
+                appConstants.MEDICINES.MEDICINE_2,
+                appConstants.MEDICINES.MEDICINE_3,
+                appConstants.MEDICINES.MEDICINE_1
+              ].includes(medicine)
+            "
             class="form-radio">
             <input
               type="radio"
@@ -609,7 +755,9 @@
           </div>
         </div>
       </div>
-      <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)"
+        class="form-group">
         <label
           >Previous Therapies<span *ngIf="false" class="error-or-required"
             >*</span
@@ -634,7 +782,7 @@
               placeholder: 'Enter your Previous Therapies ',
               type: 'text',
               validators: {},
-              for: 'Ojjaara'
+              for: appConstants.MEDICINES.MEDICINE_3
             }"
             [errors]="
               currentLineOfTherapyForm.get('previousTherapies')?.errors
@@ -642,7 +790,9 @@
           </app-custom-error>
         </div>
       </div>
-      <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)"
+        class="form-group">
         <label
           >Latest Hemoglobin (g/dL)<span *ngIf="false" class="error-or-required"
             >*</span
@@ -667,13 +817,15 @@
               placeholder: 'Enter your Latest Hemoglobin ',
               type: 'text',
               validators: {},
-              for: 'Ojjaara'
+              for: appConstants.MEDICINES.MEDICINE_3
             }"
             [errors]="currentLineOfTherapyForm.get('latestHemoglobin')?.errors">
           </app-custom-error>
         </div>
       </div>
-      <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)"
+        class="form-group">
         <label
           >Date of Last Transfusion<span *ngIf="false" class="error-or-required"
             >*</span
@@ -700,7 +852,7 @@
               placeholder: '',
               type: 'date',
               validators: {},
-              for: 'Ojjaara'
+              for: appConstants.MEDICINES.MEDICINE_3
             }"
             [errors]="
               currentLineOfTherapyForm.get('dateOfLastTransfusion')?.errors
@@ -713,7 +865,14 @@
           </app-custom-datepicker>
         </div>
       </div>
-      <div *ngIf="['Zejula', 'Ojjaara'].includes(medicine)" class="form-group">
+      <div
+        *ngIf="
+          [
+            appConstants.MEDICINES.MEDICINE_2,
+            appConstants.MEDICINES.MEDICINE_3
+          ].includes(medicine)
+        "
+        class="form-group">
         <label
           >Known Drug Allergies<span *ngIf="false" class="error-or-required"
             >*</span
@@ -747,7 +906,14 @@
         </div>
       </div>
       <label><span *ngIf="false" class="error-or-required">*</span></label>
-      <div *ngIf="['Zejula', 'Ojjaara'].includes(medicine)" class="form-group">
+      <div
+        *ngIf="
+          [
+            appConstants.MEDICINES.MEDICINE_2,
+            appConstants.MEDICINES.MEDICINE_3
+          ].includes(medicine)
+        "
+        class="form-group">
         <label
           >Notes<span *ngIf="false" class="error-or-required">*</span></label
         >
@@ -760,10 +926,10 @@
     </form>
     <!-- <div>
       <form [formGroup]="currentLineOfTherapyForm">
-        <div *ngIf="['Zejula'].includes(medicine)" class="form-group row-radio">
+        <div *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)" class="form-group row-radio">
           <div class="form-radio-group row-radio-group">
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-radio">
               <input
                 type="radio"
@@ -773,7 +939,7 @@
               <label class="form-radio-label">1st line</label>
             </div>
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-radio">
               <input
                 type="radio"
@@ -783,7 +949,7 @@
               <label class="form-radio-label">2nd line</label>
             </div>
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-radio">
               <input
                 type="radio"
@@ -793,7 +959,7 @@
               <label class="form-radio-label">3rd line</label>
             </div>
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-radio">
               <input
                 type="radio"
@@ -803,7 +969,7 @@
               <label class="form-radio-label">4th line</label>
             </div>
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-radio">
               <input
                 type="radio"
@@ -814,7 +980,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="['Zejula'].includes(medicine)" class="form-group row-radio">
+        <div *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)" class="form-group row-radio">
           <label
             >BRCA Test<span *ngIf="false" class="error-or-required"
               >*</span
@@ -822,7 +988,7 @@
           >
           <div class="form-radio-group row-radio-group">
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-radio">
               <input
                 type="radio"
@@ -832,7 +998,7 @@
               <label class="form-radio-label">Positive</label>
             </div>
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-radio">
               <input
                 type="radio"
@@ -842,7 +1008,7 @@
               <label class="form-radio-label">Negative</label>
             </div>
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-radio">
               <input
                 type="radio"
@@ -852,7 +1018,7 @@
               <label class="form-radio-label">Results Pending</label>
             </div>
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-radio">
               <input
                 type="radio"
@@ -863,7 +1029,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="['Zejula'].includes(medicine)" class="form-group row-radio">
+        <div *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)" class="form-group row-radio">
           <label
             >HRD Test<span *ngIf="false" class="error-or-required"
               >*</span
@@ -871,7 +1037,7 @@
           >
           <div class="form-radio-group row-radio-group">
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-radio">
               <input
                 type="radio"
@@ -881,7 +1047,7 @@
               <label class="form-radio-label">Positive</label>
             </div>
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-radio">
               <input
                 type="radio"
@@ -891,7 +1057,7 @@
               <label class="form-radio-label">Negative</label>
             </div>
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-radio">
               <input
                 type="radio"
@@ -901,7 +1067,7 @@
               <label class="form-radio-label">Results Pending</label>
             </div>
             <div
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-radio">
               <input
                 type="radio"
@@ -912,7 +1078,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+        <div *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)" class="form-group">
           <label
             >Previous Therapies<span *ngIf="false" class="error-or-required"
               >*</span
@@ -924,7 +1090,7 @@
             class="form-control"
             placeholder="Enter your Previous Therapies " />
         </div>
-        <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+        <div *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)" class="form-group">
           <label
             >Latest Hemoglobin (g/dL)<span
               *ngIf="false"
@@ -938,7 +1104,7 @@
             class="form-control"
             placeholder="Enter your Latest Hemoglobin " />
         </div>
-        <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+        <div *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)" class="form-group">
           <label
             >Date of Last Transfusion<span
               *ngIf="false"
@@ -953,7 +1119,7 @@
             placeholder="" />
         </div>
         <div
-          *ngIf="['Zejula', 'Ojjaara'].includes(medicine)"
+          *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3].includes(medicine)"
           class="form-group">
           <label
             >Known Drug Allergies<span *ngIf="false" class="error-or-required"
@@ -968,7 +1134,7 @@
         </div>
         <label><span *ngIf="false" class="error-or-required">*</span></label>
         <div
-          *ngIf="['Zejula', 'Ojjaara'].includes(medicine)"
+          *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3].includes(medicine)"
           class="form-group">
           <label
             >Notes<span *ngIf="false" class="error-or-required">*</span></label
@@ -1009,9 +1175,10 @@
     {{this.prescriptionInfoForm.value | json}} -->
     <ng-container
       *ngIf="
-        ['Zejula', 'Ojjaara'].includes(
-          submitEnrolService.enrollmentFormPayload.DrugGroup
-        )
+        [
+          appConstants.MEDICINES.MEDICINE_2,
+          appConstants.MEDICINES.MEDICINE_3
+        ].includes(submitEnrolService.enrollmentFormPayload.DrugGroup)
       ">
       <div class="primary-title flex toggle-panel">
         Prescription Information
@@ -1022,7 +1189,9 @@
     </ng-container>
 
     <form [formGroup]="prescriptionInfoForm">
-      <div *ngIf="['Zejula'].includes(medicine)" class="form-group">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)"
+        class="form-group">
         <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
@@ -1050,7 +1219,7 @@
       </div>
       <app-custom-prescription
         *ngIf="
-          ['Zejula'].includes(medicine) &&
+          [appConstants.MEDICINES.MEDICINE_2].includes(medicine) &&
           prescriptionInfoForm?.get('zejStd')?.value?.length! > 0
         "
         [form]="prescriptionInfoForm"
@@ -1059,7 +1228,9 @@
           qty: undefined,
           refills: undefined
         }"></app-custom-prescription>
-      <div *ngIf="['Zejula'].includes(medicine)" class="form-group">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)"
+        class="form-group">
         <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
@@ -1090,7 +1261,7 @@
       </div>
       <app-custom-prescription
         *ngIf="
-          ['Zejula'].includes(medicine) &&
+          [appConstants.MEDICINES.MEDICINE_2].includes(medicine) &&
           prescriptionInfoForm?.get('zejQSP')?.value?.length! > 0
         "
         [form]="prescriptionInfoForm"
@@ -1099,7 +1270,9 @@
           qty: 15,
           refills: 14
         }"></app-custom-prescription>
-      <div *ngIf="['Zejula'].includes(medicine)" class="form-group">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)"
+        class="form-group">
         <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
@@ -1133,7 +1306,7 @@
       </div>
       <app-custom-prescription
         *ngIf="
-          ['Zejula'].includes(medicine) &&
+          [appConstants.MEDICINES.MEDICINE_2].includes(medicine) &&
           prescriptionInfoForm?.get('zejBridge')?.value?.length! > 0
         "
         [form]="prescriptionInfoForm"
@@ -1142,7 +1315,9 @@
           qty: 15,
           refills: 14
         }"></app-custom-prescription>
-      <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)"
+        class="form-group">
         <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
@@ -1172,7 +1347,7 @@
       </div>
       <app-custom-prescription
         *ngIf="
-          ['Ojjaara'].includes(medicine) &&
+          [appConstants.MEDICINES.MEDICINE_3].includes(medicine) &&
           prescriptionInfoForm?.get('ojjaaraStd')?.value?.length! > 0
         "
         [form]="prescriptionInfoForm"
@@ -1181,7 +1356,9 @@
           qty: undefined,
           refills: undefined
         }"></app-custom-prescription>
-      <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)"
+        class="form-group">
         <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
@@ -1214,7 +1391,7 @@
       </div>
       <app-custom-prescription
         *ngIf="
-          ['Ojjaara'].includes(medicine) &&
+          [appConstants.MEDICINES.MEDICINE_3].includes(medicine) &&
           prescriptionInfoForm?.get('ojjaaraQSP')?.value?.length! > 0
         "
         [form]="prescriptionInfoForm"
@@ -1223,7 +1400,9 @@
           qty: 15,
           refills: 14
         }"></app-custom-prescription>
-      <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)"
+        class="form-group">
         <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
@@ -1257,7 +1436,7 @@
       </div>
       <app-custom-prescription
         *ngIf="
-          ['Ojjaara'].includes(medicine) &&
+          [appConstants.MEDICINES.MEDICINE_3].includes(medicine) &&
           prescriptionInfoForm?.get('ojjaaraBridge')?.value?.length! > 0
         "
         [form]="prescriptionInfoForm"
@@ -1266,7 +1445,9 @@
           qty: 15,
           refills: 14
         }"></app-custom-prescription>
-      <div *ngIf="['Jemperli'].includes(medicine)" class="form-group">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
+        class="form-group">
         <div class="form-checkbox-group no-label">
           <div class="form-check">
             <input
@@ -1296,7 +1477,7 @@
       </div>
       <app-custom-prescription
         *ngIf="
-          ['Jemperli'].includes(medicine) &&
+          [appConstants.MEDICINES.MEDICINE_1].includes(medicine) &&
           prescriptionInfoForm?.get('jemperliIV')?.value?.length! > 0
         "
         [form]="prescriptionInfoForm"
@@ -1305,7 +1486,14 @@
           qty: 15,
           refills: 14
         }"></app-custom-prescription>
-      <div *ngIf="['Zejula', 'Ojjaara'].includes(medicine)" class="form-group">
+      <div
+        *ngIf="
+          [
+            appConstants.MEDICINES.MEDICINE_2,
+            appConstants.MEDICINES.MEDICINE_3
+          ].includes(medicine)
+        "
+        class="form-group">
         <label
           >Prescription Signature<span *ngIf="true" class="error-or-required"
             >*</span
@@ -1313,19 +1501,19 @@
         >
         <!-- <select formControlName="prescriptionSignature">
           <option
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
             class="form-check"
             value="">
             Select Prescription Signature
           </option>
           <option
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
             class="form-check"
             value="Dispense as written">
             Dispense as written
           </option>
           <option
-            *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+            *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
             class="form-check"
             value="Substitute Permitted">
             Substitute Permitted
@@ -1338,7 +1526,7 @@
     </form>
     <!-- <div>
       <form [formGroup]="prescriptionInfoForm">
-        <div *ngIf="['Zejula'].includes(medicine)" class="form-group">
+        <div *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)" class="form-group">
           <div class="form-checkbox-group">
             <div class="form-check">
               <input
@@ -1363,7 +1551,7 @@
         </div>
         <app-custom-prescription
           *ngIf="
-            ['Zejula'].includes(medicine) &&
+            [appConstants.MEDICINES.MEDICINE_2].includes(medicine) &&
             prescriptionInfoForm?.get('zejStd')?.value?.length! > 0
           "
           [form]="prescriptionInfoForm"
@@ -1372,7 +1560,7 @@
             qty: 15,
             refills: 14
           }"></app-custom-prescription>
-        <div *ngIf="['Zejula'].includes(medicine)" class="form-group">
+        <div *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)" class="form-group">
           <div class="form-checkbox-group">
             <div class="form-check">
               <input
@@ -1401,7 +1589,7 @@
         </div>
         <app-custom-prescription
           *ngIf="
-            ['Zejula'].includes(medicine) &&
+            [appConstants.MEDICINES.MEDICINE_2].includes(medicine) &&
             prescriptionInfoForm?.get('zejQSP')?.value?.length! > 0
           "
           [form]="prescriptionInfoForm"
@@ -1410,7 +1598,7 @@
             qty: undefined,
             refills: undefined
           }"></app-custom-prescription>
-        <div *ngIf="['Zejula'].includes(medicine)" class="form-group">
+        <div *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)" class="form-group">
           <div class="form-checkbox-group">
             <div class="form-check">
               <input
@@ -1439,7 +1627,7 @@
         </div>
         <app-custom-prescription
           *ngIf="
-            ['Zejula'].includes(medicine) &&
+            [appConstants.MEDICINES.MEDICINE_2].includes(medicine) &&
             prescriptionInfoForm?.get('zejBridge')?.value?.length! > 0
           "
           [form]="prescriptionInfoForm"
@@ -1448,7 +1636,7 @@
             qty: 15,
             refills: 14
           }"></app-custom-prescription>
-        <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+        <div *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)" class="form-group">
           <div class="form-checkbox-group">
             <div class="form-check">
               <input
@@ -1473,7 +1661,7 @@
         </div>
         <app-custom-prescription
           *ngIf="
-            ['Ojjaara'].includes(medicine) &&
+            [appConstants.MEDICINES.MEDICINE_3].includes(medicine) &&
             prescriptionInfoForm?.get('ojjaaraStd')?.value?.length! > 0
           "
           [form]="prescriptionInfoForm"
@@ -1482,7 +1670,7 @@
             qty: undefined,
             refills: undefined
           }"></app-custom-prescription>
-        <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+        <div *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)" class="form-group">
           <div class="form-checkbox-group">
             <div class="form-check">
               <input
@@ -1511,7 +1699,7 @@
         </div>
         <app-custom-prescription
           *ngIf="
-            ['Ojjaara'].includes(medicine) &&
+            [appConstants.MEDICINES.MEDICINE_3].includes(medicine) &&
             prescriptionInfoForm?.get('ojjaaraQSP')?.value?.length! > 0
           "
           [form]="prescriptionInfoForm"
@@ -1520,7 +1708,7 @@
             qty: 15,
             refills: 14
           }"></app-custom-prescription>
-        <div *ngIf="['Ojjaara'].includes(medicine)" class="form-group">
+        <div *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)" class="form-group">
           <div class="form-checkbox-group">
             <div class="form-check">
               <input
@@ -1549,7 +1737,7 @@
         </div>
         <app-custom-prescription
           *ngIf="
-            ['Ojjaara'].includes(medicine) &&
+            [appConstants.MEDICINES.MEDICINE_3].includes(medicine) &&
             prescriptionInfoForm?.get('ojjaaraBridge')?.value?.length! > 0
           "
           [form]="prescriptionInfoForm"
@@ -1558,7 +1746,7 @@
             qty: 15,
             refills: 14
           }"></app-custom-prescription>
-        <div *ngIf="['Jemperli'].includes(medicine)" class="form-group">
+        <div *ngIf="[appConstants.MEDICINES.MEDICINE_1].includes(medicine)" class="form-group">
           <div class="form-checkbox-group">
             <div class="form-check">
               <input
@@ -1583,7 +1771,7 @@
         </div>
         <app-custom-prescription
           *ngIf="
-            ['Jemperli'].includes(medicine) &&
+            [appConstants.MEDICINES.MEDICINE_1].includes(medicine) &&
             prescriptionInfoForm?.get('jemperliIV')?.value?.length! > 0
           "
           [form]="prescriptionInfoForm"
@@ -1593,7 +1781,7 @@
             refills: 14
           }"></app-custom-prescription>
         <div
-          *ngIf="['Zejula', 'Ojjaara'].includes(medicine)"
+          *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3].includes(medicine)"
           class="form-group">
           <label
             >Prescription Signature<span *ngIf="true" class="error-or-required"
@@ -1602,19 +1790,19 @@
           >
           <select formControlName="prescriptionSignature">
             <option
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-check"
               value="">
               Select Prescription Signature
             </option>
             <option
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-check"
               value="Dispense as written">
               Dispense as written
             </option>
             <option
-              *ngIf="['Zejula', 'Ojjaara', 'Jemperli'].includes(medicine)"
+              *ngIf="[appConstants.MEDICINES.MEDICINE_2, appConstants.MEDICINES.MEDICINE_3, appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
               class="form-check"
               value="Substitute Permitted">
               Substitute Permitted
@@ -1626,9 +1814,10 @@
     <div>
       <div
         *ngIf="
-          ['Zejula', 'Ojjaara'].includes(
-            submitEnrolService.enrollmentFormPayload.DrugGroup
-          )
+          [
+            appConstants.MEDICINES.MEDICINE_2,
+            appConstants.MEDICINES.MEDICINE_3
+          ].includes(submitEnrolService.enrollmentFormPayload.DrugGroup)
         "
         class="bg enrollment-form">
         <div class="note-text tm-1">

@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { isArray } from 'lodash';
+import { AppConstants } from 'src/app/constants/app.constants';
 import { SubmitEnrollmentService } from 'src/app/enrollment/pages/submit-enrollment/submit-enrollment.service';
 // import { JsonFormControls } from 'src/app/models/json-form-data.model';
 
@@ -22,11 +23,13 @@ export class SelectPrescriptionComponent implements OnInit {
 
   constructor(
     public submitEnrolService: SubmitEnrollmentService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    public appConstants: AppConstants
   ) {}
 
   ngOnInit(): void {
-    this.medicine = this.submitEnrolService.enrollmentFormPayload.DrugGroup;
+    this.medicine =
+      this.submitEnrolService.enrollmentFormPayload.DrugGroup.toUpperCase();
     if (this.submitEnrolService.clinicalInfoForm?.value) {
       this.clinicalInfoForm.patchValue(
         this.submitEnrolService.clinicalInfoForm.value
