@@ -214,7 +214,11 @@ export class SelectPrescriptionComponent implements OnInit {
     for: 'Ojjaara',
   };
 
-  public onCheckChange(ev: { form: FormGroup; formArrName: string; ev: any }) {
+  public onCheckChange(ev: {
+    form: FormGroup;
+    formArrName: string;
+    ev: any;
+  }): void {
     const form: FormGroup = ev.form;
     const formArrName: string = ev.formArrName;
     const event = ev.ev;
@@ -275,7 +279,7 @@ export class SelectPrescriptionComponent implements OnInit {
     });
   }
 
-  private fillCheckBoxes(persistedform: FormGroup, localForm: FormGroup) {
+  private fillCheckBoxes(persistedform: FormGroup, localForm: FormGroup): void {
     Object.entries(persistedform.value).forEach(([key, value]) => {
       if (isArray(value) && value?.length) {
         value.forEach(e => {

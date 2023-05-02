@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AppConstants } from 'src/app/constants/app.constants';
 import { SubmitEnrollmentService } from 'src/app/enrollment/pages/submit-enrollment/submit-enrollment.service';
@@ -8,7 +8,7 @@ import { SubmitEnrollmentService } from 'src/app/enrollment/pages/submit-enrollm
   templateUrl: './custom-prescription.component.html',
   styleUrls: ['./custom-prescription.component.scss'],
 })
-export class CustomPrescriptionComponent {
+export class CustomPrescriptionComponent implements OnInit {
   @Input() field: any;
   @Input() form: FormGroup;
   @Input() formType: string = '';
@@ -57,7 +57,7 @@ export class CustomPrescriptionComponent {
   isStrengthRequired: boolean;
   isDoaRequired: boolean;
 
-  ngOnChanges() {
+  ngOnInit(): void {
     this.medicineName = this.submitEnrolService.enrollmentFormPayload.DrugGroup;
     this.quantity = this.field.qty;
     this.refills = this.field.refills;
