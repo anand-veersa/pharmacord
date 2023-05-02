@@ -45,7 +45,7 @@
       "label": "Signature Options",
       "placeholder": "Select signature options",
       "type": "select",
-      "class": "bg-enrollment-form max-width-70 bm-2",
+      "class": "bg-enrollment-form attestation-fields-width bm-2",
       "validators": { "required": true },
       "options": [
         {
@@ -142,7 +142,7 @@
       "label": "Signature Options",
       "placeholder": "Select signature options",
       "type": "select",
-      "class": "bg-enrollment-form max-width-70 bm-2",
+      "class": "bg-enrollment-form attestation-fields-width bm-2",
       "validators": { "required": true },
       "options": [
         {
@@ -168,7 +168,7 @@
       "label": "Patient Representative Name",
       "placeholder": "Enter Patient Representative Name",
       "type": "text",
-      "class": "bg-enrollment-form max-width-70 bm-2",
+      "class": "bg-enrollment-form attestation-fields-width bm-2",
       "reqErrorMsg": "Patient Representative Name Required",
       "validators": {
         "required": true
@@ -182,7 +182,7 @@
       "label": "Relationship to Patient",
       "placeholder": "Select Relationship to Patient",
       "type": "select",
-      "class": "bg-enrollment-form max-width-70 bm-2",
+      "class": "bg-enrollment-form attestation-fields-width bm-2",
       "validators": { "required": true },
       "options": [
         {
@@ -222,7 +222,7 @@
       "label": "E-mail of Authorized Representative ",
       "placeholder": "Enter e-mail of Authorized Representative ",
       "type": "email",
-      "class": "bg-enrollment-form max-width-70 bm-2",
+      "class": "bg-enrollment-form attestation-fields-width bm-2",
       "reqErrorMsg": "Email Address Required",
       "validityErrorMsg": "Invalid Email",
       "validators": {
@@ -238,7 +238,7 @@
       "label": "Email of Patient",
       "placeholder": "Enter your email of patient",
       "type": "email",
-      "class": "bg-enrollment-form max-width-70 bm-2",
+      "class": "bg-enrollment-form attestation-fields-width bm-2",
       "reqErrorMsg": "Email Address Required",
       "validityErrorMsg": "Invalid Email",
       "validators": {
