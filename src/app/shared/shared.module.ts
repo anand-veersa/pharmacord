@@ -27,6 +27,7 @@ import { ToggleButtonComponent } from './components/custom-toggle-button/toggle.
 import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
 import { CustomUploadDocumentsComponent } from './components/custom-upload-documents/custom-upload-documents.component';
 import { NumberformatDirective } from './directives/phone-format.directive';
+import { SafePipe } from './pipes/safe-pipe';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { NumberformatDirective } from './directives/phone-format.directive';
     CustomDialogComponent,
     CustomUploadDocumentsComponent,
     NumberformatDirective,
+    SafePipe,
   ],
   imports: [
     CommonModule,
@@ -75,6 +77,7 @@ import { NumberformatDirective } from './directives/phone-format.directive';
     CustomDialogComponent,
     CustomUploadDocumentsComponent,
     NumberformatDirective,
+    SafePipe,
   ],
   providers: [LocalStorageService],
 })

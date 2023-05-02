@@ -1,0 +1,251 @@
+{
+  "controls": [
+    {
+      "name": "attestationConsent",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "validators": { "required": true },
+      "preventDefaultSelection": true,
+      "options": [
+        {
+          "label": "I certify that the information I have entered is complete and accurate to the best of my knowledge. By selecting this option, an email will be sent to the patient for the purpose of obtaining an electronic signature, and the Prescriber identified on this Enrollment Form attests to having received the patient's consent and approval to send emails to the email address entered below.",
+          "value": {
+            "Id": 1,
+            "Name": "attestationConsent"
+          }
+        }
+      ]
+    },
+    {
+      "name": "prescriberDeclaration",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "validators": { "required": true },
+      "preventDefaultSelection": true,
+      "options": [
+        {
+          "label": " I have read and agree to the <span class='dialog-consent'> Prescriber Declaration</span>",
+          "value": {
+            "Id": 2,
+            "Name": "prescriberDeclaration"
+          }
+        }
+      ]
+    },
+    {
+      "name": "prescriberSignatureOptions",
+      "value": "Prescriber will eSign the enrollment form",
+      "display": true,
+      "label": "Signature Options",
+      "placeholder": "Select signature options",
+      "type": "select",
+      "class": "bg-enrollment-form attestation-fields-width bm-2",
+      "validators": { "required": true },
+      "options": [
+        {
+          "label": "Prescriber will eSign the enrollment form",
+          "value": "Prescriber will eSign the enrollment form"
+        },
+        {
+          "label": "Download to print and sign",
+          "value": "Download to print and sign"
+        }
+      ]
+    },
+    {
+      "name": "textingConsent",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "validators": {},
+      "preventDefaultSelection": true,
+      "options": [
+        {
+          "label": "I have read and agree to the <span class='dialog-consent'> Texting Consent</span>",
+          "value": {
+            "Id": 2,
+            "Name": "textingConsent"
+          }
+        }
+      ]
+    },
+    {
+      "name": "patientAssistanceProgram",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "validators": {},
+      "preventDefaultSelection": true,
+      "options": [
+        {
+          "label": "I have read and agree to the <span class='dialog-consent'> Patient Assistance Program Enrollment</span>",
+          "value": {
+            "Id": 2,
+            "Name": "patientAssistanceProgram"
+          }
+        }
+      ]
+    },
+    {
+      "name": "patientSupportProgram",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "validators": {},
+      "preventDefaultSelection": true,
+      "options": [
+        {
+          "label": "I have read and agree to the <span class='dialog-consent'>Patient Support Program (Optional)</span>",
+          "value": {
+            "Id": 2,
+            "Name": "patientSupportProgram"
+          },
+          "for": "Zejula,Ojjaara"
+        }
+      ]
+    },
+    {
+      "name": "hippaAuthorization",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "validators": { "required": true },
+      "preventDefaultSelection": true,
+      "options": [
+        {
+          "label": " I have read and agree to the <span class='dialog-consent'>HIPAA Patient Authorization</span>",
+          "value": {
+            "Id": 2,
+            "Name": "hippaAuthorization"
+          }
+        }
+      ]
+    },
+    {
+      "name": "patientSignatureOptions",
+      "value": "Patient will sign the enrollment form",
+      "display": true,
+      "label": "Signature Options",
+      "placeholder": "Select signature options",
+      "type": "select",
+      "class": "bg-enrollment-form attestation-fields-width bm-2",
+      "validators": { "required": true },
+      "options": [
+        {
+          "label": "Authorized Representative will sign the enrollment form",
+          "value": "Authorized Representative will sign the enrollment form",
+          "for": "Jemperli"
+        },
+        {
+          "label": "Patient Representative will sign the enrollment form",
+          "value": "Patient Representative will sign the enrollment form",
+          "for": "Zejula,Ojjaara"
+        },
+        {
+          "label": "Patient will sign the enrollment form",
+          "value": "Patient will sign the enrollment form"
+        }
+      ]
+    },
+    {
+      "name": "patientRepresentativeName",
+      "value": "",
+      "display": false,
+      "label": "Patient Representative Name",
+      "placeholder": "Enter Patient Representative Name",
+      "type": "text",
+      "class": "bg-enrollment-form attestation-fields-width bm-2",
+      "reqErrorMsg": "Patient Representative Name Required",
+      "validators": {
+        "required": true
+      },
+      "options": {}
+    },
+    {
+      "name": "relationshipToPatient",
+      "value": "",
+      "display": false,
+      "label": "Relationship to Patient",
+      "placeholder": "Select Relationship to Patient",
+      "type": "select",
+      "class": "bg-enrollment-form attestation-fields-width bm-2",
+      "validators": { "required": true },
+      "options": [
+        {
+          "label": "Unknown",
+          "value": "UNKNOWN"
+        },
+        {
+          "label": "Spouse",
+          "value": "SPOUSE"
+        },
+        {
+          "label": "Father",
+          "value": "FATHER"
+        },
+        {
+          "label": "Mother",
+          "value": "MOTHER"
+        },
+        {
+          "label": "Dependent",
+          "value": "DEPENDENT"
+        },
+        {
+          "label": "Self",
+          "value": "SELF"
+        },
+        {
+          "label": "Other",
+          "value": "OTHER"
+        }
+      ]
+    },
+    {
+      "name": "representativeEmail",
+      "value": "",
+      "display": false,
+      "label": "E-mail of Authorized Representative ",
+      "placeholder": "Enter e-mail of Authorized Representative ",
+      "type": "email",
+      "class": "bg-enrollment-form attestation-fields-width bm-2",
+      "reqErrorMsg": "Email Address Required",
+      "validityErrorMsg": "Invalid Email",
+      "validators": {
+        "required": true,
+        "pattern": "^\\S+@\\S+\\.\\S+$"
+      },
+      "required": true
+    },
+    {
+      "name": "patientEmail",
+      "value": "",
+      "display": true,
+      "label": "Email of Patient",
+      "placeholder": "Enter your email of patient",
+      "type": "email",
+      "class": "bg-enrollment-form attestation-fields-width bm-2",
+      "reqErrorMsg": "Email Address Required",
+      "validityErrorMsg": "Invalid Email",
+      "validators": {
+        "required": true,
+        "pattern": "^\\S+@\\S+\\.\\S+$"
+      },
+      "required": true
+    }
+  ]
+}

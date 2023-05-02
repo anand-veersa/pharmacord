@@ -29,6 +29,7 @@ export interface JsonFormControls {
   extLink?: string;
   display?: boolean;
   disabled?: boolean;
+  preventDefaultSelection?: boolean;
 }
 export interface JsonFormData {
   controls: JsonFormControls[];

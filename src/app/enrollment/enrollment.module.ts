@@ -27,6 +27,7 @@ import { SelectPatientComponent } from './components/select-patient/select-patie
 import { PrescriberDetailsComponent } from './components/prescriber-details/prescriber-details.component';
 import { AuthModule } from '../auth/auth.module';
 import { SelectInsuranceComponent } from './components/select-insurance/select-insurance.component';
+import { AttestationDetailsComponent } from './components/attestation-details/attestation-details.component';
 @NgModule({
   declarations: [
     EnrollmentComponent,
@@ -45,6 +46,7 @@ import { SelectInsuranceComponent } from './components/select-insurance/select-i
     SelectPatientComponent,
     PrescriberDetailsComponent,
     SelectInsuranceComponent,
+    AttestationDetailsComponent,
   ],
   imports: [
     CommonModule,

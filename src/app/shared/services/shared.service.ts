@@ -83,7 +83,7 @@ export class SharedService {
   public buildForm(formData: JsonFormData): FormGroup {
     const formControl: { [key: string]: any } = {};
     formData.controls.forEach(field => {
-      if (field.type === 'checkbox') {
+      if (field.type === 'checkbox' && !field.preventDefaultSelection) {
         formControl[field.name] = new FormArray([]);
       } else {
         formControl[field.name] = new FormControl({

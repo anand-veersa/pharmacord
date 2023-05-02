@@ -10,9 +10,11 @@
   border-radius: 5px;
   background: white;
   z-index: 1000;
-  width: 61rem;
-  height: 27rem;
 
+  &-content {
+    max-height: 30rem;
+    overflow-y: auto;
+  }
   .title {
     background-color: $color-tertiary;
   }
@@ -22,5 +24,8 @@
     align-items: center;
     padding: 1.5rem 2rem;
     color: $color-white;
+  }
+  .justify-center {
+    justify-content: center;
   }
 }

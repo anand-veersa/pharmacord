@@ -31,7 +31,7 @@ export class CustomFormComponent implements AfterViewInit {
   @Input() inputPrefix: string;
   @Input() customErrorMsg: string;
   @Input() isCustomError: boolean;
-  @Input() checked: any[];
+  @Input() checked: any[] = [];
   @Output() action = new EventEmitter();
 
   public supportedDynamicComponents = [
@@ -89,9 +89,13 @@ export class CustomFormComponent implements AfterViewInit {
     if (componentInstance === CustomCheckboxComponent) {
       dynamicComponent.setInput('checked', this.checked);
     }
-    if (componentInstance === CustomSelectComponent) {
-      dynamicComponent.instance.action.subscribe((data: string | number) =>
-        this.action.emit(data)
+    if (
+      componentInstance === CustomSelectComponent ||
+      componentInstance === CustomCheckboxComponent
+    ) {
+      dynamicComponent.instance.action.subscribe(
+        (data: string | number | { value: string | number; field: any }) =>
+          this.action.emit(data)
       );
     }
     this.changeDetectorRef.detectChanges();
