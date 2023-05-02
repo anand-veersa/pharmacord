@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { isArray } from 'lodash';
 import { SubmitEnrollmentService } from 'src/app/enrollment/pages/submit-enrollment/submit-enrollment.service';
 // import { JsonFormControls } from 'src/app/models/json-form-data.model';
 
@@ -23,9 +24,55 @@ export class SelectPrescriptionComponent implements OnInit {
     public submitEnrolService: SubmitEnrollmentService,
     public fb: FormBuilder
   ) {}
-  medicine = '';
+
   ngOnInit(): void {
     this.medicine = this.submitEnrolService.enrollmentFormPayload.DrugGroup;
+    if (this.submitEnrolService.clinicalInfoForm?.value) {
+      this.clinicalInfoForm.patchValue(
+        this.submitEnrolService.clinicalInfoForm.value
+      );
+    }
+    if (this.submitEnrolService.currentLineOfTherapyForm?.value) {
+      this.currentLineOfTherapyForm.patchValue(
+        this.submitEnrolService.currentLineOfTherapyForm.value
+      );
+    }
+    if (this.submitEnrolService.prescriptionInfoForm?.value) {
+      console.log(
+        'svc val',
+        this.submitEnrolService.prescriptionInfoForm.value
+      );
+      // console.log(Object.entries(this.submitEnrolService.prescriptionInfoForm.value));
+      // debugger;
+      // this.prescriptionInfoForm.patchValue(this.submitEnrolService.prescriptionInfoForm.value);
+
+      this.prescriptionInfoForm.patchValue(
+        this.submitEnrolService.prescriptionInfoForm.value
+      );
+
+      // let newVal = this.submitEnrolService.prescriptionInfoForm.value;
+      Object.entries(
+        this.submitEnrolService.prescriptionInfoForm.value
+      ).forEach(([key, value]) => {
+        // let newArr = [];
+        if (isArray(value) && value?.length) {
+          // newArr = value.map((e:any)=>new FormControl(e));
+          value.forEach(e => {
+            this.onCheckChange({
+              form: this.prescriptionInfoForm,
+              formArrName: key,
+              ev: { target: { checked: true, value: e } },
+            });
+          });
+          // newVal[key]=newArr;
+          // console.log(`${key} set to `)
+          // this.prescriptionInfoForm.get(key)?.patchValue(newArr);
+        }
+      });
+      // console.log('newVal',newVal);
+      // this.prescriptionInfoForm.patchValue(newVal);
+      console.log('presForm', this.prescriptionInfoForm);
+    }
 
     this.clinicalInfoForm
       .get('diagnosisICD10Code')
@@ -36,15 +83,16 @@ export class SelectPrescriptionComponent implements OnInit {
           ]);
           this.clinicalInfoForm.controls['otherICD10Code'].enable();
         } else {
-          this.clinicalInfoForm.controls['otherICD10Code'].disable();
           this.clinicalInfoForm.controls['otherICD10Code'].setValidators(null);
+          this.clinicalInfoForm.controls['otherICD10Code'].disable();
         }
         this.clinicalInfoForm.controls[
           'otherICD10Code'
         ].updateValueAndValidity();
       });
   }
-  onCheckChange(ev: any) {
+
+  onCheckChange(ev: { form: FormGroup; formArrName: string; ev: any }) {
     const form: FormGroup = ev.form;
     const formArrName: string = ev.formArrName;
     const event = ev.ev;
@@ -71,6 +119,30 @@ export class SelectPrescriptionComponent implements OnInit {
       });
     }
   }
+
+  checkOneMedicineSelected(): boolean {
+    // console.log(this.prescriptionInfoForm.get('jemperliIV')?.value?.length,!!this.prescriptionInfoForm.get('jemperliIV')?.value?.length);
+    // return this.prescriptionInfoForm.get('jemperliIV')?.value?.length;
+    if (this.medicine === 'Zejula') {
+      return !!(
+        this.prescriptionInfoForm.get('zejStd')?.value?.length ||
+        this.prescriptionInfoForm.get('zejQSP')?.value?.length ||
+        this.prescriptionInfoForm.get('zejBridge')?.value?.length
+      );
+    } else if (this.medicine === 'Ojjaara') {
+      return !!(
+        this.prescriptionInfoForm.get('ojjaaraStd')?.value?.length ||
+        this.prescriptionInfoForm.get('ojjaaraQSP')?.value?.length ||
+        this.prescriptionInfoForm.get('ojjaaraBridge')?.value?.length
+      );
+    } else if (this.medicine === 'Jemperli') {
+      return !!this.prescriptionInfoForm.get('jemperliIV')?.value?.length;
+    }
+    return false;
+  }
+
+  medicine = '';
+
   clinicalInfoForm = this.fb.group({
     patientFirstName: ['', Validators.required],
     patientLastName: ['', Validators.required],
@@ -99,51 +171,51 @@ export class SelectPrescriptionComponent implements OnInit {
     zejStd: this.fb.array([]),
     zejStdPres: this.fb.group({
       strength: [],
-      qty: [{ value: undefined, disabled: false }],
-      refills: [{ value: undefined, disabled: false }],
-      doa: [undefined],
+      qty: [{ value: null, disabled: false }],
+      refills: [{ value: null, disabled: false }],
+      doa: [null],
     }),
     zejQSP: this.fb.array([]),
     zejQSPPres: this.fb.group({
       strength: [],
       qty: [{ value: 15, disabled: true }],
       refills: [{ value: 14, disabled: true }],
-      doa: [undefined],
+      doa: [null],
     }),
     zejBridge: this.fb.array([]),
     zejBridgePres: this.fb.group({
       strength: [],
       qty: [{ value: 15, disabled: true }],
       refills: [{ value: 14, disabled: true }],
-      doa: [undefined],
+      doa: [null],
     }),
     ojjaaraStd: this.fb.array([]),
     ojjaaraStdPres: this.fb.group({
       strength: [],
-      qty: [{ value: undefined, disabled: false }],
-      refills: [{ value: undefined, disabled: false }],
-      doa: [undefined],
+      qty: [{ value: null, disabled: false }],
+      refills: [{ value: null, disabled: false }],
+      doa: [null],
     }),
     ojjaaraQSP: this.fb.array([]),
     ojjaaraQSPPres: this.fb.group({
       strength: [],
       qty: [{ value: 15, disabled: true }],
       refills: [{ value: 14, disabled: true }],
-      doa: [undefined],
+      doa: [null],
     }),
     ojjaaraBridge: this.fb.array([]),
     ojjaaraBridgePres: this.fb.group({
       strength: [],
       qty: [{ value: 15, disabled: true }],
       refills: [{ value: 14, disabled: true }],
-      doa: [undefined],
+      doa: [null],
     }),
     jemperliIV: this.fb.array([]),
     jemperliIVPres: this.fb.group({
       strength: [],
       qty: [{ value: 15, disabled: true }],
       refills: [{ value: 14, disabled: true }],
-      doa: [undefined],
+      doa: [null],
     }),
     prescriptionSignature: ['', Validators.required],
   });
@@ -239,6 +311,11 @@ export class SelectPrescriptionComponent implements OnInit {
   // }
 
   public onAction(actionType: string): void {
+    this.submitEnrolService.clinicalInfoForm = this.clinicalInfoForm;
+    this.submitEnrolService.currentLineOfTherapyForm =
+      this.currentLineOfTherapyForm;
+    this.submitEnrolService.prescriptionInfoForm = this.prescriptionInfoForm;
+
     this.action.emit({
       actionType,
       formName: 'select-prescription',
@@ -248,7 +325,7 @@ export class SelectPrescriptionComponent implements OnInit {
         ...this.prescriptionInfoForm.value,
       },
       nextScreen:
-        actionType === 'back' ? 'select-medication' : 'attestation-details',
+        actionType === 'back' ? 'select-insurance' : 'attestation-details',
     });
   }
 }

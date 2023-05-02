@@ -48,6 +48,10 @@ export class SubmitEnrollmentService {
   public appealForm: FormGroup;
   public appealDetails: JsonFormData = { controls: [] };
 
+  public prescriptionInfoForm: FormGroup;
+  public clinicalInfoForm: FormGroup;
+  public currentLineOfTherapyForm: FormGroup;
+
   public enrollmentFormPayload: EnrollmentFormPayload;
   constructor(
     private authService: AuthService,
