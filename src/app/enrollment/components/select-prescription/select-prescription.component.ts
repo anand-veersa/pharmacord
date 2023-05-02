@@ -31,17 +31,43 @@ export class SelectPrescriptionComponent implements OnInit {
       this.clinicalInfoForm.patchValue(
         this.submitEnrolService.clinicalInfoForm.value
       );
+      Object.entries(this.submitEnrolService.clinicalInfoForm.value).forEach(
+        ([key, value]) => {
+          if (isArray(value) && value?.length) {
+            value.forEach(e => {
+              this.onCheckChange({
+                form: this.clinicalInfoForm,
+                formArrName: key,
+                ev: { target: { checked: true, value: e } },
+              });
+            });
+          }
+        }
+      );
     }
     if (this.submitEnrolService.currentLineOfTherapyForm?.value) {
       this.currentLineOfTherapyForm.patchValue(
         this.submitEnrolService.currentLineOfTherapyForm.value
       );
+      Object.entries(
+        this.submitEnrolService.currentLineOfTherapyForm.value
+      ).forEach(([key, value]) => {
+        if (isArray(value) && value?.length) {
+          value.forEach(e => {
+            this.onCheckChange({
+              form: this.currentLineOfTherapyForm,
+              formArrName: key,
+              ev: { target: { checked: true, value: e } },
+            });
+          });
+        }
+      });
     }
     if (this.submitEnrolService.prescriptionInfoForm?.value) {
-      console.log(
-        'svc val',
-        this.submitEnrolService.prescriptionInfoForm.value
-      );
+      // console.log(
+      //   'svc val',
+      //   this.submitEnrolService.prescriptionInfoForm.value
+      // );
       // console.log(Object.entries(this.submitEnrolService.prescriptionInfoForm.value));
       // debugger;
       // this.prescriptionInfoForm.patchValue(this.submitEnrolService.prescriptionInfoForm.value);
@@ -71,7 +97,7 @@ export class SelectPrescriptionComponent implements OnInit {
       });
       // console.log('newVal',newVal);
       // this.prescriptionInfoForm.patchValue(newVal);
-      console.log('presForm', this.prescriptionInfoForm);
+      // console.log('presForm', this.prescriptionInfoForm);
     }
 
     this.clinicalInfoForm
