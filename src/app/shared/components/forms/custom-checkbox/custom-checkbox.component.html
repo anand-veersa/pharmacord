@@ -1,13 +1,23 @@
 <form [formGroup]="form">
-  <ul class="checkbox-group">
+  <ul [ngClass]="field.class">
     <li
       class="checkbox"
       *ngFor="let option of field.options; let index = index">
       <mat-checkbox
+        #checkbox
         color="primary"
         [checked]="isSame(checked, option.value)"
         (change)="onChecked($event.checked, option.value, index)">
-        {{ option.label }}
+        <span *ngIf="field.validators?.required" class="error-or-required"
+          >*</span
+        >
+        <span
+          *ngIf="field.preventDefaultSelection; else else_block"
+          [innerHTML]="field.options?.[0]!.label | safe : 'html'">
+        </span>
+        <ng-template #else_block>
+          {{ option.label }}
+        </ng-template>
       </mat-checkbox>
     </li>
   </ul>

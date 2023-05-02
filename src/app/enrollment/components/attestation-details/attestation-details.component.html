@@ -1,0 +1,68 @@
+<div class="attestaion-container enroll-form">
+  <div class="flex-container">
+    <span class="primary-title">Attestation</span>
+    <div class="error-or-required">* Required field</div>
+  </div>
+
+  <div *ngIf="submitEnrolService.attestationForm" class="medication-list tm-1">
+    <div
+      *ngFor="let control of submitEnrolService.attestationDetails?.controls"
+      class="input-fields">
+      <div
+        *ngIf="
+          control.name === 'prescriberDeclaration' ||
+          control.name === 'textingConsent'
+        "
+        class="tm-2">
+        <span class="primary-title">{{
+          control.name === 'prescriberDeclaration'
+            ? 'Prescriber Signature'
+            : showPatientSignature
+            ? 'Patient Signature'
+            : ''
+        }}</span>
+        <p>
+          {{
+            control.name === 'prescriberDeclaration'
+              ? "Please select the submission method for the prescriber's authorization"
+              : showPatientSignature
+              ? 'Please select the submission method for the patient authorization'
+              : ''
+          }}
+        </p>
+      </div>
+      <app-custom-form
+        *ngIf="control.display"
+        formType="bg-enrollment-form"
+        [field]="control"
+        [form]="submitEnrolService.attestationForm"
+        (action)="clickedConsent($event)"></app-custom-form>
+    </div>
+  </div>
+</div>
+
+<div class="action-panel">
+  <app-custom-button
+    btnClass="small secondary"
+    btnText="&#60; Back"
+    (action)="onAction('back')"></app-custom-button>
+  <app-custom-button
+    btnClass="small tertiary"
+    btnText="Next &#62;"
+    [isDisabled]="
+      submitEnrolService.attestationForm &&
+      submitEnrolService.attestationForm.invalid
+    "
+    (action)="onAction('next')"></app-custom-button>
+</div>
+
+<app-custom-dialog
+  *ngIf="showConfirmationDialog"
+  [data]="{
+    title: dialogTitle,
+    confirmText: 'Ok',
+    noOfButtons: 1,
+    htmlString: dialogDescription
+  }"
+  (action)="confirmConsent($event)">
+</app-custom-dialog>
