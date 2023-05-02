@@ -4,4 +4,5 @@ export const environment = {
   baseUrl: 'https://ext-api.pharmacord.com/portal/api/v1.0/',
   clientId: 'lSkjsH08FkxDQofy9grbJE8g460qjA8T',
   baseUrlDoc: 'https://ext-api.pharmacord.com/gateway/api/v1.0/',
+  setTimeoutInterval: 15,
 };

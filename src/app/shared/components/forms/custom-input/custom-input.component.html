@@ -5,6 +5,7 @@
     [ngClass]="{ disabled: field.disabled }">
     <span matPrefix *ngIf="inputPrefix"><mat-icon>search</mat-icon></span>
     <input
+      *ngIf="field.subType !== 'phone'"
       matInput
       [ngClass]="{ 'common-form-input': formType !== 'login' }"
       class="form-field-input"
@@ -12,6 +13,20 @@
       [formControlName]="field.name"
       [type]="field.type"
       [placeholder]="field.placeholder" />
+
+    <input
+      *ngIf="field.subType === 'phone'"
+      matInput
+      [ngClass]="{ 'common-form-input': formType !== 'login' }"
+      class="form-field-input"
+      floatLabel="false"
+      [formControlName]="field.name"
+      [type]="field.type"
+      [placeholder]="field.placeholder"
+      [data]="form.controls[field.name].value"
+      [maxlength]="field.validators?.max ?? null"
+      [maxlength]="field.validators?.max ?? null"
+      appNumberformat />
   </mat-form-field>
 
   <div *ngIf="field.type === 'file'">
