@@ -14,9 +14,7 @@
           "
           class="form-group">
           <label
-            >Patient First Name<span *ngIf="true" class="error-or-required"
-              >*</span
-            ></label
+            >Patient First Name<span class="error-or-required">*</span></label
           >
           <div class="form-control-with-error">
             <input
@@ -51,9 +49,7 @@
           "
           class="form-group">
           <label
-            >Patient Last Name<span *ngIf="true" class="error-or-required"
-              >*</span
-            ></label
+            >Patient Last Name<span class="error-or-required">*</span></label
           >
           <div class="form-control-with-error">
             <input
@@ -87,11 +83,7 @@
             ].includes(medicine)
           "
           class="form-group">
-          <label
-            >Date of Birth<span *ngIf="true" class="error-or-required"
-              >*</span
-            ></label
-          >
+          <label>Date of Birth<span class="error-or-required">*</span></label>
           <div class="form-control-with-error">
             <app-custom-datepicker
               [form]="clinicalInfoForm"
@@ -126,9 +118,7 @@
           "
           class="form-group">
           <label
-            >Primary Diagnosis<span *ngIf="true" class="error-or-required"
-              >*</span
-            ></label
+            >Primary Diagnosis<span class="error-or-required">*</span></label
           >
           <div class="form-control-with-error">
             <input
@@ -162,9 +152,7 @@
           "
           class="form-group">
           <label
-            >Primary Diagnosis ICD-10 Code<span
-              *ngIf="true"
-              class="error-or-required"
+            >Primary Diagnosis ICD-10 Code<span class="error-or-required"
               >*</span
             ></label
           >
@@ -199,7 +187,7 @@
           *ngIf="[appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
           class="form-group">
           <label
-            >Diagnosis ICD-10 Code<span *ngIf="true" class="error-or-required"
+            >Diagnosis ICD-10 Code<span class="error-or-required"
               >*</span
             ></label
           >
@@ -271,9 +259,7 @@
           *ngIf="[appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
           class="form-group">
           <label
-            >Mismatch repair status (MMR)<span
-              *ngIf="true"
-              class="error-or-required"
+            >Mismatch repair status (MMR)<span class="error-or-required"
               >*</span
             ></label
           >
@@ -331,7 +317,7 @@
           class="form-group">
           <label
             >Endometrial cancer prior therapies
-            <span *ngIf="true" class="error-or-required">*</span></label
+            <span class="error-or-required">*</span></label
           >
           <div class="form-checkbox-group">
             <div class="form-check">
@@ -1147,8 +1133,7 @@
               value="JemperliIV" />
             <div>
               <label class="form-check-label large-bold"
-                >JEMPERLI IV
-                <span *ngIf="true" class="error-or-required">*</span></label
+                >JEMPERLI IV <span class="error-or-required">*</span></label
               >
             </div>
           </div>
@@ -1174,9 +1159,7 @@
         "
         class="form-group">
         <label
-          >Prescription Signature<span *ngIf="true" class="error-or-required"
-            >*</span
-          ></label
+          >Prescription Signature<span class="error-or-required">*</span></label
         >
 
         <app-custom-select
