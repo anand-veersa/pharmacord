@@ -4,10 +4,10 @@
     <div class="error-or-required">* Required field</div>
   </div>
 
-  <div class="medication-list tm-1" *ngIf="submitEnrolService.attestationForm">
+  <div *ngIf="submitEnrolService.attestationForm" class="medication-list tm-1">
     <div
-      class="input-fields"
-      *ngFor="let control of submitEnrolService.attestationDetails?.controls">
+      *ngFor="let control of submitEnrolService.attestationDetails?.controls"
+      class="input-fields">
       <div
         *ngIf="
           control.name === 'prescriberDeclaration' ||
