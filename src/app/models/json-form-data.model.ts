@@ -7,6 +7,7 @@ interface JsonFormValidators {
   pattern?: string;
   nullValidator?: boolean;
   match?: boolean;
+  passwordPattern?: true;
 }
 export interface JsonFormControlOptions {
   label: string;

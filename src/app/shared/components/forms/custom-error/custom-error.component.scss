@@ -1,7 +1,16 @@
+@import '../../../../../assets/styles/abstracts/variables';
+
 .error-message {
   // position: absolute;
 }
 
 .invalid-username {
   position: absolute;
+}
+
+.success {
+  color: $color-success;
+}
+.error {
+  color: $color-error;
 }
