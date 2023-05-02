@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SubmitEnrollmentService } from 'src/app/enrollment/pages/submit-enrollment/submit-enrollment.service';
-import { JsonFormControls } from 'src/app/models/json-form-data.model';
 
 @Component({
   selector: 'app-custom-prescription',
@@ -66,8 +65,6 @@ export class CustomPrescriptionComponent {
 
     this.isStrengthRequired = this.medicineName === 'Ojjaara';
     this.isDoaRequired = this.medicineName === 'Zejula';
-
-    console.log('custom pres', this.form);
   }
 
   doa = 'Take 1 tablet orally once daily with or without food';

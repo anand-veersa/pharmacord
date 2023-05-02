@@ -9,10 +9,6 @@
         <input type="text" value="100 mg capsules" disabled />
       </div>
       <div *ngIf="['Ojjaara'].includes(medicineName)" class="value" disabled>
-        <!-- <app-custom-radio
-            [field]="radio"
-            [form]="form.get(field.name)!"
-            formType="sg pres-form"></app-custom-radio> -->
         <mat-radio-group
           [ngClass]="
             radio.class === 'block-radio'
@@ -28,7 +24,6 @@
             *ngFor="let option of radio.options"
             [value]="option.value"
             color="primary">
-            <!-- (change)="onChange($event)" -->
             {{ option.label }}
           </mat-radio-button>
         </mat-radio-group>

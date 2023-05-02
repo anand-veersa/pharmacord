@@ -10,7 +10,6 @@ import {
 import { isArray } from 'lodash';
 import { AppConstants } from 'src/app/constants/app.constants';
 import { SubmitEnrollmentService } from 'src/app/enrollment/pages/submit-enrollment/submit-enrollment.service';
-// import { JsonFormControls } from 'src/app/models/json-form-data.model';
 
 @Component({
   selector: 'app-select-prescription',
@@ -67,25 +66,14 @@ export class SelectPrescriptionComponent implements OnInit {
       });
     }
     if (this.submitEnrolService.prescriptionInfoForm?.value) {
-      // console.log(
-      //   'svc val',
-      //   this.submitEnrolService.prescriptionInfoForm.value
-      // );
-      // console.log(Object.entries(this.submitEnrolService.prescriptionInfoForm.value));
-      // debugger;
-      // this.prescriptionInfoForm.patchValue(this.submitEnrolService.prescriptionInfoForm.value);
-
       this.prescriptionInfoForm.patchValue(
         this.submitEnrolService.prescriptionInfoForm.value
       );
 
-      // let newVal = this.submitEnrolService.prescriptionInfoForm.value;
       Object.entries(
         this.submitEnrolService.prescriptionInfoForm.value
       ).forEach(([key, value]) => {
-        // let newArr = [];
         if (isArray(value) && value?.length) {
-          // newArr = value.map((e:any)=>new FormControl(e));
           value.forEach(e => {
             this.onCheckChange({
               form: this.prescriptionInfoForm,
@@ -93,14 +81,8 @@ export class SelectPrescriptionComponent implements OnInit {
               ev: { target: { checked: true, value: e } },
             });
           });
-          // newVal[key]=newArr;
-          // console.log(`${key} set to `)
-          // this.prescriptionInfoForm.get(key)?.patchValue(newArr);
         }
       });
-      // console.log('newVal',newVal);
-      // this.prescriptionInfoForm.patchValue(newVal);
-      // console.log('presForm', this.prescriptionInfoForm);
     }
 
     this.clinicalInfoForm
@@ -128,18 +110,13 @@ export class SelectPrescriptionComponent implements OnInit {
 
     const formArray: FormArray = form.get(formArrName) as FormArray;
 
-    /* Selected */
     if (event.target.checked) {
-      // Add a new control in the arrayForm
       formArray.push(new FormControl(event.target.value));
     } else {
-      /* unselected */
-      // find the unselected element
       let i: number = 0;
 
       formArray.controls.forEach((ctrl: AbstractControl<any, any>) => {
         if (ctrl.value == event.target.value) {
-          // Remove the unselected element from the arrayForm
           formArray.removeAt(i);
           return;
         }
@@ -150,8 +127,6 @@ export class SelectPrescriptionComponent implements OnInit {
   }
 
   checkOneMedicineSelected(): boolean {
-    // console.log(this.prescriptionInfoForm.get('jemperliIV')?.value?.length,!!this.prescriptionInfoForm.get('jemperliIV')?.value?.length);
-    // return this.prescriptionInfoForm.get('jemperliIV')?.value?.length;
     if (this.medicine === 'Zejula') {
       return !!(
         this.prescriptionInfoForm.get('zejStd')?.value?.length ||
@@ -308,36 +283,6 @@ export class SelectPrescriptionComponent implements OnInit {
     validators: {},
     for: 'Ojjaara',
   };
-
-  // onCheckboxClick(ev: any) {
-  //   console.log('checkbox click', ev);
-  //   this.submitEnrolService.prescriptionInfoDetails.controls.forEach(
-  //     (control: JsonFormControls) => {
-  //       if (control.name === `${ev.field.name}Pres`) {
-  //         if (ev.isChecked) {
-  //           control.display = true;
-  //         } else {
-  //           control.display = false;
-  //         }
-  //       }
-  //     }
-  //   );
-  // }
-
-  // onRadioClick(ev: any) {
-  //   console.log(ev);
-  //   this.submitEnrolService.clinicalInfoDetails.controls.forEach(
-  //     (control: JsonFormControls) => {
-  //       if (control.name === 'otherICD10Code') {
-  //         if (ev === 'Other') {
-  //           control.display = true;
-  //         } else {
-  //           control.display = false;
-  //         }
-  //       }
-  //     }
-  //   );
-  // }
 
   public onAction(actionType: string): void {
     this.submitEnrolService.clinicalInfoForm = this.clinicalInfoForm;
