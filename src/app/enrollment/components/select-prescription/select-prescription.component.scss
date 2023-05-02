@@ -1,12 +1,13 @@
 @import '../../../../assets/styles/abstracts/variables';
 @import '../../../../assets/styles/abstracts/mixins';
+
 .form-group {
-  font-family: 'Roboto';
+  font-family: $primary-font;
   font-style: normal;
   font-weight: 500;
   font-size: 1.4rem;
   line-height: 1.6rem;
-  color: #5b5b5b;
+  color: $color-sub-header;
 
   margin-top: 1rem;
   display: flex;
@@ -16,7 +17,6 @@
   & > label {
     flex-basis: 40%;
     min-height: 3.5rem;
-    // max-height: 4rem;
   }
 
   &.row-radio {
@@ -24,7 +24,7 @@
   }
 
   textarea {
-    font-family: 'Roboto';
+    font-family: $primary-font;
     font-style: normal;
     font-size: 1.6rem;
     font-weight: 400;
@@ -44,10 +44,9 @@
   padding-top: 0.5rem;
   padding-bottom: 0.6rem;
   padding-left: 1.2rem;
-  border: 1px solid #adadad;
+  border: 1px solid $color-grey-border;
   border-radius: 5px;
   color: rgb(85, 86, 91);
-  // color: rgb(85, 86, 91, 0.4);
 }
 
 .form-control-with-error {
@@ -111,13 +110,10 @@
 }
 
 .form-check {
-  // margin-top: 1rem;
   display: flex;
   margin-top: 1rem;
-  // align-items: baseline;
 }
 .form-radio {
-  // margin-top: 1rem;
   display: flex;
   margin-top: 1rem;
   align-items: baseline;

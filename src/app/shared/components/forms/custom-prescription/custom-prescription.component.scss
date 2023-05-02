@@ -15,11 +15,11 @@
   line-height: 1.6rem;
 
   input {
-    border: 1px solid #adadad;
+    border: 1px solid $color-grey-border;
     border-radius: 5px;
     min-height: 2.5rem;
     &:disabled {
-      background: #e1e1e1;
+      background: $color-disabled-input;
       color: #55565b;
       border: none;
     }
@@ -119,8 +119,7 @@
     width: 3.2rem;
     height: 2.2rem;
     text-align: center;
-    // background: #ffffff;
-    border: 1px solid #adadad;
+    border: 1px solid $color-grey-border;
     border-radius: 5px;
   }
   &-value {
