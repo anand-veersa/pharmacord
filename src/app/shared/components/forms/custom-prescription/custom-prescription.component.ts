@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { AppConstants } from 'src/app/constants/app.constants';
 import { SubmitEnrollmentService } from 'src/app/enrollment/pages/submit-enrollment/submit-enrollment.service';
 
 @Component({
@@ -11,7 +12,10 @@ export class CustomPrescriptionComponent {
   @Input() field: any;
   @Input() form: FormGroup;
   @Input() formType: string = '';
-  constructor(private submitEnrolService: SubmitEnrollmentService) {}
+  constructor(
+    private submitEnrolService: SubmitEnrollmentService,
+    private appConstants: AppConstants
+  ) {}
 
   radio = {
     name: 'strength',
@@ -38,6 +42,7 @@ export class CustomPrescriptionComponent {
     ],
     for: 'Zejula',
   };
+  doa = 'Take 1 tablet orally once daily with or without food';
   medicineName = '';
 
   quantity: undefined | number;
@@ -63,9 +68,11 @@ export class CustomPrescriptionComponent {
     this.isQtyRequired = this.field.refills ? false : true;
     this.isRefillsRequired = this.field.refills ? false : true;
 
-    this.isStrengthRequired = this.medicineName === 'Ojjaara';
-    this.isDoaRequired = this.medicineName === 'Zejula';
+    this.isStrengthRequired =
+      this.medicineName.toLowerCase() ===
+      this.appConstants.MEDICINES.MEDICINE_3.toLowerCase();
+    this.isDoaRequired =
+      this.medicineName.toLowerCase() ===
+      this.appConstants.MEDICINES.MEDICINE_2.toLowerCase();
   }
-
-  doa = 'Take 1 tablet orally once daily with or without food';
 }

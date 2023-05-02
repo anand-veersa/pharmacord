@@ -33,56 +33,28 @@ export class SelectPrescriptionComponent implements OnInit {
       this.clinicalInfoForm.patchValue(
         this.submitEnrolService.clinicalInfoForm.value
       );
-      Object.entries(this.submitEnrolService.clinicalInfoForm.value).forEach(
-        ([key, value]) => {
-          if (isArray(value) && value?.length) {
-            value.forEach(e => {
-              this.onCheckChange({
-                form: this.clinicalInfoForm,
-                formArrName: key,
-                ev: { target: { checked: true, value: e } },
-              });
-            });
-          }
-        }
+      this.fillCheckBoxes(
+        this.submitEnrolService.clinicalInfoForm,
+        this.clinicalInfoForm
       );
     }
     if (this.submitEnrolService.currentLineOfTherapyForm?.value) {
       this.currentLineOfTherapyForm.patchValue(
         this.submitEnrolService.currentLineOfTherapyForm.value
       );
-      Object.entries(
-        this.submitEnrolService.currentLineOfTherapyForm.value
-      ).forEach(([key, value]) => {
-        if (isArray(value) && value?.length) {
-          value.forEach(e => {
-            this.onCheckChange({
-              form: this.currentLineOfTherapyForm,
-              formArrName: key,
-              ev: { target: { checked: true, value: e } },
-            });
-          });
-        }
-      });
+      this.fillCheckBoxes(
+        this.submitEnrolService.currentLineOfTherapyForm,
+        this.currentLineOfTherapyForm
+      );
     }
     if (this.submitEnrolService.prescriptionInfoForm?.value) {
       this.prescriptionInfoForm.patchValue(
         this.submitEnrolService.prescriptionInfoForm.value
       );
-
-      Object.entries(
-        this.submitEnrolService.prescriptionInfoForm.value
-      ).forEach(([key, value]) => {
-        if (isArray(value) && value?.length) {
-          value.forEach(e => {
-            this.onCheckChange({
-              form: this.prescriptionInfoForm,
-              formArrName: key,
-              ev: { target: { checked: true, value: e } },
-            });
-          });
-        }
-      });
+      this.fillCheckBoxes(
+        this.submitEnrolService.prescriptionInfoForm,
+        this.prescriptionInfoForm
+      );
     }
 
     this.clinicalInfoForm
@@ -101,48 +73,6 @@ export class SelectPrescriptionComponent implements OnInit {
           'otherICD10Code'
         ].updateValueAndValidity();
       });
-  }
-
-  onCheckChange(ev: { form: FormGroup; formArrName: string; ev: any }) {
-    const form: FormGroup = ev.form;
-    const formArrName: string = ev.formArrName;
-    const event = ev.ev;
-
-    const formArray: FormArray = form.get(formArrName) as FormArray;
-
-    if (event.target.checked) {
-      formArray.push(new FormControl(event.target.value));
-    } else {
-      let i: number = 0;
-
-      formArray.controls.forEach((ctrl: AbstractControl<any, any>) => {
-        if (ctrl.value == event.target.value) {
-          formArray.removeAt(i);
-          return;
-        }
-
-        i++;
-      });
-    }
-  }
-
-  checkOneMedicineSelected(): boolean {
-    if (this.medicine === 'Zejula') {
-      return !!(
-        this.prescriptionInfoForm.get('zejStd')?.value?.length ||
-        this.prescriptionInfoForm.get('zejQSP')?.value?.length ||
-        this.prescriptionInfoForm.get('zejBridge')?.value?.length
-      );
-    } else if (this.medicine === 'Ojjaara') {
-      return !!(
-        this.prescriptionInfoForm.get('ojjaaraStd')?.value?.length ||
-        this.prescriptionInfoForm.get('ojjaaraQSP')?.value?.length ||
-        this.prescriptionInfoForm.get('ojjaaraBridge')?.value?.length
-      );
-    } else if (this.medicine === 'Jemperli') {
-      return !!this.prescriptionInfoForm.get('jemperliIV')?.value?.length;
-    }
-    return false;
   }
 
   medicine = '';
@@ -284,6 +214,48 @@ export class SelectPrescriptionComponent implements OnInit {
     for: 'Ojjaara',
   };
 
+  public onCheckChange(ev: { form: FormGroup; formArrName: string; ev: any }) {
+    const form: FormGroup = ev.form;
+    const formArrName: string = ev.formArrName;
+    const event = ev.ev;
+
+    const formArray: FormArray = form.get(formArrName) as FormArray;
+
+    if (event.target.checked) {
+      formArray.push(new FormControl(event.target.value));
+    } else {
+      let i: number = 0;
+
+      formArray.controls.forEach((ctrl: AbstractControl<any, any>) => {
+        if (ctrl.value == event.target.value) {
+          formArray.removeAt(i);
+          return;
+        }
+
+        i++;
+      });
+    }
+  }
+
+  public checkOneMedicineSelected(): boolean {
+    if (this.medicine === 'Zejula') {
+      return !!(
+        this.prescriptionInfoForm.get('zejStd')?.value?.length ||
+        this.prescriptionInfoForm.get('zejQSP')?.value?.length ||
+        this.prescriptionInfoForm.get('zejBridge')?.value?.length
+      );
+    } else if (this.medicine === 'Ojjaara') {
+      return !!(
+        this.prescriptionInfoForm.get('ojjaaraStd')?.value?.length ||
+        this.prescriptionInfoForm.get('ojjaaraQSP')?.value?.length ||
+        this.prescriptionInfoForm.get('ojjaaraBridge')?.value?.length
+      );
+    } else if (this.medicine === 'Jemperli') {
+      return !!this.prescriptionInfoForm.get('jemperliIV')?.value?.length;
+    }
+    return false;
+  }
+
   public onAction(actionType: string): void {
     this.submitEnrolService.clinicalInfoForm = this.clinicalInfoForm;
     this.submitEnrolService.currentLineOfTherapyForm =
@@ -300,6 +272,20 @@ export class SelectPrescriptionComponent implements OnInit {
       },
       nextScreen:
         actionType === 'back' ? 'select-insurance' : 'attestation-details',
+    });
+  }
+
+  private fillCheckBoxes(persistedform: FormGroup, localForm: FormGroup) {
+    Object.entries(persistedform.value).forEach(([key, value]) => {
+      if (isArray(value) && value?.length) {
+        value.forEach(e => {
+          this.onCheckChange({
+            form: localForm,
+            formArrName: key,
+            ev: { target: { checked: true, value: e } },
+          });
+        });
+      }
     });
   }
 }
