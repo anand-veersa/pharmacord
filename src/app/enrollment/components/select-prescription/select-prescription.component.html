@@ -22,21 +22,18 @@
               formControlName="patientFirstName"
               class="form-control"
               placeholder="Enter your First name" />
-            <app-custom-error
-              *ngIf="clinicalInfoForm.controls['patientFirstName'].touched"
-              [form]="clinicalInfoForm"
-              [field]="{
-                name: 'patientFirstName',
-                value: '',
-                display: true,
-                label: 'Patient First Name',
-                placeholder: 'Enter your First name',
-                type: 'text',
-                validators: { required: true },
-                for: 'Zejula, Ojjaara, Jemperli'
-              }"
-              [errors]="clinicalInfoForm.get('patientFirstName')?.errors">
-            </app-custom-error>
+
+            <mat-error
+              *ngIf="
+                clinicalInfoForm.controls['patientFirstName'].touched &&
+                clinicalInfoForm.get('patientFirstName')?.errors
+              "
+              class="error-message">
+              <div
+                *ngIf="clinicalInfoForm.get('patientFirstName')?.errors?.['required']">
+                Patient First Name is required
+              </div>
+            </mat-error>
           </div>
         </div>
         <div
@@ -57,21 +54,18 @@
               formControlName="patientLastName"
               class="form-control"
               placeholder="Enter your Last Name " />
-            <app-custom-error
-              *ngIf="clinicalInfoForm.controls['patientLastName'].touched"
-              [form]="clinicalInfoForm"
-              [field]="{
-                name: 'patientLastName',
-                value: '',
-                display: true,
-                label: 'Patient Last Name',
-                placeholder: 'Enter your Last Name ',
-                type: 'text',
-                validators: { required: true },
-                for: 'Zejula, Ojjaara, Jemperli'
-              }"
-              [errors]="clinicalInfoForm.get('patientLastName')?.errors">
-            </app-custom-error>
+
+            <mat-error
+              *ngIf="
+                clinicalInfoForm.controls['patientLastName'].touched &&
+                clinicalInfoForm.get('patientLastName')?.errors
+              "
+              class="error-message">
+              <div
+                *ngIf="clinicalInfoForm.get('patientLastName')?.errors?.['required']">
+                Patient Last Name is required
+              </div>
+            </mat-error>
           </div>
         </div>
         <div
@@ -126,21 +120,18 @@
               formControlName="primaryDiagnosis"
               class="form-control"
               placeholder="Enter your Primary Diagnosis" />
-            <app-custom-error
-              *ngIf="clinicalInfoForm.controls['primaryDiagnosis'].touched"
-              [form]="clinicalInfoForm"
-              [field]="{
-                name: 'primaryDiagnosis',
-                value: '',
-                display: true,
-                label: 'Primary Diagnosis',
-                placeholder: 'Enter your Primary Diagnosis',
-                type: 'text',
-                validators: { required: true },
-                for: 'Zejula, Ojjaara'
-              }"
-              [errors]="clinicalInfoForm.get('primaryDiagnosis')?.errors">
-            </app-custom-error>
+
+            <mat-error
+              *ngIf="
+                clinicalInfoForm.controls['primaryDiagnosis'].touched &&
+                clinicalInfoForm.get('primaryDiagnosis')?.errors
+              "
+              class="error-message">
+              <div
+                *ngIf="clinicalInfoForm.get('primaryDiagnosis')?.errors?.['required']">
+                Patient Diagnosis is required
+              </div>
+            </mat-error>
           </div>
         </div>
         <div
@@ -162,25 +153,19 @@
               formControlName="primaryDiagnosisICD10Code"
               class="form-control"
               placeholder="Enter your Primary Diagnosis ICD-10 Code" />
-            <app-custom-error
+
+            <mat-error
               *ngIf="
-                clinicalInfoForm.controls['primaryDiagnosisICD10Code'].touched
-              "
-              [form]="clinicalInfoForm"
-              [field]="{
-                name: 'primaryDiagnosisICD10Code',
-                value: '',
-                display: true,
-                label: 'Primary Diagnosis ICD-10 Code',
-                placeholder: 'Enter your Primary Diagnosis ICD-10 Code',
-                type: 'text',
-                validators: { required: true },
-                for: 'Zejula, Ojjaara'
-              }"
-              [errors]="
+                clinicalInfoForm.controls['primaryDiagnosisICD10Code']
+                  .touched &&
                 clinicalInfoForm.get('primaryDiagnosisICD10Code')?.errors
-              ">
-            </app-custom-error>
+              "
+              class="error-message">
+              <div
+                *ngIf="clinicalInfoForm.get('primaryDiagnosisICD10Code')?.errors?.['required']">
+                Patient Diagnosis ICD 10 Code is required
+              </div>
+            </mat-error>
           </div>
         </div>
         <div
@@ -235,21 +220,18 @@
                     'Other'
                   "
                   placeholder="" />
-                <app-custom-error
-                  *ngIf="clinicalInfoForm.controls['otherICD10Code'].touched"
-                  [form]="clinicalInfoForm"
-                  [field]="{
-                    name: 'otherICD10Code',
-                    value: '',
-                    display: false,
-                    label: 'Other ICD Code',
-                    placeholder: '',
-                    type: 'text',
-                    validators: { required: true },
-                    for: appConstants.MEDICINES.MEDICINE_1
-                  }"
-                  [errors]="clinicalInfoForm.get('otherICD10Code')?.errors">
-                </app-custom-error>
+
+                <mat-error
+                  *ngIf="
+                    clinicalInfoForm.controls['otherICD10Code'].touched &&
+                    clinicalInfoForm.get('otherICD10Code')?.errors
+                  "
+                  class="error-message">
+                  <div
+                    *ngIf="clinicalInfoForm.get('otherICD10Code')?.errors?.['required']">
+                    Other ICD 10 Code is required
+                  </div>
+                </mat-error>
               </div>
             </div>
           </div>
@@ -385,21 +367,6 @@
               formControlName="secondaryDiagnosis"
               class="form-control"
               placeholder="Enter your Secondary Diagnosis" />
-            <app-custom-error
-              *ngIf="clinicalInfoForm.controls['secondaryDiagnosis'].touched"
-              [form]="clinicalInfoForm"
-              [field]="{
-                name: 'secondaryDiagnosis',
-                value: '',
-                display: true,
-                label: 'Secondary Diagnosis',
-                placeholder: 'Enter your Secondary Diagnosis',
-                type: 'text',
-                validators: {},
-                for: 'Zejula, Ojjaara'
-              }"
-              [errors]="clinicalInfoForm.get('secondaryDiagnosis')?.errors">
-            </app-custom-error>
           </div>
         </div>
         <div
@@ -423,25 +390,6 @@
               formControlName="secondaryDiagnosisICD10Code"
               class="form-control"
               placeholder="Enter your Secondary Diagnosis ICD-10 Code" />
-            <app-custom-error
-              *ngIf="
-                clinicalInfoForm.controls['secondaryDiagnosisICD10Code'].touched
-              "
-              [form]="clinicalInfoForm"
-              [field]="{
-                name: 'secondaryDiagnosisICD10Code',
-                value: '',
-                display: true,
-                label: 'Secondary Diagnosis ICD-10 Code',
-                placeholder: 'Enter your Secondary Diagnosis ICD-10 Code',
-                type: 'text',
-                validators: {},
-                for: 'Zejula, Ojjaara'
-              }"
-              [errors]="
-                clinicalInfoForm.get('secondaryDiagnosisICD10Code')?.errors
-              ">
-            </app-custom-error>
           </div>
         </div>
       </form>
@@ -705,25 +653,6 @@
             formControlName="previousTherapies"
             class="form-control"
             placeholder="Enter your Previous Therapies " />
-          <app-custom-error
-            *ngIf="
-              currentLineOfTherapyForm.controls['previousTherapies'].touched
-            "
-            [form]="currentLineOfTherapyForm"
-            [field]="{
-              name: 'previousTherapies',
-              value: '',
-              display: true,
-              label: 'Previous Therapies',
-              placeholder: 'Enter your Previous Therapies ',
-              type: 'text',
-              validators: {},
-              for: appConstants.MEDICINES.MEDICINE_3
-            }"
-            [errors]="
-              currentLineOfTherapyForm.get('previousTherapies')?.errors
-            ">
-          </app-custom-error>
         </div>
       </div>
       <div
@@ -740,23 +669,6 @@
             formControlName="latestHemoglobin"
             class="form-control"
             placeholder="Enter your Latest Hemoglobin " />
-          <app-custom-error
-            *ngIf="
-              currentLineOfTherapyForm.controls['latestHemoglobin'].touched
-            "
-            [form]="currentLineOfTherapyForm"
-            [field]="{
-              name: 'latestHemoglobin',
-              value: '',
-              display: true,
-              label: 'Latest Hemoglobin (g/dL)',
-              placeholder: 'Enter your Latest Hemoglobin ',
-              type: 'text',
-              validators: {},
-              for: appConstants.MEDICINES.MEDICINE_3
-            }"
-            [errors]="currentLineOfTherapyForm.get('latestHemoglobin')?.errors">
-          </app-custom-error>
         </div>
       </div>
       <div
@@ -793,25 +705,6 @@
             formControlName="knownDrugAllergies"
             class="form-control"
             placeholder="Enter your Known Drug Allergies" />
-          <app-custom-error
-            *ngIf="
-              currentLineOfTherapyForm.controls['knownDrugAllergies'].touched
-            "
-            [form]="currentLineOfTherapyForm"
-            [field]="{
-              name: 'knownDrugAllergies',
-              value: '',
-              display: true,
-              label: 'Known Drug Allergies',
-              placeholder: 'Enter your Known Drug Allergies',
-              type: 'text',
-              validators: {},
-              for: 'Zejula , Ojjaara '
-            }"
-            [errors]="
-              currentLineOfTherapyForm.get('knownDrugAllergies')?.errors
-            ">
-          </app-custom-error>
         </div>
       </div>
       <label><span *ngIf="false" class="error-or-required">*</span></label>
@@ -1195,6 +1088,7 @@
     btnClass="small tertiary"
     btnText="Next &#62;"
     [isDisabled]="
+      false &&
       prescriptionInfoForm.invalid &&
       clinicalInfoForm.invalid &&
       currentLineOfTherapyForm.invalid

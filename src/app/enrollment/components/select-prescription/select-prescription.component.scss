@@ -129,3 +129,7 @@
   justify-content: space-between;
   margin-top: 3rem;
 }
+
+:host ::ng-deep .mat-mdc-form-field-bottom-align::before {
+  display: unset;
+}
