@@ -63,12 +63,10 @@ export class SelectPrescriberComponent implements OnInit, OnDestroy {
           prescriberListJson: this.submitEnrolService.prescribersJson,
           selectPrescriberForm: this.submitEnrolService.prescriberForm,
         });
-        // this.getPrescriberFacilities(this.submitEnrolService.selectedFacilityId);
 
         this.subscription =
           this.submitEnrolService.selectedPrescriberId.subscribe(
             (prescriberId: number) => {
-              console.log(prescriberId, 'sfsads');
               if (!prescriberId) return;
               this.getPrescriberFacilities(prescriberId);
             }
