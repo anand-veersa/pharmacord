@@ -1,0 +1,135 @@
+@import '../../../../assets/styles/abstracts/variables';
+@import '../../../../assets/styles/abstracts/mixins';
+
+.form-group {
+  font-family: $primary-font;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  color: $color-sub-header;
+
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+  & > label {
+    flex-basis: 40%;
+    min-height: 3.5rem;
+  }
+
+  &.row-radio {
+    display: block;
+  }
+
+  textarea {
+    font-family: $primary-font;
+    font-style: normal;
+    font-size: 1.6rem;
+    font-weight: 400;
+  }
+
+  app-custom-select {
+    flex-basis: 60%;
+  }
+}
+
+.form-control {
+  min-height: 3.5rem;
+  max-height: 4rem;
+  font-weight: 500;
+  font-size: 1.6rem;
+  flex-basis: 60%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.6rem;
+  padding-left: 1.2rem;
+  border: 1px solid $color-grey-border;
+  border-radius: 5px;
+  color: rgb(85, 86, 91);
+}
+
+.form-control-with-error {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 60%;
+  font-size: 1.2rem;
+  .form-control {
+    flex-basis: unset;
+  }
+}
+
+.form-checkbox-group {
+  flex-basis: 60%;
+
+  &.no-label {
+    flex-basis: unset;
+  }
+
+  input[type='checkbox'] {
+    accent-color: $checkbox-color;
+    margin-right: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.form-radio-group {
+  flex-basis: 60%;
+
+  &.row-radio-group {
+    display: flex;
+
+    .form-radio {
+      flex-basis: 20%;
+      font-weight: 500;
+      font-size: 1.4rem;
+    }
+  }
+
+  input[type='radio'] {
+    accent-color: $color-secondary;
+    margin-right: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.form-radio-group,
+.form-control,
+.form-checkbox-group {
+  .large-bold {
+    font-weight: 500;
+    font-size: 1.4rem;
+  }
+
+  .subLabel {
+    font-weight: 400;
+    font-size: 1.4rem;
+  }
+}
+
+.form-check {
+  display: flex;
+  margin-top: 1rem;
+}
+.form-radio {
+  display: flex;
+  margin-top: 1rem;
+  align-items: baseline;
+}
+
+.label-with-input {
+  flex-basis: 12%;
+}
+
+.action-panel {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 3rem;
+}
+
+:host ::ng-deep .mat-mdc-form-field-bottom-align::before {
+  display: unset;
+}

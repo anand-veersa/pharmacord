@@ -1,0 +1,33 @@
+@import '../../../../../assets/styles/abstracts/variables';
+
+:host ::ng-deep {
+  .mat-mdc-form-field {
+    width: 100%;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+  .mdc-line-ripple {
+    &::before {
+      display: none;
+    }
+  }
+  .mat-mdc-form-field-flex {
+    max-height: 35px;
+  }
+
+  .mat-mdc-text-field-wrapper {
+    background-color: unset;
+    border: 1px solid $color-grey-border;
+    border-radius: 4px;
+  }
+
+  .mat-mdc-form-field-infix {
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    min-height: 3.5rem;
+    max-height: 4rem;
+  }
+}

@@ -27,6 +27,8 @@ import { SelectPatientComponent } from './components/select-patient/select-patie
 import { PrescriberDetailsComponent } from './components/prescriber-details/prescriber-details.component';
 import { AuthModule } from '../auth/auth.module';
 import { SelectInsuranceComponent } from './components/select-insurance/select-insurance.component';
+import { SelectPrescriptionComponent } from './components/select-prescription/select-prescription.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AttestationDetailsComponent } from './components/attestation-details/attestation-details.component';
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { AttestationDetailsComponent } from './components/attestation-details/at
     SelectPatientComponent,
     PrescriberDetailsComponent,
     SelectInsuranceComponent,
+    SelectPrescriptionComponent,
     AttestationDetailsComponent,
   ],
   imports: [
@@ -55,6 +58,7 @@ import { AttestationDetailsComponent } from './components/attestation-details/at
     MaterialModule,
     ChartModule,
     PdfJsViewerModule,
+    ReactiveFormsModule,
     AuthModule,
   ],
   providers: [EnrollmentService, SubmitEnrollmentService, DatePipe],

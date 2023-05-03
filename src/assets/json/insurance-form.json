@@ -8,7 +8,9 @@
         "label": "Type Of Coverage",
         "placeholder": "",
         "type": "radio",
-        "validators": { "required": true },
+        "validators": {
+          "required": true
+        },
         "options": [
           {
             "label": "Medicare",
@@ -45,7 +47,9 @@
         "label": "Primary Insurance Payer",
         "placeholder": "Enter your primary insurance payer",
         "type": "text",
-        "validators": { "required": true }
+        "validators": {
+          "required": true
+        }
       },
       {
         "name": "insuranceName",
@@ -54,7 +58,9 @@
         "label": "Insurance Name",
         "placeholder": "Enter your insurance name",
         "type": "text",
-        "validators": { "required": true }
+        "validators": {
+          "required": true
+        }
       },
       {
         "name": "phone",
@@ -91,7 +97,9 @@
         "label": "Policy Holder's Relationship to Patient",
         "placeholder": "Select relationship to patient",
         "type": "select",
-        "validators": { "required": true },
+        "validators": {
+          "required": true
+        },
         "options": [
           {
             "label": "Self",
@@ -114,7 +122,9 @@
         "label": "Policy Holder's Name",
         "placeholder": "Enter your policy holder's name",
         "type": "text",
-        "validators": { "required": true }
+        "validators": {
+          "required": true
+        }
       },
       {
         "name": "policyHolderDob",
@@ -123,7 +133,9 @@
         "label": "Policy Holder's Date of Birth",
         "placeholder": "mm/dd/yyyy",
         "type": "date",
-        "validators": { "required": true }
+        "validators": {
+          "required": true
+        }
       },
       {
         "name": "firstInsuranceFiles",
@@ -145,7 +157,9 @@
         "label": "Type Of Coverage",
         "placeholder": "",
         "type": "radio",
-        "validators": { "required": true },
+        "validators": {
+          "required": true
+        },
         "options": [
           {
             "label": "Medicare",
@@ -182,7 +196,9 @@
         "label": "Secondary Insurance Payer",
         "placeholder": "Enter your secondary insurance payer",
         "type": "text",
-        "validators": { "required": true }
+        "validators": {
+          "required": true
+        }
       },
       {
         "name": "insuranceName",
@@ -191,7 +207,9 @@
         "label": "Insurance Name",
         "placeholder": "Enter your insurance name",
         "type": "text",
-        "validators": { "required": true }
+        "validators": {
+          "required": true
+        }
       },
       {
         "name": "phone",
@@ -228,7 +246,9 @@
         "label": "Policy Holder's Relationship to Patient",
         "placeholder": "Select relationship to patient",
         "type": "select",
-        "validators": { "required": true },
+        "validators": {
+          "required": true
+        },
         "options": [
           {
             "label": "Self",
@@ -251,7 +271,9 @@
         "label": "Policy Holder's Name",
         "placeholder": "Enter your policy holder's name",
         "type": "text",
-        "validators": { "required": true }
+        "validators": {
+          "required": true
+        }
       },
       {
         "name": "policyHolderDob",
@@ -260,7 +282,9 @@
         "label": "Policy Holder's Date of Birth",
         "placeholder": "mm/dd/yyyy",
         "type": "date",
-        "validators": { "required": true }
+        "validators": {
+          "required": true
+        }
       },
       {
         "name": "secondInsuranceFiles",
@@ -273,6 +297,102 @@
       }
     ]
   },
+  "priorAuth": {
+    "controls": [
+      {
+        "name": "priorAuth1",
+        "value": "",
+        "display": true,
+        "label": "Has a prior authorization (PA) been initiated?",
+        "placeholder": "",
+        "type": "radio",
+        "validators": {},
+        "options": [
+          {
+            "label": "Yes",
+            "value": "Yes"
+          },
+          {
+            "label": "No",
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "name": "paStatus1",
+        "value": "",
+        "display": false,
+        "label": "PA status",
+        "placeholder": "",
+        "type": "radio",
+        "validators": {
+          "required": true
+        },
+        "options": [
+          {
+            "label": "Approved",
+            "value": "Approved"
+          },
+          {
+            "label": "Denied",
+            "value": "Denied"
+          },
+          {
+            "label": "Pending",
+            "value": "Pending"
+          }
+        ]
+      }
+    ]
+  },
+  "appeal": {
+    "controls": [
+      {
+        "name": "priorAuth2",
+        "value": "",
+        "display": true,
+        "label": "Has an appeal been initiated?",
+        "placeholder": "",
+        "type": "radio",
+        "validators": {},
+        "options": [
+          {
+            "label": "Yes",
+            "value": "Yes"
+          },
+          {
+            "label": "No",
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "name": "paStatus2",
+        "value": "",
+        "display": false,
+        "label": "PA status",
+        "placeholder": "",
+        "type": "radio",
+        "validators": {
+          "required": true
+        },
+        "options": [
+          {
+            "label": "Approved",
+            "value": "Approved"
+          },
+          {
+            "label": "Denied",
+            "value": "Denied"
+          },
+          {
+            "label": "Pending",
+            "value": "Pending"
+          }
+        ]
+      }
+    ]
+  },
   "prescriptionInsurance": {
     "controls": [
       {
@@ -282,7 +402,9 @@
         "label": "Type Of Coverage",
         "placeholder": "",
         "type": "radio",
-        "validators": { "required": true },
+        "validators": {
+          "required": true
+        },
         "options": [
           {
             "label": "Medicare",
@@ -315,7 +437,9 @@
         "label": "Prescription Insurance Payer",
         "placeholder": "Enter your prescription insurance payer",
         "type": "text",
-        "validators": { "required": true }
+        "validators": {
+          "required": true
+        }
       },
       {
         "name": "insuranceName",
@@ -324,7 +448,9 @@
         "label": "Insurance Name",
         "placeholder": "Enter your insurance name",
         "type": "text",
-        "validators": { "required": true }
+        "validators": {
+          "required": true
+        }
       },
       {
         "name": "phone",
@@ -387,7 +513,9 @@
         "label": "Policy Holder's Relationship to Patient",
         "placeholder": "Select relationship to patient",
         "type": "select",
-        "validators": { "required": true },
+        "validators": {
+          "required": true
+        },
         "options": [
           {
             "label": "Self",
@@ -410,7 +538,9 @@
         "label": "Policy Holder's Name",
         "placeholder": "Enter your policy holder's name",
         "type": "text",
-        "validators": { "required": true }
+        "validators": {
+          "required": true
+        }
       },
       {
         "name": "policyHolderDob",
@@ -419,7 +549,9 @@
         "label": "Policy Holder's Date of Birth",
         "placeholder": "mm/dd/yyyy",
         "type": "date",
-        "validators": { "required": true }
+        "validators": {
+          "required": true
+        }
       },
       {
         "name": "secondInsuranceFiles",
