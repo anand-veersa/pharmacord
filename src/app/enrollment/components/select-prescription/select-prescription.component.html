@@ -292,6 +292,20 @@
                 </label>
               </div>
             </div>
+
+            <mat-error
+              *ngIf="
+                clinicalInfoForm.controls['mismatchrepairstatusMMR'].touched
+              "
+              class="error-message">
+              <div
+                *ngIf="
+                  clinicalInfoForm.get('mismatchrepairstatusMMR')?.value
+                    ?.length! === 0
+                ">
+                Mismatch repair status (MMR) is required
+              </div>
+            </mat-error>
           </div>
         </div>
         <div
@@ -346,6 +360,20 @@
                 value="Other" />
               <div><label class="form-check-label">Other </label></div>
             </div>
+            <mat-error
+              *ngIf="
+                clinicalInfoForm.controls['endometrialCancerPriortherapies']
+                  .touched
+              "
+              class="error-message">
+              <div
+                *ngIf="
+                  clinicalInfoForm.get('endometrialCancerPriortherapies')?.value
+                    ?.length! === 0
+                ">
+                Endometrial cancer prior therapies is required
+              </div>
+            </mat-error>
           </div>
         </div>
         <div
@@ -399,7 +427,7 @@
         [
           appConstants.MEDICINES.MEDICINE_2,
           appConstants.MEDICINES.MEDICINE_3
-        ].includes(submitEnrolService.enrollmentFormPayload.DrugGroup)
+        ].includes(medicine)
       "
       class="primary-title flex toggle-panel tm-1 bm-1">
       Current Line Of Therapy
@@ -736,7 +764,7 @@
         [
           appConstants.MEDICINES.MEDICINE_2,
           appConstants.MEDICINES.MEDICINE_3
-        ].includes(submitEnrolService.enrollmentFormPayload.DrugGroup)
+        ].includes(medicine)
       ">
       <div class="primary-title flex toggle-panel">
         Prescription Information
@@ -1067,7 +1095,7 @@
           [
             appConstants.MEDICINES.MEDICINE_2,
             appConstants.MEDICINES.MEDICINE_3
-          ].includes(submitEnrolService.enrollmentFormPayload.DrugGroup)
+          ].includes(medicine)
         "
         class="bg enrollment-form">
         <div class="note-text tm-1">

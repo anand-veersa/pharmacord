@@ -225,6 +225,8 @@ export class SelectPrescriptionComponent implements OnInit {
 
     const formArray: FormArray = form.get(formArrName) as FormArray;
 
+    formArray.markAsTouched();
+
     if (event.target.checked) {
       formArray.push(new FormControl(event.target.value));
     } else {
