@@ -25,6 +25,7 @@ import { CustomExpansionPanelComponent } from './components/custom-expansion-pan
 import { CustomDatepickerComponent } from './components/forms/custom-datepicker/custom-datepicker.component';
 import { ToggleButtonComponent } from './components/custom-toggle-button/toggle.component';
 import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
+import { CustomPrescriptionComponent } from './components/forms/custom-prescription/custom-prescription.component';
 import { CustomUploadDocumentsComponent } from './components/custom-upload-documents/custom-upload-documents.component';
 
 @NgModule({
@@ -45,6 +46,7 @@ import { CustomUploadDocumentsComponent } from './components/custom-upload-docum
     CustomDatepickerComponent,
     ToggleButtonComponent,
     CustomDialogComponent,
+    CustomPrescriptionComponent,
     CustomUploadDocumentsComponent,
   ],
   imports: [
@@ -71,6 +73,9 @@ import { CustomUploadDocumentsComponent } from './components/custom-upload-docum
     CustomExpansionPanelComponent,
     ToggleButtonComponent,
     CustomDialogComponent,
+    CustomPrescriptionComponent,
+    CustomErrorComponent,
+    CustomDatepickerComponent,
     CustomUploadDocumentsComponent,
   ],
   providers: [LocalStorageService],

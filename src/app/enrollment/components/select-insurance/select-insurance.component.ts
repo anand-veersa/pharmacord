@@ -58,7 +58,8 @@ export class SelectInsuranceComponent implements OnInit {
         ...this.submitEnrolService.priorAuthForm.value,
         ...this.submitEnrolService.appealForm.value,
       },
-      nextScreen: actionType === 'back' ? 'prescriber-details' : 'atte',
+      nextScreen:
+        actionType === 'back' ? 'prescriber-details' : 'select-prescription',
     });
   }
 
