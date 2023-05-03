@@ -1,40 +1,6 @@
 @import '../../../../../assets/styles/abstracts/variables';
 
-.mat-mdc-form-field {
-  width: 100%;
-}
-
-:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
-  display: none;
-}
-
 :host ::ng-deep .mat-mdc-text-field-wrapper {
-  border-radius: 6px;
-  border: 1px solid $color-grey-border;
-  padding: 0;
-  background: #ffffff;
-}
-
-:host ::ng-deep .mat-mdc-form-field-infix {
-  min-height: 3.5rem;
-  max-height: 4rem;
-  font-family: $tertiary-font;
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 2.9rem;
-  color: $color-grey-dark;
-
-  ::placeholder {
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 1.6rem;
-  }
-}
-
-:host
-  ::ng-deep
-  .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined)
-  .mat-mdc-form-field-infix {
   padding: 0;
 }
 
@@ -77,20 +43,3 @@
 :host ::ng-deep .mat-mdc-select-value {
   padding-left: 1rem;
 }
-// @import '../../../../../assets/styles/abstracts/variables';
-
-// ::ng-deep .prescriber-select {
-//   height: 4rem;
-//   mat-form-field .mat-mdc-text-field-wrapper {
-//     height: 4rem;
-//     width: 20rem;
-//   }
-//   .mat-mdc-form-field-infix {
-//     padding: 0.6rem 0 0 !important;
-//   }
-// }
-
-// ::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
-//   font-size: 1.6rem;
-//   color: $color-grey-dark-4;
-// }

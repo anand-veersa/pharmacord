@@ -26,6 +26,7 @@ import { CustomDatepickerComponent } from './components/forms/custom-datepicker/
 import { ToggleButtonComponent } from './components/custom-toggle-button/toggle.component';
 import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
 import { CustomUploadDocumentsComponent } from './components/custom-upload-documents/custom-upload-documents.component';
+import { CustomStepperComponent } from './components/custom-stepper/custom-stepper.component';
 import { NumberformatDirective } from './directives/phone-format.directive';
 import { SafePipe } from './pipes/safe-pipe';
 
@@ -48,6 +49,7 @@ import { SafePipe } from './pipes/safe-pipe';
     ToggleButtonComponent,
     CustomDialogComponent,
     CustomUploadDocumentsComponent,
+    CustomStepperComponent,
     NumberformatDirective,
     SafePipe,
   ],
@@ -76,6 +78,7 @@ import { SafePipe } from './pipes/safe-pipe';
     ToggleButtonComponent,
     CustomDialogComponent,
     CustomUploadDocumentsComponent,
+    CustomStepperComponent,
     NumberformatDirective,
     SafePipe,
   ],

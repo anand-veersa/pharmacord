@@ -49,6 +49,9 @@ export class RegistrationComponent implements OnInit {
   public UserContactDetails: Array<object> = [];
   public facilityIdsData: any[] = [];
   public prescribersWithSelectedFacility: any[] = [];
+  public stepperLabelsProvider: string[] = ['', '', ''];
+  public stepperLabelsHCP: string[] = ['', '', '', ''];
+  public stepNumber: number = 0;
   public displayScreen: string = '';
   constructor(
     private router: Router,
@@ -95,6 +98,7 @@ export class RegistrationComponent implements OnInit {
 
   public registrationStep1(): void {
     this.accountTypeSelection = false;
+    this.stepNumber++;
     if (this.prescriberRegistrationCard) {
       this.prescriberRegistration = true;
     } else {
@@ -103,6 +107,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   public registrationStep2(): void {
+    this.stepNumber++;
     if (this.prescriberRegistration) {
       this.prescriberRegistration = false;
       this.prescriberAddFacilityScreen = true;
@@ -153,7 +158,8 @@ export class RegistrationComponent implements OnInit {
     nextScreen,
   }: RegistrationScreenNextData): void {
     this.displayScreen = nextScreen;
-
+    this.stepNumber =
+      actionType === 'back' ? this.stepNumber - 1 : this.stepNumber + 1;
     if (actionType === 'back' && this.prescriberRegistrationCard) {
       this.prescriberAddFacilityScreen = false;
       this.prescriberRegistration = true;
@@ -172,6 +178,7 @@ export class RegistrationComponent implements OnInit {
 
   public navigateToLogin(): void {
     this.router.navigate(['/login']);
+    this.stepNumber = 0;
   }
 
   public checkProviderNpi(): void {
@@ -214,6 +221,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   public navigateToSelectAccountType(): void {
+    this.stepNumber = 0;
     this.othersRegistration = false;
     this.prescriberRegistration = false;
     this.accountTypeSelection = true;

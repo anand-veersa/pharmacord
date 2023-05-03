@@ -3,6 +3,7 @@
     [selectPrescriberForm]="selectPrescriberForm"
     [selectPrescriberField]="prescriberListJson"
     [displayedScreen]="displayScreen"
+    [stepNumber]="stepperCount"
     (prescriberChanged)="
       submitEnrolService.selectedPrescriberId.next($event.value)
     "></app-enrollment-form-header>

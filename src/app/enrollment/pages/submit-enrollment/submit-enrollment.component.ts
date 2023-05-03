@@ -29,6 +29,7 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
   public prescriberListJson: JsonFormData = { controls: [] };
   public selectPrescriberForm: FormGroup;
   public exitSubject = new Subject<boolean>();
+  public stepperCount: number = 0;
 
   constructor(
     public submitEnrolService: SubmitEnrollmentService,
@@ -50,6 +51,9 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     form,
     nextScreen,
   }: EnrollmentScreenNextData): void {
+    // debugger
+    this.stepperCount =
+      actionType === 'next' ? this.stepperCount + 1 : this.stepperCount - 1;
     // TODO: optimize this
     this.displayScreen = nextScreen;
     // if(actionType=== 'next') {
