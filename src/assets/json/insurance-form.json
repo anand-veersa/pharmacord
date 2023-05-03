@@ -38,7 +38,7 @@
             "value": "Uninsured"
           }
         ],
-        "class": "blockRadio"
+        "class": "block-radio"
       },
       {
         "name": "insurancePayer",
@@ -69,7 +69,8 @@
         "label": "Phone #",
         "placeholder": "Enter your Phone #",
         "type": "text",
-        "validators": {}
+        "subType": "phone",
+        "validators": { "min": 14, "max": 14 }
       },
       {
         "name": "policyId",
@@ -186,7 +187,7 @@
             "value": "Uninsured"
           }
         ],
-        "class": "blockRadio"
+        "class": "block-radio"
       },
       {
         "name": "insurancePayer",
@@ -217,6 +218,7 @@
         "label": "Phone #",
         "placeholder": "Enter your Phone #",
         "type": "text",
+        "subType": "phone",
         "validators": {}
       },
       {
@@ -426,7 +428,7 @@
             "value": "Other"
           }
         ],
-        "class": "blockRadio"
+        "class": "block-radio"
       },
       {
         "name": "insurancePayer",

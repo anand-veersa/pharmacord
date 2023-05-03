@@ -32,7 +32,7 @@
           [field]="control"
           [form]="submitEnrolService.patientDetailForm"
           formType="enrollment-form"
-          (action)="changePatient($event)"></app-custom-form>
+          (action)="changePatient($event.value)"></app-custom-form>
       </div>
     </div>
     <mat-divider vertical></mat-divider>

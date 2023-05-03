@@ -3,8 +3,9 @@
     [selectPrescriberForm]="selectPrescriberForm"
     [selectPrescriberField]="prescriberListJson"
     [displayedScreen]="displayScreen"
+    [stepNumber]="stepperCount"
     (prescriberChanged)="
-      submitEnrolService.selectedPrescriberId.next($event)
+      submitEnrolService.selectedPrescriberId.next($event.value)
     "></app-enrollment-form-header>
   <div class="submit-enrollment-container">
     <!-- <ng-container #enrollmentForm></ng-container> -->
@@ -38,6 +39,9 @@
         *ngSwitchCase="'select-prescription'"
         (action)="onAction($event)">
       </app-select-prescription>
+      <app-attestation-details
+        *ngSwitchCase="'attestation-details'"
+        (action)="onAction($event)"></app-attestation-details>
     </ng-container>
   </div>
 </div>

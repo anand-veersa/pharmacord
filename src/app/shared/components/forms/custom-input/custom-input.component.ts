@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { JsonFormControls } from 'src/app/models/json-form-data.model';
 import {
   FormArray,
@@ -19,6 +19,8 @@ export class CustomInputComponent implements OnInit {
   @Input() fieldName: string;
   @Input() formType: string = '';
   @Input() inputPrefix: string;
+  @Input() customErrorMsg: string;
+  @Input() isCustomError: boolean;
   public errors: ValidationErrors | null | undefined;
   public files: any[] = [];
   public disableUploader: boolean = false;

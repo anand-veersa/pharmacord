@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.authService.userName.next('');
     this.http.get('/assets/json/login-form.json').subscribe((formData: any) => {
       this.formData = formData;
       this.loginForm = this.sharedService.buildForm(this.formData);
@@ -41,5 +42,9 @@ export class LoginComponent implements OnInit {
         this.sharedService.notify('error', err);
       },
     });
+  }
+
+  navigateToRegistration() {
+    this.router.navigate(['/registration']);
   }
 }

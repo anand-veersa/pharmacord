@@ -51,6 +51,8 @@ export class SubmitEnrollmentService {
   public prescriptionInfoForm: FormGroup;
   public clinicalInfoForm: FormGroup;
   public currentLineOfTherapyForm: FormGroup;
+  public attestationForm: FormGroup;
+  public attestationDetails: JsonFormData = { controls: [] };
 
   public enrollmentFormPayload: EnrollmentFormPayload;
   constructor(
@@ -418,6 +420,36 @@ export class SubmitEnrollmentService {
     return patientData;
   }
 
+  public createAttestationForm(): void {
+    this.http
+      .get('/assets/json/attestation-form.json')
+      .subscribe((data: any) => {
+        const isPap = this.servicesForm
+          ?.get('Services')
+          ?.value.findIndex(
+            (el: any) => el.Name === 'PatientAssistanceProgram'
+          );
+        data.controls.forEach((item: any) => {
+          if (item.type === 'select' || item.type === 'checkbox') {
+            if (item.name === 'patientAssistanceProgram') {
+              if (isPap > -1) item.display = true;
+              else item.display = false;
+            }
+
+            item.options = item.options.filter(
+              (option: JsonFormControlOptions) =>
+                !option.for ||
+                option.for.includes(this.enrollmentFormPayload.DrugGroup)
+            );
+          }
+        });
+        this.attestationDetails = data;
+
+        this.attestationForm = this.sharedService.buildForm(
+          this.attestationDetails
+        );
+      });
+  }
   public resetForms(): void {
     if (this.medicationForm) this.medicationForm.reset();
     if (this.prescriberForm) this.prescriberForm.reset();

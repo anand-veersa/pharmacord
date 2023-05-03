@@ -1,0 +1,125 @@
+@import '../../../../../assets/styles/abstracts/variables';
+.add-provider-container {
+  padding: 2.4rem 7rem;
+
+  .form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.8rem;
+
+    .input-field-HCPNPI {
+      width: 52.3rem;
+    }
+
+    .input-field-HCPLastName,
+    .input-field-HCPFirstName {
+      width: 25.5rem;
+    }
+
+    .form-buttons {
+      align-self: end;
+    }
+  }
+
+  .footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20rem;
+    flex-direction: row-reverse;
+  }
+}
+
+.accordion-container {
+  margin-top: 2rem;
+
+  .all-accordions {
+    margin-top: 2rem;
+  }
+  .accordion-content {
+    max-height: 21rem;
+    overflow: auto;
+  }
+}
+
+.mat-expansion-panel-header {
+  background: $color-blue-light;
+  flex-direction: row-reverse;
+  gap: 2rem;
+
+  .mat-content {
+    width: 100%;
+  }
+  .mat-expansion-panel-header-title {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: unset;
+    flex-basis: unset;
+  }
+
+  .mat-expansion-panel-header-description {
+    display: flex;
+    gap: 2rem;
+    margin-right: 0;
+    justify-content: end;
+
+    .account-status {
+      margin-right: 15rem;
+      margin-bottom: 0;
+      color: $color-primary;
+
+      .Pending {
+        color: $color-tertiary;
+      }
+    }
+  }
+}
+
+.mat-expansion-panel {
+  .mat-expansion-indicator {
+    &::after {
+      transform: rotate(-45deg) !important;
+    }
+  }
+
+  &.mat-expanded {
+    .mat-expansion-indicator {
+      transform: rotate(180deg) !important;
+    }
+  }
+}
+
+.mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+.mat-mdc-table {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.mat-mdc-dialog-container {
+  border: 4px $color-header solid !important;
+  border-radius: 8px !important;
+}
+.dialog-header {
+  background: $color-tertiary;
+  display: flex;
+  padding: 1.1rem 1.9rem;
+  color: $color-white;
+  border-bottom: 2px solid $color-grey-border;
+}
+
+.dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 2.7rem 1.3rem;
+}
+
+.dialog-footer {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 2rem;
+  margin-bottom: 2.4rem;
+}

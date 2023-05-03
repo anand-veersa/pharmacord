@@ -19,6 +19,7 @@ export class AuthService {
     prescribers: any[];
     portalAccountPkId: number;
     role: any;
+    userDetails: object[];
   };
   public userName = new BehaviorSubject<string>('');
 
@@ -106,6 +107,35 @@ export class AuthService {
   public resetPassword(data: any): Observable<any> {
     return this.http
       .post(`${environment.baseUrl}portal/account/resetPassword`, data)
+      .pipe(catchError(this.handleError));
+  }
+
+  public refreshTokens(Email: string, RefreshToken: string): Observable<any> {
+    const url: string = `${environment.baseUrl}account/refreshToken`;
+    return this.http.post<any>(url, { Email, RefreshToken });
+  }
+
+  public getProviderDetails(data: {
+    NPI: number;
+    FirstName: string;
+    LastName: string;
+  }): Observable<any> {
+    return this.http
+      .get(
+        `${environment.baseUrl}provider/${data.NPI}/${data.FirstName}/${data.LastName}`
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  public validateUsername(validateUsernamePayload: string): Observable<any> {
+    return this.http
+      .get(`${environment.baseUrl}account/${validateUsernamePayload}/inuse`)
+      .pipe(catchError(this.handleError));
+  }
+
+  public accountRegistration(data: any): Observable<any> {
+    return this.http
+      .post(`${environment.baseUrl}account`, data)
       .pipe(catchError(this.handleError));
   }
 

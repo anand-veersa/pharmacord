@@ -27,6 +27,9 @@ import { ToggleButtonComponent } from './components/custom-toggle-button/toggle.
 import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
 import { CustomPrescriptionComponent } from './components/forms/custom-prescription/custom-prescription.component';
 import { CustomUploadDocumentsComponent } from './components/custom-upload-documents/custom-upload-documents.component';
+import { CustomStepperComponent } from './components/custom-stepper/custom-stepper.component';
+import { NumberformatDirective } from './directives/phone-format.directive';
+import { SafePipe } from './pipes/safe-pipe';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { CustomUploadDocumentsComponent } from './components/custom-upload-docum
     CustomDialogComponent,
     CustomPrescriptionComponent,
     CustomUploadDocumentsComponent,
+    CustomStepperComponent,
+    NumberformatDirective,
+    SafePipe,
   ],
   imports: [
     CommonModule,
@@ -77,6 +83,9 @@ import { CustomUploadDocumentsComponent } from './components/custom-upload-docum
     CustomErrorComponent,
     CustomDatepickerComponent,
     CustomUploadDocumentsComponent,
+    CustomStepperComponent,
+    NumberformatDirective,
+    SafePipe,
   ],
   providers: [LocalStorageService],
 })

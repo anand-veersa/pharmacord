@@ -29,7 +29,9 @@ export class CustomFormComponent implements AfterViewInit {
   @Input() formType: string = '';
   @Input() field: JsonFormControls;
   @Input() inputPrefix: string;
-  @Input() checked: any[];
+  @Input() customErrorMsg: string;
+  @Input() isCustomError: boolean;
+  @Input() checked: any[] = [];
   @Output() action = new EventEmitter();
 
   public supportedDynamicComponents = [
@@ -75,18 +77,26 @@ export class CustomFormComponent implements AfterViewInit {
     dynamicComponent.setInput('form', this.form);
     dynamicComponent.setInput('field', this.field);
     dynamicComponent.setInput('formType', this.formType);
+    if (this.customErrorMsg) {
+      dynamicComponent.setInput('customErrorMsg', this.customErrorMsg);
+      dynamicComponent.setInput('isCustomError', this.isCustomError);
+    }
     if (componentInstance === CustomInputComponent) {
-      dynamicComponent.setInput('inputPrefix', this.inputPrefix);
+      if (componentInstance === CustomInputComponent) {
+        dynamicComponent.setInput('inputPrefix', this.inputPrefix);
+      }
     }
     if (componentInstance === CustomCheckboxComponent) {
       dynamicComponent.setInput('checked', this.checked);
     }
     if (
       componentInstance === CustomSelectComponent ||
+      componentInstance === CustomCheckboxComponent ||
       componentInstance === CustomRadioComponent
     ) {
-      dynamicComponent.instance.action.subscribe((data: string | number) =>
-        this.action.emit(data)
+      dynamicComponent.instance.action.subscribe(
+        (data: string | number | { value: string | number; field: any }) =>
+          this.action.emit(data)
       );
     }
     this.changeDetectorRef.detectChanges();

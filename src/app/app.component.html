@@ -12,3 +12,13 @@
     <app-footer></app-footer>
   </div>
 </div>
+<app-custom-dialog
+  *ngIf="openLogoutDialog"
+  [data]="{ title: 'Confirmation', closeText: 'Stay', confirmText: 'Logout' }"
+  (action)="confirmExit($event)">
+  <div class="flex">
+    <div>
+      <h4>{{ idleState }}</h4>
+    </div>
+  </div>
+</app-custom-dialog>
