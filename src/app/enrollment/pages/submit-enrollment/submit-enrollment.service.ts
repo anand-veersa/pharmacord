@@ -286,6 +286,7 @@ export class SubmitEnrollmentService {
   }
 
   public createSelectPatientForm(): void {
+    if (this.patientDetailForm) return;
     this.http.get('/assets/json/patient-form.json').subscribe((data: any) => {
       this.patientDetails = data.leftPanel;
       this.patientDetails.controls.map(control => {

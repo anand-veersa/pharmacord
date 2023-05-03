@@ -68,13 +68,22 @@
         "disabled": false
       },
       {
-        "name": "patientAddress",
+        "name": "patientAddress1",
         "value": "",
         "display": true,
-        "label": "Patient Address",
-        "placeholder": "Enter your patient address",
+        "label": "Address 1",
+        "placeholder": "Enter your address 1",
         "type": "text",
         "validators": { "required": true }
+      },
+      {
+        "name": "patientAddress2",
+        "value": "",
+        "display": true,
+        "label": "Address 2",
+        "placeholder": "Enter your address 2",
+        "type": "text",
+        "validators": {}
       },
       {
         "name": "city",
@@ -117,7 +126,7 @@
         "validators": { "required": true }
       },
       {
-        "name": "cell Phone",
+        "name": "cellPhone",
         "value": "",
         "display": true,
         "label": "Cell Phone #",
@@ -133,6 +142,20 @@
         "placeholder": "Enter your email address",
         "type": "email",
         "validators": { "required": true, "email": true }
+      },
+      {
+        "name": "bestContactTime",
+        "value": "",
+        "display": true,
+        "label": "Best Time to Contact",
+        "placeholder": "",
+        "type": "radio",
+        "options": [
+          { "label": "AM (8 am to 10 am)", "value": "AM" },
+          { "label": "Day (10 am to 5 pm)", "value": "Day" },
+          { "label": "PM (after 5 pm)", "value": "PM" }
+        ],
+        "validators": {}
       },
       {
         "name": "repCaregiverName",

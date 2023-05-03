@@ -71,7 +71,7 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         [form.pharmacy.SpecialityPharmacy];
     }
     if (formName === 'select-patient') {
-      console.log(form);
+      this.setPatientDetails(form);
     }
     if (formName === 'prescriber-details') {
       console.log(form);
@@ -127,13 +127,46 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     this.exitSubject.next(action);
   }
 
+  private setPatientDetails(patient: any): void {
+    const patientPhone = [];
+    if (patient.homePhone)
+      patientPhone.push({ Type: 'Home', Number: patient.homePhone });
+    if (patient.cellPhone)
+      patientPhone.push({ Type: 'Mobile', Number: patient.cellPhone });
+    const caregiverName = patient.repCaregiverName
+      ? patient.repCaregiverName.split(' ')
+      : [];
+    this.submitEnrolService.enrollmentFormPayload.Patient = {
+      FirstName: patient.firstName,
+      LastName: patient.lastName,
+      DOB: patient.dob,
+      Gender: patient.sex,
+      MMRStatus: [],
+      DiagnosisCodes: [],
+      OtherDiagnosisCodes: '',
+      PriorTherapies: [],
+      OtherPriorTherapies: [],
+      Address1: patient.patientAddress1,
+      Address2: patient.patientAddress2,
+      City: patient.city,
+      State: patient.state,
+      Zip: patient.zipcode,
+      PatientEmailAddress: patient.email,
+      PatientId: null,
+      Phones: patientPhone,
+      AlternateContact: {
+        FirstName: caregiverName.length ? caregiverName[0] : '',
+        LastName: caregiverName.length > 1 ? caregiverName.at(-1) : '',
+        RelationshipToPatient: patient.repCaregiverRelation,
+        Phone: patient.repCaregiverPhone,
+      },
+      BestContactTime: patient.bestContactTime,
+    };
+  }
+
   ngOnDestroy(): void {
     this.enrolService.submitFormInitiated.next(false);
     this.submitEnrolService.selectedPrescriberId.next(0);
     this.submitEnrolService.resetForms();
   }
 }
-
-// interface ComponentType<T = any> {
-//   new (...args: any[]): T;
-// }
