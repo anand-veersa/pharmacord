@@ -12,6 +12,7 @@
       class="example-radio-button"
       *ngFor="let option of field.options"
       [value]="option.value"
+      (change)="onChange($event)"
       color="primary">
       {{ option.label }}
     </mat-radio-button>

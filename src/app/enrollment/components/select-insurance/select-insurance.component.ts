@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { JsonFormControls } from 'src/app/models/json-form-data.model';
 import { SubmitEnrollmentService } from '../../pages/submit-enrollment/submit-enrollment.service';
 
 @Component({
@@ -19,6 +20,34 @@ export class SelectInsuranceComponent implements OnInit {
     this.submitEnrolService.createInsuranceForm();
   }
 
+  public showPaStatus1(res: string): void {
+    this.submitEnrolService.priorAuthDetails.controls.forEach(
+      (control: JsonFormControls) => {
+        if (control.name === 'paStatus1') {
+          if (res === 'Yes') {
+            control.display = true;
+          } else {
+            control.display = false;
+          }
+        }
+      }
+    );
+  }
+
+  public showPaStatus2(res: any): void {
+    this.submitEnrolService.appealDetails.controls.forEach(
+      (control: JsonFormControls) => {
+        if (control.name === 'paStatus2') {
+          if (res === 'Yes') {
+            control.display = true;
+          } else {
+            control.display = false;
+          }
+        }
+      }
+    );
+  }
+
   public onAction(actionType: string): void {
     this.action.emit({
       actionType,
@@ -26,8 +55,11 @@ export class SelectInsuranceComponent implements OnInit {
       form: {
         ...this.submitEnrolService.firstInsuranceForm.value,
         ...this.submitEnrolService.secondInsuranceForm.value,
+        ...this.submitEnrolService.priorAuthForm.value,
+        ...this.submitEnrolService.appealForm.value,
       },
-      nextScreen: actionType === 'back' ? 'prescriber-details' : 'atte',
+      nextScreen:
+        actionType === 'back' ? 'prescriber-details' : 'select-prescription',
     });
   }
 

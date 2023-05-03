@@ -40,6 +40,9 @@
   }
 }
 
+.custom-select {
+  max-height: 4rem;
+}
 :host ::ng-deep .mat-mdc-select-value {
   padding-left: 1rem;
 }
