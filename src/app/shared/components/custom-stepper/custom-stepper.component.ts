@@ -30,7 +30,6 @@ export class CustomStepperComponent implements OnChanges {
   // }
 
   ngOnChanges(): void {
-    console.log(this.selectedStepNumber);
     this.stepper.reset();
     setTimeout(() => {
       for (let i = 0; i < this.selectedStepNumber; i++) {
