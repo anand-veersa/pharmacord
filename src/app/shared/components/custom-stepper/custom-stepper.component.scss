@@ -117,7 +117,7 @@
     .mat-stepper-label-position-bottom
     .mat-horizontal-stepper-header {
     padding: 0 !important;
-    padding-top: 24px !important;
+    padding-top: 10px !important;
   }
 
   ::ng-deep .mat-step-text-label {
@@ -140,5 +140,19 @@
     @include respond(tab-port) {
       display: none;
     }
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header::after {
+    top: 20px !important;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header::before {
+    top: 20px !important;
+  }
+
+  ::ng-deep
+    .mat-stepper-label-position-bottom
+    .mat-horizontal-stepper-header:not(:last-child)::after {
+    border-width: 3px;
   }
 }
