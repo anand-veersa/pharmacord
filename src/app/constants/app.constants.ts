@@ -82,4 +82,6 @@ export class AppConstants {
     &#8226; This authorization will remain in effect for two (2) years after I sign it (unless a shorter period is required by state law) or for as long as I participate in the Together with GSK Oncology program, whichever is longer.<br><br>
     &#8226; I have the right to revoke this authorization at any time by mailing a signed written statement of my revocation to Together with GSK Oncology, P.O. Box 5490, Louisville, KY 40255, but such a revocation would end my eligibility to participate in the Together with GSK Oncology program. Revoking this authorization will prohibit further disclosures by my Healthcare Providers based on this authorization after the date a written revocation is received, but will not apply to the extent that they have already taken action in reliance on this authorization. After this authorization is revoked, I understand that information provided to GSK prior to the revocation may be disclosed within GSK to maintain records of my participation.
   `;
+  public PROVIDER_ROLE = 3;
+  public OTHERS_ROLE = 4;
 }
