@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AppConstants } from 'src/app/constants/app.constants';
 import { SubmitEnrollmentService } from 'src/app/enrollment/pages/submit-enrollment/submit-enrollment.service';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-custom-prescription',
@@ -14,7 +15,8 @@ export class CustomPrescriptionComponent implements OnInit {
   @Input() formType: string = '';
   constructor(
     private submitEnrolService: SubmitEnrollmentService,
-    private appConstants: AppConstants
+    private appConstants: AppConstants,
+    public sharedService: SharedService
   ) {}
 
   radio = {

@@ -10,6 +10,7 @@ import {
 import { isArray } from 'lodash';
 import { AppConstants } from 'src/app/constants/app.constants';
 import { SubmitEnrollmentService } from 'src/app/enrollment/pages/submit-enrollment/submit-enrollment.service';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-select-prescription',
@@ -23,7 +24,8 @@ export class SelectPrescriptionComponent implements OnInit {
   constructor(
     public submitEnrolService: SubmitEnrollmentService,
     public fb: FormBuilder,
-    public appConstants: AppConstants
+    public appConstants: AppConstants,
+    public sharedService: SharedService
   ) {}
 
   ngOnInit(): void {
@@ -105,29 +107,29 @@ export class SelectPrescriptionComponent implements OnInit {
     zejStd: this.fb.array([]),
     zejStdPres: this.fb.group({
       strength: [],
-      qty: [{ value: null, disabled: false }],
-      refills: [{ value: null, disabled: false }],
-      doa: [null],
+      qty: [{ value: null, disabled: false }, Validators.required],
+      refills: [{ value: null, disabled: false }, Validators.required],
+      doa: [null, Validators.required],
     }),
     zejQSP: this.fb.array([]),
     zejQSPPres: this.fb.group({
       strength: [],
       qty: [{ value: 15, disabled: true }],
       refills: [{ value: 14, disabled: true }],
-      doa: [null],
+      doa: [null, Validators.required],
     }),
     zejBridge: this.fb.array([]),
     zejBridgePres: this.fb.group({
       strength: [],
       qty: [{ value: 15, disabled: true }],
       refills: [{ value: 14, disabled: true }],
-      doa: [null],
+      doa: [null, Validators.required],
     }),
     ojjaaraStd: this.fb.array([]),
     ojjaaraStdPres: this.fb.group({
       strength: [],
-      qty: [{ value: null, disabled: false }],
-      refills: [{ value: null, disabled: false }],
+      qty: [{ value: null, disabled: false }, Validators.required],
+      refills: [{ value: null, disabled: false }, Validators.required],
       doa: [null],
     }),
     ojjaaraQSP: this.fb.array([]),
@@ -240,6 +242,10 @@ export class SelectPrescriptionComponent implements OnInit {
 
         i++;
       });
+    }
+
+    if (formArray.length === 0) {
+      formArray.setErrors({ required: true });
     }
   }
 

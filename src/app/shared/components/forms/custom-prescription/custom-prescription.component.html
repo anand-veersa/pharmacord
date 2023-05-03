@@ -44,23 +44,51 @@
             Quantity
             <span class="error-or-required" *ngIf="isQtyRequired">*</span>
           </div>
-          <input
-            type="number"
-            [value]="quantity"
-            [disabled]="isQtyDisabled"
-            [formControlName]="'qty'" />
+          <div>
+            <input
+              type="number"
+              [value]="quantity"
+              [disabled]="isQtyDisabled"
+              [formControlName]="'qty'" />
+            <mat-error
+              *ngIf="
+                form.get(field.name + '.qty')?.touched &&
+                form.get(field.name + '.qty')?.errors
+              ">
+              {{
+                sharedService.getErrorMessage(
+                  form.get(field.name + '.qty')?.errors,
+                  'Quantity'
+                )
+              }}
+            </mat-error>
+          </div>
         </div>
         <div class="refills">
           <div class="title">
             Refills
             <span class="error-or-required" *ngIf="isRefillsRequired">*</span>
           </div>
-          <input
-            type="number"
-            [required]="isQtyRequired"
-            [value]="refills"
-            [disabled]="isRefillsDisabled"
-            [formControlName]="'refills'" />
+          <div>
+            <input
+              type="number"
+              [required]="isQtyRequired"
+              [value]="refills"
+              [disabled]="isRefillsDisabled"
+              [formControlName]="'refills'" />
+            <mat-error
+              *ngIf="
+                form.get(field.name + '.refills')?.touched &&
+                form.get(field.name + '.refills')?.errors
+              ">
+              {{
+                sharedService.getErrorMessage(
+                  form.get(field.name + '.refills')?.errors,
+                  'Refills'
+                )
+              }}
+            </mat-error>
+          </div>
         </div>
       </div>
     </div>
@@ -79,6 +107,18 @@
             [formControlName]="'doa'" />
           capsules by mouth, with or without food at the same time each day
           (preferably in the evening)
+          <mat-error
+            *ngIf="
+              form.get(field.name + '.doa')?.touched &&
+              form.get(field.name + '.doa')?.errors
+            ">
+            {{
+              sharedService.getErrorMessage(
+                form.get(field.name + '.doa')?.errors,
+                'Directions for Administration'
+              )
+            }}
+          </mat-error>
         </div>
         <div *ngIf="['Ojjaara'].includes(medicineName)" class="value" disabled>
           <input type="text" class="text-input" [value]="doa" disabled />

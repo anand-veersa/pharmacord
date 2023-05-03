@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-custom-error',
@@ -12,29 +13,12 @@ export class CustomErrorComponent implements OnChanges {
   @Input() errors: any;
   public errorMessage = '';
 
-  ngOnChanges() {
-    this.getErrorMessage();
-  }
+  constructor(private sharedService: SharedService) {}
 
-  getErrorMessage() {
-    //TODO: OPTIMIZE THIS BLOCK
-    this.errorMessage = '';
-    console.log(this.errors);
-    if (!this.errors) return;
-    const errorKeys = Object.keys(this.errors);
-    if (errorKeys.includes('required')) {
-      this.errorMessage = `${this.field.label} is required`;
-    } else if (errorKeys.includes('minlength')) {
-      this.errorMessage = `${this.field.label} must have ${this.field.validators.min} characters`;
-    } else if (errorKeys.includes('maxlength')) {
-      this.errorMessage = `${this.field.label} should not exceed  ${this.field.validators.max} characters`;
-    } else if (errorKeys.includes('passwordNotMatch')) {
-      this.errorMessage = `Passwords do not match`;
-    } else if (errorKeys.includes('maxSizeExceeded')) {
-      this.errorMessage = `Passwords do not match`;
-    } else {
-      this.errorMessage = `${this.field.label} is invalid`;
-    }
-    return this.errorMessage;
+  ngOnChanges() {
+    this.errorMessage = this.sharedService.getErrorMessage(
+      this.errors,
+      this.field.label
+    );
   }
 }
