@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  ViewChild,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -11,6 +17,7 @@ export class CustomErrorComponent implements OnChanges {
   @Input() field: any;
   @Input() errors: any;
   public errorMessage = '';
+  public passwordPatternMismatch: string[] = [];
 
   ngOnChanges() {
     this.getErrorMessage();
@@ -19,7 +26,7 @@ export class CustomErrorComponent implements OnChanges {
   getErrorMessage() {
     //TODO: OPTIMIZE THIS BLOCK
     this.errorMessage = '';
-    console.log(this.errors);
+    this.passwordPatternMismatch = this.errors?.patternMismatch ?? [];
     if (!this.errors) return;
     const errorKeys = Object.keys(this.errors);
     if (errorKeys.includes('required')) {
@@ -33,7 +40,10 @@ export class CustomErrorComponent implements OnChanges {
     } else if (errorKeys.includes('maxSizeExceeded')) {
       this.errorMessage = `Passwords do not match`;
     } else {
-      this.errorMessage = `${this.field.label} is invalid`;
+      this.errorMessage =
+        this.field.name === 'newPassword'
+          ? ''
+          : `${this.field.label} is invalid`;
     }
     return this.errorMessage;
   }

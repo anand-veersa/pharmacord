@@ -1,11 +1,11 @@
-<div [ngClass]="field.class === 'blockRadio' ? 'block-radio' : formType">
+<div [ngClass]="field.class ? field.class : formType">
   <ng-container #dynamicForm>
     <label *ngIf="field.label" class="label"
       >{{ field.label }}
       <span class="error-or-required" *ngIf="field.validators?.required"
         >*</span
-      ></label
-    >
+      >
+    </label>
   </ng-container>
   <div *ngIf="field.extLink !== ''" class="extLinkDiv">
     <p class="extLink" (click)="navigateRoute()">

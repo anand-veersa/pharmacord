@@ -153,9 +153,7 @@
         "validityErrorMsg": "Invalid New Password",
         "validators": {
           "required": true,
-          "max": 14,
-          "min": 8,
-          "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]+).{8,30}$"
+          "passwordPattern": true
         },
         "options": [],
         "required": true
@@ -172,7 +170,8 @@
           "required": true,
           "max": 14,
           "min": 8,
-          "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]+).{8,30}$"
+          "passwordPattern": true,
+          "match": true
         },
         "options": [],
         "required": true

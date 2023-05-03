@@ -53,9 +53,12 @@ export class EnrollmentFormHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnChanges() {
-    // this.prescriberName =
-    //   this.submitEnrolService.selectedPrescriber.FirstName +
-    //   this.submitEnrolService.selectedPrescriber.LastName;
+    if (this.stepNumber == 2) {
+      this.prescriberName =
+        this.submitEnrolService.selectedPrescriber.FirstName +
+        ' ' +
+        this.submitEnrolService.selectedPrescriber.LastName;
+    }
     if (this.stepNumber >= 2) {
       this.showStepper = true;
     } else {

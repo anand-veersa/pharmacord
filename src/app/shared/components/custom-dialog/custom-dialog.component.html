@@ -2,13 +2,23 @@
 <div class="custom-dialog">
   <div class="title spaced-layout">
     <span class="text-med text-x-bold">{{ data.title }}</span>
-    <span><mat-icon>close</mat-icon></span>
+    <span (click)="action.emit(false)"><mat-icon>close</mat-icon></span>
   </div>
-  <div class="tp-2 lp-3 rp3 bp-2">
-    <ng-content></ng-content>
-  </div>
-  <div class="spaced-layout">
+  <div
+    *ngIf="data.htmlString; else else_block"
+    class="custom-dialog-content tp-2 lp-3 rp-3 bp-2"
+    [innerHTML]="this.data.htmlString | safe : 'html'"></div>
+  <ng-template #else_block>
+    <div class="custom-dialog-content tp-2 lp-3 rp-3 bp-2">
+      <ng-content></ng-content>
+    </div>
+  </ng-template>
+
+  <div
+    class="spaced-layout"
+    [ngClass]="{ 'justify-center': data.noOfButtons === 1 }">
     <app-custom-button
+      *ngIf="data.noOfButtons !== 1"
       btnClass="small secondary"
       [btnText]="data.closeText"
       (action)="action.emit(false)"></app-custom-button>
