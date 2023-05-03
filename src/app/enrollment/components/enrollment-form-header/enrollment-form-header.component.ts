@@ -10,6 +10,7 @@ import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { SubmitEnrollmentService } from '../../pages/submit-enrollment/submit-enrollment.service';
+import { AuthService } from 'src/app/auth/auth.service';
 @Component({
   selector: 'app-enrollment-form-header',
   templateUrl: './enrollment-form-header.component.html',
@@ -32,18 +33,29 @@ export class EnrollmentFormHeaderComponent implements OnInit, OnDestroy {
     'Attestation and Signatures',
   ];
   public showStepper: boolean = false;
-  public prescriberName: string = 'Ritik kaushik';
-  constructor(private submitEnrolService: SubmitEnrollmentService) {}
+  public prescriberName: string = '';
+  public isPrescriber: boolean = false;
+  constructor(
+    private submitEnrolService: SubmitEnrollmentService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.titleSubscription = this.submitEnrolService.headerTitle.subscribe(
       title => (this.title = title)
     );
+    if (this.authService.user.role.RolePkId === 3) {
+      this.isPrescriber = true;
+      this.prescriberName =
+        this.authService.user.firstName + ' ' + this.authService.user.lastName;
+      // this.prescriberChanged.emit(this.authService.user.portalAccountPkId);
+    }
   }
 
   ngOnChanges() {
-    console.log(this.stepNumber, 'in enrollment');
-
+    // this.prescriberName =
+    //   this.submitEnrolService.selectedPrescriber.FirstName +
+    //   this.submitEnrolService.selectedPrescriber.LastName;
     if (this.stepNumber >= 2) {
       this.showStepper = true;
     } else {

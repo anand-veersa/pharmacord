@@ -220,34 +220,7 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-  backTriggeredFromStep2(eventData: { backBtnClicked: boolean }): void {
-    console.log('backBtnClicked value in ', eventData.backBtnClicked);
-    this.prescriberAddFacilityScreen = false;
-    if (this.prescriberRegistrationCard) {
-      this.prescriberRegistration = true;
-    } else {
-      this.othersRegistration = true;
-    }
-  }
-
-  backTriggeredFromStepAddProvider(eventData: {
-    backBtnClicked: boolean;
-  }): void {
-    this.addHealthcareProviderScreen = false;
-    this.othersAddFacilityScreen = true;
-  }
-
-  moveToOthersFirstScreen(eventData: { backBtnClicked: boolean }): void {
-    this.othersAddFacilityScreen = false;
-    this.othersRegistration = true;
-  }
-
-  moveToAddProviderScreen(eventData: { nextBtnClicked: boolean }): void {
-    this.othersAddFacilityScreen = false;
-    this.addHealthcareProviderScreen = true;
-  }
-
-  navigateToSelectAccountType(): void {
+  public navigateToSelectAccountType(): void {
     this.stepNumber = 0;
     this.othersRegistration = false;
     this.prescriberRegistration = false;

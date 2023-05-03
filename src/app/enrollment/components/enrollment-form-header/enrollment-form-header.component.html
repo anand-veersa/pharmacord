@@ -18,7 +18,7 @@
     <img
       src="../../../../assets/images/prescriber_icon.svg"
       alt="Prescriber Icon" />
-    <div class="prescriber-list">
+    <div class="prescriber-list" *ngIf="!isPrescriber">
       <span class="prescriber-name">Select a Prescriber</span>
       <app-custom-form
         formType="select-prescriber"
@@ -26,5 +26,8 @@
         [form]="selectPrescriberForm"
         (action)="prescriberChanged.emit($event)"></app-custom-form>
     </div>
+    <span class="prescriber-name" *ngIf="isPrescriber">{{
+      prescriberName
+    }}</span>
   </div>
 </div>

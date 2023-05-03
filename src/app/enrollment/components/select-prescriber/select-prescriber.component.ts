@@ -63,6 +63,10 @@ export class SelectPrescriberComponent implements OnInit, OnDestroy {
             }
           );
       });
+
+    if (this.authService.user.role.RolePkId === 3) {
+      this.getPrescriberFacilities(this.authService.user.portalAccountPkId);
+    }
   }
 
   public getPrescriberFacilities(prescriberId: number): void {

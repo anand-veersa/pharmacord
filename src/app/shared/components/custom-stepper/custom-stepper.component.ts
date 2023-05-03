@@ -13,7 +13,7 @@ import { MatStepper } from '@angular/material/stepper';
   templateUrl: './custom-stepper.component.html',
   styleUrls: ['./custom-stepper.component.scss'],
 })
-export class CustomStepperComponent implements AfterViewInit, OnChanges {
+export class CustomStepperComponent implements OnChanges {
   @Input() background: string = '';
   @Input() labelsData: string[] = ['step1', 'step2', 'step3', 'step4', 'step5'];
   @Input() selectedStepNumber: number = 0;
@@ -21,13 +21,13 @@ export class CustomStepperComponent implements AfterViewInit, OnChanges {
 
   @ViewChild('stepper') stepper: MatStepper;
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      for (let i = 0; i < this.selectedStepNumber; i++) {
-        this.stepper.next();
-      }
-    }, 0);
-  }
+  // ngAfterViewInit() {
+  //   setTimeout(() => {
+  //     for (let i = 0; i < this.selectedStepNumber; i++) {
+  //       this.stepper.next();
+  //     }
+  //   }, 0);
+  // }
 
   ngOnChanges(): void {
     console.log(this.selectedStepNumber);
