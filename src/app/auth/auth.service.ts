@@ -110,6 +110,11 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
+  public refreshTokens(Email: string, RefreshToken: string): Observable<any> {
+    const url: string = `${environment.baseUrl}account/refreshToken`;
+    return this.http.post<any>(url, { Email, RefreshToken });
+  }
+
   public getProviderDetails(data: {
     NPI: number;
     FirstName: string;

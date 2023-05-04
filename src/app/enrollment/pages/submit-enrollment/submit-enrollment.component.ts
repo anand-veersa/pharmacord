@@ -12,6 +12,8 @@ import { EnrollmentScreenNextData } from 'src/app/models/enrollment-form.model';
 import { JsonFormData } from 'src/app/models/json-form-data.model';
 import { EnrollmentService } from '../../enrollment.service';
 import { SubmitEnrollmentService } from './submit-enrollment.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { AppConstants } from 'src/app/constants/app.constants';
 
 @Component({
   selector: 'app-submit-enrollment',
@@ -29,11 +31,14 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
   public prescriberListJson: JsonFormData = { controls: [] };
   public selectPrescriberForm: FormGroup;
   public exitSubject = new Subject<boolean>();
+  public stepperCount: number = 0;
 
   constructor(
     public submitEnrolService: SubmitEnrollmentService,
     private enrolService: EnrollmentService,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService,
+    private appConstants: AppConstants
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +55,9 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     form,
     nextScreen,
   }: EnrollmentScreenNextData): void {
+    // debugger
+    this.stepperCount =
+      actionType === 'next' ? this.stepperCount + 1 : this.stepperCount - 1;
     // TODO: optimize this
     this.displayScreen = nextScreen;
     // if(actionType=== 'next') {

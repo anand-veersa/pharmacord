@@ -25,7 +25,10 @@ import { CustomExpansionPanelComponent } from './components/custom-expansion-pan
 import { CustomDatepickerComponent } from './components/forms/custom-datepicker/custom-datepicker.component';
 import { ToggleButtonComponent } from './components/custom-toggle-button/toggle.component';
 import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
+import { CustomPrescriptionComponent } from './components/forms/custom-prescription/custom-prescription.component';
 import { CustomUploadDocumentsComponent } from './components/custom-upload-documents/custom-upload-documents.component';
+import { CustomStepperComponent } from './components/custom-stepper/custom-stepper.component';
+import { NumberformatDirective } from './directives/phone-format.directive';
 import { SafePipe } from './pipes/safe-pipe';
 
 @NgModule({
@@ -46,7 +49,10 @@ import { SafePipe } from './pipes/safe-pipe';
     CustomDatepickerComponent,
     ToggleButtonComponent,
     CustomDialogComponent,
+    CustomPrescriptionComponent,
     CustomUploadDocumentsComponent,
+    CustomStepperComponent,
+    NumberformatDirective,
     SafePipe,
   ],
   imports: [
@@ -73,7 +79,12 @@ import { SafePipe } from './pipes/safe-pipe';
     CustomExpansionPanelComponent,
     ToggleButtonComponent,
     CustomDialogComponent,
+    CustomPrescriptionComponent,
+    CustomErrorComponent,
+    CustomDatepickerComponent,
     CustomUploadDocumentsComponent,
+    CustomStepperComponent,
+    NumberformatDirective,
     SafePipe,
   ],
   providers: [LocalStorageService],

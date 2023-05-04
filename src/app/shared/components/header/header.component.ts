@@ -10,6 +10,14 @@ import { SharedService } from '../../services/shared.service';
 })
 export class HeaderComponent implements OnInit {
   public userName: string = '';
+  public stepperLables: string[] = [
+    'Services Requested',
+    'Patient Information',
+    'Prescriber Information',
+    'Insurance Information',
+    'Clinical Information',
+    'Attestation and Signatures',
+  ];
 
   constructor(
     private router: Router,

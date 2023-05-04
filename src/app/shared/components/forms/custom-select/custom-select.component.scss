@@ -1,6 +1,7 @@
 @import '../../../../../assets/styles/abstracts/variables';
 
 :host ::ng-deep .mat-mdc-text-field-wrapper {
+  padding: 0;
   padding-left: 0 !important;
 }
 
@@ -40,23 +41,9 @@
   }
 }
 
+.custom-select {
+  max-height: 4rem;
+}
 :host ::ng-deep .mat-mdc-select-value {
   padding-left: 1rem;
 }
-// @import '../../../../../assets/styles/abstracts/variables';
-
-// ::ng-deep .prescriber-select {
-//   height: 4rem;
-//   mat-form-field .mat-mdc-text-field-wrapper {
-//     height: 4rem;
-//     width: 20rem;
-//   }
-//   .mat-mdc-form-field-infix {
-//     padding: 0.6rem 0 0 !important;
-//   }
-// }
-
-// ::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
-//   font-size: 1.6rem;
-//   color: $color-grey-dark-4;
-// }

@@ -1,0 +1,12 @@
+<mat-stepper
+  matStepperIcon="edit"
+  [linear]="true"
+  labelPosition="bottom"
+  #stepper
+  [ngClass]="requirementFor">
+  <ng-template matStepperIcon="done" let-index="index">
+    {{ index + 1 }}
+  </ng-template>
+  <mat-step [label]="label" [editable]="false" *ngFor="let label of labelsData">
+  </mat-step>
+</mat-stepper>

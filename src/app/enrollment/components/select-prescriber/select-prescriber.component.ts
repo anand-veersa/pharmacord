@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { PrescriberFacility } from 'src/app/models/enrollment-form.model';
 import { SubmitEnrollmentService } from '../../pages/submit-enrollment/submit-enrollment.service';
+import { AppConstants } from 'src/app/constants/app.constants';
 
 @Component({
   selector: 'app-select-prescriber',
@@ -34,10 +35,18 @@ export class SelectPrescriberComponent implements OnInit, OnDestroy {
   constructor(
     public submitEnrolService: SubmitEnrollmentService,
     private authService: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private appConstants: AppConstants
   ) {}
 
   ngOnInit(): void {
+    if (
+      this.authService.user.role.RolePkId === this.appConstants.PROVIDER_ROLE
+    ) {
+      this.submitEnrolService.selectedPrescriberId.next(
+        this.authService.user.prescribers[0].ProviderId
+      );
+    }
     this.http
       .get('/assets/json/facilities-table.json')
       .subscribe((data: any) => {
@@ -54,7 +63,7 @@ export class SelectPrescriberComponent implements OnInit, OnDestroy {
           prescriberListJson: this.submitEnrolService.prescribersJson,
           selectPrescriberForm: this.submitEnrolService.prescriberForm,
         });
-        // this.getPrescriberFacilities(this.submitEnrolService.selectedFacilityId);
+
         this.subscription =
           this.submitEnrolService.selectedPrescriberId.subscribe(
             (prescriberId: number) => {
@@ -92,7 +101,7 @@ export class SelectPrescriberComponent implements OnInit, OnDestroy {
         ? this.submitEnrolService.selectedFacility[0]
         : null,
       nextScreen:
-        actionType === 'back' ? 'select-medication' : 'prescriber-details',
+        actionType === 'back' ? 'select-medication' : 'select-services',
     };
     this.action.emit(actionObj);
   }

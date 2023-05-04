@@ -43,6 +43,14 @@ export class SubmitEnrollmentService {
   public firstInsuranceDetails: JsonFormData = { controls: [] };
   public secondInsuranceForm: FormGroup;
   public secondInsuranceDetails: JsonFormData = { controls: [] };
+  public priorAuthForm: FormGroup;
+  public priorAuthDetails: JsonFormData = { controls: [] };
+  public appealForm: FormGroup;
+  public appealDetails: JsonFormData = { controls: [] };
+
+  public prescriptionInfoForm: FormGroup;
+  public clinicalInfoForm: FormGroup;
+  public currentLineOfTherapyForm: FormGroup;
   public attestationForm: FormGroup;
   public attestationDetails: JsonFormData = { controls: [] };
 
@@ -378,16 +386,21 @@ export class SubmitEnrollmentService {
             option.for.includes(this.enrollmentFormPayload.DrugGroup)
         );
       this.firstInsuranceDetails = data.primaryMedical;
-      this.secondInsuranceDetails =
-        this.enrollmentFormPayload.DrugGroup === 'Jemperli'
-          ? data.secondaryMedical
-          : data.prescriptionInsurance;
+      if (this.enrollmentFormPayload.DrugGroup === 'Jemperli') {
+        this.secondInsuranceDetails = data.secondaryMedical;
+      } else {
+        this.secondInsuranceDetails = data.prescriptionInsurance;
+        this.priorAuthDetails = data.priorAuth;
+        this.appealDetails = data.appeal;
+      }
       this.firstInsuranceForm = this.sharedService.buildForm(
         this.firstInsuranceDetails
       );
       this.secondInsuranceForm = this.sharedService.buildForm(
         this.secondInsuranceDetails
       );
+      this.priorAuthForm = this.sharedService.buildForm(this.priorAuthDetails);
+      this.appealForm = this.sharedService.buildForm(this.appealDetails);
     });
   }
 

@@ -91,7 +91,8 @@ export class CustomFormComponent implements AfterViewInit {
     }
     if (
       componentInstance === CustomSelectComponent ||
-      componentInstance === CustomCheckboxComponent
+      componentInstance === CustomCheckboxComponent ||
+      componentInstance === CustomRadioComponent
     ) {
       dynamicComponent.instance.action.subscribe(
         (data: string | number | { value: string | number; field: any }) =>

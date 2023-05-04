@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
 import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 
@@ -39,6 +40,7 @@ import { ProfileModule } from './profile/profile.module';
     PdfJsViewerModule,
     ProfileModule,
     ToastrModule.forRoot(),
+    NgIdleKeepaliveModule.forRoot(),
   ],
   providers: [
     {

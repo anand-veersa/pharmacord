@@ -9,6 +9,17 @@
   justify-content: space-between;
   align-items: center;
 
+  .prescriber-name {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .stepper {
+    width: 72.3rem;
+    margin-right: 32rem;
+  }
+
   .prescriber {
     display: flex;
     gap: 1.2rem;

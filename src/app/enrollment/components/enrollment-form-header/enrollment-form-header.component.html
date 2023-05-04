@@ -1,13 +1,24 @@
 <div class="form-header">
-  <div class="primary-title">
+  <div class="primary-title" *ngIf="stepNumber < 2">
     <span>{{ title }}</span>
   </div>
-  <div class="stepper"></div>
-  <div class="prescriber" *ngIf="selectPrescriberForm">
+  <div class="prescriber-name" *ngIf="stepNumber >= 2">
     <img
       src="../../../../assets/images/prescriber_icon.svg"
       alt="Prescriber Icon" />
-    <div class="prescriber-list">
+    <span class="prescriber-name">{{ prescriberName }}</span>
+  </div>
+  <div class="stepper" *ngIf="showStepper">
+    <app-custom-stepper
+      [labelsData]="stepperLables"
+      [selectedStepNumber]="stepNumber - 2"
+      requirementFor="enrollment"></app-custom-stepper>
+  </div>
+  <div class="prescriber" *ngIf="displayedScreen === 'select-prescriber'">
+    <img
+      src="../../../../assets/images/prescriber_icon.svg"
+      alt="Prescriber Icon" />
+    <div class="prescriber-list" *ngIf="!isPrescriber">
       <span class="prescriber-name">Select a Prescriber</span>
       <app-custom-form
         formType="select-prescriber"
@@ -15,5 +26,8 @@
         [form]="selectPrescriberForm"
         (action)="prescriberChanged.emit($event)"></app-custom-form>
     </div>
+    <span class="prescriber-name" *ngIf="isPrescriber">{{
+      prescriberName
+    }}</span>
   </div>
 </div>

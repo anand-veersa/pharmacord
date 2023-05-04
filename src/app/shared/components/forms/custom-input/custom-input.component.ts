@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { JsonFormControls } from 'src/app/models/json-form-data.model';
 import {
   FormArray,

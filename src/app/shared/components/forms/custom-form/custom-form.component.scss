@@ -55,7 +55,9 @@ label {
     flex-basis: 35%;
   }
   app-custom-input,
-  app-custom-radio {
+  app-custom-radio,
+  app-custom-select,
+  app-custom-datepicker {
     flex-basis: 60%;
   }
 }
@@ -64,8 +66,10 @@ label {
     flex-basis: 55%;
   }
   app-custom-input,
-  app-custom-radio {
-    flex-basis: 40%;
+  app-custom-radio,
+  app-custom-select,
+  app-custom-datepicker {
+    flex-basis: 45%;
   }
 }
 
