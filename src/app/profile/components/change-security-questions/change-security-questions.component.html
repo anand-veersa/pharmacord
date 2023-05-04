@@ -1,5 +1,12 @@
 <div class="change-security-ques">
-  <p class="text-med text-x-bold">
+  <div *ngIf="setSecurityQuestionScreen">
+    <p class="text-large text-x-bold">Select New Account Security Questions</p>
+    <p class="text-med text-x-bold">
+      Select 3 security questions below. These questions will help us verify
+      your identity in the event you forget your password.
+    </p>
+  </div>
+  <p *ngIf="!setSecurityQuestionScreen" class="text-med text-x-bold">
     Update your security questions in the event you forget your password.
   </p>
   <p class="error-or-required"><span>* </span>Required field</p>
@@ -12,21 +19,35 @@
         [class]="'input-fields-' + control.name"
         [field]="control"
         [form]="profileService.changeSecurityQuesForm"
-        (action)="changeSecurityQuestions()"></app-custom-form>
+        (action)="filterOptions($event)"></app-custom-form>
     </div>
   </div>
-  <div class="change-security-ques-buttons">
-    <app-custom-button
-      btnClass="secondary register-user"
-      btnText="&#60; Back to Home"
-      [routerLink]="['/enrollment/dashboard']"></app-custom-button>
+  <div
+    *ngIf="setSecurityQuestionScreen; else else_block"
+    class="change-security-ques-buttons set-security-questions">
     <app-custom-button
       btnClass="tertiary register-user"
-      btnText="Save"
+      btnText="Continue"
       [isDisabled]="
         profileService.changeSecurityQuesForm &&
         profileService.changeSecurityQuesForm.invalid
       "
-      (click)="saveSecurityQuestions()"></app-custom-button>
+      (click)="setSecurityQuestions()"></app-custom-button>
   </div>
+  <ng-template #else_block>
+    <div class="change-security-ques-buttons">
+      <app-custom-button
+        btnClass="secondary register-user"
+        btnText="&#60; Back to Home"
+        [routerLink]="['/enrollment/dashboard']"></app-custom-button>
+      <app-custom-button
+        btnClass="tertiary register-user"
+        btnText="Save"
+        [isDisabled]="
+          profileService.changeSecurityQuesForm &&
+          profileService.changeSecurityQuesForm.invalid
+        "
+        (click)="saveSecurityQuestions()"></app-custom-button>
+    </div>
+  </ng-template>
 </div>
