@@ -73,7 +73,13 @@
   .value {
     @extend .flexy;
     justify-content: space-between;
+
+    mat-error {
+      font-size: 1.2rem;
+      width: 8.3rem;
+    }
   }
+
   .dosage-divs {
     align-items: baseline;
     justify-content: space-between;
