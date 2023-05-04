@@ -82,18 +82,27 @@ export class ProfileService {
         .get('/assets/json/change-security-ques.json')
         .subscribe((formData: any) => {
           this.changeSecurityQuesJSON = formData;
-          this.changeSecurityQuesJSON.controls.forEach(el => {
-            if (el.name === 'question1') {
-              el.options = options[0];
-              el.value = selectedOptions[0];
-            } else if (el.name === 'question2') {
-              el.options = options[1];
-              el.value = selectedOptions[1];
-            } else if (el.name === 'question3') {
-              el.options = options[2];
-              el.value = selectedOptions[2];
-            }
-          });
+          if (selectedOptions.length === 0) {
+            this.changeSecurityQuesJSON.controls.forEach(el => {
+              if (['question1', 'question2', 'question3'].includes(el.name)) {
+                el.options = options;
+              }
+            });
+          } else {
+            this.changeSecurityQuesJSON.controls.forEach(el => {
+              if (el.name === 'question1') {
+                el.options = options[0];
+                el.value = selectedOptions[0];
+              } else if (el.name === 'question2') {
+                el.options = options[1];
+                el.value = selectedOptions[1];
+              } else if (el.name === 'question3') {
+                el.options = options[2];
+                el.value = selectedOptions[2];
+              }
+            });
+          }
+
           this.changeSecurityQuesForm = this.sharedService.buildForm(
             this.changeSecurityQuesJSON
           );
