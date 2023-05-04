@@ -30,6 +30,7 @@ import { CustomUploadDocumentsComponent } from './components/custom-upload-docum
 import { CustomStepperComponent } from './components/custom-stepper/custom-stepper.component';
 import { NumberformatDirective } from './directives/phone-format.directive';
 import { SafePipe } from './pipes/safe-pipe';
+import { NumberonlyDirective } from './directives/number-only.directive';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { SafePipe } from './pipes/safe-pipe';
     CustomUploadDocumentsComponent,
     CustomStepperComponent,
     NumberformatDirective,
+    NumberonlyDirective,
     SafePipe,
   ],
   imports: [
@@ -85,6 +87,7 @@ import { SafePipe } from './pipes/safe-pipe';
     CustomUploadDocumentsComponent,
     CustomStepperComponent,
     NumberformatDirective,
+    NumberonlyDirective,
     SafePipe,
   ],
   providers: [LocalStorageService],

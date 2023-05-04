@@ -20,6 +20,10 @@ export class NumberformatDirective {
     private cdr: ChangeDetectorRef
   ) {}
 
+  ngOnInit() {
+    console.log('control name', this.ngControl.name);
+  }
+
   @HostListener('changes', ['$event'])
   ngOnChanges(event: SimpleChanges) {
     if (event['data'].currentValue) {
@@ -30,7 +34,10 @@ export class NumberformatDirective {
       // if (newVal.length <= 6) {
       //   newVal = newVal.substring(0, newVal.length - 1);
       // }
-      if (this.taxID) {
+      if (
+        typeof this.ngControl.name === 'string' &&
+        ['facilitytaxId', 'taxId'].includes(this.ngControl.name)
+      ) {
         if (newVal.length === 0) {
           newVal = '';
         } else if (newVal.length <= 2) {
