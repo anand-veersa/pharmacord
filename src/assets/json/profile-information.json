@@ -26,7 +26,7 @@
       "value": "",
       "label": "Phone",
       "placeholder": "Enter your Phone",
-      "type": "number",
+      "type": "text",
       "subType": "phone",
       "validators": {
         "required": true,
@@ -40,11 +40,12 @@
       "value": "",
       "label": "Fax",
       "placeholder": "Enter your Fax",
-      "type": "number",
+      "type": "text",
+      "subType": "phone",
       "validators": {
         "required": true,
-        "min": 10,
-        "max": 10
+        "min": 14,
+        "max": 14
       },
       "options": {}
     },
