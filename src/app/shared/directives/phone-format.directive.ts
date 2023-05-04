@@ -20,10 +20,6 @@ export class NumberformatDirective {
     private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit() {
-    console.log('control name', this.ngControl.name);
-  }
-
   @HostListener('changes', ['$event'])
   ngOnChanges(event: SimpleChanges) {
     if (event['data'].currentValue) {
