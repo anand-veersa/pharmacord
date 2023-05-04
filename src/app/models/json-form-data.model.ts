@@ -7,6 +7,7 @@ interface JsonFormValidators {
   pattern?: string;
   nullValidator?: boolean;
   match?: boolean;
+  passwordPattern?: true;
 }
 export interface JsonFormControlOptions {
   label: string;
@@ -18,6 +19,7 @@ export interface JsonFormControls {
   label: string;
   value: any;
   type: string;
+  subType?: string;
   placeholder: string;
   options?: JsonFormControlOptions[];
   validators?: JsonFormValidators;
@@ -27,6 +29,7 @@ export interface JsonFormControls {
   extLink?: string;
   display?: boolean;
   disabled?: boolean;
+  preventDefaultSelection?: boolean;
 }
 export interface JsonFormData {
   controls: JsonFormControls[];

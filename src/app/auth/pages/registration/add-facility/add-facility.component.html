@@ -1,0 +1,131 @@
+<div class="add-facility-container">
+  <div class="title">
+    <p class="text-x-bold text-large">{{ title }}</p>
+    <p class="text-medium text-xmed">
+      {{ subTitle }}
+      <span class="error-or-required">* Required field</span>
+    </p>
+  </div>
+  <div class="form-container">
+    <div class="form-fields">
+      <div
+        [class]="'input-field-' + control.name"
+        *ngFor="let control of addFacilityFormData?.controls">
+        <app-custom-form
+          [field]="control"
+          [form]="addFacilityForm"
+          formType="add-facility"></app-custom-form>
+      </div>
+
+      <div class="form-buttons">
+        <app-custom-button
+          [isDisabled]="addFacilityForm && addFacilityForm.invalid"
+          btnText="Add"
+          btnClass="secondary text-small text-x-bold x-large"
+          (click)="addFacility()"
+          *ngIf="!editClicked">
+        </app-custom-button>
+        <app-custom-button
+          btnText="Cancel"
+          btnClass="secondary text-small text-x-bold xm-small"
+          (click)="cancleEdit()"
+          *ngIf="editClicked">
+        </app-custom-button>
+        <app-custom-button
+          btnText="Update"
+          btnClass="tertiary text-small text-x-bold xm-small"
+          (click)="updateFacility()"
+          *ngIf="editClicked">
+        </app-custom-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container" *ngIf="facilities.length !== 0">
+    <table mat-table [dataSource]="facilities" class="mat-elevation-z8">
+      <ng-container matColumnDef="PracticeGroup">
+        <th class="" mat-header-cell *matHeaderCellDef>Practice Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.PracticeGroup }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let element">
+          {{ getCompleteAddress(element.Address[0]) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Phone">
+        <th mat-header-cell *matHeaderCellDef>Phone</th>
+        <td mat-cell *matCellDef="let element">{{ element.Phone }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Fax">
+        <th mat-header-cell *matHeaderCellDef>Fax</th>
+        <td mat-cell *matCellDef="let element">{{ element.Fax }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.Email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Edit/Delete">
+        <th mat-header-cell *matHeaderCellDef>Edit/Delete</th>
+        <td
+          class="button-cell"
+          mat-cell
+          *matCellDef="let element; let i = index">
+          <app-custom-button
+            btnText="Edit"
+            btnClass="xm-small secondary"
+            (click)="editFacility(element, i)"></app-custom-button>
+          <app-custom-button
+            btnText="Delete"
+            btnClass="xm-small secondary"
+            (click)="deleteFacility(i)"></app-custom-button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns; let i = index"
+        [ngClass]="editClickedIndex === i ? 'activeEdit' : ''"></tr>
+    </table>
+  </div>
+  <!-- <div class="table-container"></div> -->
+  <div class="footer-container">
+    <app-custom-button
+      *ngIf="requirementFor === 'prescriberRegistration'"
+      btnText="Save and Register"
+      btnClass="tertiary x-medium text-x-bold text-xmed"
+      [isDisabled]="facilities.length === 0"
+      (click)="sendFacilityData()">
+    </app-custom-button>
+
+    <app-custom-button
+      *ngIf="requirementFor === 'othersRegistration'"
+      btnText="Next &gt;"
+      btnClass="tertiary x-medium text-x-bold text-xmed"
+      (action)="onAction('next')">
+    </app-custom-button>
+
+    <app-custom-button
+      *ngIf="
+        requirementFor === 'prescriberRegistration' ||
+        requirementFor === 'othersRegistration'
+      "
+      btnText="&lt; Back"
+      btnClass="secondary s-medium text-x-bold text-xmed"
+      (action)="onAction('back')">
+    </app-custom-button>
+
+    <app-custom-button
+      *ngIf="requirementFor === 'accountSetting'"
+      btnText="Save"
+      btnClass="tertiary x-medium text-x-bold text-xmed"
+      (click)="sendFacilityData()">
+    </app-custom-button>
+  </div>
+</div>

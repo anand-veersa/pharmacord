@@ -69,7 +69,8 @@ export class SelectPatientComponent implements OnInit {
         ...this.submitEnrolService.patientRepDetailForm.value,
         ...this.submitEnrolService.patientRepDetailForm.value,
       },
-      nextScreen: 'prescriber-details',
+      nextScreen:
+        actionType === 'back' ? 'select-services' : 'prescriber-details',
     });
   }
 

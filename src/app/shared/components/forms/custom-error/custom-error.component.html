@@ -1,3 +1,77 @@
 <mat-error *ngIf="errorMessage" class="error-message">
   {{ errorMessage }}
+  <ng-content></ng-content>
 </mat-error>
+<div
+  *ngIf="field.name === 'newPassword' && !errorMessage"
+  class="column-flex password-patterns">
+  <span
+    class="text-xxs flex"
+    [ngClass]="
+      passwordPatternMismatch.includes('upperCase') ? 'error' : 'success'
+    "
+    ><mat-icon>
+      {{
+        passwordPatternMismatch.includes('upperCase')
+          ? 'cancel'
+          : 'check_circle_outline_icon'
+      }}</mat-icon
+    >
+    At least 1 upper case character</span
+  >
+  <span
+    class="text-xxs flex"
+    [ngClass]="
+      passwordPatternMismatch.includes('lowerCase') ? 'error' : 'success'
+    "
+    ><mat-icon>
+      {{
+        passwordPatternMismatch.includes('lowerCase')
+          ? 'cancel'
+          : 'check_circle_outline_icon'
+      }}</mat-icon
+    >
+    At least 1 lower case character</span
+  >
+  <span
+    class="text-xxs flex"
+    [ngClass]="passwordPatternMismatch.includes('number') ? 'error' : 'success'"
+    ><mat-icon>
+      {{
+        passwordPatternMismatch.includes('number')
+          ? 'cancel'
+          : 'check_circle_outline_icon'
+      }}</mat-icon
+    >
+    At least 1 numeric digit</span
+  >
+  <span
+    class="text-xxs flex"
+    [ngClass]="
+      passwordPatternMismatch.includes('specialChar') ? 'error' : 'success'
+    "
+    ><mat-icon>
+      {{
+        passwordPatternMismatch.includes('specialChar')
+          ? 'cancel'
+          : 'check_circle_outline_icon'
+      }}</mat-icon
+    >
+    1 non alphanumeric character between [!@#$%^&*]</span
+  >
+  <span
+    class="text-xxs flex"
+    [ngClass]="
+      passwordPatternMismatch.includes('minLength') ? 'error' : 'success'
+    "
+    ><mat-icon>
+      {{
+        passwordPatternMismatch.includes('minLength')
+          ? 'cancel'
+          : 'check_circle_outline_icon'
+      }}</mat-icon
+    >
+    Password must have a minimum of 8 characters</span
+  >
+</div>
+<ng-content class="invalid-username"></ng-content>

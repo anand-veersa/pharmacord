@@ -19,10 +19,16 @@ export class LogoutComponent {
 
   ngOnInit(): void {
     this.sharedService.isLoading.next(true);
-    this.authService.logout().subscribe(res => {
-      this.sharedService.isLoading.next(false);
+    this.authService.logout().subscribe({
+      next: res => {
+        this.sharedService.isLoading.next(false);
+        this.localStorage.clear();
+      },
+      error: err => {
+        this.sharedService.isLoading.next(false);
+        this.localStorage.clear();
+      },
     });
-    this.localStorage.clear();
   }
 
   public reLogin(): void {

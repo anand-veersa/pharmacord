@@ -63,6 +63,10 @@ export class SelectPrescriberComponent implements OnInit, OnDestroy {
             }
           );
       });
+
+    if (this.authService.user.role.RolePkId === 3) {
+      this.getPrescriberFacilities(this.authService.user.portalAccountPkId);
+    }
   }
 
   public getPrescriberFacilities(prescriberId: number): void {
@@ -92,7 +96,7 @@ export class SelectPrescriberComponent implements OnInit, OnDestroy {
         ? this.submitEnrolService.selectedFacility[0]
         : null,
       nextScreen:
-        actionType === 'back' ? 'select-medication' : 'prescriber-details',
+        actionType === 'back' ? 'select-medication' : 'select-services',
     };
     this.action.emit(actionObj);
   }

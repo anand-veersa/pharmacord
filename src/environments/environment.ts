@@ -4,4 +4,6 @@ export const environment = {
   clientId: 'V5G18lkyJw7nBL3g5RMBK5fgXSf4FFeH',
   pdfHost: 'https://ext-api.pharmacord.com/portaldev',
   baseUrlDoc: 'https://ext-api.pharmacord.com/gatewaydev/api/v1.0/',
+  setTimeoutInterval: 15,
+  programId: '50034',
 };

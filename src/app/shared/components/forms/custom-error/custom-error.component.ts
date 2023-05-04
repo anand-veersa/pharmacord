@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  ViewChild,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SharedService } from 'src/app/shared/services/shared.service';
 
@@ -12,6 +18,7 @@ export class CustomErrorComponent implements OnChanges {
   @Input() field: any;
   @Input() errors: any;
   public errorMessage = '';
+  public passwordPatternMismatch: string[] = [];
 
   constructor(private sharedService: SharedService) {}
 
