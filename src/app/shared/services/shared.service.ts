@@ -194,7 +194,6 @@ export class SharedService {
 
   public getErrorMessage(errors: any, label: string): string {
     let errorMessage = '';
-    console.log(errors);
     if (!errors) return '';
     const errorKeys = Object.keys(errors);
     if (errorKeys.includes('required')) {

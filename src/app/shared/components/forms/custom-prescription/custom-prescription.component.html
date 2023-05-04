@@ -5,13 +5,19 @@
         Strength/Form
         <span class="error-or-required" *ngIf="isStrengthRequired">*</span>
       </div>
-      <div *ngIf="['Zejula'].includes(medicineName)" class="value" disabled>
-        <input type="text" value="100 mg capsules" disabled />
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicineName)"
+        class="value"
+        disabled>
+        <input type="text" [value]="zejulaStrength" disabled />
       </div>
-      <div *ngIf="['Ojjaara'].includes(medicineName)" class="value" disabled>
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicineName)"
+        class="value"
+        disabled>
         <mat-radio-group
           [ngClass]="
-            radio.class === 'block-radio'
+            ojjaaraRadio.class === 'block-radio'
               ? 'block-radio-group'
               : formType
               ? formType + '-radio'
@@ -21,22 +27,41 @@
           required>
           <mat-radio-button
             class="example-radio-button"
-            *ngFor="let option of radio.options"
+            *ngFor="let option of ojjaaraRadio.options"
             [value]="option.value"
             color="primary">
             {{ option.label }}
           </mat-radio-button>
         </mat-radio-group>
+        <mat-error
+          *ngIf="
+            form.get(field.name + '.strength')?.touched &&
+            form.get(field.name + '.strength')?.errors
+          ">
+          {{
+            sharedService.getErrorMessage(
+              form.get(field.name + '.strength')?.errors,
+              'Strength'
+            )
+          }}
+        </mat-error>
       </div>
-      <div *ngIf="['Jemperli'].includes(medicineName)" class="value">
+      <div
+        *ngIf="[appConstants.MEDICINES.MEDICINE_1].includes(medicineName)"
+        class="value">
         <div class="text-area">
-          Injection: clear to slightly opalescent, colorless to yellow solution
-          supplied in a carton containing one 500 mg/10 mL (50 mg/mL),
-          single-dose vial (NDC 0173-0898-03).
+          {{ jemperliStrength }}
         </div>
       </div>
     </div>
-    <div class="dosage" *ngIf="['Zejula', 'Ojjaara'].includes(medicineName)">
+    <div
+      class="dosage"
+      *ngIf="
+        [
+          appConstants.MEDICINES.MEDICINE_2,
+          appConstants.MEDICINES.MEDICINE_3
+        ].includes(medicineName)
+      ">
       <div class="title"></div>
       <div class="value">
         <div class="qty">
@@ -98,7 +123,9 @@
         <span class="error-or-required" *ngIf="isDoaRequired">*</span>
       </div>
       <div class="value">
-        <div *ngIf="['Zejula'].includes(medicineName)" class="doa-value">
+        <div
+          *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicineName)"
+          class="doa-value">
           Take
           <input
             type="number"
@@ -120,13 +147,16 @@
             }}
           </mat-error>
         </div>
-        <div *ngIf="['Ojjaara'].includes(medicineName)" class="value" disabled>
-          <input type="text" class="text-input" [value]="doa" disabled />
+        <div
+          *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicineName)"
+          class="value"
+          disabled>
+          <input type="text" class="text-input" [value]="ojjaaraDoa" disabled />
         </div>
-        <div *ngIf="['Jemperli'].includes(medicineName)" class="text-area">
-          • Dose 1 through 4: 500 mg every 3 weeks. • Subsequent dosing
-          beginning 3 weeks after Dose 4 (Dose 5 onwards): 1000 mg every 6
-          weeks. • Administer as an intravenous infusion over 30 minutes.
+        <div
+          *ngIf="[appConstants.MEDICINES.MEDICINE_1].includes(medicineName)"
+          class="text-area">
+          {{ jemperliDoa }}
         </div>
       </div>
     </div>
