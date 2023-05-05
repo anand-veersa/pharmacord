@@ -169,7 +169,7 @@
         "label": "Office Contact Email",
         "placeholder": "Enter your office contact email",
         "type": "email",
-        "validators": { "email": true }
+        "validators": { "pattern": "^\\S+@\\S+\\.\\S+$" }
       }
     ]
   },

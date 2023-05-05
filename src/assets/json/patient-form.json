@@ -136,7 +136,7 @@
         "label": "Email Address",
         "placeholder": "Enter your email address",
         "type": "email",
-        "validators": { "required": true, "email": true }
+        "validators": { "required": true, "pattern": "^\\S+@\\S+\\.\\S+$" }
       },
       {
         "name": "repCaregiverName",
