@@ -30,6 +30,7 @@ export interface JsonFormControls {
   display?: boolean;
   disabled?: boolean;
   preventDefaultSelection?: boolean;
+  tooltipContent?: string;
 }
 export interface JsonFormData {
   controls: JsonFormControls[];

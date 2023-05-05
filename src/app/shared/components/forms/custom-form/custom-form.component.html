@@ -5,6 +5,9 @@
       <span class="error-or-required" *ngIf="field.validators?.required"
         >*</span
       >
+      <app-custom-tooltip
+        *ngIf="field.tooltipContent"
+        [tooltipContent]="field.tooltipContent"></app-custom-tooltip>
     </label>
   </ng-container>
   <div *ngIf="field.extLink !== ''" class="extLinkDiv">
