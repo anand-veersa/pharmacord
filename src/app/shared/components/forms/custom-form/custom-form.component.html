@@ -1,7 +1,12 @@
 <div [ngClass]="field.class ? field.class : formType">
   <ng-container #dynamicForm>
-    <label *ngIf="field.label" class="label"
-      >{{ field.label }}
+    <label *ngIf="field.label" class="label">
+      <div
+        *ngIf="field.preventDefaultSelection; else else_block"
+        [innerHTML]="field.label | safe : 'html'"></div>
+      <ng-template #else_block>
+        {{ field.label }}
+      </ng-template>
       <span class="error-or-required" *ngIf="field.validators?.required"
         >*</span
       >
