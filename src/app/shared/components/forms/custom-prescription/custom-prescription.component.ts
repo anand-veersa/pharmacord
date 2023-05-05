@@ -61,9 +61,6 @@ export class CustomPrescriptionComponent implements OnInit {
   quantity: undefined | number;
   refills: undefined | number;
   strength: undefined | string;
-
-  isQtyDisabled: boolean;
-  isRefillsDisabled: boolean;
   isQtyRequired: boolean;
   isRefillsRequired: boolean;
 
@@ -75,9 +72,6 @@ export class CustomPrescriptionComponent implements OnInit {
       this.submitEnrolService.enrollmentFormPayload.DrugGroup.toUpperCase();
     this.quantity = this.field.qty;
     this.refills = this.field.refills;
-
-    this.isQtyDisabled = this.field.refills ? true : false;
-    this.isRefillsDisabled = this.field.refills ? true : false;
 
     this.isQtyRequired = this.field.refills ? false : true;
     this.isRefillsRequired = this.field.refills ? false : true;
