@@ -42,6 +42,11 @@
       <app-attestation-details
         *ngSwitchCase="'attestation-details'"
         (action)="onAction($event)"></app-attestation-details>
+      <app-e-sign
+        *ngSwitchCase="'e-sign'"
+        class="esign"
+        (action)="onAction($event)">
+      </app-e-sign>
     </ng-container>
   </div>
 </div>

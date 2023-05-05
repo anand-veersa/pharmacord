@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AppConstants } from 'src/app/constants/app.constants';
 import { EnrollmentFormPayload } from 'src/app/models/enrollment-form.model';
@@ -450,6 +450,7 @@ export class SubmitEnrollmentService {
         );
       });
   }
+
   public resetForms(): void {
     if (this.medicationForm) this.medicationForm.reset();
     if (this.prescriberForm) this.prescriberForm.reset();

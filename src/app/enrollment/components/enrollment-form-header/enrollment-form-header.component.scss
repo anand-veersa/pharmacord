@@ -1,4 +1,5 @@
 @import '../../../../assets/styles/abstracts/variables';
+@import '../../../../assets/styles/abstracts/mixins';
 
 .form-header {
   width: 100%;
@@ -8,6 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 3rem;
 
   .prescriber-name {
     display: flex;
@@ -17,7 +19,11 @@
 
   .stepper {
     width: 72.3rem;
-    margin-right: 32rem;
+    margin-right: 15%;
+
+    @include respond(tab-port) {
+      width: 60rem;
+    }
   }
 
   .prescriber {

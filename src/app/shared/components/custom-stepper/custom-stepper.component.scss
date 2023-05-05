@@ -16,6 +16,13 @@
   pointer-events: none !important;
 }
 
+::ng-deep .mat-stepper-label-position-bottom .mat-stepper-horizontal-line {
+  @include respond(tab-port) {
+    top: 2.5rem;
+    border-top-width: 3px;
+  }
+}
+
 :host .onBoarding {
   ::ng-deep .mat-horizontal-stepper-header-container {
     background-color: $color-tertiary !important;
