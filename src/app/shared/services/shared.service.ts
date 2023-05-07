@@ -195,6 +195,26 @@ export class SharedService {
     });
   }
 
+  public getErrorMessage(errors: any, label: string): string {
+    let errorMessage = '';
+    if (!errors) return '';
+    const errorKeys = Object.keys(errors);
+    if (errorKeys.includes('required')) {
+      errorMessage = `${label} is required`;
+    } else if (errorKeys.includes('minlength')) {
+      errorMessage = `${label} must have ${errors.minlength.requiredLength} characters`;
+    } else if (errorKeys.includes('maxlength')) {
+      errorMessage = `${label} should not exceed  ${errors.maxLength.requiredLength} characters`;
+    } else if (errorKeys.includes('passwordNotMatch')) {
+      errorMessage = `Passwords do not match`;
+    } else if (errorKeys.includes('maxSizeExceeded')) {
+      errorMessage = `Passwords do not match`;
+    } else {
+      errorMessage = `${label} is invalid`;
+    }
+    return errorMessage;
+  }
+
   private addValidator(rules: any, formControl: { [key: string]: any }): any[] {
     let validators: any[] = [];
     if (!rules) {
