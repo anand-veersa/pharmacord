@@ -17,6 +17,9 @@
         </span>
         <ng-template #else_block>
           {{ option.label }}
+          <app-custom-tooltip
+            *ngIf="option.tooltipContent"
+            [tooltipContent]="option.tooltipContent"></app-custom-tooltip>
         </ng-template>
       </mat-checkbox>
     </li>

@@ -13,6 +13,7 @@ export interface JsonFormControlOptions {
   label: string;
   value: any;
   for?: string;
+  tooltipContent?: string;
 }
 export interface JsonFormControls {
   name: string;
