@@ -6,10 +6,12 @@
       <mat-checkbox
         #checkbox
         color="primary"
-        [checked]="isSame(checked, option.value)"
+        [checked]="isChecked()"
         (change)="onChecked($event.checked, option.value, index)">
         <div class="align-labels">
-          <span *ngIf="field.validators?.required" class="error-or-required"
+          <span
+            *ngIf="field.preventDefaultSelection && field.validators?.required"
+            class="error-or-required"
             >*</span
           >
           <span
@@ -18,10 +20,10 @@
           </span>
           <ng-template #else_block>
             {{ option.label }}
-            <app-custom-tooltip
-              *ngIf="option.tooltipContent"
-              [tooltipContent]="option.tooltipContent"></app-custom-tooltip>
           </ng-template>
+          <app-custom-tooltip
+            *ngIf="option.tooltipContent"
+            [tooltipContent]="option.tooltipContent"></app-custom-tooltip>
         </div>
       </mat-checkbox>
     </li>

@@ -12,9 +12,9 @@ export class CustomRadioComponent {
   @Input() form: FormGroup;
   @Input() formType: string = '';
   @Input() field: JsonFormControls;
-  @Output() action = new EventEmitter<string>();
+  @Output() action = new EventEmitter<any>();
 
   onChange(e: MatRadioChange) {
-    this.action.emit(e.value);
+    this.action.emit({ value: e.value, field: this.field });
   }
 }

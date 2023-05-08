@@ -24,6 +24,7 @@ export interface JsonFormControls {
   placeholder: string;
   options?: JsonFormControlOptions[];
   validators?: JsonFormValidators;
+  for?: string;
   minDate?: Date;
   maxDate?: Date;
   class?: string;

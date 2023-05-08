@@ -22,7 +22,7 @@
 
 ::ng-deep .generic-form-radio {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   label {
     font-size: 1.4rem;
     line-height: 1.6rem;
@@ -30,6 +30,12 @@
   }
   mat-radio-button {
     flex-basis: 25%;
+    @include respond(tab-land) {
+      flex-basis: 33%;
+    }
+    @include respond(tab-port) {
+      flex-basis: 50%;
+    }
   }
 }
 ::ng-deep .enrollment-form-radio {
@@ -51,9 +57,10 @@
   }
 }
 
-::ng-deep .block-radio-group-radio {
+::ng-deep .block-radio-group {
   display: flex;
   margin-left: -1rem;
+  flex-wrap: wrap;
   mat-radio-button {
     flex-basis: 27%;
   }

@@ -4,7 +4,7 @@
       {
         "name": "selectName",
         "value": "",
-        "display": false,
+        "display": true,
         "label": "Select Name",
         "placeholder": "Select Name",
         "type": "select",
@@ -69,13 +69,22 @@
         "disabled": false
       },
       {
-        "name": "patientAddress",
+        "name": "patientAddress1",
         "value": "",
         "display": true,
-        "label": "Patient Address",
-        "placeholder": "Enter your patient address",
+        "label": "Address 1",
+        "placeholder": "Enter your address 1",
         "type": "text",
         "validators": { "required": true }
+      },
+      {
+        "name": "patientAddress2",
+        "value": "",
+        "display": true,
+        "label": "Address 2",
+        "placeholder": "Enter your address 2",
+        "type": "text",
+        "validators": {}
       },
       {
         "name": "city",
@@ -120,7 +129,7 @@
         "validators": { "required": true, "min": 14, "max": 14 }
       },
       {
-        "name": "cell Phone",
+        "name": "cellPhone",
         "value": "",
         "display": true,
         "label": "Cell Phone #",
@@ -139,10 +148,60 @@
         "validators": { "required": true, "pattern": "^\\S+@\\S+\\.\\S+$" }
       },
       {
+        "name": "bestContactTime",
+        "value": "",
+        "display": true,
+        "label": "Best Time to Contact",
+        "placeholder": "",
+        "type": "radio",
+        "options": [
+          { "label": "AM (8 am to 10 am)", "value": "AM" },
+          { "label": "Day (10 am to 5 pm)", "value": "Day" },
+          { "label": "PM (after 5 pm)", "value": "PM" }
+        ],
+        "validators": {}
+      },
+      {
+        "name": "altContactFirstName",
+        "value": "",
+        "display": true,
+        "label": "Alt. Contact First Name",
+        "placeholder": "Enter your alt contact first name",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "altContactLastName",
+        "value": "",
+        "display": true,
+        "label": "Alt. Contact Last Name",
+        "placeholder": "Enter your alt contact last name",
+        "type": "text",
+        "validators": {}
+      },
+      {
+        "name": "altContactPhone",
+        "value": "",
+        "display": true,
+        "label": "Alt. Contact Phone #",
+        "placeholder": "Select your alt. contact phone #",
+        "type": "type",
+        "validators": {}
+      },
+      {
+        "name": "altContactRelation",
+        "value": "",
+        "display": true,
+        "label": "Alt. Contact Relationship to Patient",
+        "placeholder": "Select your alt. contact relationship to patient",
+        "type": "type",
+        "validators": {}
+      },
+      {
         "name": "repCaregiverName",
         "value": "",
         "display": true,
-        "label": "Patient Representative/Caregiver Name",
+        "label": "Patient Representative/ Caregiver Name",
         "placeholder": "Enter your Patient Representative/Caregiver Name",
         "type": "text",
         "validators": {},
@@ -152,7 +211,7 @@
         "name": "repCaregiverRelation",
         "value": "",
         "display": true,
-        "label": "Patient Representative/Caregiver Relationship to Patient",
+        "label": "Patient Representative/ Caregiver Relationship to Patient",
         "placeholder": "Select your Patient Representative/Caregiver Relationship to ...",
         "type": "type",
         "validators": {},
@@ -162,7 +221,7 @@
         "name": "repCaregiverPhone",
         "value": "",
         "display": true,
-        "label": "Patient Representative/Caregiver Phone #",
+        "label": "Patient Representative/ Caregiver Phone #",
         "placeholder": "Enter your patient representative/caregiver phone #",
         "type": "text",
         "subType": "phone",

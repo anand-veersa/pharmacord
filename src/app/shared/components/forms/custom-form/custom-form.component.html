@@ -1,4 +1,4 @@
-<div [ngClass]="field.class ? field.class : formType">
+<div [ngClass]="field.class ? field.class + ' ' + formType : formType">
   <ng-container #dynamicForm>
     <label *ngIf="field.label" class="label">
       <div

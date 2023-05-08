@@ -11,7 +11,7 @@ import { SubmitEnrollmentService } from '../../pages/submit-enrollment/submit-en
 })
 export class SelectMedicationComponent implements OnInit {
   @Output() action = new EventEmitter();
-  public medications: string[] = [];
+  public selectedMedication: string;
   public formJson: JsonFormData = { controls: [] };
   public selectMedicationForm: FormGroup;
 
@@ -45,13 +45,25 @@ export class SelectMedicationComponent implements OnInit {
     // this.selectMedicationForm.controls['DrugGroup'].setValue(this.selectedMedication);
   }
 
+  public medicationChanged(data: any): void {
+    this.selectedMedication = data.value;
+  }
   public onAction(actionType: string): void {
     if (actionType === 'back') this.router.navigate(['/enrollment/dashboard']);
     else {
+      let drugChanged = false;
+      if (
+        this.selectedMedication !==
+        this.submitEnrolService.enrollmentFormPayload.DrugGroup
+      )
+        drugChanged = true;
       this.action.emit({
         actionType,
         formName: 'select-medication',
-        form: this.submitEnrolService.medicationForm.value,
+        form: {
+          drugChanged,
+          drug: this.submitEnrolService.medicationForm.value,
+        },
         nextScreen: 'select-prescriber',
       });
     }

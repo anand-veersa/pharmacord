@@ -7,17 +7,24 @@
         >(At least one must be selected)</span
       >
     </div>
-    <div class="medication-list tm-2" *ngIf="submitEnrolService.servicesForm">
-      <app-custom-form
-        [field]="submitEnrolService.filteredServices.controls[0]"
-        [form]="submitEnrolService.servicesForm"
-        [checked]="
-          submitEnrolService.enrollmentFormPayload.EnrollmentServiceRequests
-        "></app-custom-form>
+    <div
+      *ngIf="submitEnrolService.servicesForm"
+      [ngClass]="selectedMedication === 'Jemperli' ? 'right-padded' : ''"
+      class="service-list">
+      <div
+        *ngFor="let control of submitEnrolService.filteredServices.controls"
+        class="tm-3">
+        <app-custom-form
+          [field]="control"
+          [form]="submitEnrolService.servicesForm"
+          [checked]="
+            submitEnrolService.enrollmentFormPayload.EnrollmentServiceRequests
+          "></app-custom-form>
+      </div>
     </div>
   </div>
-  <div *ngIf="selectedMedication !== 'Jemperli'">
-    <span class="primary-title tm-3">Preferred Specialty Pharmacy</span>
+  <div class="tm-2" *ngIf="selectedMedication !== 'Jemperli'">
+    <span class="primary-title">Preferred Specialty Pharmacy</span>
     <div class="text-small tm-1 text-medium">
       Preferred Specialty Pharmacy selection will be honored if permitted by
       patient’s insurance plan.
@@ -25,8 +32,7 @@
     <div class="medication-list tm-2" *ngIf="submitEnrolService.servicesForm">
       <app-custom-form
         [field]="submitEnrolService.filteredPharmacies.controls[0]"
-        [form]="submitEnrolService.specialityPharmacyForm"
-        formType="selectPharmacyForm"></app-custom-form>
+        [form]="submitEnrolService.specialityPharmacyForm"></app-custom-form>
     </div>
   </div>
 </div>
@@ -39,9 +45,5 @@
     btnClass="small tertiary"
     btnText="Next &#62;"
     (action)="onAction('next')"
-    [isDisabled]="
-      submitEnrolService.servicesForm
-        ? submitEnrolService.servicesForm.invalid
-        : false
-    "></app-custom-button>
+    [isDisabled]="checkFormValidity()"></app-custom-button>
 </div>
