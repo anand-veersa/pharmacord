@@ -67,6 +67,7 @@
   </div>
 
   <mat-paginator
+    *ngIf="columnSchema.length > 0 && dataSource.data.length > 0"
     class="custom-table-paginator"
     showFirstLastButtons
     aria-label="Select page of periodic elements"
