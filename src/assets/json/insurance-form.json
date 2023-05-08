@@ -219,7 +219,7 @@
         "placeholder": "Enter your Phone #",
         "type": "text",
         "subType": "phone",
-        "validators": {}
+        "validators": { "min": 14, "max": 14 }
       },
       {
         "name": "policyId",
@@ -459,7 +459,8 @@
         "label": "Phone #",
         "placeholder": "Enter your Phone #",
         "type": "text",
-        "validators": {}
+        "subType": "phone",
+        "validators": { "min": 14, "max": 14 }
       },
       {
         "name": "policyId",
@@ -468,7 +469,7 @@
         "label": "Policy ID #",
         "placeholder": "Enter your policy id",
         "type": "text",
-        "validators": {}
+        "validators": { "required": true }
       },
       {
         "name": "group",
