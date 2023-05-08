@@ -1,9 +1,13 @@
+@import '../../../../../assets/styles/abstracts/mixins';
 .checkbox-group {
   display: flex;
-  width: 85%;
   flex-wrap: wrap;
   .checkbox {
     flex-basis: 25%;
     margin-bottom: 3rem;
+    @include respond(tab-port) {
+      flex-basis: 50%;
+      margin-bottom: 0;
+    }
   }
 }

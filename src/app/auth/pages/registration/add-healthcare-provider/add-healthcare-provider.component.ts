@@ -157,15 +157,12 @@ export class AddHealthcareProviderComponent
     myCompDialog.afterOpened().subscribe(res => {
       // Trigger After Dialog Opened
       this.table?.renderRows;
-      console.log('After Opened', { res });
     });
     myCompDialog.beforeClosed().subscribe(res => {
       // Trigger Before Dialog Closed
-      console.log('Before Closed', { res });
     });
     myCompDialog.afterClosed().subscribe(res => {
       // Trigger After Dialog Closed
-      console.log('After Closed', { res });
       this.selectedFacilityInProgress = [];
     });
   }

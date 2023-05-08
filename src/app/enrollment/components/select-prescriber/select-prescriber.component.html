@@ -30,6 +30,8 @@
       btnClass="small tertiary"
       btnText="Next &#62;"
       (action)="onAction('next')"
-      [isDisabled]="!submitEnrolService.selectedFacility"></app-custom-button>
+      [isDisabled]="
+        !submitEnrolService.selectedFacility.length
+      "></app-custom-button>
   </div>
 </div>

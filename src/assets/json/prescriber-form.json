@@ -254,22 +254,23 @@
       {
         "name": "siteOfAdministration",
         "value": "physicianOffice",
-        "label": "Site of Administration *",
+        "label": "Site of Administration",
         "placeholder": "Enter your city",
         "type": "radio",
+        "display": true,
         "validators": { "required": true },
         "options": [
           {
             "label": "Physician’s office",
-            "value": "physicianOffice"
+            "value": "Physician’s Office"
           },
           {
             "label": "Hospital outpatient",
-            "value": "hospitalOutpatient"
+            "value": "Hospital Outpatient"
           },
           {
             "label": "Another site of care",
-            "value": "anotherSiteOfCare"
+            "value": "Another site of care"
           }
         ]
       }

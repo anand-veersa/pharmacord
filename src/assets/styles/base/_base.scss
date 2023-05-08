@@ -98,9 +98,29 @@ td {
   display: flex;
   align-content: flex-start;
   gap: 3rem;
-  .panel {
-    flex-basis: 48%;
+  @include respond(tab-land) {
+    flex-direction: column;
+  }
+  .panel-left {
+    flex-basis: 50%;
+
+    &-content {
+      padding-right: 4rem;
+      border-right: $border-style;
+      @include respond(tab-land) {
+        border-right: none;
+        padding-right: 0;
+        padding-bottom: 3rem;
+        border-bottom: $border-style;
+      }
+    }
+  }
+  .panel-right {
+    flex-basis: 49%;
     padding-right: 4rem;
+    @include respond(tab-land) {
+      padding-right: 0;
+    }
   }
   .panel-big {
     flex-basis: 48%;

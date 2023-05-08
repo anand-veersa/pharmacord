@@ -14,6 +14,7 @@ import { EnrollmentService } from '../../enrollment.service';
 import { SubmitEnrollmentService } from './submit-enrollment.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AppConstants } from 'src/app/constants/app.constants';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-submit-enrollment',
@@ -37,7 +38,7 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     public submitEnrolService: SubmitEnrollmentService,
     private enrolService: EnrollmentService,
     private http: HttpClient,
-    private authService: AuthService,
+    private sharedService: SharedService,
     private appConstants: AppConstants
   ) {}
 
@@ -62,23 +63,35 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     this.displayScreen = nextScreen;
     // if(actionType=== 'next') {
     if (formName === 'select-medication') {
-      this.submitEnrolService.enrollmentFormPayload.DrugGroup = form.DrugGroup;
+      if (form.drugChanged && actionType === 'next')
+        this.submitEnrolService.resetForms(true);
+      this.submitEnrolService.enrollmentFormPayload.DrugGroup =
+        form.drug.DrugGroup;
       this.formInitiated = true;
+      // if (actionType === 'next') this.submitEnrolService.resetForms();
     }
     if (formName === 'select-prescriber') {
       this.selectedFacility = form;
     }
     if (formName === 'select-services') {
-      this.submitEnrolService.enrollmentFormPayload.EnrollmentServiceRequests =
-        form.services.Services;
+      if (actionType === 'back') return;
+      for (const key in form.services) {
+        const val = form.services[key];
+        if (val)
+          this.submitEnrolService.enrollmentFormPayload.EnrollmentServiceRequests.push(
+            val
+          );
+      }
       this.submitEnrolService.enrollmentFormPayload.PreferredSpecialityPharmacy =
-        [form.pharmacy.SpecialityPharmacy];
+        form.pharmacy.SpecialityPharmacy;
     }
     if (formName === 'select-patient') {
+      console.log(form);
       this.setPatientDetails(form);
     }
     if (formName === 'prescriber-details') {
-      console.log(form);
+      this.setPrescriberDetails(form);
+      // console.log(form);
     }
     if (formName === 'attestation-details') {
       console.log(form);
@@ -140,11 +153,26 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     const caregiverName = patient.repCaregiverName
       ? patient.repCaregiverName.split(' ')
       : [];
+    const selectedPatientName = patient.selectedPatient
+      ? patient.selectedPatient.PatientName.split(' ')
+      : [];
+    const firstName =
+      selectedPatientName.length > 0
+        ? selectedPatientName[0]
+        : patient.firstName;
+    const lastName =
+      selectedPatientName.length > 1
+        ? selectedPatientName.at(-1)
+        : patient.lastName;
     this.submitEnrolService.enrollmentFormPayload.Patient = {
-      FirstName: patient.firstName,
-      LastName: patient.lastName,
-      DOB: patient.dob,
-      Gender: patient.sex,
+      FirstName: firstName,
+      LastName: lastName,
+      DOB: this.sharedService.getFormattedDate(
+        this.submitEnrolService.patientDetailForm.controls['dob'].getRawValue(),
+        true
+      ),
+      Gender:
+        this.submitEnrolService.patientDetailForm.controls['sex'].getRawValue(),
       MMRStatus: [],
       DiagnosisCodes: [],
       OtherDiagnosisCodes: '',
@@ -156,7 +184,7 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
       State: patient.state,
       Zip: patient.zipcode,
       PatientEmailAddress: patient.email,
-      PatientId: null,
+      PatientId: patient.selectedPatient?.PatientId ?? null,
       Phones: patientPhone,
       AlternateContact: {
         FirstName: caregiverName.length ? caregiverName[0] : '',
@@ -165,6 +193,50 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         Phone: patient.repCaregiverPhone,
       },
       BestContactTime: patient.bestContactTime,
+    };
+  }
+
+  private setPrescriberDetails(prescriber: any): void {
+    this.submitEnrolService.enrollmentFormPayload.Provider = {
+      FirstName: this.submitEnrolService.selectedPrescriber.FirstName,
+      LastName: this.submitEnrolService.selectedPrescriber.LastName,
+      NPI: this.submitEnrolService.selectedPrescriber.NPI,
+      TaxID: prescriber.taxId,
+      Facility: {
+        Id: this.submitEnrolService.selectedFacilityId,
+        NPI: prescriber.facilityNpi,
+        TaxId: prescriber.facilitytaxId,
+        Name:
+          this.submitEnrolService.selectedFacility[0].OfficeName ||
+          this.submitEnrolService.selectedFacility[0].PracticeGroup,
+        Address1: this.submitEnrolService.selectedFacility[0].Address.Line1,
+        Address2: this.submitEnrolService.selectedFacility[0].Address.Line2,
+        City: this.submitEnrolService.selectedFacility[0].Address.City,
+        State: this.submitEnrolService.selectedFacility[0].Address.State,
+        Zip: this.submitEnrolService.selectedFacility[0].Address.Zipcode,
+        OfficeContactName: prescriber.officeContactName,
+      },
+      Phones: [
+        {
+          Number: prescriber.officeContactPhone,
+          Ext: prescriber.officeContactExt,
+        },
+      ],
+      Fax: prescriber.fax,
+      Email: prescriber.officeContactEmail,
+      OtherFacilities: [
+        {
+          Name: prescriber.shippingFacilityName,
+          OfficeContactName: prescriber.recipientName,
+          Phone: prescriber.phone,
+          Address1: prescriber.street,
+          Address2: null,
+          City: prescriber.city,
+          State: prescriber.state,
+          Zip: prescriber.zipcode,
+          FacilityType: prescriber.siteOfAdministration,
+        },
+      ],
     };
   }
 

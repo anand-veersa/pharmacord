@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AppConstants } from 'src/app/constants/app.constants';
 import { EnrollmentFormPayload } from 'src/app/models/enrollment-form.model';
 import {
   JsonFormControlOptions,
+  JsonFormControls,
   JsonFormData,
 } from 'src/app/models/json-form-data.model';
 import { SharedService } from 'src/app/shared/services/shared.service';
@@ -19,6 +20,7 @@ export class SubmitEnrollmentService {
   );
   public selectedPrescriberId = new BehaviorSubject<number>(0);
   public selectedPrescriber: any;
+  public patientType: string = 'new';
   public medicationForm: FormGroup;
   public medicationJson: JsonFormData = { controls: [] };
   public prescriberForm: FormGroup;
@@ -105,6 +107,7 @@ export class SubmitEnrollmentService {
   }
 
   public createSelectServicesForm(selectedMedicine: string): void {
+    //TODO: optimize
     const options: JsonFormControlOptions[] = [
       {
         label: 'Coverage Support',
@@ -188,26 +191,30 @@ export class SubmitEnrollmentService {
         for: 'Zejula, Ojjaara',
       },
     ];
-    // this.http.get("/assets/json/services-form.json").subscribe((data:any) => {
-    //   const filteredOptions = data.controls[0].options.filter((option:JsonFormControlOptions) => option.for?.includes(selectedMedicine));
-    //   data.controls[0].options = filteredOptions;
-    //   this.filteredServices = data;
-    //   this.servicesForm = this.sharedService.buildForm(this.filteredServices);
-    //   console.log("form changesd", this.servicesForm);
-    // });
-
-    this.filteredServices.controls.pop();
-    // if (this.servicesForm) return;
-    this.filteredServices.controls.push({
-      name: 'Services',
-      value: '',
-      label: '',
-      placeholder: '',
-      type: 'checkbox',
-      validators: { required: true },
-      options: options.filter(option => option.for?.includes(selectedMedicine)),
+    this.http.get('/assets/json/services-form.json').subscribe((data: any) => {
+      this.filteredServices = data;
+      this.filteredServices.controls = this.filteredServices.controls.filter(
+        (control: JsonFormControls) => control.for?.includes(selectedMedicine)
+      );
+      this.servicesForm = this.sharedService.buildForm(this.filteredServices);
+      console.log('form changesd', this.servicesForm);
     });
-    this.servicesForm = this.sharedService.buildForm(this.filteredServices);
+
+    // this.filteredServices.controls.pop();
+    // this.filteredServices.controls.push({
+    //   name: 'Services',
+    //   value: '',
+    //   label: '',
+    //   placeholder: '',
+    //   type: 'checkbox',
+    //   class:
+    //     selectedMedicine === 'Jemperli'
+    //       ? 'checkbox-group right-padded'
+    //       : 'checkbox-group',
+    //   validators: { required: true },
+    //   options: options.filter(option => option.for?.includes(selectedMedicine)),
+    // });
+    // this.servicesForm = this.sharedService.buildForm(this.filteredServices);
   }
 
   public createSelectPharmacyForm(selectedMedicine: string): void {
@@ -242,7 +249,7 @@ export class SubmitEnrollmentService {
           Id: 2,
           Name: 'CVS Specialty Pharmacy',
         },
-        for: 'Ojjaara',
+        for: 'Zejula, Ojjaara',
       },
       {
         label: 'In-office dispensing site',
@@ -269,13 +276,19 @@ export class SubmitEnrollmentService {
         for: 'Ojjaara',
       },
     ];
-    this.filteredPharmacies.controls.pop();
-    // if (this.servicesForm) return;
+    // this.http.get("/assets/json/services-form.json").subscribe((data:any) => {
+    //   this.filteredServices = data;
+    //   this.filteredServices.controls= this.filteredServices.controls.filter((control:JsonFormControls) =>  control.for?.includes(selectedMedicine));
+    //   this.servicesForm = this.sharedService.buildForm(this.filteredServices);
+    //   // console.log("form changesd", this.servicesForm);
+    // });
+    this.filteredPharmacies.controls = [];
     this.filteredPharmacies.controls.push({
       name: 'SpecialityPharmacy',
       value: '',
       label: '',
       placeholder: '',
+      class: '',
       type: 'radio',
       validators: { required: true },
       options: options.filter(option => option.for?.includes(selectedMedicine)),
@@ -286,30 +299,65 @@ export class SubmitEnrollmentService {
   }
 
   public createSelectPatientForm(): void {
-    if (this.patientDetailForm) return;
     this.http.get('/assets/json/patient-form.json').subscribe((data: any) => {
       this.patientDetails = data.leftPanel;
-      this.patientDetails.controls.map(control => {
-        if (control.name === 'dob') {
-          control.maxDate = new Date();
-        }
-        if (control.name === 'state') {
-          control.options = this.sharedService.states;
-        }
-        if (control.name === 'selectName') {
-          this.enrolService.medicineCases.subscribe((data: any[]) => {
-            control.options = this.sharedService.getPatients(data).map(data => {
-              return {
-                label: data.PatientName,
-                value: { patientId: data.PatientId, caseId: data.CaseId },
-              };
+      this.patientDetails.controls = this.patientDetails.controls.filter(
+        (control, index) => {
+          if (this.patientType === 'new') {
+            if (control.name === 'selectName') return;
+          } else {
+            if (control.name === 'firstName' || control.name === 'lastName') {
+              return;
+            }
+            if (control.name === 'sex' || control.name === 'dob') {
+              control.disabled = true;
+            }
+          }
+          if (control.name === 'dob') {
+            control.maxDate = new Date();
+          }
+          if (control.name === 'state') {
+            control.options = this.sharedService.states;
+          }
+          if (control.name === 'selectName') {
+            this.enrolService.medicineCases.subscribe((data: any[]) => {
+              control.options = this.sharedService
+                .getPatients(data)
+                .map(data => {
+                  return {
+                    label: data.PatientName,
+                    value: { patientId: data.PatientId, caseId: data.CaseId },
+                  };
+                });
             });
-          });
-          console.log(control.options);
+          }
+          return control;
         }
-      });
+      );
+
       this.patientRepDetails = data.rightPanel;
       this.patientPapDetails = data.pap;
+      this.patientRepDetails.controls = this.patientRepDetails.controls.filter(
+        control => {
+          if (
+            this.enrollmentFormPayload.DrugGroup === 'Jemperli' &&
+            (control.name === 'repCaregiverName' ||
+              control.name === 'repCaregiverRelation' ||
+              control.name === 'repCaregiverPhone')
+          )
+            return;
+          if (
+            this.enrollmentFormPayload.DrugGroup !== 'Jemperli' &&
+            (control.name === 'altContactFirstName' ||
+              control.name === 'altContactLastName' ||
+              control.name === 'altContactPhone' ||
+              control.name === 'altContactRelation')
+          )
+            return;
+          return control;
+        }
+      );
+
       this.patientDetailForm = this.sharedService.buildForm(
         this.patientDetails
       );
@@ -323,26 +371,26 @@ export class SubmitEnrollmentService {
   }
 
   public createPrescriberForm(): void {
-    console.log(this.selectedPrescriber, this.selectedFacility);
     this.http
       .get('/assets/json/prescriber-form.json')
       .subscribe((data: any) => {
         this.prescriberDetails = data.leftPanel;
         this.shippingDetails = data.rightPanel;
-        this.shippingDetails.controls.map(control => {
-          if (control.name === 'siteOfAdministration') {
-            control.display =
+        this.shippingDetails.controls = this.shippingDetails.controls.filter(
+          control => {
+            if (
+              control.name === 'siteOfAdministration' &&
+              this.enrollmentFormPayload.DrugGroup !== 'Jemperli'
+            )
+              return;
+            if (
+              control.name === 'shippingAddressType' &&
               this.enrollmentFormPayload.DrugGroup === 'Jemperli'
-                ? true
-                : false;
+            )
+              return;
+            return control;
           }
-          if (control.name === 'shippingAddressType') {
-            control.display =
-              this.enrollmentFormPayload.DrugGroup === 'Jemperli'
-                ? false
-                : true;
-          }
-        });
+        );
         this.prescriberDetailForm = this.sharedService.buildForm(
           this.prescriberDetails
         );
@@ -359,7 +407,6 @@ export class SubmitEnrollmentService {
           state: this.selectedFacility[0].Address.State,
           zipcode: this.selectedFacility[0].Address.Zipcode,
         });
-        console.log(this.shippingDetails);
         this.shippingDetailForm = this.sharedService.buildForm(
           this.shippingDetails
         );
@@ -451,10 +498,29 @@ export class SubmitEnrollmentService {
         );
       });
   }
-  public resetForms(): void {
-    if (this.medicationForm) this.medicationForm.reset();
-    if (this.prescriberForm) this.prescriberForm.reset();
-    if (this.servicesForm) this.servicesForm.reset();
+  public resetForms(drugChangeReset: boolean = false): void {
+    if (this.medicationForm && !drugChangeReset) this.medicationForm.reset();
     this.selectedFacilityId = 0;
+    this.selectedFacility = [];
+    if (this.prescriberForm) this.prescriberForm.reset();
+    if (this.servicesForm) {
+      this.filteredServices = { controls: [] };
+      this.servicesForm.reset();
+    }
+    if (this.specialityPharmacyForm) this.specialityPharmacyForm.reset();
+    if (this.patientDetailForm) this.patientDetailForm.reset();
+    if (this.patientRepDetailForm) this.patientRepDetailForm.reset();
+    if (this.patientPapDetailForm) this.patientPapDetailForm.reset();
+    if (this.prescriberDetailForm) this.prescriberDetailForm.reset();
+    if (this.shippingDetailForm) this.shippingDetailForm.reset();
+    if (this.firstInsuranceForm) this.firstInsuranceForm.reset();
+    if (this.secondInsuranceForm) this.secondInsuranceForm.reset();
+    console.log('form', this.servicesForm);
+  }
+
+  private clearFormArray(form: any, control: string) {
+    while (form.controls[control].length !== 0) {
+      form.controls[control].removeAt(0);
+    }
   }
 }

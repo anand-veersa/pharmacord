@@ -66,7 +66,6 @@ export class CustomInputComponent implements OnInit {
         (<HTMLInputElement>event.target).value = '';
         // event.target.value = '';
       };
-      console.log(this.files, this.files.length);
       // if(this.files.length === 1) this.disableUploader = true;
     }
   }

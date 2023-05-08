@@ -6,9 +6,11 @@
       <mat-checkbox
         #checkbox
         color="primary"
-        [checked]="isSame(checked, option.value)"
+        [checked]="isChecked()"
         (change)="onChecked($event.checked, option.value, index)">
-        <span *ngIf="field.validators?.required" class="error-or-required"
+        <span
+          *ngIf="field.preventDefaultSelection && field.validators?.required"
+          class="error-or-required"
           >*</span
         >
         <span

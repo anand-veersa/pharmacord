@@ -48,7 +48,7 @@ interface OtherFacilityData {
   OfficeContactName: string;
   Phone: string;
   Address1: string;
-  Address2: string;
+  Address2: string | null;
   City: string;
   State: string;
   Zip: string;

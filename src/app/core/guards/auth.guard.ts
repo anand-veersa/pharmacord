@@ -52,6 +52,7 @@ export class AuthGuard
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    if (!component) return true;
     if (!component.formInitiated) return true;
     let subject = new Subject<boolean>();
     component.openDialog();
