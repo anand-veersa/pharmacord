@@ -29,10 +29,12 @@
                 clinicalInfoForm.get('patientFirstName')?.errors
               "
               class="error-message">
-              <div
-                *ngIf="clinicalInfoForm.get('patientFirstName')?.errors?.['required']">
-                Patient First Name is required
-              </div>
+              {{
+                sharedService.getErrorMessage(
+                  clinicalInfoForm.get('patientFirstName')?.errors,
+                  'Patient First Name'
+                )
+              }}
             </mat-error>
           </div>
         </div>
@@ -61,10 +63,12 @@
                 clinicalInfoForm.get('patientLastName')?.errors
               "
               class="error-message">
-              <div
-                *ngIf="clinicalInfoForm.get('patientLastName')?.errors?.['required']">
-                Patient Last Name is required
-              </div>
+              {{
+                sharedService.getErrorMessage(
+                  clinicalInfoForm.get('patientLastName')?.errors,
+                  'Patient Last Name'
+                )
+              }}
             </mat-error>
           </div>
         </div>
@@ -127,10 +131,12 @@
                 clinicalInfoForm.get('primaryDiagnosis')?.errors
               "
               class="error-message">
-              <div
-                *ngIf="clinicalInfoForm.get('primaryDiagnosis')?.errors?.['required']">
-                Patient Diagnosis is required
-              </div>
+              {{
+                sharedService.getErrorMessage(
+                  clinicalInfoForm.get('primaryDiagnosis')?.errors,
+                  'Primary Diagnosis'
+                )
+              }}
             </mat-error>
           </div>
         </div>
@@ -161,10 +167,12 @@
                 clinicalInfoForm.get('primaryDiagnosisICD10Code')?.errors
               "
               class="error-message">
-              <div
-                *ngIf="clinicalInfoForm.get('primaryDiagnosisICD10Code')?.errors?.['required']">
-                Patient Diagnosis ICD 10 Code is required
-              </div>
+              {{
+                sharedService.getErrorMessage(
+                  clinicalInfoForm.get('primaryDiagnosisICD10Code')?.errors,
+                  'Primary Diagnosis ICD-10 Code'
+                )
+              }}
             </mat-error>
           </div>
         </div>
@@ -227,10 +235,12 @@
                     clinicalInfoForm.get('otherICD10Code')?.errors
                   "
                   class="error-message">
-                  <div
-                    *ngIf="clinicalInfoForm.get('otherICD10Code')?.errors?.['required']">
-                    Other ICD 10 Code is required
-                  </div>
+                  {{
+                    sharedService.getErrorMessage(
+                      clinicalInfoForm.get('otherICD10Code')?.errors,
+                      'Other ICD-10 Code'
+                    )
+                  }}
                 </mat-error>
               </div>
             </div>
@@ -292,6 +302,19 @@
                 </label>
               </div>
             </div>
+
+            <mat-error
+              *ngIf="
+                clinicalInfoForm.controls['mismatchrepairstatusMMR'].touched
+              "
+              class="error-message">
+              {{
+                sharedService.getErrorMessage(
+                  clinicalInfoForm.get('mismatchrepairstatusMMR')?.errors,
+                  'Mismatch repair status (MMR)'
+                )
+              }}
+            </mat-error>
           </div>
         </div>
         <div
@@ -346,6 +369,20 @@
                 value="Other" />
               <div><label class="form-check-label">Other </label></div>
             </div>
+            <mat-error
+              *ngIf="
+                clinicalInfoForm.controls['endometrialCancerPriortherapies']
+                  .touched
+              "
+              class="error-message">
+              {{
+                sharedService.getErrorMessage(
+                  clinicalInfoForm.get('endometrialCancerPriortherapies')
+                    ?.errors,
+                  'Endometrial cancer prior therapies'
+                )
+              }}
+            </mat-error>
           </div>
         </div>
         <div
@@ -399,7 +436,7 @@
         [
           appConstants.MEDICINES.MEDICINE_2,
           appConstants.MEDICINES.MEDICINE_3
-        ].includes(submitEnrolService.enrollmentFormPayload.DrugGroup)
+        ].includes(medicine)
       "
       class="primary-title flex toggle-panel tm-1 bm-1">
       Current Line Of Therapy
@@ -736,7 +773,7 @@
         [
           appConstants.MEDICINES.MEDICINE_2,
           appConstants.MEDICINES.MEDICINE_3
-        ].includes(submitEnrolService.enrollmentFormPayload.DrugGroup)
+        ].includes(medicine)
       ">
       <div class="primary-title flex toggle-panel">
         Prescription Information
@@ -1067,7 +1104,7 @@
           [
             appConstants.MEDICINES.MEDICINE_2,
             appConstants.MEDICINES.MEDICINE_3
-          ].includes(submitEnrolService.enrollmentFormPayload.DrugGroup)
+          ].includes(medicine)
         "
         class="bg enrollment-form">
         <div class="note-text tm-1">
