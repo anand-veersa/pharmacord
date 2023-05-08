@@ -30,12 +30,14 @@ export class LoginComponent implements OnInit {
       this.loginForm = this.sharedService.buildForm(this.formData);
     });
   }
-  onSubmit(): void {
+  public onSubmit(): void {
     this.sharedService.isLoading.next(true);
     this.authService.login(this.loginForm.value).subscribe({
-      next: res => {
+      next: (res: any) => {
         this.sharedService.isLoading.next(false);
-        this.router.navigate(['/enrollment/dashboard']);
+        if (res.Payload.IsFirstTimeLogin) {
+          this.router.navigate(['/security-questions']);
+        } else this.router.navigate(['/enrollment/dashboard']);
       },
       error: err => {
         this.sharedService.isLoading.next(false);
@@ -44,7 +46,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  navigateToRegistration() {
+  public navigateToRegistration() {
     this.router.navigate(['/registration']);
   }
 }

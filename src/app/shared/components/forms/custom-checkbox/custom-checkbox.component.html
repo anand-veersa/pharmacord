@@ -8,16 +8,21 @@
         color="primary"
         [checked]="isSame(checked, option.value)"
         (change)="onChecked($event.checked, option.value, index)">
-        <span *ngIf="field.validators?.required" class="error-or-required"
-          >*</span
-        >
-        <span
-          *ngIf="field.preventDefaultSelection; else else_block"
-          [innerHTML]="field.options?.[0]!.label | safe : 'html'">
-        </span>
-        <ng-template #else_block>
-          {{ option.label }}
-        </ng-template>
+        <div class="align-labels">
+          <span *ngIf="field.validators?.required" class="error-or-required"
+            >*</span
+          >
+          <span
+            *ngIf="field.preventDefaultSelection; else else_block"
+            [innerHTML]="field.options?.[0]!.label | safe : 'html'">
+          </span>
+          <ng-template #else_block>
+            {{ option.label }}
+            <app-custom-tooltip
+              *ngIf="option.tooltipContent"
+              [tooltipContent]="option.tooltipContent"></app-custom-tooltip>
+          </ng-template>
+        </div>
       </mat-checkbox>
     </li>
   </ul>

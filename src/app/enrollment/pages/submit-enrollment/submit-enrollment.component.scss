@@ -9,3 +9,13 @@
 .esign {
   border-radius: 0.8rem;
 }
+::ng-deep .services-tooltip {
+  width: 24rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+
+  ul > li {
+    list-style: disc;
+  }
+}

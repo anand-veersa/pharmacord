@@ -13,6 +13,7 @@ export interface JsonFormControlOptions {
   label: string;
   value: any;
   for?: string;
+  tooltipContent?: string;
 }
 export interface JsonFormControls {
   name: string;
@@ -30,6 +31,7 @@ export interface JsonFormControls {
   display?: boolean;
   disabled?: boolean;
   preventDefaultSelection?: boolean;
+  tooltipContent?: string;
 }
 export interface JsonFormData {
   controls: JsonFormControls[];

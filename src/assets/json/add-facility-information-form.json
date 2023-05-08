@@ -19,13 +19,14 @@
       "value": "",
       "label": "Phone",
       "placeholder": "",
-      "type": "number",
+      "type": "text",
+      "subType": "phone",
       "reqErrorMsg": "Phone number is Required",
       "validityErrorMsg": "Phone number is not vaild",
       "validators": {
         "required": true,
-        "max": 10,
-        "min": 10
+        "max": 14,
+        "min": 14
       },
       "required": true,
       "options": []
@@ -35,13 +36,14 @@
       "value": "",
       "label": "Fax",
       "placeholder": "",
-      "type": "number",
+      "type": "text",
+      "subType": "phone",
       "reqErrorMsg": "Fax is a required",
       "validityErrorMsg": "Fax number is not valid",
       "validators": {
         "required": true,
-        "max": 10,
-        "min": 10
+        "max": 14,
+        "min": 14
       },
       "required": true,
       "options": []
@@ -357,7 +359,8 @@
       "value": "",
       "label": "Zip",
       "placeholder": "",
-      "type": "number",
+      "type": "text",
+      "subType": "numberOnly",
       "reqErrorMsg": "Zip is a required field",
       "validityErrorMsg": "invalid Zip",
       "validators": {

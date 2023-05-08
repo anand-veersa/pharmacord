@@ -33,6 +33,15 @@ export class ProfileService {
       );
   }
 
+  public setFirstTimeSecurityQuestion(data: any): Observable<any> {
+    return this.http
+      .post(`${environment.baseUrl}securityQuestion/save`, data)
+      .pipe(
+        catchError(this.handleError),
+        tap(res => this.handleToaster(res))
+      );
+  }
+
   public updateChangeSecurityQuestion(data: any): Observable<any> {
     return this.http
       .post(
@@ -65,47 +74,40 @@ export class ProfileService {
   }
 
   public createChangeSecurityQuesForm(
-    options: Array<{ label: string; value: number }>,
-    selectedSecurityQuestions: Array<any>
+    options: any,
+    selectedOptions: number[]
   ): void {
     if (!this.changeSecurityQuesForm) {
       this.http
         .get('/assets/json/change-security-ques.json')
         .subscribe((formData: any) => {
           this.changeSecurityQuesJSON = formData;
-          this.filterQuestions(options, selectedSecurityQuestions);
+          if (selectedOptions.length === 0) {
+            this.changeSecurityQuesJSON.controls.forEach(el => {
+              if (['question1', 'question2', 'question3'].includes(el.name)) {
+                el.options = options;
+              }
+            });
+          } else {
+            this.changeSecurityQuesJSON.controls.forEach(el => {
+              if (el.name === 'question1') {
+                el.options = options[0];
+                el.value = selectedOptions[0];
+              } else if (el.name === 'question2') {
+                el.options = options[1];
+                el.value = selectedOptions[1];
+              } else if (el.name === 'question3') {
+                el.options = options[2];
+                el.value = selectedOptions[2];
+              }
+            });
+          }
+
           this.changeSecurityQuesForm = this.sharedService.buildForm(
             this.changeSecurityQuesJSON
           );
         });
     }
-  }
-
-  public filterQuestions(
-    options: Array<{ label: string; value: number }>,
-    selectedSecurityQuestions: Array<any>
-  ): void {
-    let index = 0;
-    let arr: number[] = [];
-    if (this.changeSecurityQuesForm) {
-      const { question1, question2, question3 } =
-        this.changeSecurityQuesForm.value;
-      arr = [question1, question2, question3];
-    } else {
-      arr = selectedSecurityQuestions.map(el => el.SecurityQuestion.Id);
-    }
-    const q1 = options.filter(e => e.value !== arr[1] && e.value !== arr[2]);
-    const q2 = options.filter(e => e.value !== arr[0] && e.value !== arr[2]);
-    const q3 = options.filter(e => e.value !== arr[0] && e.value !== arr[1]);
-
-    this.changeSecurityQuesJSON.controls.forEach(data => {
-      if (data.type === 'select') {
-        if (data.name === 'question1') data.options = q1;
-        else if (data.name === 'question2') data.options = q2;
-        else if (data.name === 'question3') data.options = q3;
-        data.value = arr[index++];
-      }
-    });
   }
 
   public createProfileInfo(): void {

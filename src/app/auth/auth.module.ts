@@ -13,6 +13,8 @@ import { AuthInterceptor } from '../core/interceptors/auth-interceptor.service';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { AddFacilityComponent } from './pages/registration/add-facility/add-facility.component';
 import { AddHealthcareProviderComponent } from './pages/registration/add-healthcare-provider/add-healthcare-provider.component';
+import { SetSecurityQuestionsComponent } from './pages/set-security-questions/set-security-questions.component';
+import { ProfileModule } from '../profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -23,11 +25,13 @@ import { AddHealthcareProviderComponent } from './pages/registration/add-healthc
     RegistrationComponent,
     AddFacilityComponent,
     AddHealthcareProviderComponent,
+    SetSecurityQuestionsComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
     SharedModule,
+    ProfileModule,
     FormsModule,
     ReactiveFormsModule,
     AuthRoutingModule,
