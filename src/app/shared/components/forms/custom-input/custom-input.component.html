@@ -52,6 +52,11 @@
       (click)="browseFile($event, field.name)">
       <button class="browse">Browse</button>
     </div>
+    <app-custom-error
+      [field]="field"
+      [form]="form"
+      [errors]="this.form.get(field.name)?.errors">
+    </app-custom-error>
     <input
       type="file"
       hidden

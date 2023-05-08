@@ -208,7 +208,7 @@ export class SharedService {
     } else if (errorKeys.includes('passwordNotMatch')) {
       errorMessage = `Passwords do not match`;
     } else if (errorKeys.includes('maxSizeExceeded')) {
-      errorMessage = `Passwords do not match`;
+      errorMessage = `Only PDF upto 10 MB is supported`;
     } else {
       errorMessage = `${label} is invalid`;
     }

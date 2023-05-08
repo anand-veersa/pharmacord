@@ -141,7 +141,8 @@
         "name": "firstInsuranceFiles",
         "value": [],
         "display": true,
-        "label": "Attach Front and Back Copy of Insurance Card  ",
+        "label": "<div> Attach Front and Back Copy of Insurance Card  </div> <div> Only pdf, up to 10 MB </div>",
+        "preventDefaultSelection": "true",
         "placeholder": "",
         "type": "file",
         "validators": {}
@@ -290,7 +291,8 @@
         "name": "secondInsuranceFiles",
         "value": "",
         "display": true,
-        "label": "Attach Front and Back Copy of Insurance Card  ",
+        "label": "<div> Attach Front and Back Copy of Insurance Card  </div> <div> Only pdf, up to 10 MB </div>",
+        "preventDefaultSelection": "true",
         "placeholder": "",
         "type": "file",
         "validators": {}
@@ -558,7 +560,8 @@
         "name": "secondInsuranceFiles",
         "value": "",
         "display": true,
-        "label": "Attach Front and Back Copy of Insurance Card  ",
+        "label": "<div> Attach Front and Back Copy of Insurance Card  </div> <div> Only pdf, up to 10 MB </div>",
+        "preventDefaultSelection": "true",
         "placeholder": "",
         "type": "file",
         "validators": {}
