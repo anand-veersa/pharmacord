@@ -1,0 +1,99 @@
+<div
+  class="esign-container"
+  *ngIf="!thankYouScreen && !thankYouScreenDownloadable">
+  <div class="pdfView" *ngIf="showPDF">
+    <ng2-pdfjs-viewer
+      pagemode="none"
+      [pdfSrc]="pdfSrc"
+      [download]="false"
+      [openFile]="false"
+      [page]="1"
+      style="width: 100%; height: 100%">
+    </ng2-pdfjs-viewer>
+  </div>
+
+  <div class="iframe-container" *ngIf="showIframe">
+    <iframe
+      [src]="docuSignUrl | safe : 'resourceUrl'"
+      title="docusign frame"
+      style="height: 90%; width: 100%"
+      id="iframe_id">
+    </iframe>
+    <app-custom-button
+      btnClass="small tertiary"
+      btnText="Finish"
+      (click)="redirect()"></app-custom-button>
+  </div>
+
+  <app-custom-dialog
+    *ngIf="eSignConfirmation"
+    [data]="{
+      title: 'Confirmation',
+      closeText: 'Cancel',
+      confirmText: 'Proceed'
+    }"
+    (action)="continueToSigning($event)">
+    <div class="dialoug-content">
+      <img src="../../../../assets/images/tri_alert_icon.svg" alt="Alert" />
+      <div class="dialoug-text">
+        <p class="text-x-bold text-xmed">
+          You are about to finalize the enrollment form and proceed to e-sign
+          the enrollment form. You will not be able to edit the information once
+          you proceed.
+        </p>
+      </div>
+    </div>
+  </app-custom-dialog>
+</div>
+<div class="thankyou-screen" *ngIf="thankYouScreenDownloadable">
+  <p class="text-bold text-xmed">
+    The enrollment has been successfully submitted
+  </p>
+  <div class="information">
+    <p class="text-smed">
+      Your registration request has been submitted. A confirmation email has
+      been sent to the email address entered during the registration process.
+      You will receive another email notification within 2 business days
+      regarding your account approval.
+    </p>
+    <p class="text-smed">
+      If you have any questions, please contact us at 844-447-4662.
+    </p>
+  </div>
+  <app-custom-button
+    btnClass="small tertiary text-x-bold"
+    btnText="View/print PDF"
+    btnIcon="view_download.svg"
+    iconPlace="prefix"
+    (click)="downloadPdf()"></app-custom-button>
+</div>
+
+<div class="thankyou-screen" *ngIf="thankYouScreen">
+  <p class="text-bold text-xmed">The enrollment is being submitted</p>
+  <div class="information">
+    <p class="text-smed">
+      The GSK Oncology Enrollment Form for [Patient Full Name] is being
+      submitted. You will receive a copy of the enrollment form via email once
+      the submission has been completed. Please allow up to 2 business days for
+      the enrollment to be processed.
+    </p>
+    <p class="text-smed">
+      If you have any questions, please contact us at 844-447-4662.
+    </p>
+  </div>
+</div>
+
+<div
+  class="action-panel"
+  *ngIf="!showIframe && !thankYouScreen && !thankYouScreenDownloadable">
+  <app-custom-button
+    btnClass="small secondary"
+    btnText="&#60; Back"
+    (action)="onAction('back')"></app-custom-button>
+  <app-custom-button
+    btnClass="small tertiary"
+    btnText="E-Signature"
+    btnIcon="esign-icon.svg"
+    iconPlace="prefix"
+    (click)="eSignWork()"></app-custom-button>
+</div>

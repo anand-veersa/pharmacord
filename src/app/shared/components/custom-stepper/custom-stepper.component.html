@@ -3,6 +3,7 @@
   [linear]="true"
   labelPosition="bottom"
   #stepper
+  class="{{ 'last-edited-step-' + stepper.selectedIndex }}"
   [ngClass]="requirementFor">
   <ng-template matStepperIcon="done" let-index="index">
     {{ index + 1 }}

@@ -35,6 +35,7 @@ export class AuthInterceptor {
 
     return next.handle(modifiedRequest).pipe(
       catchError((error: HttpErrorResponse) => {
+        console.log(error);
         if (
           error instanceof HttpErrorResponse &&
           [401].includes(error.status) &&

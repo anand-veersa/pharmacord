@@ -30,6 +30,8 @@ import { SelectInsuranceComponent } from './components/select-insurance/select-i
 import { SelectPrescriptionComponent } from './components/select-prescription/select-prescription.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AttestationDetailsComponent } from './components/attestation-details/attestation-details.component';
+import { ESignComponent } from './components/e-sign/e-sign.component';
+import { RedirectDocusignComponent } from './components/redirect-docusign/redirect-docusign.component';
 @NgModule({
   declarations: [
     EnrollmentComponent,
@@ -50,6 +52,8 @@ import { AttestationDetailsComponent } from './components/attestation-details/at
     SelectInsuranceComponent,
     SelectPrescriptionComponent,
     AttestationDetailsComponent,
+    ESignComponent,
+    RedirectDocusignComponent,
   ],
   imports: [
     CommonModule,
