@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormArray, FormControl, FormGroup, NgForm } from '@angular/forms';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AppConstants } from 'src/app/constants/app.constants';
 import { EnrollmentFormPayload } from 'src/app/models/enrollment-form.model';
@@ -107,114 +107,13 @@ export class SubmitEnrollmentService {
   }
 
   public createSelectServicesForm(selectedMedicine: string): void {
-    //TODO: optimize
-    const options: JsonFormControlOptions[] = [
-      {
-        label: 'Coverage Support',
-        value: {
-          Id: 1,
-          Name: 'CoverageSupport',
-        },
-        for: 'Jemperli',
-      },
-      {
-        label: 'Patient Assistance Program(PAP)',
-        value: {
-          Id: 3,
-          Name: 'PatientAssistanceProgram',
-        },
-        for: 'Jemperli, Zejula, Ojjaara',
-      },
-      {
-        label: 'Alternate Coverage Support',
-        value: {
-          Id: 12,
-          Name: 'AlternateCoverageSupport',
-        },
-        for: 'Jemperli',
-      },
-      {
-        label: 'Commercial Co-pay Assistance',
-        value: {
-          Id: 2,
-          Name: 'CommercialCopayAssistance',
-        },
-        for: 'Jemperli, Zejula, Ojjaara',
-      },
-      {
-        label: 'Alternative Funding Sources Information',
-        value: {
-          Id: 2,
-          Name: 'AlternativeFundingSourcesInformation',
-        },
-        for: 'Zejula, Ojjaara',
-      },
-      {
-        label:
-          'Benefits Investigation (Pharmacy and/or Medical Insurance Coverage)',
-        value: {
-          Id: 2,
-          Name: 'BenefitsInvestigation',
-        },
-        for: 'Zejula, Ojjaara',
-      },
-      {
-        label: 'Home Health Coverage Information',
-        value: {
-          Id: 2,
-          Name: 'HomeHealthCoverageInformation',
-        },
-        for: 'Zejula',
-      },
-      {
-        label: 'Patient Advocacy Organization Information',
-        value: {
-          Id: 2,
-          Name: 'PatientAdvocacyOrganizationInformation',
-        },
-        for: 'Zejula, Ojjaara',
-      },
-      {
-        label: 'Prior Authorization and Appeals Support',
-        value: {
-          Id: 2,
-          Name: 'PriorAuthorizationAndAppealsSupport',
-        },
-        for: 'Zejula, Ojjaara',
-      },
-      {
-        label: 'Quick Start and Bridge Programs',
-        value: {
-          Id: 2,
-          Name: 'QuickStartAndBridgePrograms',
-        },
-        for: 'Zejula, Ojjaara',
-      },
-    ];
     this.http.get('/assets/json/services-form.json').subscribe((data: any) => {
       this.filteredServices = data;
       this.filteredServices.controls = this.filteredServices.controls.filter(
         (control: JsonFormControls) => control.for?.includes(selectedMedicine)
       );
       this.servicesForm = this.sharedService.buildForm(this.filteredServices);
-      console.log('form changesd', this.servicesForm);
     });
-
-    // this.filteredServices.controls.pop();
-    // this.filteredServices.controls.push({
-    //   name: 'Services',
-    //   value: '',
-    //   label: '',
-    //   placeholder: '',
-    //   type: 'checkbox',
-    //   class:
-    //     selectedMedicine === 'Jemperli'
-    //       ? 'checkbox-group right-padded'
-    //       : 'checkbox-group',
-    //   validators: { required: true },
-    //   options: options.filter(option => option.for?.includes(selectedMedicine)),
-    // });
-    // this.servicesForm = this.sharedService.buildForm(this.filteredServices);
   }
 
   public createSelectPharmacyForm(selectedMedicine: string): void {
@@ -375,9 +274,17 @@ export class SubmitEnrollmentService {
       .get('/assets/json/prescriber-form.json')
       .subscribe((data: any) => {
         this.prescriberDetails = data.leftPanel;
+        this.prescriberDetails.controls.map(control => {
+          if (control.name === 'state') {
+            control.options = this.sharedService.states;
+          }
+        });
         this.shippingDetails = data.rightPanel;
         this.shippingDetails.controls = this.shippingDetails.controls.filter(
           control => {
+            if (control.name === 'state') {
+              control.options = this.sharedService.states;
+            }
             if (
               control.name === 'siteOfAdministration' &&
               this.enrollmentFormPayload.DrugGroup !== 'Jemperli'

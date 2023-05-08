@@ -3,6 +3,8 @@
 
 ::ng-deep {
   .change-security-ques {
+    background: $color-white;
+    border-radius: 0 0 0.8rem 0.8rem;
     padding: 2.4rem 5.5rem;
     @include respond(tab-land) {
       padding: 1rem;
@@ -37,6 +39,9 @@
     justify-content: space-between;
     width: 100%;
     margin: 3.3rem 0 2rem 0;
+  }
+  .set-security-questions {
+    justify-content: flex-end;
   }
   .form-fields {
     display: flex;

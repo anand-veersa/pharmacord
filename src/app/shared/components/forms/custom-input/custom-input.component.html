@@ -4,29 +4,45 @@
     *ngIf="field.type !== 'file'"
     [ngClass]="{ disabled: field.disabled }">
     <span matPrefix *ngIf="inputPrefix"><mat-icon>search</mat-icon></span>
-    <input
-      *ngIf="field.subType !== 'phone'"
-      matInput
-      [ngClass]="{ 'common-form-input': formType !== 'login' }"
-      class="form-field-input"
-      floatLabel="false"
-      [formControlName]="field.name"
-      [type]="field.type"
-      [placeholder]="field.placeholder" />
 
-    <input
-      *ngIf="field.subType === 'phone'"
-      matInput
-      [ngClass]="{ 'common-form-input': formType !== 'login' }"
-      class="form-field-input"
-      floatLabel="false"
-      [formControlName]="field.name"
-      [type]="field.type"
-      [placeholder]="field.placeholder"
-      [data]="form.controls[field.name].value"
-      [maxlength]="field.validators?.max ?? null"
-      [maxlength]="field.validators?.max ?? null"
-      appNumberformat />
+    <ng-container [ngSwitch]="field.subType">
+      <input
+        *ngSwitchCase="'phone'"
+        matInput
+        [ngClass]="{ 'common-form-input': formType !== 'login' }"
+        class="form-field-input"
+        floatLabel="false"
+        [formControlName]="field.name"
+        [type]="field.type"
+        [data]="form.controls[field.name].value"
+        [placeholder]="field.placeholder"
+        [maxlength]="field.validators?.max ?? null"
+        [maxlength]="field.validators?.max ?? null"
+        appNumberformat />
+
+      <input
+        *ngSwitchCase="'numberOnly'"
+        matInput
+        [ngClass]="{ 'common-form-input': formType !== 'login' }"
+        class="form-field-input"
+        floatLabel="false"
+        [formControlName]="field.name"
+        [type]="field.type"
+        [placeholder]="field.placeholder"
+        [maxlength]="field.validators?.max ?? null"
+        [maxlength]="field.validators?.max ?? null"
+        appNumberOnly />
+
+      <input
+        *ngSwitchDefault
+        matInput
+        [ngClass]="{ 'common-form-input': formType !== 'login' }"
+        class="form-field-input"
+        floatLabel="false"
+        [formControlName]="field.name"
+        [type]="field.type"
+        [placeholder]="field.placeholder" />
+    </ng-container>
   </mat-form-field>
 
   <div *ngIf="field.type === 'file'">
@@ -36,6 +52,11 @@
       (click)="browseFile($event, field.name)">
       <button class="browse">Browse</button>
     </div>
+    <app-custom-error
+      [field]="field"
+      [form]="form"
+      [errors]="this.form.get(field.name)?.errors">
+    </app-custom-error>
     <input
       type="file"
       hidden

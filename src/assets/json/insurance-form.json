@@ -141,7 +141,8 @@
         "name": "firstInsuranceFiles",
         "value": [],
         "display": true,
-        "label": "Attach Front and Back Copy of Insurance Card  ",
+        "label": "<div> Attach Front and Back Copy of Insurance Card  </div> <div> Only pdf, up to 10 MB </div>",
+        "preventDefaultSelection": "true",
         "placeholder": "",
         "type": "file",
         "validators": {}
@@ -219,7 +220,7 @@
         "placeholder": "Enter your Phone #",
         "type": "text",
         "subType": "phone",
-        "validators": {}
+        "validators": { "min": 14, "max": 14 }
       },
       {
         "name": "policyId",
@@ -290,7 +291,8 @@
         "name": "secondInsuranceFiles",
         "value": "",
         "display": true,
-        "label": "Attach Front and Back Copy of Insurance Card  ",
+        "label": "<div> Attach Front and Back Copy of Insurance Card  </div> <div> Only pdf, up to 10 MB </div>",
+        "preventDefaultSelection": "true",
         "placeholder": "",
         "type": "file",
         "validators": {}
@@ -459,7 +461,8 @@
         "label": "Phone #",
         "placeholder": "Enter your Phone #",
         "type": "text",
-        "validators": {}
+        "subType": "phone",
+        "validators": { "min": 14, "max": 14 }
       },
       {
         "name": "policyId",
@@ -468,7 +471,7 @@
         "label": "Policy ID #",
         "placeholder": "Enter your policy id",
         "type": "text",
-        "validators": {}
+        "validators": { "required": true }
       },
       {
         "name": "group",
@@ -557,7 +560,8 @@
         "name": "secondInsuranceFiles",
         "value": "",
         "display": true,
-        "label": "Attach Front and Back Copy of Insurance Card  ",
+        "label": "<div> Attach Front and Back Copy of Insurance Card  </div> <div> Only pdf, up to 10 MB </div>",
+        "preventDefaultSelection": "true",
         "placeholder": "",
         "type": "file",
         "validators": {}

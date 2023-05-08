@@ -5,7 +5,8 @@
       "value": "",
       "label": "HCP NPI",
       "placeholder": "",
-      "type": "number",
+      "type": "text",
+      "subType": "numberOnly",
       "reqErrorMsg": "NPI is a required field",
       "validityErrorMsg": "",
       "validators": {

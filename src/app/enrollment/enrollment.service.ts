@@ -133,6 +133,34 @@ export class EnrollmentService {
     );
   }
 
+  public enroll(enrollPayload: any): Observable<any> {
+    return this.http
+      .post(`${environment.baseUrlDoc}case/enroll/twgoHcpPortal`, enrollPayload)
+      .pipe(catchError(this.handleError));
+  }
+
+  public getDocument(DocID: string): Observable<any> {
+    return this.http
+      .get(`${environment.baseUrl}documents/${DocID}`, { responseType: 'blob' })
+      .pipe(map(response => new Blob([response], { type: 'application/pdf' })));
+  }
+
+  public postDocuSign(SignerPayload: any): Observable<any> {
+    return this.http
+      .post(
+        `${environment.baseUrl}portal/docusign/signer
+`,
+        SignerPayload
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  public getPatientReferralPdf(docId: string): Observable<any> {
+    return this.http
+      .get(`${environment.baseUrl}documents/${docId}`, { responseType: 'blob' })
+      .pipe(map(response => new Blob([response], { type: 'application/pdf' })));
+  }
+
   private handleError(errorRes: number): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes) {

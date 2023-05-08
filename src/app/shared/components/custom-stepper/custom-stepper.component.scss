@@ -16,6 +16,13 @@
   pointer-events: none !important;
 }
 
+::ng-deep .mat-stepper-label-position-bottom .mat-stepper-horizontal-line {
+  @include respond(tab-port) {
+    top: 2.5rem;
+    border-top-width: 3px;
+  }
+}
+
 :host .onBoarding {
   ::ng-deep .mat-horizontal-stepper-header-container {
     background-color: $color-tertiary !important;
@@ -177,5 +184,162 @@
     .mat-horizontal-stepper-header:not(:first-child)::before {
     border-top-width: 3px !important;
     border-color: $light-border-3 !important;
+  }
+
+  :host ::ng-deep .mat-horizontal-stepper-header .mat-step-icon {
+    border: none;
+  }
+
+  :host
+    ::ng-deep
+    .last-edited-step-1
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(1)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-1
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(3)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-2
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(1)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-2
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(3)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-2
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(3)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-2
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(5)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-3
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(1)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-3
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(3)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-3
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(3)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-3
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(5)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-3
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(5)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-3
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(7)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-4
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(1)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-4
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(3)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-4
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(3)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-4
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(5)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-4
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(5)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-4
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(7)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-4
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(7)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-4
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(9)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-5
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(1)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-5
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(3)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-5
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(3)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-5
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(5)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-5
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(5)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-5
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(7)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-5
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(7)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-5
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(9)::before,
+  :host
+    ::ng-deep
+    .last-edited-step-5
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(9)::after,
+  :host
+    ::ng-deep
+    .last-edited-step-5
+    .mat-horizontal-stepper-header-container
+    .mat-step-header:nth-child(11)::before {
+    border-top-color: $color-tertiary !important;
   }
 }

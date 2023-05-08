@@ -6,6 +6,7 @@ import { ForgotUsernameComponent } from './pages/forgot-username/forgot-username
 import { LoginComponent } from './pages/login/login.component';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { SetSecurityQuestionsComponent } from './pages/set-security-questions/set-security-questions.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'registration',
     component: RegistrationComponent,
+  },
+  {
+    path: 'security-questions',
+    component: SetSecurityQuestionsComponent,
   },
 ];
 

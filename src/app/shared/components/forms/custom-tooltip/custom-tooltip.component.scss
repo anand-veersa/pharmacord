@@ -1,0 +1,44 @@
+@import '../../../../../assets/styles/abstracts/variables';
+
+.tooltip {
+  position: relative;
+  height: 2rem;
+  width: 2rem;
+}
+.info-icon {
+  margin-left: 0.25rem;
+  color: $color-secondary;
+  cursor: pointer;
+}
+
+.tooltip-content {
+  display: none;
+  background-color: $color-white;
+  color: $color-sub-header;
+  border: 0.05rem solid $color-sub-header;
+  box-shadow: 0 0.4rem 0.2rem rgba(0, 0, 0, 0.12);
+  border-radius: 0.6rem;
+  padding: 0.5rem 0;
+  position: absolute;
+  transform: translateX(50%);
+  top: 114%;
+  right: 36%;
+  z-index: 1;
+}
+.tooltip-arrow {
+  display: none;
+  height: 0.75rem;
+  width: 0.75rem;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 97%;
+  right: 25%;
+  border: 1.5px solid;
+  border-color: $color-sub-header transparent transparent $color-sub-header;
+  background-color: $color-white;
+  z-index: 2;
+}
+
+.info-icon:hover ~ * {
+  display: block;
+}
