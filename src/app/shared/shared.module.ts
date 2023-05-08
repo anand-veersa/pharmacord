@@ -31,6 +31,7 @@ import { CustomStepperComponent } from './components/custom-stepper/custom-stepp
 import { NumberformatDirective } from './directives/phone-format.directive';
 import { SafePipe } from './pipes/safe-pipe';
 import { CustomTooltipComponent } from './components/forms/custom-tooltip/custom-tooltip.component';
+import { NumberonlyDirective } from './directives/number-only.directive';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { CustomTooltipComponent } from './components/forms/custom-tooltip/custom
     CustomUploadDocumentsComponent,
     CustomStepperComponent,
     NumberformatDirective,
+    NumberonlyDirective,
     SafePipe,
     CustomTooltipComponent,
   ],
@@ -87,6 +89,7 @@ import { CustomTooltipComponent } from './components/forms/custom-tooltip/custom
     CustomUploadDocumentsComponent,
     CustomStepperComponent,
     NumberformatDirective,
+    NumberonlyDirective,
     SafePipe,
   ],
   providers: [LocalStorageService],

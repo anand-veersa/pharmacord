@@ -343,6 +343,11 @@ export class SubmitEnrollmentService {
       .get('/assets/json/prescriber-form.json')
       .subscribe((data: any) => {
         this.prescriberDetails = data.leftPanel;
+        this.prescriberDetails.controls.map(control => {
+          if (control.name === 'state') {
+            control.options = this.sharedService.states;
+          }
+        });
         this.shippingDetails = data.rightPanel;
         this.shippingDetails.controls.map(control => {
           if (control.name === 'siteOfAdministration') {
@@ -350,6 +355,9 @@ export class SubmitEnrollmentService {
               this.enrollmentFormPayload.DrugGroup === 'Jemperli'
                 ? true
                 : false;
+          }
+          if (control.name === 'state') {
+            control.options = this.sharedService.states;
           }
           if (control.name === 'shippingAddressType') {
             control.display =
