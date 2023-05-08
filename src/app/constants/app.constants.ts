@@ -35,6 +35,14 @@ export class AppConstants {
       '#B3A99F',
       '#40488D',
     ],
+    BAR_CHART_X_COORDINATES: [
+      'Intake',
+      'Insurance, Auth, Required',
+      'Financial, Services In, Progress',
+      'PAP In, Process',
+      'Other',
+      'Total',
+    ],
   };
   public MAX_FILE_SIZE = 10485760;
   public PRESCRIBER_DECLARATION = `I certify that the information provided above is true and that ZEJULA is being prescribed for the patient listed above. I hereby certify that, for any insured patient seeking co-pay assistance under the Co-pay Program, in the absence of financial support from such program, any applicable co-pay, coinsurance, or other out-of-pocket cost for ZEJULA would be collected from the patient upon treatment. I appoint Together with GSK Oncology, on my behalf, to convey this prescription to the dispensing pharmacy, to the extent permitted under state law.<br><br>
