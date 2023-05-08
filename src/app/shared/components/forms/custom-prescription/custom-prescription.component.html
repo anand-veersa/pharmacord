@@ -70,7 +70,7 @@
             <span class="error-or-required" *ngIf="isQtyRequired">*</span>
           </div>
           <div>
-            <input type="number" [value]="quantity" [formControlName]="'qty'" />
+            <input type="number" [formControlName]="'qty'" />
             <mat-error
               *ngIf="
                 form.get(field.name + '.qty')?.touched &&
@@ -91,10 +91,7 @@
             <span class="error-or-required" *ngIf="isRefillsRequired">*</span>
           </div>
           <div>
-            <input
-              type="number"
-              [value]="refills"
-              [formControlName]="'refills'" />
+            <input type="number" [formControlName]="'refills'" />
             <mat-error
               *ngIf="
                 form.get(field.name + '.refills')?.touched &&

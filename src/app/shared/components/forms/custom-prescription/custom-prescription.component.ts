@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { AppConstants } from 'src/app/constants/app.constants';
 import { SubmitEnrollmentService } from 'src/app/enrollment/pages/submit-enrollment/submit-enrollment.service';
 import { SharedService } from 'src/app/shared/services/shared.service';
@@ -58,9 +58,6 @@ export class CustomPrescriptionComponent implements OnInit {
     ],
   };
 
-  quantity: undefined | number;
-  refills: undefined | number;
-  strength: undefined | string;
   isQtyRequired: boolean;
   isRefillsRequired: boolean;
 
@@ -70,11 +67,16 @@ export class CustomPrescriptionComponent implements OnInit {
   ngOnInit(): void {
     this.medicineName =
       this.submitEnrolService.enrollmentFormPayload.DrugGroup.toUpperCase();
-    this.quantity = this.field.qty;
-    this.refills = this.field.refills;
-
-    this.isQtyRequired = this.field.refills ? false : true;
-    this.isRefillsRequired = this.field.refills ? false : true;
+    this.isQtyRequired = this.form
+      .get(this.field.name + '.qty')
+      ?.hasValidator(Validators.required)
+      ? true
+      : false;
+    this.isRefillsRequired = this.form
+      .get(this.field.name + '.refills')
+      ?.hasValidator(Validators.required)
+      ? true
+      : false;
 
     this.isStrengthRequired =
       this.medicineName === this.appConstants.MEDICINES.MEDICINE_3;
