@@ -22,8 +22,8 @@ export class AppConstants {
     BAR_CHART_LABELS: [
       'Intake',
       'Insurance Auth Required',
-      'Financial Services In Progress',
-      'PAP In Process',
+      'Financial Services In Process',
+      'PAP In Progress',
       'Other',
       'Total',
     ],
@@ -38,8 +38,8 @@ export class AppConstants {
     BAR_CHART_X_COORDINATES: [
       'Intake',
       'Insurance, Auth, Required',
-      'Financial, Services In, Progress',
-      'PAP In, Process',
+      'Financial, Services In, Process',
+      'PAP In, Progress',
       'Other',
       'Total',
     ],
