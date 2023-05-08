@@ -16,7 +16,7 @@ const routes: Routes = [{ path: '', component: ProfileComponent }];
     ChangeSecurityQuestionsComponent,
     ProfileInformationComponent,
   ],
-  exports: [RouterModule],
+  exports: [RouterModule, ChangeSecurityQuestionsComponent],
   imports: [
     CommonModule,
     MaterialModule,

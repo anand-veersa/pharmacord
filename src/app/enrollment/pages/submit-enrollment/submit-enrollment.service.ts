@@ -112,6 +112,8 @@ export class SubmitEnrollmentService {
           Id: 1,
           Name: 'CoverageSupport',
         },
+        tooltipContent:
+          '<div class="services-tooltip lm-1"><ul><li>Benefits Investigation</li><li>Prior Authorization Support</li><li>Appeals Support</li><li>Claims Assistance</li></ul></div>',
         for: 'Jemperli',
       },
       {
@@ -120,6 +122,8 @@ export class SubmitEnrollmentService {
           Id: 3,
           Name: 'PatientAssistanceProgram',
         },
+        tooltipContent:
+          '<div class="services-tooltip"><span>Uninsured patients who meet eligibility requirements may access medication free of charge through the Together with GSK Oncology Patient Assistance Program (PAP) offered by the GSK PAP Foundation. Medicare patients who meet program requirements may also be eligible for the Patient Assistance Program.</span></div>',
         for: 'Jemperli, Zejula, Ojjaara',
       },
       {
@@ -128,6 +132,8 @@ export class SubmitEnrollmentService {
           Id: 12,
           Name: 'AlternateCoverageSupport',
         },
+        tooltipContent:
+          '<div class="services-tooltip lm-1"><ul><li>Information about Patient Advocacy Organizations</li><li> Information about Independent Co-Pay Foundations</li></ul></div>',
         for: 'Jemperli',
       },
       {
@@ -136,6 +142,8 @@ export class SubmitEnrollmentService {
           Id: 2,
           Name: 'CommercialCopayAssistance',
         },
+        tooltipContent:
+          '<div class="services-tooltip"><span>Eligible commercially insured patients could pay as little as $0 up to a total of $26,000 for up to 12 months for their medicine.</span></div>',
         for: 'Jemperli, Zejula, Ojjaara',
       },
       {
@@ -205,7 +213,15 @@ export class SubmitEnrollmentService {
       placeholder: '',
       type: 'checkbox',
       validators: { required: true },
-      options: options.filter(option => option.for?.includes(selectedMedicine)),
+      options: options.filter(option => {
+        if (
+          selectedMedicine.toUpperCase() !==
+            this.appConstants.MEDICINES.MEDICINE_1 &&
+          option.tooltipContent
+        )
+          delete option.tooltipContent;
+        return option.for?.includes(selectedMedicine);
+      }),
     });
     this.servicesForm = this.sharedService.buildForm(this.filteredServices);
   }

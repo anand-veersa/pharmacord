@@ -66,7 +66,7 @@ export class AuthService {
   private handleAuthentication(data: any) {
     const {
       AccessToken,
-      HasSecurityQuestionAnswere,
+      HasSecurityQuestionAnswered,
       IsFirstTimeLogin,
       RefreshToken,
     } = data.Payload;
@@ -75,7 +75,7 @@ export class AuthService {
       'userData',
       JSON.stringify({
         AccessToken,
-        HasSecurityQuestionAnswere,
+        HasSecurityQuestionAnswered,
         IsFirstTimeLogin,
         RefreshToken,
         UserName,
