@@ -154,3 +154,7 @@ button:disabled {
     gap: 0;
   }
 }
+
+.btn-text {
+  pointer-events: none;
+}
