@@ -111,9 +111,9 @@ export class ChartsComponent implements OnChanges {
             color: '#000000',
             callback: (index: number) => {
               const labelName =
-                this.appConstants.BAR_CHART.BAR_CHART_LABELS[index];
+                this.appConstants.BAR_CHART.BAR_CHART_X_COORDINATES[index];
               if (/\s/.test(labelName)) {
-                return labelName.split(' '); //check space for labelName break
+                return labelName.split(','); //check comma for labelName break
               } else {
                 return labelName;
               }

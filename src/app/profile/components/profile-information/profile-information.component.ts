@@ -29,8 +29,12 @@ export class ProfileInformationComponent implements OnInit {
         LastName:
           this.profileService.profileInformationForm.get('lastName')?.value,
         Email: this.profileService.profileInformationForm.get('email')?.value,
-        Phone: this.profileService.profileInformationForm.get('phone')?.value,
-        Fax: this.profileService.profileInformationForm.get('fax')?.value,
+        Phone: this.profileService.profileInformationForm
+          .get('phone')
+          ?.value?.replace(/\D/g, ''),
+        Fax: this.profileService.profileInformationForm
+          .get('fax')
+          ?.value?.replace(/\D/g, ''),
       },
     };
     this.profileService
