@@ -56,7 +56,6 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     form,
     nextScreen,
   }: EnrollmentScreenNextData): void {
-    // debugger
     this.stepperCount =
       actionType === 'next' ? this.stepperCount + 1 : this.stepperCount - 1;
     // TODO: optimize this
@@ -92,6 +91,9 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     if (formName === 'prescriber-details') {
       this.setPrescriberDetails(form);
       // console.log(form);
+    }
+    if (formName === 'select-insurance') {
+      this.setInsuranceDetails(form);
     }
     if (formName === 'attestation-details') {
       console.log(form);
@@ -238,6 +240,86 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         },
       ],
     };
+  }
+
+  private setInsuranceDetails(insurance: any): void {
+    console.log(insurance);
+    // appealForm
+    // priorAuthForm
+    // secondInsuranceForm
+    // firstInsuranceForm
+    const medicalPlansData: any[] = [];
+    const pharmacyPlansData: any[] = [];
+    let medicalPlanFirstData: any = {};
+    let medicalPlanSecondData: any = {};
+    if (insurance.firstInsuranceForm.coverageType.length) {
+      medicalPlanFirstData = {
+        Type: insurance.firstInsuranceForm.coverageType,
+        PolicyHolderEmployer: insurance.firstInsuranceForm.policyHolderName,
+        PlanName: insurance.firstInsuranceForm.insuranceName,
+        Phone: insurance.firstInsuranceForm.phone,
+        PlanRank: 'Primary',
+        PolicyID: insurance.firstInsuranceForm.policyId,
+        SubscriberName: insurance.firstInsuranceForm.policyHolderName,
+        SubscriberDOB: insurance.firstInsuranceForm.policyHolderDob,
+        RelationshipToSubscriber:
+          insurance.firstInsuranceForm.relationToPatient,
+        GroupNo: insurance.firstInsuranceForm.group,
+        AttachDoc: insurance.firstInsuranceForm.group.firstInsuranceFiles,
+      };
+      medicalPlansData.push(medicalPlanFirstData);
+    }
+
+    if (insurance.secondInsuranceForm.coverageType.length) {
+      medicalPlanSecondData = {
+        Type: insurance.secondInsuranceForm.coverageType,
+        PolicyHolderEmployer: insurance.secondInsuranceForm.insurancePayer,
+        PlanName: insurance.secondInsuranceForm.insuranceName,
+        Phone: insurance.secondInsuranceForm.phone,
+        PlanRank: 'Secondary',
+        PolicyID: insurance.secondInsuranceForm.policyId,
+        SubscriberName: insurance.secondInsuranceForm.policyHolderName,
+        SubscriberDOB: insurance.secondInsuranceForm.policyHolderDob,
+        RelationshipToSubscriber:
+          insurance.secondInsuranceForm.relationToPatient,
+        GroupNo: insurance.secondInsuranceForm.group,
+        AttachDoc: insurance.secondInsuranceForm.secondInsuranceFiles,
+      };
+      if (
+        this.submitEnrolService.enrollmentFormPayload.DrugGroup === 'Jemperli'
+      ) {
+        medicalPlansData.push(medicalPlanSecondData);
+      } else {
+        pharmacyPlansData.push(medicalPlanSecondData);
+      }
+    }
+
+    if (
+      this.submitEnrolService.enrollmentFormPayload.DrugGroup === 'Jemperli'
+    ) {
+      this.submitEnrolService.enrollmentFormPayload.Insurance = {
+        MedicalInsurance: insurance.firstInsuranceForm.coverageType.length
+          ? 'Y'
+          : 'N',
+        PharmacyInsurance: insurance.secondInsuranceForm.coverageType.length
+          ? 'Y'
+          : 'N',
+        MedicalPlans: medicalPlansData,
+        PharmacyPlans: pharmacyPlansData,
+      };
+    } else {
+      this.submitEnrolService.enrollmentFormPayload.Insurance = {
+        MedicalInsurance: insurance.firstInsuranceForm.coverageType.length
+          ? 'Y'
+          : 'N',
+        PharmacyInsurance: insurance.secondInsuranceForm.coverageType.length
+          ? 'Y'
+          : 'N',
+        MedicalPlans: medicalPlansData,
+        PharmacyPlans: pharmacyPlansData,
+      };
+    }
+    // if priorAuth and appeal comes set these to Patient Data here??
   }
 
   ngOnDestroy(): void {

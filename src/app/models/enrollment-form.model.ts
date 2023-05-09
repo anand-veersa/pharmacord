@@ -18,10 +18,11 @@ interface MedicalPlanData {
 }
 
 interface InsuranceData {
-  MBI: string;
+  MBI?: string;
   MedicalInsurance: string;
   PharmacyInsurance: string;
   MedicalPlans: MedicalPlanData[];
+  PharmacyPlans?: MedicalPlanData[];
 }
 
 interface PrescriptionInformationData {

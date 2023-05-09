@@ -53,10 +53,14 @@ export class SelectInsuranceComponent implements OnInit {
       actionType,
       formName: 'select-insurance',
       form: {
-        ...this.submitEnrolService.firstInsuranceForm.value,
-        ...this.submitEnrolService.secondInsuranceForm.value,
-        ...this.submitEnrolService.priorAuthForm.value,
-        ...this.submitEnrolService.appealForm.value,
+        firstInsuranceForm: {
+          ...this.submitEnrolService.firstInsuranceForm.value,
+        },
+        secondInsuranceForm: {
+          ...this.submitEnrolService.secondInsuranceForm.value,
+        },
+        priorAuthForm: { ...this.submitEnrolService.priorAuthForm.value },
+        appealForm: { ...this.submitEnrolService.appealForm.value },
       },
       nextScreen:
         actionType === 'back' ? 'prescriber-details' : 'select-prescription',
