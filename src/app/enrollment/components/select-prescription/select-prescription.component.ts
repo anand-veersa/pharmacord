@@ -278,9 +278,9 @@ export class SelectPrescriptionComponent implements OnInit {
       actionType,
       formName: 'select-prescription',
       form: {
-        ...this.clinicalInfoForm.value,
-        ...this.currentLineOfTherapyForm.value,
-        ...this.prescriptionInfoForm.value,
+        ...this.clinicalInfoForm.getRawValue(),
+        ...this.currentLineOfTherapyForm.getRawValue(),
+        ...this.prescriptionInfoForm.getRawValue(),
       },
       nextScreen:
         actionType === 'back' ? 'select-insurance' : 'attestation-details',
