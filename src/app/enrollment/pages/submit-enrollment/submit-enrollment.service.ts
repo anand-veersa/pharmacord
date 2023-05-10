@@ -379,15 +379,14 @@ export class SubmitEnrollmentService {
     this.http
       .get('/assets/json/attestation-form.json')
       .subscribe((data: any) => {
-        const isPap = this.servicesForm
-          ?.get('Services')
-          ?.value.findIndex(
-            (el: any) => el.Name === 'PatientAssistanceProgram'
-          );
+        const isPap =
+          this.servicesForm?.get('PatientAssistanceProgram')?.value?.Name ===
+          'PatientAssistanceProgram';
+
         data.controls.forEach((item: any) => {
           if (item.type === 'select' || item.type === 'checkbox') {
             if (item.name === 'patientAssistanceProgram') {
-              if (isPap > -1) item.display = true;
+              if (isPap) item.display = true;
               else item.display = false;
             }
 
