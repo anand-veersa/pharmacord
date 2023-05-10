@@ -29,6 +29,24 @@ interface PrescriptionInformationData {
   Quantity: string | null;
   Strength: string;
   DirectionForAdministration: string[];
+  Medication?: string;
+  Refills?: string;
+}
+
+interface ShipToAddressData {
+  RecipientName: string;
+  Phone: string;
+  Address1: string;
+  Address2: string | null;
+  City: string;
+  State: string;
+  Zip: string;
+}
+interface PrescriptionData {
+  Prescription: PrescriptionInformationData[];
+  ProviderSignatureMapping: string;
+  ShipToAddress: ShipToAddressData;
+  ShipToType: object;
 }
 
 export interface FacilityData {
@@ -71,11 +89,15 @@ interface PrescriberData {
 interface AttestaionData {
   IsPatientAttestationConsent: boolean;
   PrescriberDeclaration: boolean;
-  TextingOptIn: boolean;
-  PAPEnrollment: boolean;
-  HIPPAAuthorization: boolean;
-  PSPEnrollment: boolean;
-  PatientEmail: string;
+  TextingOptIn?: boolean;
+  PAPEnrollment?: boolean;
+  HIPPAAuthorization?: boolean;
+  PSPEnrollment?: boolean;
+  PatientEmail?: string;
+  PatientRepresentativeName?: string;
+  PatientRelationship?: string;
+  PatientOrRepresentativeEmail?: string;
+  PatientOrRepresentativePhone?: string;
 }
 
 interface AlternateContactData {
@@ -112,6 +134,16 @@ interface PatientData {
   BestContactTime: string;
 }
 
+interface MeasurementsData {
+  Name: string;
+  Result: string;
+}
+interface ClinicalData {
+  TherapyStartDate: string;
+  Measurements: MeasurementsData[];
+  LastTreatmentDate: string | null;
+}
+
 export interface EnrollmentFormPayload {
   ExtRefId: string;
   PopulatePdfFlag: boolean;
@@ -124,10 +156,11 @@ export interface EnrollmentFormPayload {
     Id: string;
     Name: string;
   }[];
+  Clinical: ClinicalData;
   Patient: PatientData;
   Financial: FinancialData;
   Insurance: InsuranceData;
-  PrescriptionInformation: PrescriptionInformationData;
+  PrescriptionInformation: PrescriptionData;
   Provider: PrescriberData;
   Attestation: AttestaionData;
 }
