@@ -96,7 +96,7 @@ export class SubmitEnrollmentService {
       name: 'Prescriber',
       value: '',
       label: '',
-      placeholder: '',
+      placeholder: '-- Select one --',
       type: 'select',
       validators: { required: true },
       options: options,

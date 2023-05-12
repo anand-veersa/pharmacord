@@ -8,7 +8,7 @@
   min-height: 4rem;
   color: $color-grey-dark-4;
 
-  &:hover {
+  &:hover:not(.mdc-list-item--disabled) {
     background-color: $color-secondary;
     color: white;
   }
@@ -32,7 +32,7 @@
       font-size: 1.6rem;
       color: $color-grey-dark-4;
     }
-    &:hover:not(.mat-option-disabled) {
+    &:hover:not(.mdc-list-item--disabled) {
       .mdc-list-item__primary-text {
         color: $color-white;
       }
