@@ -145,7 +145,10 @@
         "label": "Email Address",
         "placeholder": "Enter your email address",
         "type": "email",
-        "validators": { "required": true, "pattern": "^\\S+@\\S+\\.\\S+$" }
+        "validators": {
+          "required": true,
+          "pattern": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,12}$"
+        }
       },
       {
         "name": "bestContactTime",
