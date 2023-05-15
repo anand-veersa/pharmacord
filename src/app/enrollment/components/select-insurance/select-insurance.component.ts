@@ -90,4 +90,32 @@ export class SelectInsuranceComponent implements OnInit {
         ?.setValue(currentValue);
     }
   }
+
+  public isNextDisabled(): boolean {
+    let isFormValid = true;
+
+    if (this.firstInsurance) {
+      isFormValid =
+        isFormValid && this.submitEnrolService.firstInsuranceForm.valid;
+    }
+    if (this.secondInsurance) {
+      isFormValid =
+        isFormValid && this.submitEnrolService.secondInsuranceForm.valid;
+    }
+    if (this.firstInsurance || this.secondInsurance) {
+      if (
+        this.submitEnrolService.priorAuthForm.get('priorAuth1')?.value === 'Yes'
+      ) {
+        isFormValid =
+          isFormValid && this.submitEnrolService.priorAuthForm.valid;
+      }
+      if (
+        this.submitEnrolService.appealForm.get('priorAuth2')?.value === 'Yes'
+      ) {
+        isFormValid = isFormValid && this.submitEnrolService.appealForm.valid;
+      }
+    }
+
+    return !isFormValid;
+  }
 }
