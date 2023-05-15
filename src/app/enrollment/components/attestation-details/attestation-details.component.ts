@@ -3,6 +3,7 @@ import { SubmitEnrollmentService } from '../../pages/submit-enrollment/submit-en
 import { AppConstants } from 'src/app/constants/app.constants';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { JsonFormControls } from 'src/app/models/json-form-data.model';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-attestation-details',
@@ -24,10 +25,14 @@ export class AttestationDetailsComponent implements OnInit {
 
   constructor(
     public submitEnrolService: SubmitEnrollmentService,
-    private appConstants: AppConstants
+    private appConstants: AppConstants,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
+    if (this.authService.user?.role?.RolePkId === 4) {
+      this.showPatientSignature = false;
+    }
     this.submitEnrolService.createAttestationForm();
   }
 

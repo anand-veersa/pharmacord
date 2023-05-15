@@ -453,13 +453,32 @@ export class SubmitEnrollmentService {
           ?.value.findIndex(
             (el: any) => el.Name === 'PatientAssistanceProgram'
           );
+        const userRolePkId = this.authService.user?.role?.RolePkId;
+        const arr = [
+          'textingConsent',
+          'patientAssistanceProgram',
+          'patientSupportProgram',
+          'hippaAuthorization',
+          'patientSignatureOptions',
+          'patientRepresentativeName',
+          'relationshipToPatient',
+          'patientEmail',
+          'representativeEmail',
+        ];
+
         data.controls.forEach((item: any) => {
+          if (userRolePkId === 4) {
+            if (item.name === 'prescriberSignatureOptions') {
+              item.options.splice(0, 1);
+              item.value = 'Download to print and sign';
+            }
+            if (arr.includes(item.name)) item.display = false;
+          }
           if (item.type === 'select' || item.type === 'checkbox') {
             if (item.name === 'patientAssistanceProgram') {
               if (isPap > -1) item.display = true;
               else item.display = false;
             }
-
             item.options = item.options.filter(
               (option: JsonFormControlOptions) =>
                 !option.for ||
