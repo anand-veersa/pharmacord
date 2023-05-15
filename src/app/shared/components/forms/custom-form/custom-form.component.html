@@ -15,6 +15,7 @@
         [tooltipContent]="field.tooltipContent"></app-custom-tooltip>
     </label>
   </ng-container>
+  <ng-content></ng-content>
   <div *ngIf="field.extLink !== ''" class="extLinkDiv">
     <p class="extLink" (click)="navigateRoute()">
       {{ field.extLink }}

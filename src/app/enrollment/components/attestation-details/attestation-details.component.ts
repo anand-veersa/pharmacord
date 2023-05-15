@@ -67,28 +67,28 @@ export class AttestationDetailsComponent implements OnInit {
         this.confirmConsent(this.attestationConsentClicked);
         break;
       case 'prescriberDeclaration':
-        if (event.isChecked) this.showConfirmationDialog = true;
+        this.showConfirmationDialog = true;
         this.dialogTitle = 'Prescriber Declaration';
         this.dialogDescription = this.appConstants.PRESCRIBER_DECLARATION;
         break;
       case 'textingConsent':
-        if (event.isChecked) this.showConfirmationDialog = true;
+        this.showConfirmationDialog = true;
         this.dialogTitle = 'Texting Consent (Rates May Apply)';
         this.dialogDescription = this.appConstants.TEXTING_CONSENT;
         break;
       case 'patientAssistanceProgram':
-        if (event.isChecked) this.showConfirmationDialog = true;
+        this.showConfirmationDialog = true;
         this.dialogTitle =
           'Patient Assistance Program (PAP) for uninsured and eligible Medicare patients';
         this.dialogDescription = this.appConstants.PAP_CONSENT;
         break;
       case 'patientSupportProgram':
-        if (event.isChecked) this.showConfirmationDialog = true;
+        this.showConfirmationDialog = true;
         this.dialogTitle = 'Patient Support Program (Optional)';
         this.dialogDescription = this.appConstants.PSP_CONSENT;
         break;
       case 'hippaAuthorization': {
-        if (event.isChecked) this.showConfirmationDialog = true;
+        this.showConfirmationDialog = true;
         this.dialogTitle = 'HIPAA Patient Authorization';
         const drugGroup =
           this.submitEnrolService?.enrollmentFormPayload.DrugGroup;

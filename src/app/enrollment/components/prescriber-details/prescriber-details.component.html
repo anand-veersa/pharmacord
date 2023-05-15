@@ -18,7 +18,21 @@
           *ngIf="control.display"
           [field]="control"
           [form]="submitEnrolService.prescriberDetailForm"
-          formType="enrollment-form"></app-custom-form>
+          formType="enrollment-form">
+          <app-custom-input
+            *ngIf="control.name === 'officeContactPhone'"
+            [form]="submitEnrolService.prescriberDetailForm"
+            [field]="{
+              name: 'officeContactExt',
+              value: '',
+              display: true,
+              label: '',
+              placeholder: 'Ext(if applicable)',
+              type: 'text',
+              class: 'office-contact-ext-position',
+              validators: {}
+            }"></app-custom-input>
+        </app-custom-form>
       </div>
     </div>
     <mat-divider vertical></mat-divider>

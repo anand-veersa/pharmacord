@@ -66,6 +66,13 @@
                       : ' '
                   }}</span
                 >
+                <span
+                  *ngIf="pescriberObject.AccountStatus === 'Pending'"
+                  matTooltip="The provider's consent to be
+                  added to this account"
+                  [matTooltipPosition]="'above'">
+                  <mat-icon class="info-icon text-xmed">info</mat-icon>
+                </span>
               </div>
               <app-custom-button
                 btnText="Edit"
