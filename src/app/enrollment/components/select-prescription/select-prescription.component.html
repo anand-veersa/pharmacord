@@ -1110,11 +1110,6 @@
   <app-custom-button
     btnClass="small tertiary"
     btnText="Next &#62;"
-    [isDisabled]="
-      false &&
-      prescriptionInfoForm.invalid &&
-      clinicalInfoForm.invalid &&
-      currentLineOfTherapyForm.invalid
-    "
+    [isDisabled]="isNextDisabled()"
     (action)="onAction('next')"></app-custom-button>
 </div>
