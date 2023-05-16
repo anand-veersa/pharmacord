@@ -5,6 +5,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { isArray } from 'lodash';
@@ -108,59 +109,8 @@ export class SelectPrescriptionComponent implements OnInit {
         mismatchrepairstatusMMR: this.fb.array([], Validators.required),
         endometrialCancerPriortherapies: this.fb.array([], Validators.required),
       });
-      this.currentLineOfTherapyForm = this.fb.group({
-        // currentLineOfTherapy: ['', Validators.required],
-        // bRCATest: [''],
-        // hRDTest: [''],
-        // previousTherapies: [''],
-        // latestHemoglobin: [''],
-        // dateOfLastTransfusion: [''],
-        // knownDrugAllergies: [''],
-        // notes: [''],
-      });
+      this.currentLineOfTherapyForm = this.fb.group({});
       this.prescriptionInfoForm = this.fb.group({
-        // zejStd: this.fb.array([]),
-        // zejStdPres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: null, disabled: false }, Validators.required],
-        //   refills: [{ value: null, disabled: false }, Validators.required],
-        //   doa: [null, Validators.required],
-        // }),
-        // zejQSP: this.fb.array([]),
-        // zejQSPPres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: 15, disabled: true }],
-        //   refills: [{ value: 14, disabled: true }],
-        //   doa: [null, Validators.required],
-        // }),
-        // zejBridge: this.fb.array([]),
-        // zejBridgePres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: 15, disabled: true }],
-        //   refills: [{ value: 14, disabled: true }],
-        //   doa: [null, Validators.required],
-        // }),
-        // ojjaaraStd: this.fb.array([]),
-        // ojjaaraStdPres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: null, disabled: false }, Validators.required],
-        //   refills: [{ value: null, disabled: false }, Validators.required],
-        //   doa: [null],
-        // }),
-        // ojjaaraQSP: this.fb.array([]),
-        // ojjaaraQSPPres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: 15, disabled: true }],
-        //   refills: [{ value: 14, disabled: true }],
-        //   doa: [null],
-        // }),
-        // ojjaaraBridge: this.fb.array([]),
-        // ojjaaraBridgePres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: 15, disabled: true }],
-        //   refills: [{ value: 14, disabled: true }],
-        //   doa: [null],
-        // }),
         jemperliIV: this.fb.array(['JemperliIV']),
         jemperliIVPres: this.fb.group({
           strength: [],
@@ -168,7 +118,6 @@ export class SelectPrescriptionComponent implements OnInit {
           refills: [{ value: null, disabled: true }],
           doa: [null],
         }),
-        // prescriptionSignature: ['', Validators.required],
       });
     } else if (this.medicine === this.appConstants.MEDICINES.MEDICINE_2) {
       this.clinicalInfoForm = this.fb.group({
@@ -185,9 +134,7 @@ export class SelectPrescriptionComponent implements OnInit {
         currentLineOfTherapy: [''],
         bRCATest: [''],
         hRDTest: [''],
-        // previousTherapies: [''],
-        // latestHemoglobin: [''],
-        // dateOfLastTransfusion: [''],
+
         knownDrugAllergies: [''],
         notes: [''],
       });
@@ -213,34 +160,7 @@ export class SelectPrescriptionComponent implements OnInit {
           refills: [{ value: 14, disabled: true }],
           doa: [null],
         }),
-        // ojjaaraStd: this.fb.array([]),
-        // ojjaaraStdPres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: null, disabled: false }, Validators.required],
-        //   refills: [{ value: null, disabled: false }, Validators.required],
-        //   doa: [null],
-        // }),
-        // ojjaaraQSP: this.fb.array([]),
-        // ojjaaraQSPPres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: 15, disabled: true }],
-        //   refills: [{ value: 14, disabled: true }],
-        //   doa: [null],
-        // }),
-        // ojjaaraBridge: this.fb.array([]),
-        // ojjaaraBridgePres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: 15, disabled: true }],
-        //   refills: [{ value: 14, disabled: true }],
-        //   doa: [null],
-        // }),
-        // jemperliIV: this.fb.array(['JemperliIV']),
-        // jemperliIVPres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: 15, disabled: true }],
-        //   refills: [{ value: 14, disabled: true }],
-        //   doa: [null],
-        // }),
+
         prescriptionSignature: ['', Validators.required],
       });
     } else if (this.medicine === this.appConstants.MEDICINES.MEDICINE_3) {
@@ -251,17 +171,11 @@ export class SelectPrescriptionComponent implements OnInit {
         treatmentStartDate: [''],
         primaryDiagnosis: [''],
         primaryDiagnosisICD10Code: [''],
-        // diagnosisICD10Code: ['', Validators.required],
-        // otherICD10Code: [{ value: '', disabled: true }, Validators.required],
-        // mismatchrepairstatusMMR: this.fb.array([]),
-        // endometrialCancerPriortherapies: this.fb.array([]),
+
         secondaryDiagnosis: [''],
         secondaryDiagnosisICD10Code: [''],
       });
       this.currentLineOfTherapyForm = this.fb.group({
-        // currentLineOfTherapy: ['', Validators.required],
-        // bRCATest: [''],
-        // hRDTest: [''],
         previousTherapies: [''],
         latestHemoglobin: [''],
         dateOfLastTransfusion: [''],
@@ -269,27 +183,6 @@ export class SelectPrescriptionComponent implements OnInit {
         notes: [''],
       });
       this.prescriptionInfoForm = this.fb.group({
-        // zejStd: this.fb.array([]),
-        // zejStdPres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: null, disabled: false }, Validators.required],
-        //   refills: [{ value: null, disabled: false }, Validators.required],
-        //   doa: [null, Validators.required],
-        // }),
-        // zejQSP: this.fb.array([]),
-        // zejQSPPres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: 15, disabled: true }],
-        //   refills: [{ value: 14, disabled: true }],
-        //   doa: [null, Validators.required],
-        // }),
-        // zejBridge: this.fb.array([]),
-        // zejBridgePres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: 15, disabled: true }],
-        //   refills: [{ value: 14, disabled: true }],
-        //   doa: [null, Validators.required],
-        // }),
         ojjaaraStd: this.fb.array([]),
         ojjaaraStdPres: this.fb.group({
           strength: [],
@@ -311,13 +204,7 @@ export class SelectPrescriptionComponent implements OnInit {
           refills: [{ value: 14, disabled: true }],
           doa: [null],
         }),
-        // jemperliIV: this.fb.array(['JemperliIV']),
-        // jemperliIVPres: this.fb.group({
-        //   strength: [],
-        //   qty: [{ value: 15, disabled: true }],
-        //   refills: [{ value: 14, disabled: true }],
-        //   doa: [null],
-        // }),
+
         prescriptionSignature: ['', Validators.required],
       });
     }
@@ -402,106 +289,7 @@ export class SelectPrescriptionComponent implements OnInit {
     if (formArray.length === 0 && formArray.hasValidator(Validators.required)) {
       formArray.setErrors({ required: true });
     }
-
-    if (event.target.checked) {
-      if (formArrName === 'zejStd' || formArrName === 'ojjaaraStd') {
-        form
-          .get(formArrName + 'Pres')
-          ?.get('qty')
-          ?.setValidators(Validators.required);
-        form
-          .get(formArrName + 'Pres')
-          ?.get('qty')
-          ?.updateValueAndValidity();
-        form
-          .get(formArrName + 'Pres')
-          ?.get('refills')
-          ?.setValidators(Validators.required);
-        form
-          .get(formArrName + 'Pres')
-          ?.get('refills')
-          ?.updateValueAndValidity();
-      }
-
-      if (formArrName.includes('zej')) {
-        form
-          .get(formArrName + 'Pres')
-          ?.get('doa')
-          ?.setValidators(Validators.required);
-        form
-          .get(formArrName + 'Pres')
-          ?.get('doa')
-          ?.updateValueAndValidity();
-      }
-
-      if (formArrName.includes('ojjaara')) {
-        form
-          .get(formArrName + 'Pres')
-          ?.get('strength')
-          ?.setValidators(Validators.required);
-        form
-          .get(formArrName + 'Pres')
-          ?.get('strength')
-          ?.updateValueAndValidity();
-      }
-    } else {
-      if (formArrName === 'zejStd' || formArrName === 'ojjaaraStd') {
-        form
-          .get(formArrName + 'Pres')
-          ?.get('qty')
-          ?.setValidators(null);
-        form
-          .get(formArrName + 'Pres')
-          ?.get('qty')
-          ?.updateValueAndValidity();
-
-        form
-          .get(formArrName + 'Pres')
-          ?.get('refills')
-          ?.setValidators(null);
-        form
-          .get(formArrName + 'Pres')
-          ?.get('refills')
-          ?.updateValueAndValidity();
-      }
-
-      if (formArrName.includes('zej')) {
-        form
-          .get(formArrName + 'Pres')
-          ?.get('doa')
-          ?.setValidators(null);
-        form
-          .get(formArrName + 'Pres')
-          ?.get('doa')
-          ?.updateValueAndValidity();
-      }
-
-      if (formArrName.includes('ojjaara')) {
-        form
-          .get(formArrName + 'Pres')
-          ?.get('strength')
-          ?.setValidators(null);
-        form
-          .get(formArrName + 'Pres')
-          ?.get('strength')
-          ?.updateValueAndValidity();
-      }
-    }
-  }
-  public findInvalidControls(form: any): any[] {
-    const invalid = [];
-    const controls = form.controls;
-    for (const name in controls) {
-      if (controls[name].invalid) {
-        invalid.push(name);
-        console.log(typeof controls[name]);
-        if (typeof controls[name] === 'object') {
-          const invNested = this.findInvalidControls(controls[name]);
-          invalid.push(invNested);
-        }
-      }
-    }
-    return invalid;
+    this.handleShowHideValidation(event.target.checked, form, formArrName);
   }
 
   public checkOneMedicineSelected(): boolean {
@@ -528,23 +316,6 @@ export class SelectPrescriptionComponent implements OnInit {
     this.submitEnrolService.currentLineOfTherapyForm =
       this.currentLineOfTherapyForm;
     this.submitEnrolService.prescriptionInfoForm = this.prescriptionInfoForm;
-
-    // console.log(this.prescriptionInfoForm,this.clinicalInfoForm,this.clinicalInfoForm);
-
-    console.log(
-      this.prescriptionInfoForm.valid,
-      this.currentLineOfTherapyForm.valid,
-      this.clinicalInfoForm.valid,
-      this.checkOneMedicineSelected()
-    );
-    console.log(
-      this.prescriptionInfoForm.value,
-      this.currentLineOfTherapyForm.value,
-      this.clinicalInfoForm.value
-    );
-
-    const invalidControls = this.findInvalidControls(this.prescriptionInfoForm);
-    console.log(invalidControls);
 
     if (actionType === 'back') {
       this.action.emit({
@@ -585,5 +356,68 @@ export class SelectPrescriptionComponent implements OnInit {
         });
       }
     });
+  }
+
+  private handleShowHideValidation(
+    checked: boolean,
+    form: FormGroup,
+    formArrName: string
+  ): void {
+    if (checked) {
+      if (formArrName === 'zejStd' || formArrName === 'ojjaaraStd') {
+        this.addDynamicValidator(
+          form,
+          formArrName + 'Pres' + '.qty',
+          Validators.required
+        );
+        this.addDynamicValidator(
+          form,
+          formArrName + 'Pres' + '.refills',
+          Validators.required
+        );
+      }
+
+      if (formArrName.includes('zej')) {
+        this.addDynamicValidator(
+          form,
+          formArrName + 'Pres' + '.doa',
+          Validators.required
+        );
+      }
+
+      if (formArrName.includes('ojjaara')) {
+        this.addDynamicValidator(
+          form,
+          formArrName + 'Pres' + '.strength',
+          Validators.required
+        );
+      }
+    } else {
+      if (formArrName === 'zejStd' || formArrName === 'ojjaaraStd') {
+        this.addDynamicValidator(form, formArrName + 'Pres' + '.qty', null);
+        this.addDynamicValidator(form, formArrName + 'Pres' + '.refills', null);
+      }
+
+      if (formArrName.includes('zej')) {
+        this.addDynamicValidator(form, formArrName + 'Pres' + '.doa', null);
+      }
+
+      if (formArrName.includes('ojjaara')) {
+        this.addDynamicValidator(
+          form,
+          formArrName + 'Pres' + '.strength',
+          null
+        );
+      }
+    }
+  }
+
+  private addDynamicValidator(
+    form: FormGroup,
+    formArrName: string,
+    validators: ValidatorFn | ValidatorFn[] | null
+  ) {
+    form.get(formArrName)?.setValidators(validators);
+    form.get(formArrName)?.updateValueAndValidity();
   }
 }
