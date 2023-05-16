@@ -317,21 +317,19 @@ export class SelectPrescriptionComponent implements OnInit {
       this.currentLineOfTherapyForm;
     this.submitEnrolService.prescriptionInfoForm = this.prescriptionInfoForm;
 
-    if (actionType === 'back') {
-      this.action.emit({
-        actionType,
-        formName: 'select-prescription',
-        form: {
-          clinicalInfoForm: { ...this.clinicalInfoForm.getRawValue() },
-          currentLineOfTherapyForm: {
-            ...this.currentLineOfTherapyForm.getRawValue(),
-          },
-          prescriptionInfoForm: { ...this.prescriptionInfoForm.getRawValue() },
+    this.action.emit({
+      actionType,
+      formName: 'select-prescription',
+      form: {
+        clinicalInfoForm: { ...this.clinicalInfoForm.getRawValue() },
+        currentLineOfTherapyForm: {
+          ...this.currentLineOfTherapyForm.getRawValue(),
         },
-        nextScreen:
-          actionType === 'back' ? 'select-medication' : 'attestation-details',
-      });
-    }
+        prescriptionInfoForm: { ...this.prescriptionInfoForm.getRawValue() },
+      },
+      nextScreen:
+        actionType === 'back' ? 'select-medication' : 'attestation-details',
+    });
   }
 
   public isNextDisabled(): boolean {
