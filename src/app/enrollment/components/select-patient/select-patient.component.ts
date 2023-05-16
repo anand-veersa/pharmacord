@@ -13,8 +13,8 @@ export class SelectPatientComponent implements OnInit {
   @Input() selectedMedication: string;
   @Output() title = new EventEmitter();
   @Output() action = new EventEmitter();
-  public patientType: string = 'new';
   public patients: any[];
+  public selectedPatient: any;
 
   constructor(
     public submitEnrolService: SubmitEnrollmentService,
@@ -23,28 +23,17 @@ export class SelectPatientComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.submitEnrolService.createSelectPatientForm();
-    this.enrolService.medicineCases.subscribe((data: any[]) => {
-      this.patients = this.sharedService.getPatients(data);
-    });
+    if (!this.submitEnrolService.patientDetailForm) {
+      this.submitEnrolService.createSelectPatientForm();
+      this.enrolService.medicineCases.subscribe((data: any[]) => {
+        this.patients = this.sharedService.getPatients(data);
+      });
+    }
   }
 
   public changePatientType(type: string): void {
-    this.patientType = type;
-    this.submitEnrolService.patientDetails.controls.forEach(
-      (control: JsonFormControls) => {
-        if (
-          control.name === 'selectName' ||
-          control.name === 'firstName' ||
-          control.name === 'lastName'
-        ) {
-          control.display = !control.display;
-        }
-        if (control.name === 'sex' || control.name === 'dob') {
-          control.disabled = !control.disabled;
-        }
-      }
-    );
+    this.submitEnrolService.patientType = type;
+    this.submitEnrolService.createSelectPatientForm();
   }
 
   public changePatient(patientData: any): void {
@@ -52,6 +41,7 @@ export class SelectPatientComponent implements OnInit {
       patientData.patientId,
       patientData.caseId
     );
+    this.selectedPatient = patient;
     this.submitEnrolService.patientDetailForm.controls['sex'].setValue(
       patient.Gender
     );
@@ -65,6 +55,7 @@ export class SelectPatientComponent implements OnInit {
       actionType,
       formName: 'select-patient',
       form: {
+        selectedPatient: this.selectedPatient,
         ...this.submitEnrolService.patientDetailForm.value,
         ...this.submitEnrolService.patientRepDetailForm.value,
         ...this.submitEnrolService.patientRepDetailForm.value,

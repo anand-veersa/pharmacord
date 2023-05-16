@@ -18,16 +18,35 @@ interface MedicalPlanData {
 }
 
 interface InsuranceData {
-  MBI: string;
+  MBI?: string;
   MedicalInsurance: string;
   PharmacyInsurance: string;
   MedicalPlans: MedicalPlanData[];
+  PharmacyPlans?: MedicalPlanData[];
 }
 
 interface PrescriptionInformationData {
   Quantity: string | null;
   Strength: string;
   DirectionForAdministration: string[];
+  Medication?: string;
+  Refills?: string;
+}
+
+interface ShipToAddressData {
+  RecipientName: string;
+  Phone: string;
+  Address1: string;
+  Address2: string | null;
+  City: string;
+  State: string;
+  Zip: string;
+}
+interface PrescriptionData {
+  Prescriptions: PrescriptionInformationData[];
+  ProviderSignatureMapping: string;
+  ShipToAddress: ShipToAddressData;
+  ShipToType: object;
 }
 
 export interface FacilityData {
@@ -48,7 +67,7 @@ interface OtherFacilityData {
   OfficeContactName: string;
   Phone: string;
   Address1: string;
-  Address2: string;
+  Address2: string | null;
   City: string;
   State: string;
   Zip: string;
@@ -69,12 +88,16 @@ interface PrescriberData {
 
 interface AttestaionData {
   IsPatientAttestationConsent: boolean;
-  PrescriberDeclaration: boolean;
-  TextingOptIn: boolean;
-  PAPEnrollment: boolean;
-  HIPPAAuthorization: boolean;
-  PSPEnrollment: boolean;
-  PatientEmail: string;
+  PrescriberDeclaration: string;
+  TextingOptIn?: boolean;
+  PAPEnrollment?: boolean;
+  HIPPAAuthorization?: boolean;
+  PSPEnrollment?: boolean;
+  PatientEmail?: string;
+  PatientRepresentativeName?: string;
+  PatientRelationship?: string;
+  PatientOrRepresentativeEmail?: string;
+  PatientOrRepresentativePhone?: string;
 }
 
 interface AlternateContactData {
@@ -109,6 +132,20 @@ interface PatientData {
   Phones: PhoneData[];
   AlternateContact: AlternateContactData;
   BestContactTime: string;
+  PAInitiated?: string;
+  PAStatus?: string;
+  PAAppealInitiated?: string;
+  PAAppealStatus?: string;
+}
+
+interface MeasurementsData {
+  Name: string;
+  Result: string;
+}
+interface ClinicalData {
+  TherapyStartDate: string;
+  Measurements: MeasurementsData[];
+  LastTreatmentDate: string | null;
 }
 
 export interface EnrollmentFormPayload {
@@ -123,10 +160,11 @@ export interface EnrollmentFormPayload {
     Id: string;
     Name: string;
   }[];
+  Clinical: ClinicalData;
   Patient: PatientData;
   Financial: FinancialData;
   Insurance: InsuranceData;
-  PrescriptionInformation: PrescriptionInformationData;
+  PrescriptionInformation: PrescriptionData;
   Provider: PrescriberData;
   Attestation: AttestaionData;
 }

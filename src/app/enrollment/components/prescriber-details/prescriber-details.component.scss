@@ -1,6 +1,10 @@
 @import '../../../../assets/styles/abstracts/mixins';
 @import '../../../../assets/styles/abstracts/variables';
 
+.sec-title span {
+  flex-basis: 49%;
+}
+
 .action-panel {
   display: flex;
   width: 100%;

@@ -12,7 +12,8 @@ export class PrescriberDetailsComponent implements OnInit {
   constructor(public submitEnrolService: SubmitEnrollmentService) {}
 
   ngOnInit(): void {
-    this.submitEnrolService.createPrescriberForm();
+    if (!this.submitEnrolService.prescriberDetailForm)
+      this.submitEnrolService.createPrescriberForm();
   }
 
   public checkFormValidity(): boolean {
@@ -27,8 +28,12 @@ export class PrescriberDetailsComponent implements OnInit {
       actionType,
       formName: 'prescriber-details',
       form: {
-        ...this.submitEnrolService.prescriberDetailForm.value,
-        ...this.submitEnrolService.shippingDetailForm.value,
+        prescriberDetailForm: {
+          ...this.submitEnrolService.prescriberDetailForm.value,
+        },
+        shippingDetailForm: {
+          ...this.submitEnrolService.shippingDetailForm.value,
+        },
       },
       nextScreen: actionType === 'back' ? 'select-patient' : 'select-insurance',
     });
