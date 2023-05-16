@@ -1,6 +1,8 @@
 <div
   class="esign-container"
-  *ngIf="!thankYouScreen && !thankYouScreenDownloadable">
+  *ngIf="
+    !thankYouScreen && !thankYouScreenDownloadable && !almostDoneDownloadable
+  ">
   <div class="pdfView" *ngIf="showPDF">
     <ng2-pdfjs-viewer
       pagemode="none"
@@ -45,6 +47,7 @@
     </div>
   </app-custom-dialog>
 </div>
+
 <div class="thankyou-screen" *ngIf="thankYouScreenDownloadable">
   <p class="text-bold text-xmed">
     The enrollment has been successfully submitted
@@ -58,6 +61,25 @@
     </p>
     <p class="text-smed">
       If you have any questions, please contact us at 844-447-4662.
+    </p>
+  </div>
+  <app-custom-button
+    btnClass="small tertiary text-x-bold"
+    btnText="View/print PDF"
+    btnIcon="view_download.svg"
+    iconPlace="prefix"
+    (click)="downloadPdf()"></app-custom-button>
+</div>
+
+<div class="thankyou-screen" *ngIf="almostDoneDownloadable">
+  <p class="text-bold text-xmed">You're almost done!</p>
+  <div class="information">
+    <p class="text-smed">
+      Please download, print, complete, sign, and fax the TwGO enrollment form
+      to 844-447-4662.
+    </p>
+    <p class="text-smed">
+      If you have any questions, please contact us at 844-447-5662.
     </p>
   </div>
   <app-custom-button
@@ -85,7 +107,12 @@
 
 <div
   class="action-panel"
-  *ngIf="!showIframe && !thankYouScreen && !thankYouScreenDownloadable">
+  *ngIf="
+    !showIframe &&
+    !thankYouScreen &&
+    !thankYouScreenDownloadable &&
+    !almostDoneDownloadable
+  ">
   <app-custom-button
     btnClass="small secondary"
     btnText="&#60; Back"

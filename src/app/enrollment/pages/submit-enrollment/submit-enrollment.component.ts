@@ -85,12 +85,10 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         form.pharmacy.SpecialityPharmacy;
     }
     if (formName === 'select-patient') {
-      console.log(form);
       this.setPatientDetails(form);
     }
     if (formName === 'prescriber-details') {
       this.setPrescriberDetails(form);
-      // console.log(form);
     }
     if (formName === 'select-insurance') {
       this.setInsuranceDetails(form);
@@ -101,7 +99,6 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     if (formName === 'attestation-details') {
       this.setAttestationDetails(form);
     }
-    console.log(this.submitEnrolService.enrollmentFormPayload);
   }
 
   // private getComponentByScreen(): void {
@@ -157,7 +154,6 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
   }
 
   private setPatientDetails(patient: any): void {
-    console.log(patient, 'patient form data');
     const patientPhone = [];
     if (patient.homePhone)
       patientPhone.push({
@@ -216,7 +212,6 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
   }
 
   private setPrescriberDetails(prescriber: any): void {
-    console.log(prescriber, 'prescriber form data');
     this.submitEnrolService.enrollmentFormPayload.Provider = {
       FirstName: this.submitEnrolService.selectedPrescriber.FirstName,
       LastName: this.submitEnrolService.selectedPrescriber.LastName,
@@ -246,8 +241,12 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
           Ext: this.submitEnrolService.selectedFacility[0].Extension,
         },
       ],
-      Fax: prescriber.prescriberDetailForm.fax.replace(/\D/g, '') ?? null,
-      Email: prescriber.prescriberDetailForm.officeContactEmail,
+      Fax: prescriber.prescriberDetailForm.fax.length
+        ? prescriber.prescriberDetailForm.fax.replace(/\D/g, '')
+        : null,
+      Email: prescriber.prescriberDetailForm.officeContactEmail.length
+        ? prescriber.prescriberDetailForm.officeContactEmail
+        : null,
       OtherFacilities: [
         {
           Name: prescriber.shippingDetailForm.shippingFacilityName,
@@ -277,11 +276,6 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
   }
 
   private setInsuranceDetails(insurance: any): void {
-    console.log(insurance, 'insurance form data');
-    // appealForm
-    // priorAuthForm
-    // secondInsuranceForm
-    // firstInsuranceForm
     const medicalPlansData: any[] = [];
     const pharmacyPlansData: any[] = [];
     let medicalPlanFirstData: any = {};
@@ -382,7 +376,6 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
   }
 
   private setPrescriptionDetails(prescription: any): void {
-    console.log(prescription);
     // set clinical data
     const measurementsData: any[] = [
       {
@@ -505,7 +498,6 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
   }
 
   private setAttestationDetails(attestation: any): void {
-    console.log(attestation, 'attestation form data');
     // take a check for each property
     let attestationPayload: any = {};
     attestationPayload = {

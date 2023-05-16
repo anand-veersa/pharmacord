@@ -23,6 +23,7 @@ export class ESignComponent implements OnInit {
   public showPDF: boolean = false;
   public thankYouScreen: boolean = false;
   public thankYouScreenDownloadable: boolean = false;
+  public almostDoneDownloadable: boolean = false;
   private docId: string = '';
   private caseId: string = '';
   constructor(
@@ -183,10 +184,18 @@ export class ESignComponent implements OnInit {
         if (res.Status === 'SUCCESS') {
           this.docId = res.Payload.DocID;
           this.caseId = res.Payload.CaseId;
-          this.enrollService.getDocument(this.docId).subscribe(pdf => {
-            this.pdfSrc = window.URL.createObjectURL(pdf);
-            this.showPDF = true;
-          });
+          if (
+            this.submitEnrolService.attestationForm.controls[
+              'prescriberSignatureOptions'
+            ].value === 'Download to print and sign'
+          ) {
+            this.almostDoneDownloadable = true;
+          } else {
+            this.enrollService.getDocument(this.docId).subscribe(pdf => {
+              this.pdfSrc = window.URL.createObjectURL(pdf);
+              this.showPDF = true;
+            });
+          }
         }
         this.sharedService.isLoading.next(false);
       },

@@ -272,7 +272,7 @@
         "options": [
           {
             "label": "Physician’s office",
-            "value": "Physician’s Office"
+            "value": "Practice Office"
           },
           {
             "label": "Hospital outpatient",
@@ -280,7 +280,7 @@
           },
           {
             "label": "Another site of care",
-            "value": "Another site of care"
+            "value": "Other"
           }
         ]
       }
