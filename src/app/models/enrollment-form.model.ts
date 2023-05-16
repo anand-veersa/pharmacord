@@ -43,7 +43,7 @@ interface ShipToAddressData {
   Zip: string;
 }
 interface PrescriptionData {
-  Prescription: PrescriptionInformationData[];
+  Prescriptions: PrescriptionInformationData[];
   ProviderSignatureMapping: string;
   ShipToAddress: ShipToAddressData;
   ShipToType: object;
@@ -88,7 +88,7 @@ interface PrescriberData {
 
 interface AttestaionData {
   IsPatientAttestationConsent: boolean;
-  PrescriberDeclaration: boolean;
+  PrescriberDeclaration: string;
   TextingOptIn?: boolean;
   PAPEnrollment?: boolean;
   HIPPAAuthorization?: boolean;
@@ -132,6 +132,10 @@ interface PatientData {
   Phones: PhoneData[];
   AlternateContact: AlternateContactData;
   BestContactTime: string;
+  PAInitiated?: string;
+  PAStatus?: string;
+  PAAppealInitiated?: string;
+  PAAppealStatus?: string;
 }
 
 interface MeasurementsData {

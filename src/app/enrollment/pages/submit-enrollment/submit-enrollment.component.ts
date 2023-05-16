@@ -149,13 +149,26 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     this.exitSubject.next(action);
   }
 
+  private convertDate(str: string) {
+    const date = new Date(str),
+      mnth = ('0' + (date.getMonth() + 1)).slice(-2),
+      day = ('0' + date.getDate()).slice(-2);
+    return mnth + day + date.getFullYear();
+  }
+
   private setPatientDetails(patient: any): void {
     console.log(patient, 'patient form data');
     const patientPhone = [];
     if (patient.homePhone)
-      patientPhone.push({ Type: 'Home', Number: patient.homePhone });
+      patientPhone.push({
+        Type: 'Home',
+        Number: patient.homePhone.replace(/\D/g, ''),
+      });
     if (patient.cellPhone)
-      patientPhone.push({ Type: 'Mobile', Number: patient.cellPhone });
+      patientPhone.push({
+        Type: 'Mobile',
+        Number: patient.cellPhone.replace(/\D/g, ''),
+      });
     const caregiverName = patient.repCaregiverName
       ? patient.repCaregiverName.split(' ')
       : [];
@@ -208,11 +221,15 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
       FirstName: this.submitEnrolService.selectedPrescriber.FirstName,
       LastName: this.submitEnrolService.selectedPrescriber.LastName,
       NPI: this.submitEnrolService.selectedPrescriber.NPI,
-      TaxID: prescriber.prescriberDetailForm.taxId,
+      TaxID: prescriber.prescriberDetailForm.taxId
+        ? prescriber.prescriberDetailForm.taxId.replace(/\D/g, '')
+        : null,
       Facility: {
         Id: this.submitEnrolService.selectedFacilityId,
         NPI: prescriber.prescriberDetailForm.facilityNpi,
-        TaxId: prescriber.prescriberDetailForm.facilitytaxId,
+        TaxId: prescriber.prescriberDetailForm.facilitytaxId
+          ? prescriber.prescriberDetailForm.facilitytaxId.replace(/\D/g, '')
+          : null,
         Name:
           this.submitEnrolService.selectedFacility[0].OfficeName ||
           this.submitEnrolService.selectedFacility[0].PracticeGroup,
@@ -225,23 +242,23 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
       },
       Phones: [
         {
-          Number: prescriber.prescriberDetailForm.officeContactPhone,
-          Ext: prescriber.prescriberDetailForm.officeContactExt,
+          Number: this.submitEnrolService.selectedFacility[0].Phone,
+          Ext: this.submitEnrolService.selectedFacility[0].Extension,
         },
       ],
-      Fax: prescriber.prescriberDetailForm.fax,
+      Fax: prescriber.prescriberDetailForm.fax.replace(/\D/g, '') ?? null,
       Email: prescriber.prescriberDetailForm.officeContactEmail,
       OtherFacilities: [
         {
-          Name: prescriber.prescriberDetailForm.shippingFacilityName,
-          OfficeContactName: prescriber.prescriberDetailForm.recipientName,
-          Phone: prescriber.prescriberDetailForm.phone,
-          Address1: prescriber.prescriberDetailForm.street,
+          Name: prescriber.shippingDetailForm.shippingFacilityName,
+          OfficeContactName: prescriber.shippingDetailForm.recipientName,
+          Phone: prescriber.shippingDetailForm.phone.replace(/\D/g, ''),
+          Address1: prescriber.shippingDetailForm.street,
           Address2: null,
-          City: prescriber.prescriberDetailForm.city,
-          State: prescriber.prescriberDetailForm.state,
-          Zip: prescriber.prescriberDetailForm.zipcode,
-          FacilityType: prescriber.prescriberDetailForm.siteOfAdministration,
+          City: prescriber.shippingDetailForm.city,
+          State: prescriber.shippingDetailForm.state,
+          Zip: prescriber.shippingDetailForm.zipcode,
+          FacilityType: prescriber.shippingDetailForm.siteOfAdministration,
         },
       ],
     };
@@ -250,7 +267,7 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     this.submitEnrolService.enrollmentFormPayload.PrescriptionInformation.ShipToAddress =
       {
         RecipientName: prescriber.shippingDetailForm.recipientName,
-        Phone: prescriber.shippingDetailForm.phone,
+        Phone: prescriber.shippingDetailForm.phone.replace(/\D/g, ''),
         Address1: prescriber.shippingDetailForm.street,
         Address2: null,
         City: prescriber.shippingDetailForm.city,
@@ -274,15 +291,18 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         Type: insurance.firstInsuranceForm.coverageType,
         PolicyHolderEmployer: insurance.firstInsuranceForm.policyHolderName,
         PlanName: insurance.firstInsuranceForm.insuranceName,
-        Phone: insurance.firstInsuranceForm.phone,
+        Phone: insurance.firstInsuranceForm.phone.replace(/\D/g, ''),
         PlanRank: 'Primary',
         PolicyID: insurance.firstInsuranceForm.policyId,
         SubscriberName: insurance.firstInsuranceForm.policyHolderName,
-        SubscriberDOB: insurance.firstInsuranceForm.policyHolderDob,
+        SubscriberDOB: this.sharedService.getFormattedDate(
+          insurance.firstInsuranceForm.policyHolderDob,
+          true
+        ),
         RelationshipToSubscriber:
           insurance.firstInsuranceForm.relationToPatient,
         GroupNo: insurance.firstInsuranceForm.group,
-        AttachDoc: insurance.firstInsuranceForm.group.firstInsuranceFiles,
+        AttachDoc: insurance.firstInsuranceForm.firstInsuranceFiles,
       };
       medicalPlansData.push(medicalPlanFirstData);
     }
@@ -292,11 +312,14 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         Type: insurance.secondInsuranceForm.coverageType,
         PolicyHolderEmployer: insurance.secondInsuranceForm.insurancePayer,
         PlanName: insurance.secondInsuranceForm.insuranceName,
-        Phone: insurance.secondInsuranceForm.phone,
+        Phone: insurance.secondInsuranceForm.phone.replace(/\D/g, ''),
         PlanRank: 'Secondary',
         PolicyID: insurance.secondInsuranceForm.policyId,
         SubscriberName: insurance.secondInsuranceForm.policyHolderName,
-        SubscriberDOB: insurance.secondInsuranceForm.policyHolderDob,
+        SubscriberDOB: this.sharedService.getFormattedDate(
+          insurance.secondInsuranceForm.policyHolderDob,
+          true
+        ),
         RelationshipToSubscriber:
           insurance.secondInsuranceForm.relationToPatient,
         GroupNo: insurance.secondInsuranceForm.group,
@@ -336,7 +359,26 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         PharmacyPlans: pharmacyPlansData,
       };
     }
-    // if priorAuth and appeal comes set these to Patient Data here??
+
+    // priorAuth form
+    if (insurance.priorAuthForm.priorAuth1.length) {
+      this.submitEnrolService.enrollmentFormPayload.Patient.PAInitiated =
+        insurance.priorAuthForm.priorAuth1;
+      if (insurance.priorAuthForm.paStatus1.length) {
+        this.submitEnrolService.enrollmentFormPayload.Patient.PAStatus =
+          insurance.priorAuthForm.paStatus1;
+      }
+    }
+
+    // appeal form
+    if (insurance.appealForm.priorAuth2.length) {
+      this.submitEnrolService.enrollmentFormPayload.Patient.PAAppealInitiated =
+        insurance.priorAuthForm.priorAuth2;
+      if (insurance.priorAuthForm.paStatus2.length) {
+        this.submitEnrolService.enrollmentFormPayload.Patient.PAAppealStatus =
+          insurance.priorAuthForm.paStatus2;
+      }
+    }
   }
 
   private setPrescriptionDetails(prescription: any): void {
@@ -371,9 +413,9 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         {
           Strength: prescription.prescriptionInfoForm.jemperliIVPres.strength,
           DirectionForAdministration: [
-            ...prescription.prescriptionInfoForm.jemperliIVPres.doa,
+            [prescription.prescriptionInfoForm.jemperliIVPres.doa],
           ],
-          Quantity: prescription.prescriptionInfoForm.jemperliIVPres.qty,
+          Quantity: null,
         },
       ];
     } else if (
@@ -452,7 +494,7 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
 
     //setting the data
     this.submitEnrolService.enrollmentFormPayload.PrescriptionInformation = {
-      Prescription: prescriptionData,
+      Prescriptions: prescriptionData,
       ProviderSignatureMapping:
         prescription.prescriptionInfoForm.prescriptionSignature,
       ShipToAddress:
@@ -469,7 +511,9 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     attestationPayload = {
       ...attestationPayload,
       IsPatientAttestationConsent: attestation.attestationConsent,
-      PrescriberDeclaration: attestation.prescriberDeclaration,
+      PrescriberDeclaration: attestation.prescriberDeclaration
+        ? 'True'
+        : 'False',
     };
 
     // check prescriber signature option
