@@ -3,6 +3,7 @@ import { SubmitEnrollmentService } from '../../pages/submit-enrollment/submit-en
 import { AppConstants } from 'src/app/constants/app.constants';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { JsonFormControls } from 'src/app/models/json-form-data.model';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-attestation-details',
@@ -24,10 +25,14 @@ export class AttestationDetailsComponent implements OnInit {
 
   constructor(
     public submitEnrolService: SubmitEnrollmentService,
-    private appConstants: AppConstants
+    private appConstants: AppConstants,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
+    if (this.authService.user?.role?.RolePkId === 4) {
+      this.showPatientSignature = false;
+    }
     this.submitEnrolService.createAttestationForm();
   }
 
@@ -67,28 +72,28 @@ export class AttestationDetailsComponent implements OnInit {
         this.confirmConsent(this.attestationConsentClicked);
         break;
       case 'prescriberDeclaration':
-        if (event.isChecked) this.showConfirmationDialog = true;
+        this.showConfirmationDialog = true;
         this.dialogTitle = 'Prescriber Declaration';
         this.dialogDescription = this.appConstants.PRESCRIBER_DECLARATION;
         break;
       case 'textingConsent':
-        if (event.isChecked) this.showConfirmationDialog = true;
+        this.showConfirmationDialog = true;
         this.dialogTitle = 'Texting Consent (Rates May Apply)';
         this.dialogDescription = this.appConstants.TEXTING_CONSENT;
         break;
       case 'patientAssistanceProgram':
-        if (event.isChecked) this.showConfirmationDialog = true;
+        this.showConfirmationDialog = true;
         this.dialogTitle =
           'Patient Assistance Program (PAP) for uninsured and eligible Medicare patients';
         this.dialogDescription = this.appConstants.PAP_CONSENT;
         break;
       case 'patientSupportProgram':
-        if (event.isChecked) this.showConfirmationDialog = true;
+        this.showConfirmationDialog = true;
         this.dialogTitle = 'Patient Support Program (Optional)';
         this.dialogDescription = this.appConstants.PSP_CONSENT;
         break;
       case 'hippaAuthorization': {
-        if (event.isChecked) this.showConfirmationDialog = true;
+        this.showConfirmationDialog = true;
         this.dialogTitle = 'HIPAA Patient Authorization';
         const drugGroup =
           this.submitEnrolService?.enrollmentFormPayload.DrugGroup;

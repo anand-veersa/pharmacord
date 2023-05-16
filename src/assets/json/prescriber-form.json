@@ -141,12 +141,13 @@
         "placeholder": "Enter your office contact phone #",
         "type": "text",
         "subType": "phone",
+        "class": "office-contact-phone-position",
         "validators": { "min": 14, "max": 14 }
       },
       {
         "name": "officeContactExt",
         "value": "",
-        "display": true,
+        "display": false,
         "label": "Office Contact Ext",
         "placeholder": "Ext(if applicable)",
         "type": "text",

@@ -98,7 +98,7 @@ export class SubmitEnrollmentService {
       name: 'Prescriber',
       value: '',
       label: '',
-      placeholder: '',
+      placeholder: '-- Select one --',
       type: 'select',
       validators: { required: true },
       options: options,
@@ -379,17 +379,37 @@ export class SubmitEnrollmentService {
     this.http
       .get('/assets/json/attestation-form.json')
       .subscribe((data: any) => {
-        const isPap =
-          this.servicesForm?.get('PatientAssistanceProgram')?.value?.Name ===
-          'PatientAssistanceProgram';
+        const isPap = this.servicesForm
+          ?.get('Services')
+          ?.value.findIndex(
+            (el: any) => el.Name === 'PatientAssistanceProgram'
+          );
+        const userRolePkId = this.authService.user?.role?.RolePkId;
+        const arr = [
+          'textingConsent',
+          'patientAssistanceProgram',
+          'patientSupportProgram',
+          'hippaAuthorization',
+          'patientSignatureOptions',
+          'patientRepresentativeName',
+          'relationshipToPatient',
+          'patientEmail',
+          'representativeEmail',
+        ];
 
         data.controls.forEach((item: any) => {
+          if (userRolePkId === 4) {
+            if (item.name === 'prescriberSignatureOptions') {
+              item.options.splice(0, 1);
+              item.value = 'Download to print and sign';
+            }
+            if (arr.includes(item.name)) item.display = false;
+          }
           if (item.type === 'select' || item.type === 'checkbox') {
             if (item.name === 'patientAssistanceProgram') {
               if (isPap) item.display = true;
               else item.display = false;
             }
-
             item.options = item.options.filter(
               (option: JsonFormControlOptions) =>
                 !option.for ||

@@ -1,4 +1,14 @@
+@import '../../../../../assets/styles/abstracts/variables';
 @import '../../../../../assets/styles/abstracts/mixins';
+
+::ng-deep .mat-mdc-checkbox.mat-primary {
+  --mdc-checkbox-selected-checkmark-color: #{$color-white};
+  --mdc-checkbox-selected-focus-icon-color: #{$color-tertiary};
+  --mdc-checkbox-selected-hover-icon-color: #{$color-tertiary};
+  --mdc-checkbox-selected-icon-color: #{$color-tertiary};
+  --mdc-checkbox-selected-pressed-icon-color: #{$color-tertiary};
+}
+
 .checkbox-group {
   display: flex;
   flex-wrap: wrap;
