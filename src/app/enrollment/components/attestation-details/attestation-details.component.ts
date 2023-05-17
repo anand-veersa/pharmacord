@@ -4,6 +4,7 @@ import { AppConstants } from 'src/app/constants/app.constants';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { JsonFormControls } from 'src/app/models/json-form-data.model';
 import { AuthService } from 'src/app/auth/auth.service';
+import { FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-attestation-details',
@@ -33,33 +34,16 @@ export class AttestationDetailsComponent implements OnInit {
     if (this.authService.user?.role?.RolePkId === 4) {
       this.showPatientSignature = false;
     }
-    this.submitEnrolService.createAttestationForm();
+    this.submitEnrolService.createAttestationForm(() => {
+      this.setPrescriberSignatureOptions();
+      this.setPatientSignatureOptions();
+    });
   }
 
   public clickedConsent(event: any): void {
     this.rowClicked = event;
     if (event.field.name === 'prescriberSignatureOptions') {
-      const arr = [
-        'textingConsent',
-        'patientAssistanceProgram',
-        'patientSupportProgram',
-        'hippaAuthorization',
-        'patientSignatureOptions',
-        'patientRepresentativeName',
-        'relationshipToPatient',
-        'patientEmail',
-        'representativeEmail',
-      ];
-      this.submitEnrolService.attestationDetails.controls.forEach(field => {
-        if (arr.includes(field.name)) {
-          if (event.value === 'Download to print and sign')
-            field.display = this.showPatientSignature = false;
-          else {
-            field.display = this.showPatientSignature = true;
-            this.setPatientSignatureOptions();
-          }
-        }
-      });
+      this.setPrescriberSignatureOptions();
     }
 
     if (event.field.name === 'patientSignatureOptions')
@@ -133,6 +117,78 @@ export class AttestationDetailsComponent implements OnInit {
     }
   }
 
+  private updateValidation(form: FormGroup, field: any, show: boolean) {
+    const reqFields = [
+      'patientRepresentativeName',
+      'relationshipToPatient',
+      'representativeEmail',
+      'patientEmail',
+    ];
+    const reqTrueFields = [
+      'hippaAuthorization',
+      'attestationConsent',
+      'prescriberDeclaration',
+    ];
+    const emailFields = ['patientEmail', 'representativeEmail'];
+
+    const formField = form.get(field.name);
+
+    if (!show) {
+      formField?.clearValidators();
+    } else {
+      if (reqFields.includes(field.name)) {
+        formField?.addValidators(Validators.required);
+      }
+      if (reqTrueFields.includes(field.name)) {
+        formField?.addValidators(Validators.requiredTrue);
+      }
+      if (emailFields.includes(field.name)) {
+        formField?.addValidators(Validators.email);
+      }
+    }
+    formField?.updateValueAndValidity();
+  }
+
+  private setPrescriberSignatureOptions() {
+    const arr = [
+      'textingConsent',
+      'patientAssistanceProgram',
+      'patientSupportProgram',
+      'hippaAuthorization',
+      'patientSignatureOptions',
+      'patientRepresentativeName',
+      'relationshipToPatient',
+      'patientEmail',
+      'representativeEmail',
+    ];
+
+    const prescriberSignatureOptions =
+      this.submitEnrolService.attestationForm?.get(
+        'prescriberSignatureOptions'
+      )?.value;
+
+    this.submitEnrolService.attestationDetails.controls.forEach(field => {
+      if (arr.includes(field.name)) {
+        if (prescriberSignatureOptions === 'Download to print and sign') {
+          field.display = this.showPatientSignature = false;
+          this.updateValidation(
+            this.submitEnrolService.attestationForm,
+            field,
+            false
+          );
+        } else {
+          field.display = this.showPatientSignature = true;
+          this.updateValidation(
+            this.submitEnrolService.attestationForm,
+            field,
+            true
+          );
+          this.setPatientSignatureOptions();
+        }
+      }
+    });
+  }
+
   private setPatientSignatureOptions() {
     const patientSignatureOptions =
       this.submitEnrolService.attestationForm?.get(
@@ -145,8 +201,21 @@ export class AttestationDetailsComponent implements OnInit {
         patientSignatureOptions ===
           'Patient Representative will sign the enrollment form'
       ) {
-        if (field.name === 'patientEmail') field.display = false;
-        else field.display = true;
+        if (field.name === 'patientEmail') {
+          field.display = false;
+          this.updateValidation(
+            this.submitEnrolService.attestationForm,
+            field,
+            false
+          );
+        } else {
+          field.display = true;
+          this.updateValidation(
+            this.submitEnrolService.attestationForm,
+            field,
+            true
+          );
+        }
       } else if (
         patientSignatureOptions === 'Patient will sign the enrollment form'
       ) {
@@ -154,9 +223,21 @@ export class AttestationDetailsComponent implements OnInit {
           field.name === 'patientRepresentativeName' ||
           field.name === 'relationshipToPatient' ||
           field.name === 'representativeEmail'
-        )
+        ) {
           field.display = false;
-        else field.display = true;
+          this.updateValidation(
+            this.submitEnrolService.attestationForm,
+            field,
+            false
+          );
+        } else {
+          field.display = true;
+          this.updateValidation(
+            this.submitEnrolService.attestationForm,
+            field,
+            true
+          );
+        }
       }
     });
   }
