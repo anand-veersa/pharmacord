@@ -215,10 +215,35 @@
         "value": "",
         "display": true,
         "label": "Patient Representative/ Caregiver Relationship to Patient",
-        "placeholder": "Select your Patient Representative/Caregiver Relationship to ...",
-        "type": "type",
+        "placeholder": "Select your Patient Representative/Caregiver Relationship to Patient",
+        "type": "select",
         "validators": {},
-        "class": "tm-2"
+        "options": [
+          {
+            "label": "Spouse",
+            "value": "SPOUSE"
+          },
+          {
+            "label": "Father",
+            "value": "FATHER"
+          },
+          {
+            "label": "Mother",
+            "value": "MOTHER"
+          },
+          {
+            "label": "Dependent",
+            "value": "DEPENDENT"
+          },
+          {
+            "label": "Self",
+            "value": "SELF"
+          },
+          {
+            "label": "Other",
+            "value": "OTHER"
+          }
+        ]
       },
       {
         "name": "repCaregiverPhone",

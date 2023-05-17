@@ -58,7 +58,12 @@
               *ngIf="control.display"
               [field]="control"
               [form]="submitEnrolService.shippingDetailForm"
-              formType="enrollment-form"></app-custom-form>
+              formType="enrollment-form"
+              (action)="
+                control.name === 'shippingAddressType' &&
+                  onShippingTypeChange($event)
+              ">
+            </app-custom-form>
           </div>
         </ng-container>
       </div>

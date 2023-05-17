@@ -188,7 +188,7 @@
         "validators": { "required": true },
         "options": [
           {
-            "label": "Patient’s Address",
+            "label": "Patient's Address",
             "value": "patientAddress"
           },
           {
