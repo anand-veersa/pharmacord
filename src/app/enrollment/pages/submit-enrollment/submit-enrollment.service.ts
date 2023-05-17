@@ -253,6 +253,11 @@ export class SubmitEnrollmentService {
               control.name === 'altContactRelation')
           )
             return;
+          if (
+            control.name === 'bestContactTime' &&
+            this.enrollmentFormPayload.DrugGroup !== 'Jemperli'
+          )
+            return;
           return control;
         }
       );

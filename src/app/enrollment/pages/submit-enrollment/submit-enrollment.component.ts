@@ -85,20 +85,27 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         form.pharmacy.SpecialityPharmacy;
     }
     if (formName === 'select-patient') {
+      console.log(form, 'select-patient');
       this.setPatientDetails(form);
     }
     if (formName === 'prescriber-details') {
+      console.log(form, 'prescriber-details');
       this.setPrescriberDetails(form);
     }
     if (formName === 'select-insurance') {
       this.setInsuranceDetails(form);
+      console.log(form, 'select-insurance');
     }
     if (formName === 'select-prescription') {
       this.setPrescriptionDetails(form);
+      console.log(form, 'select-prescription');
     }
     if (formName === 'attestation-details') {
+      console.log(form, 'attestation-details');
       this.setAttestationDetails(form);
     }
+
+    console.log(this.submitEnrolService.enrollmentFormPayload);
   }
 
   // private getComponentByScreen(): void {
@@ -205,10 +212,17 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         FirstName: caregiverName.length ? caregiverName[0] : '',
         LastName: caregiverName.length > 1 ? caregiverName.at(-1) : '',
         RelationshipToPatient: patient.repCaregiverRelation,
-        Phone: patient.repCaregiverPhone,
+        Phone: patient.repCaregiverPhone.length
+          ? patient.repCaregiverPhone
+          : null,
       },
       BestContactTime: patient.bestContactTime,
     };
+
+    if (this.submitEnrolService.enrollmentFormPayload.DrugGroup != 'Jemperli') {
+      delete this.submitEnrolService.enrollmentFormPayload.Patient
+        .BestContactTime;
+    }
   }
 
   private setPrescriberDetails(prescriber: any): void {
@@ -251,7 +265,9 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         {
           Name: prescriber.shippingDetailForm.shippingFacilityName,
           OfficeContactName: prescriber.shippingDetailForm.recipientName,
-          Phone: prescriber.shippingDetailForm.phone.replace(/\D/g, ''),
+          Phone: prescriber.shippingDetailForm.phone.length
+            ? prescriber.shippingDetailForm.phone.replace(/\D/g, '')
+            : null,
           Address1: prescriber.shippingDetailForm.street,
           Address2: null,
           City: prescriber.shippingDetailForm.city,
@@ -262,11 +278,17 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
       ],
     };
 
+    if (this.submitEnrolService.enrollmentFormPayload.DrugGroup != 'Jemperli') {
+      delete this.submitEnrolService.enrollmentFormPayload.Provider
+        .OtherFacilities;
+    }
     // set ship to Address that is in Prescription Object
     this.submitEnrolService.enrollmentFormPayload.PrescriptionInformation.ShipToAddress =
       {
         RecipientName: prescriber.shippingDetailForm.recipientName,
-        Phone: prescriber.shippingDetailForm.phone.replace(/\D/g, ''),
+        Phone: prescriber.shippingDetailForm.phone.length
+          ? prescriber.shippingDetailForm.phone.replace(/\D/g, '')
+          : null,
         Address1: prescriber.shippingDetailForm.street,
         Address2: null,
         City: prescriber.shippingDetailForm.city,
@@ -285,7 +307,9 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         Type: insurance.firstInsuranceForm.coverageType,
         PolicyHolderEmployer: insurance.firstInsuranceForm.policyHolderName,
         PlanName: insurance.firstInsuranceForm.insuranceName,
-        Phone: insurance.firstInsuranceForm.phone.replace(/\D/g, ''),
+        Phone: insurance.firstInsuranceForm.phone.length
+          ? insurance.firstInsuranceForm.phone.replace(/\D/g, '')
+          : null,
         PlanRank: 'Primary',
         PolicyID: insurance.firstInsuranceForm.policyId,
         SubscriberName: insurance.firstInsuranceForm.policyHolderName,
@@ -306,7 +330,9 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         Type: insurance.secondInsuranceForm.coverageType,
         PolicyHolderEmployer: insurance.secondInsuranceForm.insurancePayer,
         PlanName: insurance.secondInsuranceForm.insuranceName,
-        Phone: insurance.secondInsuranceForm.phone.replace(/\D/g, ''),
+        Phone: insurance.secondInsuranceForm.phone.length
+          ? insurance.secondInsuranceForm.phone.replace(/\D/g, '')
+          : null,
         PlanRank: 'Secondary',
         PolicyID: insurance.secondInsuranceForm.policyId,
         SubscriberName: insurance.secondInsuranceForm.policyHolderName,
@@ -357,7 +383,7 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     // priorAuth form
     if (insurance.priorAuthForm.priorAuth1.length) {
       this.submitEnrolService.enrollmentFormPayload.Patient.PAInitiated =
-        insurance.priorAuthForm.priorAuth1;
+        insurance.priorAuthForm.priorAuth1 === 'Yes' ? true : false;
       if (insurance.priorAuthForm.paStatus1.length) {
         this.submitEnrolService.enrollmentFormPayload.Patient.PAStatus =
           insurance.priorAuthForm.paStatus1;
@@ -389,7 +415,10 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     ];
 
     this.submitEnrolService.enrollmentFormPayload.Clinical = {
-      TherapyStartDate: prescription.clinicalInfoForm.treatmentStartDate,
+      TherapyStartDate: this.sharedService.getFormattedDate(
+        prescription.clinicalInfoForm.treatmentStartDate,
+        true
+      ),
       Measurements: prescription.currentLineOfTherapyForm.bRCATest.length
         ? measurementsData
         : [],

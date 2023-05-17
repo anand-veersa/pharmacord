@@ -83,7 +83,7 @@ interface PrescriberData {
   Phones: { Number: string; Ext: string }[];
   Fax: string;
   Email: string;
-  OtherFacilities: OtherFacilityData[];
+  OtherFacilities?: OtherFacilityData[];
 }
 
 interface AttestaionData {
@@ -131,10 +131,10 @@ interface PatientData {
   PatientId: null;
   Phones: PhoneData[];
   AlternateContact: AlternateContactData;
-  BestContactTime: string;
-  PAInitiated?: string;
+  BestContactTime?: string;
+  PAInitiated?: boolean;
   PAStatus?: string;
-  PAAppealInitiated?: string;
+  PAAppealInitiated?: boolean;
   PAAppealStatus?: string;
 }
 
