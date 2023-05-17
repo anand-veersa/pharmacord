@@ -438,20 +438,55 @@ export class SubmitEnrollmentService {
       this.filteredServices = { controls: [] };
       this.servicesForm.reset();
     }
-    if (this.specialityPharmacyForm) this.specialityPharmacyForm.reset();
-    if (this.patientDetailForm) this.patientDetailForm.reset();
-    if (this.patientRepDetailForm) this.patientRepDetailForm.reset();
-    if (this.patientPapDetailForm) this.patientPapDetailForm.reset();
-    if (this.prescriberDetailForm) this.prescriberDetailForm.reset();
-    if (this.shippingDetailForm) this.shippingDetailForm.reset();
-    if (this.firstInsuranceForm) this.firstInsuranceForm.reset();
-    if (this.secondInsuranceForm) this.secondInsuranceForm.reset();
-    console.log('form', this.servicesForm);
-  }
-
-  private clearFormArray(form: any, control: string) {
-    while (form.controls[control].length !== 0) {
-      form.controls[control].removeAt(0);
+    if (this.specialityPharmacyForm) {
+      this.filteredPharmacies = { controls: [] };
+      this.specialityPharmacyForm.reset();
     }
+    if (this.patientDetailForm) {
+      this.patientDetails = { controls: [] };
+      this.patientDetailForm.reset();
+    }
+
+    if (this.patientRepDetailForm) {
+      this.patientRepDetails = { controls: [] };
+      this.patientRepDetailForm.reset();
+    }
+    if (this.patientPapDetailForm) {
+      this.patientPapDetails = { controls: [] };
+      this.patientPapDetailForm.reset();
+    }
+    if (this.prescriberDetailForm) {
+      this.prescriberDetails = { controls: [] };
+      this.prescriberDetailForm.reset();
+    }
+    if (this.shippingDetailForm) {
+      this.shippingDetails = { controls: [] };
+      this.shippingDetailForm.reset();
+    }
+    if (this.firstInsuranceForm) {
+      this.firstInsuranceDetails = { controls: [] };
+      this.firstInsuranceForm.reset();
+    }
+    if (this.secondInsuranceForm) {
+      this.secondInsuranceDetails = { controls: [] };
+      this.secondInsuranceForm.reset();
+    }
+    if (this.priorAuthForm) {
+      this.priorAuthDetails = { controls: [] };
+      this.priorAuthForm.reset();
+    }
+    if (this.appealForm) {
+      this.appealDetails = { controls: [] };
+      this.appealForm.reset();
+    }
+    if (this.attestationForm) {
+      this.attestationDetails = { controls: [] };
+      this.attestationForm.reset();
+    }
+    if (this.prescriptionInfoForm) this.prescriptionInfoForm.reset();
+    if (this.clinicalInfoForm) this.clinicalInfoForm.reset();
+    if (this.currentLineOfTherapyForm) this.currentLineOfTherapyForm.reset();
+
+    console.log('form', this.servicesForm);
   }
 }

@@ -221,27 +221,27 @@
         "options": [
           {
             "label": "Spouse",
-            "value": "SPOUSE"
+            "value": "Spouse"
           },
           {
             "label": "Father",
-            "value": "FATHER"
+            "value": "Father"
           },
           {
             "label": "Mother",
-            "value": "MOTHER"
+            "value": "Mother"
           },
           {
             "label": "Dependent",
-            "value": "DEPENDENT"
+            "value": "Dependent"
           },
           {
             "label": "Self",
-            "value": "SELF"
+            "value": "Self"
           },
           {
             "label": "Other",
-            "value": "OTHER"
+            "value": "Other"
           }
         ]
       },

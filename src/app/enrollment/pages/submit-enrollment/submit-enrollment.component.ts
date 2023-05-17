@@ -213,7 +213,7 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         LastName: caregiverName.length > 1 ? caregiverName.at(-1) : '',
         RelationshipToPatient: patient.repCaregiverRelation,
         Phone: patient.repCaregiverPhone.length
-          ? patient.repCaregiverPhone
+          ? patient.repCaregiverPhone.replace(/\D/g, '')
           : null,
       },
       BestContactTime: patient.bestContactTime,
