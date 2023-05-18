@@ -85,27 +85,20 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         form.pharmacy.SpecialityPharmacy;
     }
     if (formName === 'select-patient') {
-      console.log(form, 'select-patient');
       this.setPatientDetails(form);
     }
     if (formName === 'prescriber-details') {
-      console.log(form, 'prescriber-details');
       this.setPrescriberDetails(form);
     }
     if (formName === 'select-insurance') {
       this.setInsuranceDetails(form);
-      console.log(form, 'select-insurance');
     }
     if (formName === 'select-prescription') {
       this.setPrescriptionDetails(form);
-      console.log(form, 'select-prescription');
     }
     if (formName === 'attestation-details') {
-      console.log(form, 'attestation-details');
       this.setAttestationDetails(form);
     }
-
-    console.log(this.submitEnrolService.enrollmentFormPayload);
   }
 
   // private getComponentByScreen(): void {
