@@ -1,94 +1,186 @@
 {
   "controls": [
     {
-      "name": "Services",
+      "name": "CoverageSupport",
       "value": "",
       "display": true,
       "label": "",
       "placeholder": "",
       "type": "checkbox",
-      "class": "checkbox-group",
-      "validators": { "required": true },
+      "for": "Jemperli",
+      "tooltipContent": "<div class='services-tooltip lm-1'><ul><li>Benefits Investigation</li><li>Prior Authorization Support</li><li>Appeals Support</li><li>Claims Assistance</li></ul></div>",
       "options": [
         {
           "label": "Coverage Support",
           "value": {
             "Id": 1,
             "Name": "CoverageSupport"
-          },
-          "for": "Jemperli"
-        },
-        {
-          "label": "Patient Assistance Program(PAP)",
-          "value": {
-            "Id": 3,
-            "Name": "PatientAssistanceProgram"
-          },
-          "for": "Jemperli, Zejula, Ojjaara"
-        },
+          }
+        }
+      ]
+    },
+    {
+      "name": "AlternateCoverageSupport",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "tooltipContent": "<div class='services-tooltip lm-1'><ul><li>Information about Patient Advocacy Organizations</li><li> Information about Independent Co-Pay Foundations</li></ul></div>",
+      "options": [
         {
           "label": "Alternate Coverage Support",
           "value": {
             "Id": 12,
             "Name": "AlternateCoverageSupport"
-          },
-          "for": "Jemperli"
-        },
+          }
+        }
+      ],
+      "for": "Jemperli"
+    },
+    {
+      "name": "PatientAssistanceProgram",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "for": "Jemperli, Zejula, Ojjaara",
+      "tooltipContent": "<div class='services-tooltip'><span>Uninsured patients who meet eligibility requirements may access medication free of charge through the Together with GSK Oncology Patient Assistance Program (PAP) offered by the GSK PAP Foundation. Medicare patients who meet program requirements may also be eligible for the Patient Assistance Program.</span></div>",
+      "options": [
+        {
+          "label": "Patient Assistance Program(PAP)",
+          "value": {
+            "Id": 3,
+            "Name": "PatientAssistanceProgram"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CommercialCopayAssistance",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "for": "Jemperli, Zejula, Ojjaara",
+      "tooltipContent": "<div class='services-tooltip'><span>Eligible commercially insured patients could pay as little as $0 up to a total of $26,000 for up to 12 months for their medicine.</span></div>",
+      "options": [
         {
           "label": "Commercial Co-pay Assistance",
           "value": {
             "Id": 2,
             "Name": "CommercialCopayAssistance"
-          },
-          "for": "Jemperli, Zejula, Ojjaara"
-        },
+          }
+        }
+      ]
+    },
+    {
+      "name": "AlternativeFundingSourcesInformation",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "for": "Zejula, Ojjaara",
+      "options": [
         {
           "label": "Alternative Funding Sources Information",
           "value": {
             "Id": 2,
             "Name": "AlternativeFundingSourcesInformation"
-          },
-          "for": "Zejula, Ojjaara"
-        },
+          }
+        }
+      ]
+    },
+    {
+      "name": "BenefitsInvestigation",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "for": "Zejula, Ojjaara",
+      "options": [
         {
           "label": "Benefits Investigation (Pharmacy and/or Medical Insurance Coverage)",
           "value": {
             "Id": 2,
             "Name": "BenefitsInvestigation"
-          },
-          "for": "Zejula, Ojjaara"
-        },
+          }
+        }
+      ]
+    },
+    {
+      "name": "HomeHealthCoverageInformation",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "for": "Zejula",
+      "options": [
         {
           "label": "Home Health Coverage Information",
           "value": {
             "Id": 2,
             "Name": "HomeHealthCoverageInformation"
-          },
-          "for": "Zejula"
-        },
+          }
+        }
+      ]
+    },
+    {
+      "name": "PatientAdvocacyOrganizationInformation",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "for": "Zejula, Ojjaara",
+      "options": [
         {
           "label": "Patient Advocacy Organization Information",
           "value": {
             "Id": 2,
             "Name": "PatientAdvocacyOrganizationInformation"
-          },
-          "for": "Zejula, Ojjaara"
-        },
+          }
+        }
+      ]
+    },
+    {
+      "name": "PriorAuthorizationAndAppealsSupport",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "for": "Zejula, Ojjaara",
+      "options": [
         {
           "label": "Prior Authorization and Appeals Support",
           "value": {
             "Id": 2,
             "Name": "PriorAuthorizationAndAppealsSupport"
-          },
-          "for": "Zejula, Ojjaara"
-        },
+          }
+        }
+      ]
+    },
+    {
+      "name": "QuickStartAndBridgePrograms",
+      "value": "",
+      "display": true,
+      "label": "",
+      "placeholder": "",
+      "type": "checkbox",
+      "for": "Zejula, Ojjaara",
+      "options": [
         {
           "label": "Quick Start and Bridge Programs",
           "value": {
             "Id": 2,
             "Name": "QuickStartAndBridgePrograms"
-          },
-          "for": "Zejula, Ojjaara"
+          }
         }
       ]
     }

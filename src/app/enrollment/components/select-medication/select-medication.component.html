@@ -5,7 +5,8 @@
     <app-custom-form
       [field]="submitEnrolService.medicationJson.controls[0]"
       [form]="submitEnrolService.medicationForm"
-      formType="medication-form"></app-custom-form>
+      formType="medication-form"
+      (action)="medicationChanged($event)"></app-custom-form>
   </div>
 </div>
 

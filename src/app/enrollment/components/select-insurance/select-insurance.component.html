@@ -168,5 +168,6 @@
   <app-custom-button
     btnClass="small tertiary"
     btnText="Next &#62;"
+    [isDisabled]="isNextDisabled()"
     (action)="onAction('next')"></app-custom-button>
 </div>

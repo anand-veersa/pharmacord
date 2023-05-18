@@ -83,17 +83,14 @@ export class SharedService {
   public buildForm(formData: JsonFormData): FormGroup {
     const formControl: { [key: string]: any } = {};
     formData.controls.forEach(field => {
-      if (field.type === 'checkbox' && !field.preventDefaultSelection) {
-        formControl[field.name] = new FormArray([]);
-      } else {
-        formControl[field.name] = new FormControl({
-          value: field.value,
-          disabled: field.disabled ?? false,
-        });
-        let validators = this.addValidator(field.validators, formControl);
-        validators = validators?.filter(validator => validator !== null);
-        formControl[field.name].addValidators(validators);
-      }
+      formControl[field.name] = new FormControl({
+        value: field.value,
+        disabled: field.disabled ?? false,
+      });
+      let validators = this.addValidator(field.validators, formControl);
+      validators = validators?.filter(validator => validator !== null);
+      formControl[field.name].addValidators(validators);
+      // }
     });
     return new FormGroup(formControl);
   }

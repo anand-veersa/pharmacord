@@ -95,8 +95,7 @@ export class CustomFormComponent implements AfterViewInit {
       componentInstance === CustomRadioComponent
     ) {
       dynamicComponent.instance.action.subscribe(
-        (data: string | number | { value: string | number; field: any }) =>
-          this.action.emit(data)
+        (data: { value: any; field: any }) => this.action.emit(data)
       );
     }
     this.changeDetectorRef.detectChanges();
