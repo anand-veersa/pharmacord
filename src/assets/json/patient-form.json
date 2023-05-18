@@ -188,7 +188,8 @@
         "display": true,
         "label": "Alt. Contact Phone #",
         "placeholder": "Select your alt. contact phone #",
-        "type": "type",
+        "type": "text",
+        "subType": "phone",
         "validators": {}
       },
       {
@@ -197,8 +198,34 @@
         "display": true,
         "label": "Alt. Contact Relationship to Patient",
         "placeholder": "Select your alt. contact relationship to patient",
-        "type": "type",
-        "validators": {}
+        "type": "select",
+        "validators": {},
+        "options": [
+          {
+            "label": "Spouse",
+            "value": "SPOUSE"
+          },
+          {
+            "label": "Father",
+            "value": "FATHER"
+          },
+          {
+            "label": "Mother",
+            "value": "MOTHER"
+          },
+          {
+            "label": "Dependent",
+            "value": "DEPENDENT"
+          },
+          {
+            "label": "Self",
+            "value": "SELF"
+          },
+          {
+            "label": "Other",
+            "value": "OTHER"
+          }
+        ]
       },
       {
         "name": "repCaregiverName",
