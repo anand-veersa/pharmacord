@@ -40,8 +40,6 @@ export class SelectPrescriberComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.submitEnrolService.selectedFacility);
-
     if (
       this.authService.user.role.RolePkId === this.appConstants.PROVIDER_ROLE
     ) {

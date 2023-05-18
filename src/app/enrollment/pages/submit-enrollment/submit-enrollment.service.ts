@@ -175,12 +175,7 @@ export class SubmitEnrollmentService {
         for: 'Ojjaara',
       },
     ];
-    // this.http.get("/assets/json/services-form.json").subscribe((data:any) => {
-    //   this.filteredServices = data;
-    //   this.filteredServices.controls= this.filteredServices.controls.filter((control:JsonFormControls) =>  control.for?.includes(selectedMedicine));
-    //   this.servicesForm = this.sharedService.buildForm(this.filteredServices);
-    //   // console.log("form changesd", this.servicesForm);
-    // });
+
     this.filteredPharmacies.controls = [];
     this.filteredPharmacies.controls.push({
       name: 'SpecialityPharmacy',
@@ -487,7 +482,5 @@ export class SubmitEnrollmentService {
     if (this.prescriptionInfoForm) this.prescriptionInfoForm.reset();
     if (this.clinicalInfoForm) this.clinicalInfoForm.reset();
     if (this.currentLineOfTherapyForm) this.currentLineOfTherapyForm.reset();
-
-    console.log('form', this.servicesForm);
   }
 }

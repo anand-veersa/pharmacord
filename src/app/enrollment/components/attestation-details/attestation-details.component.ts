@@ -31,7 +31,9 @@ export class AttestationDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.authService.user?.role?.RolePkId === 4) {
+    if (
+      this.authService.user?.role?.RolePkId === this.appConstants.OTHERS_ROLE
+    ) {
       this.showPatientSignature = false;
     }
     this.submitEnrolService.createAttestationForm(() => {

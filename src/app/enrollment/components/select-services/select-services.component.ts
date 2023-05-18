@@ -22,7 +22,6 @@ export class SelectServicesComponent implements OnChanges {
   constructor(public submitEnrolService: SubmitEnrollmentService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.submitEnrolService.servicesForm);
     if (this.submitEnrolService.filteredServices.controls.length > 0) return;
     this.submitEnrolService.createSelectServicesForm(
       this.submitEnrolService.enrollmentFormPayload.DrugGroup

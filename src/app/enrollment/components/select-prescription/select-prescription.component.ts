@@ -8,7 +8,6 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { isArray } from 'lodash';
 import { AppConstants } from 'src/app/constants/app.constants';
 import { SubmitEnrollmentService } from 'src/app/enrollment/pages/submit-enrollment/submit-enrollment.service';
 import { SharedService } from 'src/app/shared/services/shared.service';
@@ -343,7 +342,7 @@ export class SelectPrescriptionComponent implements OnInit {
 
   private fillCheckBoxes(persistedform: FormGroup, localForm: FormGroup): void {
     Object.entries(persistedform.value).forEach(([key, value]) => {
-      if (isArray(value) && value?.length && localForm.contains(key)) {
+      if (Array.isArray(value) && value?.length && localForm.contains(key)) {
         value.forEach(e => {
           this.onCheckChange({
             form: localForm,
