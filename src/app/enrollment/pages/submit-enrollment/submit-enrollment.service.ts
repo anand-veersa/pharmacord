@@ -380,7 +380,7 @@ export class SubmitEnrollmentService {
     return patientData;
   }
 
-  public createAttestationForm(): void {
+  public createAttestationForm(callback: () => void): void {
     this.http
       .get('/assets/json/attestation-form.json')
       .subscribe((data: any) => {
@@ -427,6 +427,7 @@ export class SubmitEnrollmentService {
         this.attestationForm = this.sharedService.buildForm(
           this.attestationDetails
         );
+        callback();
       });
   }
   public resetForms(drugChangeReset: boolean = false): void {
