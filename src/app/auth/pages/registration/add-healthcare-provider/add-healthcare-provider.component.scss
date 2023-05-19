@@ -63,12 +63,19 @@
     justify-content: end;
 
     .account-status {
+      display: flex;
       margin-right: 15rem;
       margin-bottom: 0;
       color: $color-primary;
 
       .Pending {
         color: $color-tertiary;
+      }
+
+      .info-icon {
+        margin-left: 0.25rem;
+        color: $color-secondary;
+        cursor: pointer;
       }
     }
   }

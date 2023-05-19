@@ -70,11 +70,7 @@
             <span class="error-or-required" *ngIf="isQtyRequired">*</span>
           </div>
           <div>
-            <input
-              type="number"
-              [value]="quantity"
-              [disabled]="isQtyDisabled"
-              [formControlName]="'qty'" />
+            <input appNumberOnly type="text" [formControlName]="'qty'" />
             <mat-error
               *ngIf="
                 form.get(field.name + '.qty')?.touched &&
@@ -95,12 +91,7 @@
             <span class="error-or-required" *ngIf="isRefillsRequired">*</span>
           </div>
           <div>
-            <input
-              type="number"
-              [required]="isQtyRequired"
-              [value]="refills"
-              [disabled]="isRefillsDisabled"
-              [formControlName]="'refills'" />
+            <input appNumberOnly type="text" [formControlName]="'refills'" />
             <mat-error
               *ngIf="
                 form.get(field.name + '.refills')?.touched &&
@@ -128,8 +119,8 @@
           class="doa-value">
           Take
           <input
-            type="number"
-            [required]="isRefillsRequired"
+            appNumberOnly
+            type="text"
             class="doa-input"
             [formControlName]="'doa'" />
           capsules by mouth, with or without food at the same time each day
@@ -156,7 +147,11 @@
         <div
           *ngIf="[appConstants.MEDICINES.MEDICINE_1].includes(medicineName)"
           class="text-area">
-          {{ jemperliDoa }}
+          <ul>
+            <li *ngFor="let dir of jemperliDoa" class="li-style">
+              {{ dir }}
+            </li>
+          </ul>
         </div>
       </div>
     </div>

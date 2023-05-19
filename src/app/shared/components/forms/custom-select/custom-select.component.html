@@ -6,7 +6,7 @@
       (selectionChange)="selectionChanged($event)"
       [formControlName]="field.name"
       [disabled]="field.disabled ?? false">
-      <mat-option disabled value="">{{
+      <mat-option value="" disabled>{{
         field.placeholder ? field.placeholder : 'Select'
       }}</mat-option>
       <mat-option *ngFor="let option of field.options" [value]="option.value">

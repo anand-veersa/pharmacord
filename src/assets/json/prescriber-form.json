@@ -141,12 +141,13 @@
         "placeholder": "Enter your office contact phone #",
         "type": "text",
         "subType": "phone",
+        "class": "office-contact-phone-position",
         "validators": { "min": 14, "max": 14 }
       },
       {
         "name": "officeContactExt",
         "value": "",
-        "display": true,
+        "display": false,
         "label": "Office Contact Ext",
         "placeholder": "Ext(if applicable)",
         "type": "text",
@@ -169,7 +170,9 @@
         "label": "Office Contact Email",
         "placeholder": "Enter your office contact email",
         "type": "email",
-        "validators": { "pattern": "^\\S+@\\S+\\.\\S+$" }
+        "validators": {
+          "pattern": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,12}$"
+        }
       }
     ]
   },
@@ -185,7 +188,7 @@
         "validators": { "required": true },
         "options": [
           {
-            "label": "Patient’s Address",
+            "label": "Patient's Address",
             "value": "patientAddress"
           },
           {
@@ -270,7 +273,7 @@
         "options": [
           {
             "label": "Physician’s office",
-            "value": "Physician’s Office"
+            "value": "Practice Office"
           },
           {
             "label": "Hospital outpatient",
@@ -278,7 +281,7 @@
           },
           {
             "label": "Another site of care",
-            "value": "Another site of care"
+            "value": "Other"
           }
         ]
       }

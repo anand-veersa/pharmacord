@@ -7,6 +7,7 @@ import { SharedService } from 'src/app/shared/services/shared.service';
 import { AuthService } from '../../auth.service';
 import { RegistrationScreenNextData } from '../../../models/registration-form-model';
 import { Observable } from 'rxjs';
+import { AppConstants } from 'src/app/constants/app.constants';
 
 @Component({
   selector: 'app-registration',
@@ -57,7 +58,8 @@ export class RegistrationComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private sharedService: SharedService,
-    private authService: AuthService
+    private authService: AuthService,
+    private appConstants: AppConstants
   ) {}
 
   ngOnInit() {
@@ -306,7 +308,7 @@ export class RegistrationComponent implements OnInit {
       PrescriberId: this.prescriberID,
       IsNewUser: true,
       Role: {
-        RolePkId: 3, // 3 for prescriber 5 for Others
+        RolePkId: this.appConstants.PROVIDER_ROLE,
       },
       UserContactDetails: this.UserContactDetails,
     };
@@ -345,7 +347,7 @@ export class RegistrationComponent implements OnInit {
         this.othersCreateUsernameForm.controls['confirmNewPassword'].value,
       IsNewUser: true,
       Role: {
-        RolePkId: 5, // 5 for Others
+        RolePkId: this.appConstants.OTHERS_ROLE, // 4 for Others
       },
       UserContactDetails: this.UserContactDetails,
     };

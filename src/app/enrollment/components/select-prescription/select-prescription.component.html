@@ -819,9 +819,7 @@
         "
         [form]="prescriptionInfoForm"
         [field]="{
-          name: 'zejStdPres',
-          qty: undefined,
-          refills: undefined
+          name: 'zejStdPres'
         }"></app-custom-prescription>
       <div
         *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)"
@@ -861,9 +859,7 @@
         "
         [form]="prescriptionInfoForm"
         [field]="{
-          name: 'zejQSPPres',
-          qty: 15,
-          refills: 14
+          name: 'zejQSPPres'
         }"></app-custom-prescription>
       <div
         *ngIf="[appConstants.MEDICINES.MEDICINE_2].includes(medicine)"
@@ -906,9 +902,7 @@
         "
         [form]="prescriptionInfoForm"
         [field]="{
-          name: 'zejBridgePres',
-          qty: 15,
-          refills: 14
+          name: 'zejBridgePres'
         }"></app-custom-prescription>
       <div
         *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)"
@@ -947,9 +941,7 @@
         "
         [form]="prescriptionInfoForm"
         [field]="{
-          name: 'ojjaaraStdPres',
-          qty: undefined,
-          refills: undefined
+          name: 'ojjaaraStdPres'
         }"></app-custom-prescription>
       <div
         *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)"
@@ -991,9 +983,7 @@
         "
         [form]="prescriptionInfoForm"
         [field]="{
-          name: 'ojjaaraQSPPres',
-          qty: 15,
-          refills: 14
+          name: 'ojjaaraQSPPres'
         }"></app-custom-prescription>
       <div
         *ngIf="[appConstants.MEDICINES.MEDICINE_3].includes(medicine)"
@@ -1036,9 +1026,7 @@
         "
         [form]="prescriptionInfoForm"
         [field]="{
-          name: 'ojjaaraBridgePres',
-          qty: 15,
-          refills: 14
+          name: 'ojjaaraBridgePres'
         }"></app-custom-prescription>
       <div
         *ngIf="[appConstants.MEDICINES.MEDICINE_1].includes(medicine)"
@@ -1076,9 +1064,7 @@
         "
         [form]="prescriptionInfoForm"
         [field]="{
-          name: 'jemperliIVPres',
-          qty: 15,
-          refills: 14
+          name: 'jemperliIVPres'
         }"></app-custom-prescription>
       <div
         *ngIf="
@@ -1124,11 +1110,6 @@
   <app-custom-button
     btnClass="small tertiary"
     btnText="Next &#62;"
-    [isDisabled]="
-      false &&
-      prescriptionInfoForm.invalid &&
-      clinicalInfoForm.invalid &&
-      currentLineOfTherapyForm.invalid
-    "
+    [isDisabled]="isNextDisabled()"
     (action)="onAction('next')"></app-custom-button>
 </div>

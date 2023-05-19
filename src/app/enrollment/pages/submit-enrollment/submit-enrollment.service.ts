@@ -98,7 +98,7 @@ export class SubmitEnrollmentService {
       name: 'Prescriber',
       value: '',
       label: '',
-      placeholder: '',
+      placeholder: '-- Select one --',
       type: 'select',
       validators: { required: true },
       options: options,
@@ -175,12 +175,7 @@ export class SubmitEnrollmentService {
         for: 'Ojjaara',
       },
     ];
-    // this.http.get("/assets/json/services-form.json").subscribe((data:any) => {
-    //   this.filteredServices = data;
-    //   this.filteredServices.controls= this.filteredServices.controls.filter((control:JsonFormControls) =>  control.for?.includes(selectedMedicine));
-    //   this.servicesForm = this.sharedService.buildForm(this.filteredServices);
-    //   // console.log("form changesd", this.servicesForm);
-    // });
+
     this.filteredPharmacies.controls = [];
     this.filteredPharmacies.controls.push({
       name: 'SpecialityPharmacy',
@@ -251,6 +246,11 @@ export class SubmitEnrollmentService {
               control.name === 'altContactLastName' ||
               control.name === 'altContactPhone' ||
               control.name === 'altContactRelation')
+          )
+            return;
+          if (
+            control.name === 'bestContactTime' &&
+            this.enrollmentFormPayload.DrugGroup !== 'Jemperli'
           )
             return;
           return control;
@@ -375,7 +375,7 @@ export class SubmitEnrollmentService {
     return patientData;
   }
 
-  public createAttestationForm(): void {
+  public createAttestationForm(callback: () => void): void {
     this.http
       .get('/assets/json/attestation-form.json')
       .subscribe((data: any) => {
@@ -384,13 +384,32 @@ export class SubmitEnrollmentService {
           ?.value.findIndex(
             (el: any) => el.Name === 'PatientAssistanceProgram'
           );
+        const userRolePkId = this.authService.user?.role?.RolePkId;
+        const arr = [
+          'textingConsent',
+          'patientAssistanceProgram',
+          'patientSupportProgram',
+          'hippaAuthorization',
+          'patientSignatureOptions',
+          'patientRepresentativeName',
+          'relationshipToPatient',
+          'patientEmail',
+          'representativeEmail',
+        ];
+
         data.controls.forEach((item: any) => {
+          if (userRolePkId === 4) {
+            if (item.name === 'prescriberSignatureOptions') {
+              item.options.splice(0, 1);
+              item.value = 'Download to print and sign';
+            }
+            if (arr.includes(item.name)) item.display = false;
+          }
           if (item.type === 'select' || item.type === 'checkbox') {
             if (item.name === 'patientAssistanceProgram') {
-              if (isPap > -1) item.display = true;
+              if (isPap) item.display = true;
               else item.display = false;
             }
-
             item.options = item.options.filter(
               (option: JsonFormControlOptions) =>
                 !option.for ||
@@ -403,6 +422,7 @@ export class SubmitEnrollmentService {
         this.attestationForm = this.sharedService.buildForm(
           this.attestationDetails
         );
+        callback();
       });
   }
   public resetForms(drugChangeReset: boolean = false): void {
@@ -414,20 +434,53 @@ export class SubmitEnrollmentService {
       this.filteredServices = { controls: [] };
       this.servicesForm.reset();
     }
-    if (this.specialityPharmacyForm) this.specialityPharmacyForm.reset();
-    if (this.patientDetailForm) this.patientDetailForm.reset();
-    if (this.patientRepDetailForm) this.patientRepDetailForm.reset();
-    if (this.patientPapDetailForm) this.patientPapDetailForm.reset();
-    if (this.prescriberDetailForm) this.prescriberDetailForm.reset();
-    if (this.shippingDetailForm) this.shippingDetailForm.reset();
-    if (this.firstInsuranceForm) this.firstInsuranceForm.reset();
-    if (this.secondInsuranceForm) this.secondInsuranceForm.reset();
-    console.log('form', this.servicesForm);
-  }
-
-  private clearFormArray(form: any, control: string) {
-    while (form.controls[control].length !== 0) {
-      form.controls[control].removeAt(0);
+    if (this.specialityPharmacyForm) {
+      this.filteredPharmacies = { controls: [] };
+      this.specialityPharmacyForm.reset();
     }
+    if (this.patientDetailForm) {
+      this.patientDetails = { controls: [] };
+      this.patientDetailForm.reset();
+    }
+
+    if (this.patientRepDetailForm) {
+      this.patientRepDetails = { controls: [] };
+      this.patientRepDetailForm.reset();
+    }
+    if (this.patientPapDetailForm) {
+      this.patientPapDetails = { controls: [] };
+      this.patientPapDetailForm.reset();
+    }
+    if (this.prescriberDetailForm) {
+      this.prescriberDetails = { controls: [] };
+      this.prescriberDetailForm.reset();
+    }
+    if (this.shippingDetailForm) {
+      this.shippingDetails = { controls: [] };
+      this.shippingDetailForm.reset();
+    }
+    if (this.firstInsuranceForm) {
+      this.firstInsuranceDetails = { controls: [] };
+      this.firstInsuranceForm.reset();
+    }
+    if (this.secondInsuranceForm) {
+      this.secondInsuranceDetails = { controls: [] };
+      this.secondInsuranceForm.reset();
+    }
+    if (this.priorAuthForm) {
+      this.priorAuthDetails = { controls: [] };
+      this.priorAuthForm.reset();
+    }
+    if (this.appealForm) {
+      this.appealDetails = { controls: [] };
+      this.appealForm.reset();
+    }
+    if (this.attestationForm) {
+      this.attestationDetails = { controls: [] };
+      this.attestationForm.reset();
+    }
+    if (this.prescriptionInfoForm) this.prescriptionInfoForm.reset();
+    if (this.clinicalInfoForm) this.clinicalInfoForm.reset();
+    if (this.currentLineOfTherapyForm) this.currentLineOfTherapyForm.reset();
   }
 }

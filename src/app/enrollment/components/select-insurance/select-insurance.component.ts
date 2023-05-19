@@ -20,11 +20,12 @@ export class SelectInsuranceComponent implements OnInit {
     this.submitEnrolService.createInsuranceForm();
   }
 
-  public showPaStatus1(res: string): void {
+  public showPaStatus1(res: any): void {
+    const value = res.value;
     this.submitEnrolService.priorAuthDetails.controls.forEach(
       (control: JsonFormControls) => {
         if (control.name === 'paStatus1') {
-          if (res === 'Yes') {
+          if (value === 'Yes') {
             control.display = true;
           } else {
             control.display = false;
@@ -35,10 +36,11 @@ export class SelectInsuranceComponent implements OnInit {
   }
 
   public showPaStatus2(res: any): void {
+    const value = res.value;
     this.submitEnrolService.appealDetails.controls.forEach(
       (control: JsonFormControls) => {
         if (control.name === 'paStatus2') {
-          if (res === 'Yes') {
+          if (value === 'Yes') {
             control.display = true;
           } else {
             control.display = false;
@@ -53,10 +55,14 @@ export class SelectInsuranceComponent implements OnInit {
       actionType,
       formName: 'select-insurance',
       form: {
-        ...this.submitEnrolService.firstInsuranceForm.value,
-        ...this.submitEnrolService.secondInsuranceForm.value,
-        ...this.submitEnrolService.priorAuthForm.value,
-        ...this.submitEnrolService.appealForm.value,
+        firstInsuranceForm: {
+          ...this.submitEnrolService.firstInsuranceForm.value,
+        },
+        secondInsuranceForm: {
+          ...this.submitEnrolService.secondInsuranceForm.value,
+        },
+        priorAuthForm: { ...this.submitEnrolService.priorAuthForm.value },
+        appealForm: { ...this.submitEnrolService.appealForm.value },
       },
       nextScreen:
         actionType === 'back' ? 'prescriber-details' : 'select-prescription',
@@ -83,5 +89,33 @@ export class SelectInsuranceComponent implements OnInit {
         .get('secondInsuranceFiles')
         ?.setValue(currentValue);
     }
+  }
+
+  public isNextDisabled(): boolean {
+    let isFormValid = true;
+
+    if (this.firstInsurance) {
+      isFormValid =
+        isFormValid && this.submitEnrolService.firstInsuranceForm.valid;
+    }
+    if (this.secondInsurance) {
+      isFormValid =
+        isFormValid && this.submitEnrolService.secondInsuranceForm.valid;
+    }
+    if (this.firstInsurance || this.secondInsurance) {
+      if (
+        this.submitEnrolService.priorAuthForm.get('priorAuth1')?.value === 'Yes'
+      ) {
+        isFormValid =
+          isFormValid && this.submitEnrolService.priorAuthForm.valid;
+      }
+      if (
+        this.submitEnrolService.appealForm.get('priorAuth2')?.value === 'Yes'
+      ) {
+        isFormValid = isFormValid && this.submitEnrolService.appealForm.valid;
+      }
+    }
+
+    return !isFormValid;
   }
 }

@@ -40,8 +40,6 @@ export class SelectPrescriberComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.submitEnrolService.selectedFacility);
-
     if (
       this.authService.user.role.RolePkId === this.appConstants.PROVIDER_ROLE
     ) {
@@ -114,7 +112,9 @@ export class SelectPrescriberComponent implements OnInit, OnDestroy {
       const facility: PrescriberFacility = {
         FacilityId: item.Id,
         FacilityName: item.OfficeName || item.PracticeGroup,
-        Address: `${item.Address.Line1} ${item.Address.Line2}, ${item.Address.City}, ${item.Address.State}, ${item.Address.Zipcode}`,
+        Address: `${item.Address.Line1} ${item.Address.Line2 || ''}, ${
+          item.Address.City
+        }, ${item.Address.State}, ${item.Address.Zipcode}`,
         Phone: item.Phone,
         Fax: item.Fax,
         Email: item.Email,

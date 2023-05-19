@@ -1,9 +1,41 @@
+@import '../../../../assets/styles/abstracts/mixins';
+@import '../../../../assets/styles/abstracts/variables';
+
 .sec-title span {
   flex-basis: 49%;
 }
+
 .action-panel {
   display: flex;
   width: 100%;
   justify-content: space-between;
   margin-top: 3rem;
+}
+
+:host ::ng-deep {
+  .office-contact-phone-position {
+    display: flex;
+    align-items: center;
+    justify-content: unset;
+    margin-top: 0.5rem;
+    app-custom-form {
+      width: 100%;
+    }
+    label {
+      color: $color-grey-dark-4;
+      font-weight: 500;
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+      flex-basis: 40%;
+    }
+    app-custom-input:first-of-type {
+      flex-basis: 33%;
+      max-width: 33%;
+    }
+    app-custom-input:nth-of-type(2) {
+      margin-left: 1rem;
+      flex-basis: 25%;
+      max-width: 25%;
+    }
+  }
 }

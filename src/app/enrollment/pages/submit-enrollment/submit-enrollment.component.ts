@@ -56,7 +56,6 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     form,
     nextScreen,
   }: EnrollmentScreenNextData): void {
-    // debugger
     this.stepperCount =
       actionType === 'next' ? this.stepperCount + 1 : this.stepperCount - 1;
     // TODO: optimize this
@@ -86,17 +85,20 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         form.pharmacy.SpecialityPharmacy;
     }
     if (formName === 'select-patient') {
-      console.log(form);
       this.setPatientDetails(form);
     }
     if (formName === 'prescriber-details') {
       this.setPrescriberDetails(form);
-      // console.log(form);
+    }
+    if (formName === 'select-insurance') {
+      this.setInsuranceDetails(form);
+    }
+    if (formName === 'select-prescription') {
+      this.setPrescriptionDetails(form);
     }
     if (formName === 'attestation-details') {
-      console.log(form);
+      this.setAttestationDetails(form);
     }
-    console.log(this.submitEnrolService.enrollmentFormPayload);
   }
 
   // private getComponentByScreen(): void {
@@ -144,12 +146,25 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
     this.exitSubject.next(action);
   }
 
+  private convertDate(str: string) {
+    const date = new Date(str),
+      mnth = ('0' + (date.getMonth() + 1)).slice(-2),
+      day = ('0' + date.getDate()).slice(-2);
+    return mnth + day + date.getFullYear();
+  }
+
   private setPatientDetails(patient: any): void {
     const patientPhone = [];
     if (patient.homePhone)
-      patientPhone.push({ Type: 'Home', Number: patient.homePhone });
+      patientPhone.push({
+        Type: 'Home',
+        Number: patient.homePhone.replace(/\D/g, ''),
+      });
     if (patient.cellPhone)
-      patientPhone.push({ Type: 'Mobile', Number: patient.cellPhone });
+      patientPhone.push({
+        Type: 'Mobile',
+        Number: patient.cellPhone.replace(/\D/g, ''),
+      });
     const caregiverName = patient.repCaregiverName
       ? patient.repCaregiverName.split(' ')
       : [];
@@ -190,10 +205,17 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         FirstName: caregiverName.length ? caregiverName[0] : '',
         LastName: caregiverName.length > 1 ? caregiverName.at(-1) : '',
         RelationshipToPatient: patient.repCaregiverRelation,
-        Phone: patient.repCaregiverPhone,
+        Phone: patient.repCaregiverPhone.length
+          ? patient.repCaregiverPhone.replace(/\D/g, '')
+          : null,
       },
       BestContactTime: patient.bestContactTime,
     };
+
+    if (this.submitEnrolService.enrollmentFormPayload.DrugGroup != 'Jemperli') {
+      delete this.submitEnrolService.enrollmentFormPayload.Patient
+        .BestContactTime;
+    }
   }
 
   private setPrescriberDetails(prescriber: any): void {
@@ -201,11 +223,15 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
       FirstName: this.submitEnrolService.selectedPrescriber.FirstName,
       LastName: this.submitEnrolService.selectedPrescriber.LastName,
       NPI: this.submitEnrolService.selectedPrescriber.NPI,
-      TaxID: prescriber.taxId,
+      TaxID: prescriber.prescriberDetailForm.taxId
+        ? prescriber.prescriberDetailForm.taxId.replace(/\D/g, '')
+        : null,
       Facility: {
         Id: this.submitEnrolService.selectedFacilityId,
-        NPI: prescriber.facilityNpi,
-        TaxId: prescriber.facilitytaxId,
+        NPI: prescriber.prescriberDetailForm.facilityNpi,
+        TaxId: prescriber.prescriberDetailForm.facilitytaxId
+          ? prescriber.prescriberDetailForm.facilitytaxId.replace(/\D/g, '')
+          : null,
         Name:
           this.submitEnrolService.selectedFacility[0].OfficeName ||
           this.submitEnrolService.selectedFacility[0].PracticeGroup,
@@ -214,32 +240,337 @@ export class SubmitEnrollmentComponent implements OnInit, OnDestroy {
         City: this.submitEnrolService.selectedFacility[0].Address.City,
         State: this.submitEnrolService.selectedFacility[0].Address.State,
         Zip: this.submitEnrolService.selectedFacility[0].Address.Zipcode,
-        OfficeContactName: prescriber.officeContactName,
+        OfficeContactName: prescriber.prescriberDetailForm.officeContactName,
       },
       Phones: [
         {
-          Number: prescriber.officeContactPhone,
-          Ext: prescriber.officeContactExt,
+          Number: this.submitEnrolService.selectedFacility[0].Phone,
+          Ext: this.submitEnrolService.selectedFacility[0].Extension,
         },
       ],
-      Fax: prescriber.fax,
-      Email: prescriber.officeContactEmail,
+      Fax: prescriber.prescriberDetailForm.fax.length
+        ? prescriber.prescriberDetailForm.fax.replace(/\D/g, '')
+        : null,
+      Email: prescriber.prescriberDetailForm.officeContactEmail.length
+        ? prescriber.prescriberDetailForm.officeContactEmail
+        : null,
       OtherFacilities: [
         {
-          Name: prescriber.shippingFacilityName,
-          OfficeContactName: prescriber.recipientName,
-          Phone: prescriber.phone,
-          Address1: prescriber.street,
+          Name: prescriber.shippingDetailForm.shippingFacilityName,
+          OfficeContactName: prescriber.shippingDetailForm.recipientName,
+          Phone: prescriber.shippingDetailForm.phone.length
+            ? prescriber.shippingDetailForm.phone.replace(/\D/g, '')
+            : null,
+          Address1: prescriber.shippingDetailForm.street,
           Address2: null,
-          City: prescriber.city,
-          State: prescriber.state,
-          Zip: prescriber.zipcode,
-          FacilityType: prescriber.siteOfAdministration,
+          City: prescriber.shippingDetailForm.city,
+          State: prescriber.shippingDetailForm.state,
+          Zip: prescriber.shippingDetailForm.zipcode,
+          FacilityType: prescriber.shippingDetailForm.siteOfAdministration,
         },
       ],
     };
+
+    if (this.submitEnrolService.enrollmentFormPayload.DrugGroup != 'Jemperli') {
+      delete this.submitEnrolService.enrollmentFormPayload.Provider
+        .OtherFacilities;
+    }
+    // set ship to Address that is in Prescription Object
+    this.submitEnrolService.enrollmentFormPayload.PrescriptionInformation.ShipToAddress =
+      {
+        RecipientName: prescriber.shippingDetailForm.recipientName,
+        Phone: prescriber.shippingDetailForm.phone.length
+          ? prescriber.shippingDetailForm.phone.replace(/\D/g, '')
+          : null,
+        Address1: prescriber.shippingDetailForm.street,
+        Address2: null,
+        City: prescriber.shippingDetailForm.city,
+        State: prescriber.shippingDetailForm.state,
+        Zip: prescriber.shippingDetailForm.zipcode,
+      };
   }
 
+  private setInsuranceDetails(insurance: any): void {
+    const medicalPlansData: any[] = [];
+    const pharmacyPlansData: any[] = [];
+    let medicalPlanFirstData: any = {};
+    let medicalPlanSecondData: any = {};
+    if (insurance.firstInsuranceForm.coverageType.length) {
+      medicalPlanFirstData = {
+        Type: insurance.firstInsuranceForm.coverageType,
+        PolicyHolderEmployer: insurance.firstInsuranceForm.policyHolderName,
+        PlanName: insurance.firstInsuranceForm.insuranceName,
+        Phone: insurance.firstInsuranceForm.phone.length
+          ? insurance.firstInsuranceForm.phone.replace(/\D/g, '')
+          : null,
+        PlanRank: 'Primary',
+        PolicyID: insurance.firstInsuranceForm.policyId,
+        SubscriberName: insurance.firstInsuranceForm.policyHolderName,
+        SubscriberDOB: this.sharedService.getFormattedDate(
+          insurance.firstInsuranceForm.policyHolderDob,
+          true
+        ),
+        RelationshipToSubscriber:
+          insurance.firstInsuranceForm.relationToPatient,
+        GroupNo: insurance.firstInsuranceForm.group,
+        AttachDoc: insurance.firstInsuranceForm.firstInsuranceFiles,
+      };
+      medicalPlansData.push(medicalPlanFirstData);
+    }
+
+    if (insurance.secondInsuranceForm.coverageType.length) {
+      medicalPlanSecondData = {
+        Type: insurance.secondInsuranceForm.coverageType,
+        PolicyHolderEmployer: insurance.secondInsuranceForm.insurancePayer,
+        PlanName: insurance.secondInsuranceForm.insuranceName,
+        Phone: insurance.secondInsuranceForm.phone.length
+          ? insurance.secondInsuranceForm.phone.replace(/\D/g, '')
+          : null,
+        PlanRank: 'Secondary',
+        PolicyID: insurance.secondInsuranceForm.policyId,
+        SubscriberName: insurance.secondInsuranceForm.policyHolderName,
+        SubscriberDOB: this.sharedService.getFormattedDate(
+          insurance.secondInsuranceForm.policyHolderDob,
+          true
+        ),
+        RelationshipToSubscriber:
+          insurance.secondInsuranceForm.relationToPatient,
+        GroupNo: insurance.secondInsuranceForm.group,
+        AttachDoc: insurance.secondInsuranceForm.secondInsuranceFiles,
+      };
+      if (
+        this.submitEnrolService.enrollmentFormPayload.DrugGroup === 'Jemperli'
+      ) {
+        medicalPlansData.push(medicalPlanSecondData);
+      } else {
+        pharmacyPlansData.push(medicalPlanSecondData);
+      }
+    }
+
+    if (
+      this.submitEnrolService.enrollmentFormPayload.DrugGroup === 'Jemperli'
+    ) {
+      this.submitEnrolService.enrollmentFormPayload.Insurance = {
+        MedicalInsurance: insurance.firstInsuranceForm.coverageType.length
+          ? 'Y'
+          : 'N',
+        PharmacyInsurance: insurance.secondInsuranceForm.coverageType.length
+          ? 'Y'
+          : 'N',
+        MedicalPlans: medicalPlansData,
+        PharmacyPlans: pharmacyPlansData,
+      };
+    } else {
+      this.submitEnrolService.enrollmentFormPayload.Insurance = {
+        MedicalInsurance: insurance.firstInsuranceForm.coverageType.length
+          ? 'Y'
+          : 'N',
+        PharmacyInsurance: insurance.secondInsuranceForm.coverageType.length
+          ? 'Y'
+          : 'N',
+        MedicalPlans: medicalPlansData,
+        PharmacyPlans: pharmacyPlansData,
+      };
+    }
+
+    // priorAuth form
+    if (insurance.priorAuthForm.priorAuth1.length) {
+      this.submitEnrolService.enrollmentFormPayload.Patient.PAInitiated =
+        insurance.priorAuthForm.priorAuth1 === 'Yes' ? true : false;
+      if (insurance.priorAuthForm.paStatus1.length) {
+        this.submitEnrolService.enrollmentFormPayload.Patient.PAStatus =
+          insurance.priorAuthForm.paStatus1;
+      }
+    }
+
+    // appeal form
+    if (insurance.appealForm.priorAuth2.length) {
+      this.submitEnrolService.enrollmentFormPayload.Patient.PAAppealInitiated =
+        insurance.priorAuthForm.priorAuth2;
+      if (insurance.priorAuthForm.paStatus2.length) {
+        this.submitEnrolService.enrollmentFormPayload.Patient.PAAppealStatus =
+          insurance.priorAuthForm.paStatus2;
+      }
+    }
+  }
+
+  private setPrescriptionDetails(prescription: any): void {
+    // set clinical data
+    const measurementsData: any[] = [
+      {
+        Name: 'BRCA',
+        Result: prescription.currentLineOfTherapyForm.bRCATest,
+      },
+      {
+        Name: 'HRd',
+        Result: prescription.currentLineOfTherapyForm.hRDTest,
+      },
+    ];
+
+    this.submitEnrolService.enrollmentFormPayload.Clinical = {
+      TherapyStartDate: this.sharedService.getFormattedDate(
+        prescription.clinicalInfoForm.treatmentStartDate,
+        true
+      ),
+      Measurements: prescription.currentLineOfTherapyForm.bRCATest.length
+        ? measurementsData
+        : [],
+      LastTreatmentDate: null,
+    };
+
+    // set prescription data
+    let prescriptionData: any[] = [];
+
+    if (
+      this.submitEnrolService.enrollmentFormPayload.DrugGroup === 'Jemperli'
+    ) {
+      prescriptionData = [
+        {
+          Strength: prescription.prescriptionInfoForm.jemperliIVPres.strength,
+          DirectionForAdministration: [
+            [prescription.prescriptionInfoForm.jemperliIVPres.doa],
+          ],
+          Quantity: null,
+        },
+      ];
+    } else if (
+      this.submitEnrolService.enrollmentFormPayload.DrugGroup === 'Zejula'
+    ) {
+      //standard prescription
+      if (prescription.prescriptionInfoForm.zejStd.length) {
+        prescriptionData.push({
+          Strength: prescription.prescriptionInfoForm.zejStd.strength,
+          DirectionForAdministration: [
+            prescription.prescriptionInfoForm.zejStd.doa,
+          ],
+          Quantity: prescription.prescriptionInfoForm.zejStd.qty,
+          Medication: 'Standard Prescription',
+        });
+      }
+      //quick start
+      if (prescription.prescriptionInfoForm.zejQSP.length) {
+        prescriptionData.push({
+          Strength: prescription.prescriptionInfoForm.zejQSP.strength,
+          DirectionForAdministration: [
+            prescription.prescriptionInfoForm.zejQSP.doa,
+          ],
+          Quantity: prescription.prescriptionInfoForm.zejQSP.qty,
+          Medication: 'Quick Start',
+        });
+      }
+      //bridge program
+      if (prescription.prescriptionInfoForm.zejBridge.length) {
+        prescriptionData.push({
+          Strength: prescription.prescriptionInfoForm.zejBridge.strength,
+          DirectionForAdministration: [
+            prescription.prescriptionInfoForm.zejBridge.doa,
+          ],
+          Quantity: prescription.prescriptionInfoForm.zejBridge.qty,
+          Medication: 'Bridge Program',
+        });
+      }
+    } else if (
+      this.submitEnrolService.enrollmentFormPayload.DrugGroup === 'Ojjaara'
+    ) {
+      //standard
+      if (prescription.prescriptionInfoForm.ojjaaraStd.length) {
+        prescriptionData.push({
+          Strength: prescription.prescriptionInfoForm.ojjaaraStd.strength,
+          DirectionForAdministration: [
+            prescription.prescriptionInfoForm.ojjaaraStd.doa,
+          ],
+          Quantity: prescription.prescriptionInfoForm.ojjaaraStd.qty,
+          Medication: 'Standard Prescription',
+        });
+      }
+      //Quick start
+      if (prescription.prescriptionInfoForm.ojjaaraQSP.length) {
+        prescriptionData.push({
+          Strength: prescription.prescriptionInfoForm.ojjaaraQSP.strength,
+          DirectionForAdministration: [
+            prescription.prescriptionInfoForm.ojjaaraQSP.doa,
+          ],
+          Quantity: prescription.prescriptionInfoForm.ojjaaraQSP.qty,
+          Medication: 'Quick Start',
+        });
+      }
+      //Bridge program
+      if (prescription.prescriptionInfoForm.ojjaaraBridge.length) {
+        prescriptionData.push({
+          Strength: prescription.prescriptionInfoForm.ojjaaraBridge.strength,
+          DirectionForAdministration: [
+            prescription.prescriptionInfoForm.ojjaaraBridge.doa,
+          ],
+          Quantity: prescription.prescriptionInfoForm.ojjaaraBridge.qty,
+          Medication: 'Bridge Program',
+        });
+      }
+    }
+
+    //setting the data
+    this.submitEnrolService.enrollmentFormPayload.PrescriptionInformation = {
+      Prescriptions: prescriptionData,
+      ProviderSignatureMapping:
+        prescription.prescriptionInfoForm.prescriptionSignature,
+      ShipToAddress:
+        this.submitEnrolService.enrollmentFormPayload.PrescriptionInformation
+          .ShipToAddress,
+      ShipToType: {},
+    };
+  }
+
+  private setAttestationDetails(attestation: any): void {
+    // take a check for each property
+    let attestationPayload: any = {};
+    attestationPayload = {
+      ...attestationPayload,
+      IsPatientAttestationConsent: attestation.attestationConsent,
+      PrescriberDeclaration: attestation.prescriberDeclaration
+        ? 'True'
+        : 'False',
+    };
+
+    // check prescriber signature option
+    if (
+      attestation.prescriberSignatureOptions ===
+      'Prescriber will eSign the enrollment form'
+    ) {
+      attestationPayload = {
+        ...attestationPayload,
+        TextingOptIn: attestation.textingConsent,
+        PAPEnrollment: attestation.patientAssistanceProgram,
+        HIPPAAuthorization: attestation.hippaAuthorization,
+      };
+
+      if (
+        this.submitEnrolService.enrollmentFormPayload.DrugGroup !== 'Jemperli'
+      ) {
+        attestationPayload = {
+          ...attestationPayload,
+          PSPEnrollment: attestation.patientSupportProgram,
+        };
+      }
+
+      if (
+        attestation.patientSignatureOptions ===
+        'Patient will sign the enrollment form'
+      ) {
+        attestationPayload = {
+          ...attestationPayload,
+          PatientEmail: attestation.patientEmail,
+        };
+      } else {
+        attestationPayload = {
+          ...attestationPayload,
+          PatientRepresentativeName: attestation.patientRepresentativeName,
+          PatientRelationship: attestation.relationshipToPatient,
+          PatientOrRepresentativeEmail: attestation.representativeEmail,
+        };
+      }
+    }
+    this.submitEnrolService.enrollmentFormPayload.Attestation =
+      attestationPayload;
+  }
   ngOnDestroy(): void {
     this.enrolService.submitFormInitiated.next(false);
     this.submitEnrolService.selectedPrescriberId.next(0);

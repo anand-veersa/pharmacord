@@ -145,7 +145,10 @@
         "label": "Email Address",
         "placeholder": "Enter your email address",
         "type": "email",
-        "validators": { "required": true, "pattern": "^\\S+@\\S+\\.\\S+$" }
+        "validators": {
+          "required": true,
+          "pattern": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,12}$"
+        }
       },
       {
         "name": "bestContactTime",
@@ -212,10 +215,35 @@
         "value": "",
         "display": true,
         "label": "Patient Representative/ Caregiver Relationship to Patient",
-        "placeholder": "Select your Patient Representative/Caregiver Relationship to ...",
-        "type": "type",
+        "placeholder": "Select your Patient Representative/Caregiver Relationship to Patient",
+        "type": "select",
         "validators": {},
-        "class": "tm-2"
+        "options": [
+          {
+            "label": "Spouse",
+            "value": "Spouse"
+          },
+          {
+            "label": "Father",
+            "value": "Father"
+          },
+          {
+            "label": "Mother",
+            "value": "Mother"
+          },
+          {
+            "label": "Dependent",
+            "value": "Dependent"
+          },
+          {
+            "label": "Self",
+            "value": "Self"
+          },
+          {
+            "label": "Other",
+            "value": "Other"
+          }
+        ]
       },
       {
         "name": "repCaregiverPhone",

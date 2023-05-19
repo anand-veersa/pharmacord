@@ -3,21 +3,29 @@
     Prescriber/Facility Information
   </div>
   <div *ngIf="submitEnrolService.shippingDetailForm" class="panel-cont">
-    <div class="panel-left">
-      <div>
-        Please provide the collaborating prescriber information (if applicable).
-      </div>
-      <div class="error-or-required">* Required field</div>
-      <div class="panel-left-content">
-        <div
-          *ngFor="let control of submitEnrolService.prescriberDetails.controls"
-          [ngClass]="control.class ? control.class : 'tm-1'">
-          <app-custom-form
-            *ngIf="control.display"
-            [field]="control"
+    <div class="panel">
+      <div
+        *ngFor="let control of submitEnrolService.prescriberDetails.controls"
+        [ngClass]="control.class ? control.class : 'tm-1'">
+        <app-custom-form
+          *ngIf="control.display"
+          [field]="control"
+          [form]="submitEnrolService.prescriberDetailForm"
+          formType="enrollment-form">
+          <app-custom-input
+            *ngIf="control.name === 'officeContactPhone'"
             [form]="submitEnrolService.prescriberDetailForm"
-            formType="enrollment-form"></app-custom-form>
-        </div>
+            [field]="{
+              name: 'officeContactExt',
+              value: '',
+              display: true,
+              label: '',
+              placeholder: 'Ext(if applicable)',
+              type: 'text',
+              class: 'office-contact-ext-position',
+              validators: {}
+            }"></app-custom-input>
+        </app-custom-form>
       </div>
     </div>
     <div class="panel-right">
@@ -50,7 +58,12 @@
               *ngIf="control.display"
               [field]="control"
               [form]="submitEnrolService.shippingDetailForm"
-              formType="enrollment-form"></app-custom-form>
+              formType="enrollment-form"
+              (action)="
+                control.name === 'shippingAddressType' &&
+                  onShippingTypeChange($event)
+              ">
+            </app-custom-form>
           </div>
         </ng-container>
       </div>
