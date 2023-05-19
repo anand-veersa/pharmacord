@@ -24,6 +24,8 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
   public validPortalAccountID: boolean = false;
   public screenWidth: number;
   public hideEnrollmentBtns: boolean = false;
+  public hideSubmitEnrollBtn: boolean = false;
+  public hideActionPanel: boolean = false;
   private routeSubs: Subscription;
   private dialogRef: MatDialogRef<CustomUploadDocumentsComponent>;
   private patientId: string = '';
@@ -63,11 +65,20 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
           this.enrolService.selectedMedicine.next(
             this.appConstants.MEDICINES.ALL
           );
+          this.hideSubmitEnrollBtn = false;
           this.hideEnrollmentBtns = false;
+          this.hideActionPanel = false;
+          if (event.url.includes('/tools-and-forms')) {
+            this.hideSubmitEnrollBtn = true;
+          }
+        } else if (event.url.includes('/account-settings')) {
+          this.hideActionPanel = true;
         } else {
           this.enableAllMeds = false;
           this.hideEnrollmentBtns = false;
           this.changeMedicine(this.appConstants.MEDICINES.MEDICINE_1);
+          this.hideActionPanel = false;
+          this.hideSubmitEnrollBtn = false;
         }
       }
     });

@@ -219,7 +219,7 @@
       <app-custom-button
         mat-button
         mat-dialog-close
-        btnText="Close"
+        btnText="Done"
         btnClass="secondary small text-x-bold text-xmed"
         [isDisabled]="disableDialougeBtn"
         (click)="closeDialog()">
@@ -234,6 +234,8 @@
       *ngIf="requirementFor === 'othersRegistration'"
       btnClass="tertiary x-medium text-x-bold text-xmed"
       btnText="Save and Register"
+      btnIcon="saveAndRegisterIcon.svg"
+      iconPlace="prefix"
       [isDisabled]="!this.prescribersWithSelectedFacility.length"
       (click)="registrationCall()">
     </app-custom-button>
