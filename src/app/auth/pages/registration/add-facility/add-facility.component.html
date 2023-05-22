@@ -17,11 +17,11 @@
           formType="add-facility"></app-custom-form>
       </div>
 
-      <div class="form-buttons">
+      <div class="form-buttons tp-2">
         <app-custom-button
           [isDisabled]="addFacilityForm && addFacilityForm.invalid"
           btnText="Add"
-          btnClass="secondary text-small text-x-bold x-large"
+          btnClass="secondary text-small text-x-bold xx-small"
           (click)="addFacility()"
           *ngIf="!editClicked">
         </app-custom-button>
@@ -100,6 +100,8 @@
       *ngIf="requirementFor === 'prescriberRegistration'"
       btnText="Save and Register"
       btnClass="tertiary x-medium text-x-bold text-xmed"
+      btnIcon="saveAndRegisterIcon.svg"
+      iconPlace="prefix"
       [isDisabled]="facilities.length === 0"
       (click)="sendFacilityData()">
     </app-custom-button>
