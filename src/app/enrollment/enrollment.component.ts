@@ -65,6 +65,7 @@ export class EnrollmentComponent implements OnInit, OnDestroy {
           this.enrolService.selectedMedicine.next(
             this.appConstants.MEDICINES.ALL
           );
+          this.changeMedicine(this.appConstants.MEDICINES.ALL);
           this.hideSubmitEnrollBtn = false;
           this.hideEnrollmentBtns = false;
           this.hideActionPanel = false;

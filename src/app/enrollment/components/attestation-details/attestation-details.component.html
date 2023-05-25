@@ -48,7 +48,11 @@
     (action)="onAction('back')"></app-custom-button>
   <app-custom-button
     btnClass="small tertiary"
-    btnText="Next &#62;"
+    [btnText]="
+      prescriberSignatureOptions === 'Download to print and sign'
+        ? 'Submit'
+        : 'Next &#62;'
+    "
     [isDisabled]="
       submitEnrolService.attestationForm &&
       submitEnrolService.attestationForm.invalid

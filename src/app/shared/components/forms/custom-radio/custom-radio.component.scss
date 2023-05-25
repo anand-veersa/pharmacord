@@ -28,6 +28,17 @@
   }
 }
 
+::ng-deep .service-form-radio {
+  .mat-mdc-radio-button.mat-primary {
+    --mdc-radio-selected-icon-color: #{$color-secondary};
+    --mdc-radio-selected-focus-icon-color: #{$color-secondary};
+    --mdc-radio-selected-hover-icon-color: #{$color-secondary};
+    --mdc-radio-selected-icon-color: #{$color-secondary};
+    --mdc-radio-selected-pressed-icon-color: #{$color-secondary};
+    --mat-mdc-radio-checked-ripple-color: #{$color-secondary};
+  }
+}
+
 ::ng-deep .generic-form-radio {
   display: flex;
   flex-wrap: wrap;

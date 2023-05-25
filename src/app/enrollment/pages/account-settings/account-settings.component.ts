@@ -54,6 +54,34 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
     this.cdr.detectChanges();
   }
 
+  //
+  public tabChange(): void {
+    // this.sharedService.isLoading.next(true);
+    this.providersWithAllFacilities = [];
+    this.providersWithSelectedFacilities = [];
+    this.hcpAllFacilities = [];
+    this.facilitiesWithoutProvider = [];
+
+    //for add healthcare
+    this.prescribersWithAllFacility = [];
+    this.prescribersWithSelectedFacility = [];
+    this.getAllFacilities();
+  }
+
+  resetAndRebuild(): void {
+    this.sharedService.isLoading.next(true);
+    this.enrolService.getAccountInfo(this.authService.user.username).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.sharedService.isLoading.next(false);
+      },
+      error: err => {
+        this.sharedService.isLoading.next(false);
+        this.sharedService.notify('error', err);
+      },
+    });
+  }
+
   // collect and update call for each facility coming
   public collectMasterFacilities(eventData: { facilities: any }): void {
     this.facilities = eventData.facilities;
@@ -115,6 +143,7 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
         next: (res: any) => {
           if (res.Status === 'SUCCESS') {
             console.log(res.Status);
+            this.resetAndRebuild();
           }
 
           this.sharedService.isLoading.next(false);
@@ -228,6 +257,8 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
           next: (res: any) => {
             if (res.Status === 'SUCCESS') {
               console.log(res.Status);
+              //call for accountInformation again
+              this.resetAndRebuild();
             }
           },
           error: err => {
@@ -292,6 +323,9 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
           next: (res: any) => {
             if (res.Status === 'SUCCESS') {
               console.log(res.Status);
+              this.hcpAllFacilities = [];
+              this.getAllFacilities();
+              this.resetAndRebuild();
             }
             this.sharedService.isLoading.next(false);
           },

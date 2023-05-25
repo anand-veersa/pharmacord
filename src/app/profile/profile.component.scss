@@ -51,5 +51,8 @@
     span.mdc-tab__text-label {
       color: $color-white !important;
     }
+    .mdc-tab-indicator__content--underline {
+      display: none;
+    }
   }
 }

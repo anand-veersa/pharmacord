@@ -340,6 +340,24 @@ export class SubmitEnrollmentService {
             !option.for ||
             option.for.includes(this.enrollmentFormPayload.DrugGroup)
         );
+      const index1 = data.primaryMedical.controls.findIndex(function (
+        obj: any
+      ) {
+        return obj.name === 'policyHolderDob';
+      });
+      const index2 = data.secondaryMedical.controls.findIndex(function (
+        obj: any
+      ) {
+        return obj.name === 'policyHolderDob';
+      });
+      const index3 = data.prescriptionInsurance.controls.findIndex(function (
+        obj: any
+      ) {
+        return obj.name === 'policyHolderDob';
+      });
+      data.primaryMedical.controls[index1].maxDate = new Date();
+      data.secondaryMedical.controls[index2].maxDate = new Date();
+      data.prescriptionInsurance.controls[index3].maxDate = new Date();
       this.firstInsuranceDetails = data.primaryMedical;
       if (this.enrollmentFormPayload.DrugGroup === 'Jemperli') {
         this.secondInsuranceDetails = data.secondaryMedical;

@@ -1,4 +1,7 @@
-<mat-tab-group animationDuration="100ms" #tabGroup>
+<mat-tab-group
+  animationDuration="100ms"
+  (selectedTabChange)="tabChange()"
+  #tabGroup>
   <mat-tab label="Facility">
     <div class="facility-container">
       <app-add-facility

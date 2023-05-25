@@ -174,8 +174,10 @@
           <th class="" mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
             <mat-checkbox
+              color="warn"
               (change)="getCheckbox(element)"
-              [checked]="element.isSelected"></mat-checkbox>
+              [checked]="element.isSelected">
+            </mat-checkbox>
           </td>
         </ng-container>
 
