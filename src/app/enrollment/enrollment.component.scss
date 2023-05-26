@@ -1,7 +1,7 @@
 @import '../../assets/styles/abstracts/variables';
 .enrollment {
   display: flex;
-  height: 100%;
+  min-height: 72rem;
   .sidenav {
     flex: 1 1 9%;
     @media print {

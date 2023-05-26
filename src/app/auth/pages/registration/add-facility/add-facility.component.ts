@@ -75,9 +75,9 @@ export class AddFacilityComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.hcpAllFacilities.forEach(facility => {
-      facility.Address = [facility.Address];
-    });
+    // this.hcpAllFacilities.forEach(facility => {
+    //   facility.Address = [facility.Address];
+    // });
     this.existingFacilities = [...this.hcpAllFacilities];
     if (this.requirementFor === 'accountSetting') {
       this.facilities = [...this.hcpAllFacilities];
@@ -123,11 +123,11 @@ export class AddFacilityComponent implements OnInit, OnChanges {
       ],
       PracticeGroup: this.addFacilityForm.value.practiceName,
       Email: this.addFacilityForm.value.facilityEmail,
-      Fax: this.addFacilityForm.value.facilityFax,
+      Fax: this.addFacilityForm.value.facilityFax.replace(/\D/g, ''),
       OfficeName: this.addFacilityForm.value.practiceName,
       Rank: 1,
       Id: null,
-      Phone: this.addFacilityForm.value.facilityPhone,
+      Phone: this.addFacilityForm.value.facilityPhone.replace(/\D/g, ''),
       PhoneType: 'Office',
       Extension: null,
       Contacts: [],
@@ -172,15 +172,18 @@ export class AddFacilityComponent implements OnInit, OnChanges {
   private setValuesToForm(facilityData: any): void {
     this.addFacilityForm.setValue({
       practiceName: facilityData.PracticeGroup,
-      facilityPhone: facilityData.Phone,
-      facilityFax: facilityData.Fax,
+      facilityPhone: facilityData.Phone.replace(/\D/g, ''),
+      facilityFax: facilityData.Fax.replace(/\D/g, ''),
       facilityEmail: facilityData.Email,
-      facilityAddress1: facilityData.Address.Line1,
+      facilityAddress1:
+        facilityData.Address.Line1 || facilityData.Address[0].Line1,
       facilityAddress2:
-        facilityData.Address.Line2 === '' ? null : facilityData.Address.Line2,
-      facilityCity: facilityData.Address.City,
-      facilityState: facilityData.Address.State,
-      facilityZip: facilityData.Address.Zipcode,
+        facilityData.Address.Line2 || facilityData.Address[0].Line2,
+      facilityCity: facilityData.Address.City || facilityData.Address[0].City,
+      facilityState:
+        facilityData.Address.State || facilityData.Address[0].State,
+      facilityZip:
+        facilityData.Address.Zipcode || facilityData.Address[0].Zipcode,
     });
   }
 
@@ -211,25 +214,37 @@ export class AddFacilityComponent implements OnInit, OnChanges {
     this.facilities[this.editClickedIndex].PracticeGroup =
       this.addFacilityForm.value.practiceName;
     this.facilities[this.editClickedIndex].phone =
-      this.addFacilityForm.value.facilityPhone;
+      this.addFacilityForm.value.facilityPhone.replace(/\D/g, '');
     this.facilities[this.editClickedIndex].Fax =
-      this.addFacilityForm.value.facilityFax;
+      this.addFacilityForm.value.facilityFax.replace(/\D/g, '');
     this.facilities[this.editClickedIndex].Email =
       this.addFacilityForm.value.facilityEmail;
-
-    this.facilities[this.editClickedIndex].Address.Line1 =
-      this.addFacilityForm.value.facilityAddress1;
-    this.facilities[this.editClickedIndex].Address.Line2 =
-      this.addFacilityForm.value.facilityAddress2;
-    this.facilities[this.editClickedIndex].Address.State =
-      this.addFacilityForm.value.facilityState;
-    this.facilities[this.editClickedIndex].Address.City =
-      this.addFacilityForm.value.facilityCity;
-    this.facilities[this.editClickedIndex].Address.Zipcode =
-      this.addFacilityForm.value.facilityZip;
-    this.dataSource = [...this.facilities];
-    this.table?.renderRows();
-
+    if (this.requirementFor === 'accountSetting') {
+      this.facilities[this.editClickedIndex].Address.Line1 =
+        this.addFacilityForm.value.facilityAddress1;
+      this.facilities[this.editClickedIndex].Address.Line2 =
+        this.addFacilityForm.value.facilityAddress2;
+      this.facilities[this.editClickedIndex].Address.State =
+        this.addFacilityForm.value.facilityState;
+      this.facilities[this.editClickedIndex].Address.City =
+        this.addFacilityForm.value.facilityCity;
+      this.facilities[this.editClickedIndex].Address.Zipcode =
+        this.addFacilityForm.value.facilityZip;
+    } else {
+      this.facilities[this.editClickedIndex].Address[0].Line1 =
+        this.addFacilityForm.value.facilityAddress1;
+      this.facilities[this.editClickedIndex].Address[0].Line2 =
+        this.addFacilityForm.value.facilityAddress2;
+      this.facilities[this.editClickedIndex].Address[0].State =
+        this.addFacilityForm.value.facilityState;
+      this.facilities[this.editClickedIndex].Address[0].City =
+        this.addFacilityForm.value.facilityCity;
+      this.facilities[this.editClickedIndex].Address[0].Zipcode =
+        this.addFacilityForm.value.facilityZip;
+    }
+    // this.dataSource = [];
+    // this.dataSource = [...this.facilities];
+    // this.table?.renderRows();
     if (this.requirementFor === 'accountSetting') {
       this.facilitiesToUpdate = [
         ...this.facilitiesToUpdate,

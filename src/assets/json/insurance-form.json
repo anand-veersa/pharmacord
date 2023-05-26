@@ -134,7 +134,8 @@
         "placeholder": "mm/dd/yyyy",
         "type": "date",
         "validators": {
-          "required": true
+          "required": true,
+          "maxDate": ""
         }
       },
       {
@@ -284,7 +285,8 @@
         "placeholder": "mm/dd/yyyy",
         "type": "date",
         "validators": {
-          "required": true
+          "required": true,
+          "maxDate": ""
         }
       },
       {
@@ -553,7 +555,8 @@
         "placeholder": "mm/dd/yyyy",
         "type": "date",
         "validators": {
-          "required": true
+          "required": true,
+          "maxDate": ""
         }
       },
       {

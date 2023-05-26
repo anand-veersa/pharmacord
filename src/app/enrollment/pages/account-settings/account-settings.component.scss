@@ -51,3 +51,7 @@
   gap: 3rem;
   margin-left: 5.7rem;
 }
+
+:host ::ng-deep .mdc-tab-indicator__content--underline {
+  display: none;
+}

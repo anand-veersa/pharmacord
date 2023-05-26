@@ -70,13 +70,13 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
       }
 
       input[type='checkbox']:checked ~ .toggle-button-switch {
-        background-color: #37bfcb;
+        background-color: #924a98;
         left: 23px;
       }
 
       input[type='checkbox']:checked ~ .toggle-button-text {
         background-color: #ffffff;
-        border: 1px solid #37bfcb;
+        border: 1px solid #924a98;
       }
     `,
   ],

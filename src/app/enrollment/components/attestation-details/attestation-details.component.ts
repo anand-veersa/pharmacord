@@ -17,6 +17,7 @@ export class AttestationDetailsComponent implements OnInit {
   public showConfirmationDialog: boolean = false;
   public dialogTitle: string = '';
   public dialogDescription: string = '';
+  public prescriberSignatureOptions: string = '';
   private rowClicked: {
     checkboxRef: MatCheckbox;
     isChecked: true;
@@ -164,14 +165,14 @@ export class AttestationDetailsComponent implements OnInit {
       'representativeEmail',
     ];
 
-    const prescriberSignatureOptions =
+    this.prescriberSignatureOptions =
       this.submitEnrolService.attestationForm?.get(
         'prescriberSignatureOptions'
       )?.value;
 
     this.submitEnrolService.attestationDetails.controls.forEach(field => {
       if (arr.includes(field.name)) {
-        if (prescriberSignatureOptions === 'Download to print and sign') {
+        if (this.prescriberSignatureOptions === 'Download to print and sign') {
           field.display = this.showPatientSignature = false;
           this.updateValidation(
             this.submitEnrolService.attestationForm,

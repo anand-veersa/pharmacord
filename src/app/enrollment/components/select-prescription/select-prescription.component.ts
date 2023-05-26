@@ -327,7 +327,7 @@ export class SelectPrescriptionComponent implements OnInit {
         prescriptionInfoForm: { ...this.prescriptionInfoForm.getRawValue() },
       },
       nextScreen:
-        actionType === 'back' ? 'select-medication' : 'attestation-details',
+        actionType === 'back' ? 'select-insurance' : 'attestation-details',
     });
   }
 

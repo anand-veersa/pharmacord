@@ -32,7 +32,8 @@
     <div class="medication-list tm-2" *ngIf="submitEnrolService.servicesForm">
       <app-custom-form
         [field]="submitEnrolService.filteredPharmacies.controls[0]"
-        [form]="submitEnrolService.specialityPharmacyForm"></app-custom-form>
+        [form]="submitEnrolService.specialityPharmacyForm"
+        formType="service-form"></app-custom-form>
     </div>
   </div>
 </div>
