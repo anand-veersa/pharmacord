@@ -21,4 +21,10 @@
       {{ field.extLink }}
     </p>
   </div>
+  <mat-error
+    *ngIf="isCustomError && field.label === 'Username'"
+    class="error-message">
+    {{ customErrorMsg }}
+    <ng-content></ng-content>
+  </mat-error>
 </div>

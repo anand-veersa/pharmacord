@@ -198,8 +198,14 @@ export class SharedService {
     const errorKeys = Object.keys(errors);
     if (errorKeys.includes('required')) {
       errorMessage = `${label} is required`;
+    } else if (errorKeys.includes('username')) {
+      errorMessage = 'Username already in use';
     } else if (errorKeys.includes('minlength')) {
-      errorMessage = `${label} must have ${errors.minlength.requiredLength} characters`;
+      errorMessage = `${label} must have ${
+        errors.minlength.requiredLength === 14
+          ? 10
+          : errors.minlength.requiredLength
+      } characters`;
     } else if (errorKeys.includes('maxlength')) {
       errorMessage = `${label} should not exceed  ${errors.maxLength.requiredLength} characters`;
     } else if (errorKeys.includes('passwordNotMatch')) {

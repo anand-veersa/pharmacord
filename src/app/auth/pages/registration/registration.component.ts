@@ -36,8 +36,8 @@ export class RegistrationComponent implements OnInit {
   public othersAddFacilityScreen: boolean = false; // add facility by others
   public addHealthcareProviderScreen: boolean = false; //add Provider scrren
   public thankYouScreen: boolean = false;
-  public invalidUsernameError: string = 'Invalid username';
-  public invalidUsername: boolean = true;
+  public invalidUsernameError: string = 'Username Already exist';
+  public invalidUsername: boolean = false;
   public addFacilityScreenTitle: string = 'Associated Practice Office(s)';
   public addFacilityScreenSubTitle: string =
     'Please add or update the Practice/Facility information associated with this new account.';
@@ -121,11 +121,12 @@ export class RegistrationComponent implements OnInit {
         LastName:
           this.confirmAccountInformationForm.controls['confirmAccountLastName']
             .value,
-        Phone:
-          this.confirmAccountInformationForm.controls['confirmAccountPhone']
-            .value,
-        Fax: this.confirmAccountInformationForm.controls['confirmAccountFax']
-          .value,
+        Phone: this.confirmAccountInformationForm.controls[
+          'confirmAccountPhone'
+        ].value.replace(/\D/g, ''),
+        Fax: this.confirmAccountInformationForm.controls[
+          'confirmAccountFax'
+        ].value.replace(/\D/g, ''),
         Email:
           this.confirmAccountInformationForm.controls['confirmAccountEmail']
             .value,
@@ -141,11 +142,12 @@ export class RegistrationComponent implements OnInit {
         LastName:
           this.othersAccountInformationForm.controls['confirmAccountLastName']
             .value,
-        Phone:
-          this.othersAccountInformationForm.controls['confirmAccountPhone']
-            .value,
-        Fax: this.othersAccountInformationForm.controls['confirmAccountFax']
-          .value,
+        Phone: this.othersAccountInformationForm.controls[
+          'confirmAccountPhone'
+        ].value.replace(/\D/g, ''),
+        Fax: this.othersAccountInformationForm.controls[
+          'confirmAccountFax'
+        ].value.replace(/\D/g, ''),
         Email:
           this.othersAccountInformationForm.controls['confirmAccountEmail']
             .value,
@@ -452,6 +454,7 @@ export class RegistrationComponent implements OnInit {
 
   public resetLookupForm(): void {
     this.validPrescriberNPI = false;
+    this.findPrescriberBtnClicked = false;
     this.lookupInformationForm.reset();
     this.lookupInformationForm.controls['providerNpi'].enable();
     this.lookupInformationForm.controls['providerFirstName'].enable();
@@ -460,13 +463,14 @@ export class RegistrationComponent implements OnInit {
   }
 
   public checkUsername(controlName: string): void {
+    this.invalidUsername = false;
     if (controlName === 'username') {
       const validateUsernamePayload =
         this.createUsernameForm.controls['username'].value;
       this.authService.validateUsername(validateUsernamePayload).subscribe({
         next: (res: any) => {
           if (res.Status === 'SUCCESS') {
-            this.invalidUsername = res.Payload;
+            this.invalidUsername = !res.Payload;
           }
         },
         error: (err: any) => {

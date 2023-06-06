@@ -135,3 +135,11 @@
   width: 1.6rem;
   height: 1.6rem;
 }
+
+.wrong-Npi-error-msg {
+  border-radius: 3px;
+  background: rgba(228, 155, 19, 0.2);
+  color: $color-error;
+  text-align: center;
+  padding: 0.8rem 0.8rem 0 0.8rem;
+}

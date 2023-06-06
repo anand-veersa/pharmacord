@@ -24,6 +24,13 @@
         (click)="checkProviderDetails()">
       </app-custom-button>
     </div>
+
+    <div class="wrong-Npi-error-msg" *ngIf="!validPrescriberNPI">
+      <p class="text-xs">
+        One or more pieces of information entered do not match our records.
+        Please try again or contact us for additional assistance.
+      </p>
+    </div>
   </div>
 
   <!-- accordions start here -->

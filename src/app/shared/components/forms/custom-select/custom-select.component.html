@@ -14,4 +14,9 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <app-custom-error
+    *ngIf="form.controls[this.field.name].touched"
+    [form]="form"
+    [field]="field"
+    [errors]="form.get(field.name)?.errors"></app-custom-error>
 </form>

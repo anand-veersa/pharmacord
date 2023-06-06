@@ -89,6 +89,7 @@ export class AddHealthcareProviderComponent
   public providerAlreadyExist: boolean = false;
   public facilitiesWithoutProvider: any[] = [];
   public deletePrescribers: string[] = [];
+  public validPrescriberNPI: boolean = true;
 
   @ViewChild('dialogRef')
   dialogRef!: TemplateRef<any>;
@@ -263,6 +264,7 @@ export class AddHealthcareProviderComponent
       this.authService.getProviderDetails(payloadGetProviderDetails).subscribe({
         next: (res: any) => {
           if (res.Status === 'SUCCESS') {
+            this.validPrescriberNPI = true;
             this.currentPrescriberId = res.Payload[0].Id;
             this.facilities = res.Payload[0].Facilities;
 
@@ -302,11 +304,13 @@ export class AddHealthcareProviderComponent
             this.openTempDialog();
             this.npiData.push(payloadGetProviderDetails);
           } else {
+            this.validPrescriberNPI = false;
             this.sharedService.notify('error', res.Errors[0].Message);
           }
           this.sharedService.isLoading.next(false);
         },
         error: err => {
+          this.validPrescriberNPI = false;
           this.sharedService.isLoading.next(false);
           this.sharedService.notify('error', err);
         },

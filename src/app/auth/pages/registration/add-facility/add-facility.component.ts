@@ -75,9 +75,6 @@ export class AddFacilityComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // this.hcpAllFacilities.forEach(facility => {
-    //   facility.Address = [facility.Address];
-    // });
     this.existingFacilities = [...this.hcpAllFacilities];
     if (this.requirementFor === 'accountSetting') {
       this.facilities = [...this.hcpAllFacilities];
